@@ -13,9 +13,7 @@ import de.alpharogroup.user.management.entities.UserCredits;
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
 public class UserCreditsDaoTest extends AbstractTestNGSpringContextTests {
 	@Autowired
-	private UserCreditsDao userCreditsDao;
-
-	
+	private UserCreditsDao userCreditsDao;	
 
 	@Test
 	public void testFindAll() {

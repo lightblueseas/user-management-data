@@ -1,7 +1,4 @@
-create table BaseAttributesEntity (id int4 not null, primary key (id));
 create table addresses (id int4 not null, address_comment varchar(100), geohash varchar(16), latitude varchar(12), longitude varchar(12), street varchar(64), streetnumber varchar(5), federalstate_id int4, zipcode_id int4, primary key (id));
-create table attributes (id int4 not null, name varchar(64), type varchar(256), value varchar(2048), primary key (id));
-create table base_attributes (base_attributes_id int4 not null, attributes_id int4 not null, primary key (base_attributes_id, attributes_id));
 create table blacklisted_contacts (user_data_id int4 not null, blacklisted_id int4 not null, primary key (user_data_id, blacklisted_id));
 create table contactmethods (id int4 not null, contactmethod varchar(255), contactvalue varchar(1024), primary key (id));
 create table countries (id int4 not null, iso3166_a2name varchar(2), iso3166_a3name varchar(3), iso3166_number varchar(3), name varchar(128), primary key (id));

@@ -23,7 +23,7 @@ import de.alpharogroup.user.management.enums.Contactmethod;
  */
 @Entity
 @Table(name = "contactmethods")
-@TypeDef(name = "contactmethodConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "user.management.enums.Contactmethod") })
+@TypeDef(name = "contactmethodConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.Contactmethod") })
 @Getter
 @Setter
 @NoArgsConstructor

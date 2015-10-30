@@ -28,7 +28,7 @@ import de.alpharogroup.user.management.enums.RuleViolationReason;
 @Entity
 @Table(name="rule_violations")
 @TypeDefs({ 
-	@TypeDef(name = "reasonConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "user.management.enums.RuleViolationReason") }) })
+	@TypeDef(name = "reasonConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.RuleViolationReason") }) })
 @Getter
 @Setter
 @NoArgsConstructor

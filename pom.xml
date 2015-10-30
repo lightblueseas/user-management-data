@@ -52,6 +52,8 @@
 		<!-- JAULP versions -->
 		<jaulp.core.version>4.2.0</jaulp.core.version>
 		<jaulp.email.version>${jaulp.core.version}</jaulp.email.version>
+		<!-- CONNECTION POOL versions -->
+		<bonecp.version>0.8.0.RELEASE</bonecp.version>
 	</properties>
 
 	<dependencyManagement>
@@ -110,6 +112,12 @@
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>jaulp.email</artifactId>
 				<version>${jaulp.email.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.jolbox</groupId>
+				<artifactId>bonecp</artifactId>
+				<version>${bonecp.version}</version>
 			</dependency>
 
 		</dependencies>

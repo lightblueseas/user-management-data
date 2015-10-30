@@ -37,7 +37,7 @@ import de.alpharogroup.user.management.enums.Gender;
  */
 @Entity
 @Table(name = "user_data")
-@TypeDefs({ @TypeDef(name = "genderConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "user.management.enums.Gender") }) })
+@TypeDefs({ @TypeDef(name = "genderConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.Gender") }) })
 @Getter
 @Setter
 @NoArgsConstructor
