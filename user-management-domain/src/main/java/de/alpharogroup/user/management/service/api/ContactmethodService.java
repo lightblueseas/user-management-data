@@ -33,7 +33,7 @@ public interface ContactmethodService extends DomainService<Integer, Contactmeth
 	boolean existsContact(Contactmethod contact);
 
 	/**
-	 * Check if a contact exist with given contactvalue and the given {@link ContactmethodType}.
+	 * Check if a contact exist with given contact value and the given {@link ContactmethodType}.
 	 * 
 	 * @param contactValue
 	 *            the contact value
@@ -45,7 +45,7 @@ public interface ContactmethodService extends DomainService<Integer, Contactmeth
 			ContactmethodType contactMethod);
 
 	/**
-	 * Find all the contactmethods from the given contactvalue and the given {@link ContactmethodType}.
+	 * Find all the {@link Contactmethod} objects from the given contact value and the given {@link ContactmethodType}.
 	 * 
 	 * @param contactValue
 	 *            the contact value
@@ -57,18 +57,18 @@ public interface ContactmethodService extends DomainService<Integer, Contactmeth
 			ContactmethodType contactMethod);
 
 	/**
-	 * Find all the contactmethods from the given contactvalue and the given {@link ContactmethodType}.
+	 * Find all the {@link Contactmethod} objects from the given contact value and the given {@link ContactmethodType}.
 	 *
-	 * @param contactmethod the contactmethod
-	 * @param contactvalue the contactvalue
+	 * @param contactmethod the contact method
+	 * @param contactvalue the contact value
 	 * @return the list of the found {@link Contactmethod} objects.
 	 */
 	List<Contactmethod> find(final ContactmethodType contactmethod, final String contactvalue);
 	
 	/**
-	 * Find all the contactmethods from the given user and the given {@link ContactmethodType}.
+	 * Find all the {@link Contactmethod} objects from the given user and the given {@link ContactmethodType}.
 	 *
-	 * @param contactmethod the contactmethod
+	 * @param contactmethod the contact method
 	 * @param user the user
 	 * @return the list of the found {@link Contactmethod} objects.
 	 */
