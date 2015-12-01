@@ -32,7 +32,7 @@ import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.factories.UserManagementModelFactory;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.api.RolesService;
-import de.alpharogroup.user.management.service.api.UserManagementService;
+import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
@@ -44,7 +44,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	@Autowired
 	private AddressesService addressesService;
 	@Autowired
-	private UserManagementService userManagementService;
+	private UsersManagementService userManagementService;
 	@Autowired
 	private RolesService rolesService;
 	@Autowired

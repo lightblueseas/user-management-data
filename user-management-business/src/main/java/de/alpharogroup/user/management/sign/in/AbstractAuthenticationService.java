@@ -1,7 +1,7 @@
 package de.alpharogroup.user.management.sign.in;
 
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.service.api.UserManagementService;
+import de.alpharogroup.user.management.service.api.UsersManagementService;
 
 /**
  * The Class AbstractAuthenticationService provides authentication methods.
@@ -18,7 +18,7 @@ public abstract class AbstractAuthenticationService {
 	 */
 	public AuthenticationResult<Users, AuthenticationErrors> authenticate(String email, String password) {
 		AuthenticationResult<Users, AuthenticationErrors> authenticationResult = new AuthenticationResult<Users, AuthenticationErrors>();
-		final UserManagementService userManagementBusinessService = getUserManagementService();
+		final UsersManagementService userManagementBusinessService = getUserManagementService();
 		final boolean emailExists = userManagementBusinessService
 				.existsUserWithEmail(email);
 
@@ -65,6 +65,6 @@ public abstract class AbstractAuthenticationService {
 		return authenticationResult;
 	}
 	
-	public abstract UserManagementService getUserManagementService();
+	public abstract UsersManagementService getUserManagementService();
 
 }

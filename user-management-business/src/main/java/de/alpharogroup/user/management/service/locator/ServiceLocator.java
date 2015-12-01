@@ -10,7 +10,7 @@ import de.alpharogroup.user.management.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.RuleViolationsService;
 import de.alpharogroup.user.management.service.api.UserCreditsService;
 import de.alpharogroup.user.management.service.api.UserDatasService;
-import de.alpharogroup.user.management.service.api.UserManagementService;
+import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 
 public interface ServiceLocator {
@@ -91,7 +91,7 @@ public interface ServiceLocator {
 	 * 
 	 * @return the user management service
 	 */
-	UserManagementService getUserManagementService();
+	UsersManagementService getUserManagementService();
 
 	/**
 	 * Gets the users service.
@@ -186,7 +186,7 @@ public interface ServiceLocator {
 	 * @param userManagementService
 	 *            the new user management service
 	 */
-	void setUserManagementService(UserManagementService userManagementService);
+	void setUserManagementService(UsersManagementService userManagementService);
 
 	/**
 	 * Sets the users business service.

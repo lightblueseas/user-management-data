@@ -34,19 +34,19 @@ import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.UserDatasService;
-import de.alpharogroup.user.management.service.api.UserManagementService;
+import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
 
 /**
- * The Class UserManagementBusinessService.
+ * The class {@link UsersManagementBusinessService}.
  * 
  * @author Asterios Raptis
  */
 @Transactional
-@Service("userManagementService")
-public class UserManagementBusinessService implements UserManagementService {
+@Service("usersManagementService")
+public class UsersManagementBusinessService implements UsersManagementService {
 
 	/**
 	 * The serialVersionUID.
@@ -54,7 +54,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	private static final long serialVersionUID = 1L;
 	/** The Constant logger. */
 	private static final Logger LOGGER = Logger
-			.getLogger(UserManagementBusinessService.class.getName());
+			.getLogger(UsersManagementBusinessService.class.getName());
 
 	/** The Addresses business service. */
 	@Autowired
@@ -103,7 +103,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean existsfindUserWithEmailOrUsername(
+	public boolean existsUserWithEmailOrUsername(
 			final String emailOrUsername) {
 		boolean emailExists = usersService.findUserWithEmail(emailOrUsername) != null;
 		return emailExists || existsUserWithUsername(emailOrUsername);

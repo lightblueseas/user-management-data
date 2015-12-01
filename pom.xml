@@ -50,12 +50,12 @@
 
 	<properties>
 		<!-- MYSTIC-CRYPT versions -->
-		<mystic-crypt.version>4.4.0</mystic-crypt.version>
+		<mystic-crypt.version>4.5.0</mystic-crypt.version>
 		<crypt-core.version>${mystic-crypt.version}</crypt-core.version>
 		<auth-security.version>${mystic-crypt.version}</auth-security.version>
-		<!-- JAULP versions -->
-		<jaulp.core.version>4.2.0</jaulp.core.version>
-		<jaulp.email.version>${jaulp.core.version}</jaulp.email.version>
+		<!-- NEW EXTENSIONS LIB versions -->
+		<extensions-lib.version>4.7.0</extensions-lib.version>
+		<email-tails.version>${extensions-lib.version}</email-tails.version>
 		<!-- CONNECTION POOL versions -->
 		<bonecp.version>0.8.0.RELEASE</bonecp.version>
 	</properties>
@@ -123,11 +123,11 @@
 				<artifactId>crypt-core</artifactId>
 				<version>${crypt-core.version}</version>
 			</dependency>
-			<!-- JAULP DEPENDENCIES -->
+			<!-- NEW EXTENSIONS LIB DEPENDENCIES -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jaulp.email</artifactId>
-				<version>${jaulp.email.version}</version>
+				<artifactId>email-tails</artifactId>
+				<version>${email-tails.version}</version>
 			</dependency>
 
 			<dependency>
@@ -139,14 +139,5 @@
 		</dependencies>
 
 	</dependencyManagement>
-
-	<dependencies>
-		<!-- LOMBOK DEPENDENCIES -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
-
-	</dependencies>
 
 </project>

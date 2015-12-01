@@ -4,6 +4,9 @@ import de.alpharogroup.db.service.jpa.BusinessService;
 import de.alpharogroup.user.management.entities.ResetPasswords;
 import de.alpharogroup.user.management.entities.Users;
 
+/**
+ * The interface {@link ResetPasswordsService}.
+ */
 public interface ResetPasswordsService extends BusinessService<ResetPasswords, Integer>{
 
 	/**

@@ -20,13 +20,13 @@ import de.alpharogroup.user.management.service.api.PermissionsService;
 import de.alpharogroup.user.management.service.api.RelationPermissionsService;
 import de.alpharogroup.user.management.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.UserDatasService;
-import de.alpharogroup.user.management.service.api.UserManagementService;
+import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
 public class UsersBusinessServiceTest extends AbstractTestNGSpringContextTests {
 	@Autowired
-	private UserManagementService userManagementService;
+	private UsersManagementService userManagementService;
 	@Autowired
 	private RolesService rolesService;
 	@Autowired

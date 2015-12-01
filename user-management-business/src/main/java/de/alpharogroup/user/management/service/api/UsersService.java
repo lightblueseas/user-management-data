@@ -9,66 +9,67 @@ import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.GenderType;
 
 /**
- * The Interface UsersService.
+ * The interface {@link UsersService}.
  */
 public interface UsersService extends BusinessService<Users, Integer> {
 
 	/**
-	 * Checks if the given username exists.
+	 * Checks if a user exists with the given user name.
 	 * 
 	 * @param username
-	 *            the username
+	 *            the user name
 	 * @return true, if successful
 	 */
 	boolean existsUserWithUsername(String username);
 
 	/**
-	 * Find addresses from the given user.
+	 * Find all {@link Addresses} from the given {@link Users}.
 	 * 
 	 * @param user
 	 *            the user
-	 * @return the list
+	 * @return the list of found {@link Addresses} from the given {@link Users}.
 	 */
 	List<Addresses> findAddressesFromUser(final Users user);
 
 	/**
-	 * Find address from the given user.
+	 * Find the main {@link Addresses} from the given {@link Users}.
 	 * 
 	 * @param user
 	 *            the user
-	 * @return the addresses
+	 * @return the main {@link Addresses} from the given {@link Users}.
 	 */
 	Addresses findAddressFromUser(final Users user);
 
 	/**
-	 * Find roles from the given user.
+	 * Find roles from the given {@link Users}.
 	 * 
 	 * @param user
 	 *            the user
-	 * @return the list
+	 * @return the list of found {@link Roles} from the given {@link Users}.
 	 */
 	List<Roles> findRolesFromUser(final Users user);
 
 	/**
-	 * Find user with the given email.
+	 * Find the {@link Users} object with the given email.
 	 * 
 	 * @param email
 	 *            the email
-	 * @return the users
+	 * @return the found {@link Users} object
 	 */
 	Users findUserWithEmail(final String email);
 
 	/**
-	 * Find user with the given username.
+	 * Find {@link Users} object from the given user name.
 	 * 
 	 * @param username
-	 *            the username
-	 * @return the users
+	 *            the user name
+	 * @return the found {@link Users} object
 	 */
 	Users findUserWithUsername(final String username);
 
 	/**
-	 * Checks if the given user is in the given role.
+	 * Checks if the given {@link Users} object is in the given {@link Roles}
+	 * object.
 	 * 
 	 * @param user
 	 *            the user
@@ -79,7 +80,7 @@ public interface UsersService extends BusinessService<Users, Integer> {
 	boolean userIsInRole(final Users user, final Roles role);
 
 	/**
-	 * Find users from the given gender and the range from till until.
+	 * Find users from the given {@link GenderType} object and the range from till until.
 	 * 
 	 * @param from
 	 *            the from
@@ -87,12 +88,12 @@ public interface UsersService extends BusinessService<Users, Integer> {
 	 *            the search gender
 	 * @param until
 	 *            the until
-	 * @return the list
+	 * @return the found list of {@link Users} objects that matches the criteria.
 	 */
 	List<Users> findUsers(Integer from, GenderType searchGender, Integer until);
 
 	/**
-	 * Find users from the given gender and the range from till until and the
+	 * Find users from the given {@link GenderType} object and the range from till until and the
 	 * given geohash code.
 	 * 
 	 * @param from
@@ -103,7 +104,7 @@ public interface UsersService extends BusinessService<Users, Integer> {
 	 *            the until
 	 * @param geohash
 	 *            the geohash
-	 * @return the list
+	 * @return the found list of {@link Users} objects that matches the criteria.
 	 */
 	List<Users> findUsers(Integer from, GenderType searchGender, Integer until,
 			final String geohash);

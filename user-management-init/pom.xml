@@ -82,10 +82,10 @@
 			<artifactId>tomcat-jdbc</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- NEW EXTENSIONS LIB DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jaulp.email</artifactId>
+			<artifactId>email-tails</artifactId>
 			<scope>test</scope>
 		</dependency>
 
