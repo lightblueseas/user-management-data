@@ -2,16 +2,15 @@ package de.alpharogroup.user.management.service.api;
 
 import java.util.List;
 
-import de.alpharogroup.db.service.jpa.BusinessService;
-import de.alpharogroup.user.management.entities.Permissions;
-import de.alpharogroup.user.management.entities.RelationPermissions;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.service.domain.DomainService;
+import de.alpharogroup.user.management.domain.Permission;
+import de.alpharogroup.user.management.domain.RelationPermission;
+import de.alpharogroup.user.management.domain.User;
 
 /**
- * The interface {@link RelationPermissionsService}.
+ * The interface {@link RelationPermissionService}.
  */
-public interface RelationPermissionsService extends
-		BusinessService<RelationPermissions, Integer> {
+public interface RelationPermissionService extends DomainService<Integer, RelationPermission> {
 
 	/**
 	 * Find all given permissions that the given provider granted to the
@@ -23,8 +22,8 @@ public interface RelationPermissionsService extends
 	 *            the subscriber
 	 * @return the list
 	 */
-	RelationPermissions findRelationPermissions(final Users provider,
-			final Users subscriber);
+	RelationPermission findRelationPermissions(final User provider,
+			final User subscriber);
 
 	/**
 	 * Finds the RelationPermissions object from the given permissions the given
@@ -38,8 +37,8 @@ public interface RelationPermissionsService extends
 	 *            the permission
 	 * @return the relation permissions
 	 */
-	RelationPermissions findRelationPermissions(final Users provider,
-			final Users subscriber, Permissions permission);
+	RelationPermission findRelationPermissions(final User provider,
+			final User subscriber, Permission permission);
 
 	/**
 	 * Find a list of RelationPermissions that the given provider granted to the
@@ -51,7 +50,7 @@ public interface RelationPermissionsService extends
 	 *            the subscriber
 	 * @return the list
 	 */
-	List<RelationPermissions> find(final Users provider, final Users subscriber);
+	List<RelationPermission> find(final User provider, final User subscriber);
 
 	/**
 	 * Find a list of RelationPermissions from the given provider and to the
@@ -66,8 +65,8 @@ public interface RelationPermissionsService extends
 	 *            the permission
 	 * @return the list
 	 */
-	List<RelationPermissions> find(final Users provider,
-			final Users subscriber, Permissions permission);
+	List<RelationPermission> find(final User provider,
+			final User subscriber, Permission permission);
 	
 	/**
 	 * Adds the given permission for the given subscriber provided from the provider.
@@ -76,7 +75,7 @@ public interface RelationPermissionsService extends
 	 * @param subscriber the subscriber
 	 * @param permission the permission
 	 */
-	void addPermission( Users provider, Users subscriber, Permissions permission);
+	void addPermission( User provider, User subscriber, Permission permission);
 	
 	/**
 	 * Removes the given permission for the given subscriber provided from the provider.
@@ -85,7 +84,7 @@ public interface RelationPermissionsService extends
 	 * @param subscriber the subscriber
 	 * @param permission the permission
 	 */
-	void removePermission( Users provider, Users subscriber, Permissions permission);
+	void removePermission( User provider, User subscriber, Permission permission);
 	
 	/**
 	 * Removes all permissions that are given for both users.
@@ -93,6 +92,6 @@ public interface RelationPermissionsService extends
 	 * @param provider the provider
 	 * @param subscriber the subscriber
 	 */
-	void removeAllPermissions(Users provider, Users subscriber);
+	void removeAllPermissions(User provider, User subscriber);
 
 }

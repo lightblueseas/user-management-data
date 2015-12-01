@@ -1,8 +1,76 @@
 package de.alpharogroup.user.management.service.api;
 
+import java.util.List;
+
 import de.alpharogroup.service.domain.DomainService;
 import de.alpharogroup.user.management.domain.Contactmethod;
+import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.management.enums.ContactmethodType;
 
+/**
+ * The interface {@link ContactmethodService}.
+ */
 public interface ContactmethodService extends DomainService<Integer, Contactmethod>  {
+	
+	/**
+	 * Compare the given contact objects.
+	 * 
+	 * @param contact
+	 *            the contact
+	 * @param compare
+	 *            the compare
+	 * @return true, if successful
+	 */
+	boolean compare(Contactmethod contact, Contactmethod compare);
 
+	/**
+	 * Check if a contact exist with given {@link Contactmethod}.
+	 * 
+	 * @param contact
+	 *            the contact
+	 * @return true, if successful
+	 */
+	boolean existsContact(Contactmethod contact);
+
+	/**
+	 * Check if a contact exist with given contactvalue and the given {@link ContactmethodType}.
+	 * 
+	 * @param contactValue
+	 *            the contact value
+	 * @param contactMethod
+	 *            the contact method
+	 * @return true, if successful
+	 */
+	boolean existsContact(String contactValue,
+			ContactmethodType contactMethod);
+
+	/**
+	 * Find all the contactmethods from the given contactvalue and the given {@link ContactmethodType}.
+	 * 
+	 * @param contactValue
+	 *            the contact value
+	 * @param contactMethod
+	 *            the contact method
+	 * @return the list
+	 */
+	List<Contactmethod> findContact(String contactValue,
+			ContactmethodType contactMethod);
+
+	/**
+	 * Find all the contactmethods from the given contactvalue and the given {@link ContactmethodType}.
+	 *
+	 * @param contactmethod the contactmethod
+	 * @param contactvalue the contactvalue
+	 * @return the list
+	 */
+	List<Contactmethod> find(final ContactmethodType contactmethod, final String contactvalue);
+	
+	/**
+	 * Find all the contactmethods from the given user and the given {@link ContactmethodType}.
+	 *
+	 * @param contactmethod the contactmethod
+	 * @param user the user
+	 * @return the list
+	 */
+	List<Contactmethod> findContactmethod(final ContactmethodType contactmethod, final User user);
 }

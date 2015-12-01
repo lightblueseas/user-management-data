@@ -4,6 +4,6 @@ import de.alpharogroup.db.entitymapper.AbstractEntityBOMapper;
 import de.alpharogroup.user.management.domain.UserData;
 import de.alpharogroup.user.management.entities.UserDatas;
 
-public class UserDataMapper extends AbstractEntityBOMapper<UserDatas, UserData> {
+public class UserDatasMapper extends AbstractEntityBOMapper<UserDatas, UserData> {
 
 }
