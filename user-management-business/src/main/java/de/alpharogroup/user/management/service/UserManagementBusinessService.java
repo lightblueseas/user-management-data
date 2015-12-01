@@ -7,6 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.address.book.service.api.AddressesService;
 import de.alpharogroup.auth.enums.InsertUserState;
@@ -25,21 +31,13 @@ import de.alpharogroup.user.management.entities.UserData;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.Contactmethod;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
-import de.alpharogroup.user.management.sign.up.SignUpUserResult;
-import de.alpharogroup.user.management.sign.up.UserModel;
-
-import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
-import de.alpharogroup.user.management.service.api.PermissionsService;
 import de.alpharogroup.user.management.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.UserDataService;
 import de.alpharogroup.user.management.service.api.UserManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
+import de.alpharogroup.user.management.sign.up.SignUpUserResult;
+import de.alpharogroup.user.management.sign.up.UserModel;
 
 /**
  * The Class UserManagementBusinessService.
@@ -65,10 +63,6 @@ public class UserManagementBusinessService implements UserManagementService {
 	/** The contactmethods business service. */
 	@Autowired
 	private ContactmethodsService contactmethodsService;
-
-	/** The permission business service. */
-	@Autowired
-	private PermissionsService permissionService;
 
 	/** The roles business service. */
 	@Autowired
@@ -519,16 +513,6 @@ public class UserManagementBusinessService implements UserManagementService {
 			return emailContactInDB;
 		}
 		return emailContactInDB;
-	}
-
-	/**
-	 * Sets the permission business service.
-	 * 
-	 * @param permissionService
-	 *            the new permission business service
-	 */
-	public void setPermissionService(final PermissionsService permissionService) {
-		this.permissionService = permissionService;
 	}
 
 	/**

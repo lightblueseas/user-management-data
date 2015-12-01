@@ -2,7 +2,7 @@ package de.alpharogroup.user.management.application.models;
 
 import java.io.File;
 
-import de.alpharogroup.date.ConvertDateUtils;
+import de.alpharogroup.date.ConvertDateExtensions;
 import de.alpharogroup.file.checksum.Algorithm;
 import de.alpharogroup.file.checksum.ChecksumUtils;
 import de.alpharogroup.file.read.ReadFileUtils;
@@ -66,7 +66,7 @@ public class UserModelConverter {
 		resourcesModel.setFilename(file.getName());
 		resourcesModel.setFilesize(file.length()+"");
 		resourcesModel.setChecksum(ChecksumUtils.getChecksumQuietly(file, Algorithm.SHA_256));
-		resourcesModel.setCreated(ConvertDateUtils.toDate(file.lastModified()));
+		resourcesModel.setCreated(ConvertDateExtensions.toDate(file.lastModified()));
 		resourcesModel.setDeletedFlag(Boolean.FALSE);
 		return resourcesModel;
 	}	

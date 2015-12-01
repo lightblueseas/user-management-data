@@ -1,6 +1,6 @@
 package de.alpharogroup.user.management.domain;
 
-import de.alpharogroup.db.domain.BaseBusinessObject;
+import de.alpharogroup.domain.BaseDomainObject;
 import de.alpharogroup.user.management.enums.Contactmethod;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
-public class ContactmethodBusinessObject extends BaseBusinessObject<Integer> {
+public class ContactmethodBusinessObject extends BaseDomainObject<Integer> {
 	/** The serial Version UID */
 	private static final long serialVersionUID = 1L;
 	/** The contact method like email, telefon etc. */

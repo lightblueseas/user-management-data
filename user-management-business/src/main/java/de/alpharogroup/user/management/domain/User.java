@@ -3,7 +3,7 @@ package de.alpharogroup.user.management.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.alpharogroup.db.domain.BaseBusinessObject;
+import de.alpharogroup.domain.BaseDomainObject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
-public class User extends BaseBusinessObject<Integer> {
+public class User extends BaseDomainObject<Integer> {
 
 	/** The serial Version UID. */
 	private static final long serialVersionUID = 1L;

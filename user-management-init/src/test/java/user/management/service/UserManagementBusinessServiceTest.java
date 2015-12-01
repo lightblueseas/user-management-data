@@ -8,9 +8,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+
 import de.alpharogroup.address.book.service.api.AddressesService;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
-import de.alpharogroup.date.CreateDateUtils;
+import de.alpharogroup.date.CreateDateExtensions;
 import de.alpharogroup.email.messages.Mimetypes;
 import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
@@ -30,12 +36,6 @@ import de.alpharogroup.user.management.service.api.UserManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
 public class UserManagementBusinessServiceTest extends AbstractTestNGSpringContextTests {
@@ -59,7 +59,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 		UserManagementModelFactory userManagementModelFactory = UserManagementModelFactory.getInstance();
 		UserModel userModel = userManagementModelFactory.newUserModel(
 				"Knight",
-				CreateDateUtils.newDate(1974, 8, 28),
+				CreateDateExtensions.newDate(1974, 8, 28),
 				"Michael",
 				Gender.MALE,
 				"127.0.0.1",
@@ -83,7 +83,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 		
 		userModel = userManagementModelFactory.newUserModel(
 				"Frankenstein",
-				CreateDateUtils.newDate(1974, 8, 28),
+				CreateDateExtensions.newDate(1974, 8, 28),
 				"Adolf",
 				Gender.MALE,
 				"127.0.0.1",
@@ -105,7 +105,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 		
 		userModel = userManagementModelFactory.newUserModel(
 				"Dean",
-				CreateDateUtils.newDate(1974, 8, 28),
+				CreateDateExtensions.newDate(1974, 8, 28),
 				"James",
 				Gender.MALE,
 				"127.0.0.1",

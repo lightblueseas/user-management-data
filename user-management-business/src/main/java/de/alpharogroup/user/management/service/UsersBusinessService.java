@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.address.book.service.util.HqlStringCreator;
 import de.alpharogroup.collections.ListExtensions;
-import de.alpharogroup.date.CalculateDateUtils;
+import de.alpharogroup.date.CalculateDateExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 
 import org.apache.log4j.Logger;
@@ -148,8 +148,8 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	public List<Users> findUsers(Integer from, Gender searchGender, Integer until)
 	{
 		Date now = new Date(System.currentTimeMillis());
-		Date start = CalculateDateUtils.substractYearsFromDate(now, until);
-		Date end = CalculateDateUtils.substractYearsFromDate(now, from);
+		Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
+		Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
 		final String hqlString = "select u from Users u " + "where u.userData.gender=:gender "
 		// + "and u.userData.dateofbirth between :start and :end"
 			+ "and u.userData.dateofbirth >= :start " + "and u.userData.dateofbirth <= :end";
@@ -166,8 +166,8 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		final String geohash)
 	{
 		Date now = new Date(System.currentTimeMillis());
-		Date start = CalculateDateUtils.substractYearsFromDate(now, until);
-		Date end = CalculateDateUtils.substractYearsFromDate(now, from);
+		Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
+		Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
 
 		final StringBuilder hqlString = new StringBuilder();
 		hqlString.append("select u from Users u " + "where u.userData.gender=:gender "

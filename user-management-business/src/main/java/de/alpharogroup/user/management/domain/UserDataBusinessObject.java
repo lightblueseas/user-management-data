@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import de.alpharogroup.address.book.domain.Address;
-import de.alpharogroup.db.domain.BaseBusinessObject;
+import de.alpharogroup.domain.BaseDomainObject;
 import de.alpharogroup.resource.system.domain.Resource;
 import de.alpharogroup.user.management.enums.Gender;
 import lombok.EqualsAndHashCode;
@@ -17,7 +17,7 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
-public class UserDataBusinessObject extends BaseBusinessObject<Integer> {
+public class UserDataBusinessObject extends BaseDomainObject<Integer> {
 	/**
 	 * The serial Version UID.
 	 */

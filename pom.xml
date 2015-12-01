@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-persistence-parent</artifactId>
-		<version>2.2.0</version>
+		<version>2.14.0</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -46,7 +46,7 @@
 
 	<properties>
 		<!-- MYSTIC-CRYPT versions -->
-		<mystic-crypt.version>4.2.0</mystic-crypt.version>
+		<mystic-crypt.version>4.4.0</mystic-crypt.version>
 		<crypt-core.version>${mystic-crypt.version}</crypt-core.version>
 		<auth-security.version>${mystic-crypt.version}</auth-security.version>
 		<!-- JAULP versions -->
@@ -86,7 +86,19 @@
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
+				<artifactId>address-book-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
 				<artifactId>resource-system-entities</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>resource-system-domain</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
