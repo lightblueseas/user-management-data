@@ -7,19 +7,20 @@ import de.alpharogroup.user.management.entities.Users;
 public interface ResetPasswordsService extends BusinessService<ResetPasswords, Integer>{
 
 	/**
-	 * Find reset password.
+	 * Find the entry from the given {@link Users} and the given generated password(hashed).
 	 *
 	 * @param user the user
 	 * @param generatedPassword the generated password(hashed) is the confirmationCode from the url query string
-	 * @return the reset passwords
+	 * @return the entry of the found {@link ResetPasswords} or null if not found
 	 */
 	ResetPasswords findResetPassword(Users user, String generatedPassword);
 
+
 	/**
-	 * Finds the reseted password from the given {@link Users} object.
+	 * Finds the {@link ResetPasswords} object from the given {@link Users} object.
 	 *
 	 * @param user the user
-	 * @return the reset passwords
+	 * @return the entry of the found {@link ResetPasswords} or null if not found
 	 */
 	ResetPasswords findResetPassword(Users user);
 }
