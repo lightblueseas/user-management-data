@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Contactmethod;
+import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.api.UsersService;
 
@@ -24,7 +24,7 @@ public class ContactmethodsBusinessServiceTest {
 	@Test
 	public void testFindContactmethod() {
 		Users michaelProvider = usersService.findUserWithEmail("michael.knight@gmail.com");
-		List<Contactmethods> cms = contactmethodsService.findContactmethod(Contactmethod.INTERNET, michaelProvider);
+		List<Contactmethods> cms = contactmethodsService.findContactmethod(ContactmethodType.INTERNET, michaelProvider);
 		for (Contactmethods contactmethods : cms) {
 			System.out.println(contactmethods);
 		}

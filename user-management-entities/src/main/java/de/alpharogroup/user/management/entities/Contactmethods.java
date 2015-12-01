@@ -15,7 +15,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import de.alpharogroup.db.entity.BaseEntity;
-import de.alpharogroup.user.management.enums.Contactmethod;
+import de.alpharogroup.user.management.enums.ContactmethodType;
 
 /**
  * The Entity class {@link Contactmethods} is keeping the
@@ -23,7 +23,7 @@ import de.alpharogroup.user.management.enums.Contactmethod;
  */
 @Entity
 @Table(name = "contactmethods")
-@TypeDef(name = "contactmethodConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.Contactmethod") })
+@TypeDef(name = "contactmethodConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.ContactmethodType") })
 @Getter
 @Setter
 @NoArgsConstructor
@@ -37,7 +37,7 @@ implements Cloneable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "contactmethod")
 	@Type(type = "contactmethodConverter")
-	private Contactmethod contactmethod;
+	private ContactmethodType contactmethod;
 	/**
 	 * The value from the contact method. For instance 'abc@gmail.com' for email
 	 * or 'http://www.google.com' for internet.

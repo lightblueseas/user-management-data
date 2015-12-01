@@ -14,12 +14,12 @@ import de.alpharogroup.resource.system.service.api.ResourcesService;
 import de.alpharogroup.user.management.entities.Permissions;
 import de.alpharogroup.user.management.entities.RelationPermissions;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.service.api.PermissionsService;
 import de.alpharogroup.user.management.service.api.RelationPermissionsService;
 import de.alpharogroup.user.management.service.api.RolesService;
-import de.alpharogroup.user.management.service.api.UserDataService;
+import de.alpharogroup.user.management.service.api.UserDatasService;
 import de.alpharogroup.user.management.service.api.UserManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 
@@ -38,13 +38,13 @@ public class UsersBusinessServiceTest extends AbstractTestNGSpringContextTests {
 	@Autowired	
 	private ResourcesService resourcesService;
 	@Autowired		
-	private UserDataService userDataService;
+	private UserDatasService userDataService;
 
 	@Test(enabled=false)
 	public void testFindUsers() {
 		Integer from = 18;
 		Integer until = 50;
-		List<Users> users = usersService.findUsers(from, Gender.MALE, until);
+		List<Users> users = usersService.findUsers(from, GenderType.MALE, until);
 		System.out.println(users);		
 	}
 
@@ -52,7 +52,7 @@ public class UsersBusinessServiceTest extends AbstractTestNGSpringContextTests {
 	public void testFindUsersWithGeohash() {
 		Integer from = 18;
 		Integer until = 50;
-		List<Users> users = usersService.findUsers(from, Gender.MALE, until, "u0ww");
+		List<Users> users = usersService.findUsers(from, GenderType.MALE, until, "u0ww");
 		System.out.println(users);		
 	}
 	@Test(enabled=false)

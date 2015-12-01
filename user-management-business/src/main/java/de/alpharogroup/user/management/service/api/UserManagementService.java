@@ -15,9 +15,9 @@ import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.entities.Resources;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Roles;
-import de.alpharogroup.user.management.entities.UserData;
+import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Contactmethod;
+import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
 
@@ -328,7 +328,7 @@ public interface UserManagementService extends de.alpharogroup.auth.usermanageme
 	 * @return the contactmethods
 	 */
 	Contactmethods updateContactmethod(final String contactmethodValue,
-			final Contactmethod contactmethodType,
+			final ContactmethodType contactmethodType,
 			final Contactmethods contactmethod);
 
 	/**
@@ -401,7 +401,7 @@ public interface UserManagementService extends de.alpharogroup.auth.usermanageme
 	 * @param userDataId the user data id
 	 * @return the UserData object.
 	 */
-	UserData deleteBlacklisted(Users blacklisted, final Integer userDataId);
+	UserDatas deleteBlacklisted(Users blacklisted, final Integer userDataId);
 
 	/**
 	 * Deletes the given Addresses object from the given UserData object.
@@ -410,7 +410,7 @@ public interface UserManagementService extends de.alpharogroup.auth.usermanageme
 	 * @param ud the user data id
 	 * @return the UserData object.
 	 */
-	UserData deleteAddress(Addresses address, final UserData ud );
+	UserDatas deleteAddress(Addresses address, final UserDatas ud );
 	
 	Users addUserContact(Users user, Users contact);
 

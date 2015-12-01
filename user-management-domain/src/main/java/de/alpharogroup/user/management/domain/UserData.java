@@ -7,7 +7,7 @@ import java.util.Set;
 import de.alpharogroup.address.book.domain.Address;
 import de.alpharogroup.domain.BaseDomainObject;
 import de.alpharogroup.resource.system.domain.Resource;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.GenderType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
-public class UserDataBusinessObject extends BaseDomainObject<Integer> {
+public class UserData extends BaseDomainObject<Integer> {
 	/**
 	 * The serial Version UID.
 	 */
@@ -29,13 +29,13 @@ public class UserDataBusinessObject extends BaseDomainObject<Integer> {
 	/** The contacts of the user that are black listed. */
 	private Set<User> blacklistedContacts = new HashSet<>();
 	/** The contact data of the user. */
-	private Set<ContactmethodBusinessObject> contactmethods = new HashSet<>();
+	private Set<Contactmethod> contactmethods = new HashSet<>();
 	/** The date of birth from the user. */
 	private Date dateofbirth;
 	/** The first name of the user. */
 	private String firstname;
 	/** The enum for the gender of the user. */
-	private Gender gender;
+	private GenderType gender;
 	/** The resources of the user. */
 	private Set<Resource> resources = new HashSet<>();
 	/** The ip address from where the user has register his self. */

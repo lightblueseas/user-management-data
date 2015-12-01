@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Defines the Gender enumeration.
+ * Defines the type of the gender.
  */
-public enum Gender {
+public enum GenderType {
 
 	/** The male. */
 	MALE,
@@ -20,13 +20,13 @@ public enum Gender {
 	/**
 	 * Gets the all genders without the gender constant UNDEFINED.
 	 * 
-	 * @return the valid genders
+	 * @return the valid gender types
 	 */
-	public static List<Gender> getValidGenders() {
-		Gender[] genderValues = Gender.values();
-		List<Gender> genders = new ArrayList<Gender>();
+	public static List<GenderType> getValidGenders() {
+		GenderType[] genderValues = GenderType.values();
+		List<GenderType> genders = new ArrayList<GenderType>();
 		for (int i = 0; i < genderValues.length; i++) {
-			if (!genderValues[i].equals(Gender.UNDEFINED)) {
+			if (!genderValues[i].equals(GenderType.UNDEFINED)) {
 				genders.add(genderValues[i]);
 			}
 		}

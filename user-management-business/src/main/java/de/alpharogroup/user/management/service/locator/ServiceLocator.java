@@ -9,7 +9,7 @@ import de.alpharogroup.user.management.service.api.RobinsonsService;
 import de.alpharogroup.user.management.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.RuleViolationsService;
 import de.alpharogroup.user.management.service.api.UserCreditsService;
-import de.alpharogroup.user.management.service.api.UserDataService;
+import de.alpharogroup.user.management.service.api.UserDatasService;
 import de.alpharogroup.user.management.service.api.UserManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 
@@ -84,7 +84,7 @@ public interface ServiceLocator {
 	 *
 	 * @return the user data service
 	 */
-	UserDataService getUserDataService();
+	UserDatasService getUserDataService();
 
 	/**
 	 * Gets the user management service.
@@ -178,7 +178,7 @@ public interface ServiceLocator {
 	 * @param userDataService
 	 *            the user data service
 	 */
-	void setUserDataService(UserDataService userDataService);
+	void setUserDataService(UserDatasService userDataService);
 
 	/**
 	 * Sets the user management service.

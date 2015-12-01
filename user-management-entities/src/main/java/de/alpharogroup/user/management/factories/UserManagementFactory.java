@@ -15,10 +15,10 @@ import de.alpharogroup.user.management.entities.ResetPasswords;
 import de.alpharogroup.user.management.entities.Robinsons;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.RuleViolations;
-import de.alpharogroup.user.management.entities.UserData;
+import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Contactmethod;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.ContactmethodType;
+import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 
 /**
@@ -222,7 +222,7 @@ public class UserManagementFactory implements Serializable {
 	 *            the id
 	 * @return Contactmethods A Contactmethods object
 	 */
-	public Contactmethods newContactmethods(Contactmethod contactmethod,
+	public Contactmethods newContactmethods(ContactmethodType contactmethod,
 			String contactvalue, Integer id) {
 		Contactmethods contactmethods = new Contactmethods();
 
@@ -242,7 +242,7 @@ public class UserManagementFactory implements Serializable {
 	 *            the contactvalue
 	 * @return Contactmethods A Contactmethods object
 	 */
-	public Contactmethods newContactmethods(Contactmethod contactmethod,
+	public Contactmethods newContactmethods(ContactmethodType contactmethod,
 			String contactvalue) {
 		return newContactmethods(contactmethod, contactvalue, null);
 	}
@@ -375,8 +375,8 @@ public class UserManagementFactory implements Serializable {
 	 *            the locale
 	 * @return the user data
 	 */
-	public UserData newUserData(String birthname, Date dateofbirth,
-			String firstname, Gender gender, String ipAddress, String lastname,
+	public UserDatas newUserData(String birthname, Date dateofbirth,
+			String firstname, GenderType gender, String ipAddress, String lastname,
 			String locale) {
 		return newUserData(null, birthname, dateofbirth, firstname, gender,
 				ipAddress, lastname, locale);
@@ -403,8 +403,8 @@ public class UserManagementFactory implements Serializable {
 	 *            the locale
 	 * @return UserData A UserData object
 	 */
-	public UserData newUserData(Integer id, String birthname, Date dateofbirth,
-			String firstname, Gender gender, String ipAddress, String lastname,
+	public UserDatas newUserData(Integer id, String birthname, Date dateofbirth,
+			String firstname, GenderType gender, String ipAddress, String lastname,
 			String locale) {
 		return newUserData(id, birthname, dateofbirth, firstname, gender,
 				ipAddress, lastname, locale, null, null, null, null);
@@ -439,12 +439,12 @@ public class UserManagementFactory implements Serializable {
 	 *            the user contacts
 	 * @return UserData A UserData object
 	 */
-	public UserData newUserData(Integer id, String birthname, Date dateofbirth,
-			String firstname, Gender gender, String ipAddress, String lastname,
+	public UserDatas newUserData(Integer id, String birthname, Date dateofbirth,
+			String firstname, GenderType gender, String ipAddress, String lastname,
 			String locale, Set<Addresses> addresses,
 			Set<Contactmethods> contactmethods, Set<Resources> resources,
 			Set<Users> userContacts) {
-		UserData userData = new UserData();
+		UserDatas userData = new UserDatas();
 		userData.setBirthname(birthname);
 		userData.setContactmethods(contactmethods);
 		userData.setDateofbirth(dateofbirth);
@@ -489,7 +489,7 @@ public class UserManagementFactory implements Serializable {
 	 * @return the users
 	 */
 	public Users newUsers(Boolean active, String pw, String salt,
-			String username, Boolean locked, UserData userData, Set<Roles> roles) {
+			String username, Boolean locked, UserDatas userData, Set<Roles> roles) {
 		return newUsers(null, active, pw, salt, username, locked, userData,
 				roles);
 	}
@@ -516,7 +516,7 @@ public class UserManagementFactory implements Serializable {
 	 * @return Users A Users object
 	 */
 	public Users newUsers(Integer id, Boolean active, String pw, String salt,
-			String username, Boolean locked, UserData userData, Set<Roles> roles) {
+			String username, Boolean locked, UserDatas userData, Set<Roles> roles) {
 		Users users = new Users();
 		users.setActive(active);
 		users.setLocked(locked);

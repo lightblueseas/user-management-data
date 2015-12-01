@@ -52,7 +52,7 @@ implements Cloneable {
 	/** The data of this user. */
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "user_data")
-	private UserData userData;
+	private UserDatas userData;
 	/** The user name. */
 	@Column(name = "username", length = 256, unique = true)
 	private String username;

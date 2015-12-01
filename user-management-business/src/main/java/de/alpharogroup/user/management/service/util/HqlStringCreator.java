@@ -6,7 +6,7 @@ import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Permissions;
 import de.alpharogroup.user.management.entities.RuleViolations;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Contactmethod;
+import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 
 public class HqlStringCreator {
@@ -84,7 +84,7 @@ public class HqlStringCreator {
 		return sb.toString();
 	}
 
-	public static String forContactmethods(Contactmethod contactmethod, String contactvalue) {
+	public static String forContactmethods(ContactmethodType contactmethod, String contactvalue) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("select cm from " + Contactmethods.class.getSimpleName() + " cm");
 		boolean contactmethodIsNotNull = contactmethod != null;

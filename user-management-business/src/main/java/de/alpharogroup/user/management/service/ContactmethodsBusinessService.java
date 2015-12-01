@@ -12,7 +12,7 @@ import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 import de.alpharogroup.user.management.daos.ContactmethodsDao;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Contactmethod;
+import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.util.HqlStringCreator;
 
@@ -71,7 +71,7 @@ public class ContactmethodsBusinessService extends AbstractBusinessService<Conta
 	 * {@inheritDoc}
 	 */
 	public boolean existsContact(final String contactValue,
-			final Contactmethod contactMethod) {
+			final ContactmethodType contactMethod) {
 		final List<Contactmethods> contacts = findContact(contactValue,
 				contactMethod);
 		if (null != contacts && !contacts.isEmpty()) {
@@ -84,12 +84,12 @@ public class ContactmethodsBusinessService extends AbstractBusinessService<Conta
 	 * {@inheritDoc}
 	 */
 	public List<Contactmethods> findContact(final String contactValue,
-			final Contactmethod contactMethod) {
+			final ContactmethodType contactMethod) {
 		return find(contactMethod, contactValue);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Contactmethods> find(final Contactmethod contactmethod, final String contactvalue) {
+	public List<Contactmethods> find(final ContactmethodType contactmethod, final String contactvalue) {
 		String hqlString = HqlStringCreator.forContactmethods(contactmethod, contactvalue);
 		final Query query = getQuery(hqlString);
 		if(contactmethod != null){
@@ -103,7 +103,7 @@ public class ContactmethodsBusinessService extends AbstractBusinessService<Conta
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Contactmethods> findContactmethod(final Contactmethod contactmethod, final Users user) {
+	public List<Contactmethods> findContactmethod(final ContactmethodType contactmethod, final Users user) {
 		final String hqlString = 
 				  "select distinct cm from Users u inner join u.userData.contactmethods cm "
 				+ "where u=:user "

@@ -6,10 +6,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import de.alpharogroup.db.dao.jpa.JpaEntityManagerDao;
-import de.alpharogroup.user.management.entities.UserData;
+import de.alpharogroup.user.management.entities.UserDatas;
 
 @Repository("userDataDao")
-public class UserDataDao extends JpaEntityManagerDao<UserData, Integer>{
+public class UserDataDao extends JpaEntityManagerDao<UserDatas, Integer>{
 
 	/**
 	 * The serialVersionUID.

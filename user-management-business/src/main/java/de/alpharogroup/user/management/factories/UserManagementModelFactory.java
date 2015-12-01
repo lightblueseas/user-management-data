@@ -7,7 +7,7 @@ import java.util.Locale;
 import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.auth.models.BaseUsernameSignUpModel;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.sign.up.UserModel;
 
 public class UserManagementModelFactory implements Serializable {
@@ -33,7 +33,7 @@ public class UserManagementModelFactory implements Serializable {
 			String birthname,
 			Date dateOfBirth,
 			String firstname,
-			Gender gender,
+			GenderType gender,
 			String ipAddress,
 			String lastname,
 			Locale locale,

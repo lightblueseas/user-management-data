@@ -19,7 +19,7 @@ import de.alpharogroup.jgeohash.GeoHashUtils;
 import de.alpharogroup.user.management.daos.UsersDao;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.GenderType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -145,7 +145,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Users> findUsers(Integer from, Gender searchGender, Integer until)
+	public List<Users> findUsers(Integer from, GenderType searchGender, Integer until)
 	{
 		Date now = new Date(System.currentTimeMillis());
 		Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
@@ -162,7 +162,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Users> findUsers(Integer from, Gender searchGender, Integer until,
+	public List<Users> findUsers(Integer from, GenderType searchGender, Integer until,
 		final String geohash)
 	{
 		Date now = new Date(System.currentTimeMillis());

@@ -27,13 +27,13 @@ import de.alpharogroup.resource.system.service.api.ResourcesService;
 import de.alpharogroup.user.management.application.models.UserModelConverter;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Roles;
-import de.alpharogroup.user.management.entities.UserData;
+import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Contactmethod;
+import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.api.RolesService;
-import de.alpharogroup.user.management.service.api.UserDataService;
+import de.alpharogroup.user.management.service.api.UserDatasService;
 import de.alpharogroup.user.management.service.api.UserManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
@@ -74,7 +74,7 @@ public class UserManagementBusinessService implements UserManagementService {
 
 	/** The users business service. */
 	@Autowired
-	private UserDataService userDataService;
+	private UserDatasService userDataService;
 
 	/** The resources business service. */
 	@Autowired
@@ -85,7 +85,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	 * 
 	 * @return the user data service
 	 */
-	public UserDataService getUserDataService() {
+	public UserDatasService getUserDataService() {
 		return userDataService;
 	}
 
@@ -95,7 +95,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	 * @param userDataService
 	 *            the new user data service
 	 */
-	public void setUserDataService(UserDataService userDataService) {
+	public void setUserDataService(UserDatasService userDataService) {
 		this.userDataService = userDataService;
 	}
 
@@ -115,7 +115,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	@Override
 	public boolean existsUserWithEmail(final String email) {
 		final Contactmethods emailContact = UserManagementFactory.getInstance()
-				.newContactmethods(Contactmethod.EMAIL, email);
+				.newContactmethods(ContactmethodType.EMAIL, email);
 		return existsUserWithEmail(emailContact);
 	}
 
@@ -179,7 +179,7 @@ public class UserManagementBusinessService implements UserManagementService {
 		List<Contactmethods> cms = new ArrayList<Contactmethods>();
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.EMAIL.equals(cm.getContactmethod())) {
+			if (ContactmethodType.EMAIL.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
 		}
@@ -195,7 +195,7 @@ public class UserManagementBusinessService implements UserManagementService {
 		List<Contactmethods> cms = new ArrayList<Contactmethods>();
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.FAX.equals(cm.getContactmethod())) {
+			if (ContactmethodType.FAX.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
 		}
@@ -211,7 +211,7 @@ public class UserManagementBusinessService implements UserManagementService {
 		List<Contactmethods> cms = new ArrayList<Contactmethods>();
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.INTERNET.equals(cm.getContactmethod())) {
+			if (ContactmethodType.INTERNET.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
 		}
@@ -227,7 +227,7 @@ public class UserManagementBusinessService implements UserManagementService {
 		List<Contactmethods> cms = new ArrayList<Contactmethods>();
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.MOBILE.equals(cm.getContactmethod())) {
+			if (ContactmethodType.MOBILE.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
 		}
@@ -243,7 +243,7 @@ public class UserManagementBusinessService implements UserManagementService {
 		List<Contactmethods> cms = new ArrayList<Contactmethods>();
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.TELEFON.equals(cm.getContactmethod())) {
+			if (ContactmethodType.TELEFON.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
 		}return cms;
@@ -256,7 +256,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	public Contactmethods findEmailContactFromUser(final Users user) {
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.EMAIL.equals(cm.getContactmethod())) {
+			if (ContactmethodType.EMAIL.equals(cm.getContactmethod())) {
 				return cm;
 			}
 		}
@@ -270,7 +270,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	public Contactmethods findFaxContactFromUser(final Users user) {
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.FAX.equals(cm.getContactmethod())) {
+			if (ContactmethodType.FAX.equals(cm.getContactmethod())) {
 				return cm;
 			}
 		}
@@ -284,7 +284,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	public Contactmethods findInternetContactFromUser(final Users user) {
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.INTERNET.equals(cm.getContactmethod())) {
+			if (ContactmethodType.INTERNET.equals(cm.getContactmethod())) {
 				return cm;
 			}
 		}
@@ -298,7 +298,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	public Contactmethods findMobileContactFromUser(final Users user) {
 		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
 		for (Contactmethods cm : userContactMethods) {
-			if (Contactmethod.MOBILE.equals(cm.getContactmethod())) {
+			if (ContactmethodType.MOBILE.equals(cm.getContactmethod())) {
 				return cm;
 			}
 		}
@@ -319,7 +319,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	@Override
 	public Contactmethods findTelefonContactFromUser(final Users user) {
 		for (Contactmethods cm : user.getUserData().getContactmethods()) {
-			if (Contactmethod.TELEFON.equals(cm.getContactmethod())) {
+			if (ContactmethodType.TELEFON.equals(cm.getContactmethod())) {
 				return cm;
 			}
 		}
@@ -390,7 +390,7 @@ public class UserManagementBusinessService implements UserManagementService {
 			}
 			mergedAddresses.add(address);
 		}
-		UserData userData = user.getUserData();
+		UserDatas userData = user.getUserData();
 		userData.getAddresses().addAll(mergedAddresses);
 		userData = userDataService.merge(userData);
 	}
@@ -402,7 +402,7 @@ public class UserManagementBusinessService implements UserManagementService {
 		if (!addressesService.exists(address.getId())) {
 			address = addressesService.merge(address);
 		}
-		UserData userData = user.getUserData();
+		UserDatas userData = user.getUserData();
 		userData.getAddresses().add(address);
 		userData = userDataService.merge(userData);
 	}
@@ -445,7 +445,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	public Contactmethods saveUserWithContactmethod(final Users user,
 			final Contactmethods contact) throws BatchUpdateException {
 		final Contactmethods saved = contactmethodsService.merge(contact);
-		UserData ud = userDataService.get(user.getUserData().getId());
+		UserDatas ud = userDataService.get(user.getUserData().getId());
 		ud.getContactmethods().add(saved);
 		ud = userDataService.merge(ud);
 		return saved;
@@ -457,7 +457,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	public List<Contactmethods> saveUserWithContactmethods(final Users user,
 			final List<Contactmethods> contacts) throws BatchUpdateException {
 		List<Contactmethods> saved = contactmethodsService.merge(contacts);
-		UserData ud = userDataService.get(user.getUserData().getId());
+		UserDatas ud = userDataService.get(user.getUserData().getId());
 		ud.getContactmethods().addAll(saved);
 		ud = userDataService.merge(ud);
 		return saved;
@@ -499,7 +499,7 @@ public class UserManagementBusinessService implements UserManagementService {
 			throws EmailAlreadyExistsException {
 
 		final Contactmethods emailContact = UserManagementFactory.getInstance()
-				.newContactmethods(Contactmethod.EMAIL, email);
+				.newContactmethods(ContactmethodType.EMAIL, email);
 		final Contactmethods emailContactInDB = findEmailContactFromUser(user);
 		if(emailContactInDB == null) {
 			return emailContact;
@@ -554,7 +554,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	 */
 	@Override
 	public Contactmethods updateContactmethod(final String contactmethodValue,
-			final Contactmethod contactmethodType,
+			final ContactmethodType contactmethodType,
 			final Contactmethods contactmethod) {
 		final Contactmethods newContactMethod = UserManagementFactory
 				.getInstance().newContactmethods(contactmethodType,
@@ -635,23 +635,23 @@ public class UserManagementBusinessService implements UserManagementService {
 		}
 		final Set<Contactmethods> contacts = new HashSet<Contactmethods>();
 		final Contactmethods emailContact = UserManagementFactory.getInstance()
-				.newContactmethods(Contactmethod.EMAIL, email);
+				.newContactmethods(ContactmethodType.EMAIL, email);
 		contacts.add(emailContact);
 		if(userModel.getFax()!=null && !userModel.getFax().isEmpty()) {
 			final Contactmethods faxContact = UserManagementFactory.getInstance()
 					.newContactmethods(
-					Contactmethod.FAX, userModel.getFax());
+					ContactmethodType.FAX, userModel.getFax());
 			contacts.add(faxContact);
 		}
 		if(userModel.getTelefon()!=null && !userModel.getTelefon().isEmpty()) {
 			final Contactmethods telefonContact = UserManagementFactory.getInstance()
-					.newContactmethods(Contactmethod.TELEFON,
+					.newContactmethods(ContactmethodType.TELEFON,
 							userModel.getTelefon());
 			contacts.add(telefonContact);
 		}
 		if(userModel.getMobile()!=null && !userModel.getMobile().isEmpty()) {
 			final Contactmethods mobileContact = UserManagementFactory.getInstance()
-					.newContactmethods(Contactmethod.MOBILE,
+					.newContactmethods(ContactmethodType.MOBILE,
 							userModel.getMobile());
 			contacts.add(mobileContact);
 		}
@@ -674,7 +674,7 @@ public class UserManagementBusinessService implements UserManagementService {
 				locale = locale.substring(0, 5);
 			}
 		}
-		UserData userData = UserManagementFactory.getInstance().newUserData(
+		UserDatas userData = UserManagementFactory.getInstance().newUserData(
 				userModel.getBirthname(), userModel.getDateofbirth(),
 				userModel.getFirstname(), userModel.getGender(),
 				userModel.getIpAddress(), userModel.getLastname(), locale);
@@ -713,7 +713,7 @@ public class UserManagementBusinessService implements UserManagementService {
 		Resources resource = UserModelConverter.convert(resourceModel);
 		resource = resourcesService.merge(resource);
 		resourceModel.setId(resource.getId());
-		UserData userData = userDataService.get(user.getUserData().getId());
+		UserDatas userData = userDataService.get(user.getUserData().getId());
 		userData.getResources().add(resource);
 		userData = userDataService.merge(userData);
 		try {
@@ -728,7 +728,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	 * {@inheritDoc}
 	 */
 	public void deleteResource(ResourcesModel resourceModel, final Integer userDataId) {		
-		UserData userData = userDataService.get(userDataId);
+		UserDatas userData = userDataService.get(userDataId);
 		Resources resource = resourcesService.get(resourceModel.getId());
 		if(userData.getResources().contains(resource)) {
 			if(userData.getResources().remove(resource)) {
@@ -748,8 +748,8 @@ public class UserManagementBusinessService implements UserManagementService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public UserData deleteBlacklisted(Users blacklisted, final Integer userDataId) {
-		UserData userData = userDataService.get(userDataId);
+	public UserDatas deleteBlacklisted(Users blacklisted, final Integer userDataId) {
+		UserDatas userData = userDataService.get(userDataId);
 		if(userData.getBlacklistedContacts().contains(blacklisted)) {			
 			try {
 				userData.getBlacklistedContacts().remove(blacklisted);
@@ -761,8 +761,8 @@ public class UserManagementBusinessService implements UserManagementService {
 		return userData;
 	}
 	
-	public UserData deleteAddress(Addresses address, final UserData ud ) {
-		UserData userData = userDataService.get(ud.getId());
+	public UserDatas deleteAddress(Addresses address, final UserDatas ud ) {
+		UserDatas userData = userDataService.get(ud.getId());
 		if(userData.getAddresses().contains(address)) {
 			userData.getAddresses().remove(address);
 			userData = userDataService.merge(userData);
@@ -771,7 +771,7 @@ public class UserManagementBusinessService implements UserManagementService {
 	}
 	
 	public Users addUserContact(Users user, Users contact) {
-		UserData userData = getUserDataService().get(user.getUserData().getId());
+		UserDatas userData = getUserDataService().get(user.getUserData().getId());
 		userData.getUserContacts().add(contact);
 		userData = getUserDataService().merge(userData);
 		user.setUserData(userData);

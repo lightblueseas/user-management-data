@@ -42,6 +42,10 @@
 		<module>user-management-entities</module>
 		<module>user-management-business</module>
 		<module>user-management-init</module>
+		<module>user-management-domain</module>
+		<module>user-management-rest-api</module>
+		<module>user-management-rest-client</module>
+		<module>user-management-rest-web</module>
 	</modules>
 
 	<properties>

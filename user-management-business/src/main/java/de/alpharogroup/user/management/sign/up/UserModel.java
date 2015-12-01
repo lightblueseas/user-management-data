@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import de.alpharogroup.address.book.entities.Addresses;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.GenderType;
 
 /**
  * The Class UserModel holds data of the user.
@@ -27,7 +27,7 @@ public class UserModel implements Serializable {
 	private String firstname;
 
 	/** The gender. */
-	private Gender gender;
+	private GenderType gender;
 
 	/** The IP address. */
 	private String ipAddress;
@@ -97,7 +97,7 @@ public class UserModel implements Serializable {
 	 *
 	 * @return the gender
 	 */
-	public Gender getGender() {
+	public GenderType getGender() {
 		return gender;
 	}
 
@@ -178,7 +178,7 @@ public class UserModel implements Serializable {
 	 *
 	 * @param gender the new gender
 	 */
-	public void setGender(Gender gender) {
+	public void setGender(GenderType gender) {
 		this.gender = gender;
 	}
 

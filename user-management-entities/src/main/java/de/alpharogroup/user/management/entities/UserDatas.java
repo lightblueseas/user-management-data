@@ -30,18 +30,18 @@ import org.hibernate.annotations.TypeDefs;
 import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.db.entity.BaseEntity;
 import de.alpharogroup.resource.system.entities.Resources;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.GenderType;
 
 /**
  * The Class UserData hold user specific data.
  */
 @Entity
 @Table(name = "user_data")
-@TypeDefs({ @TypeDef(name = "genderConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.Gender") }) })
+@TypeDefs({ @TypeDef(name = "genderConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.GenderType") }) })
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserData 
+public class UserDatas 
 extends BaseEntity<Integer> 
 implements Cloneable {
 
@@ -82,7 +82,7 @@ implements Cloneable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "gender")
 	@Type(type = "genderConverter")
-	private Gender gender;
+	private GenderType gender;
 	/** The resources of the user. */
 	@ManyToMany(fetch=FetchType.EAGER)
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})

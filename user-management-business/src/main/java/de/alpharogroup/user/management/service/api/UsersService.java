@@ -6,7 +6,7 @@ import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.db.service.jpa.BusinessService;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.GenderType;
 
 /**
  * The Interface UsersService.
@@ -89,7 +89,7 @@ public interface UsersService extends BusinessService<Users, Integer> {
 	 *            the until
 	 * @return the list
 	 */
-	List<Users> findUsers(Integer from, Gender searchGender, Integer until);
+	List<Users> findUsers(Integer from, GenderType searchGender, Integer until);
 
 	/**
 	 * Find users from the given gender and the range from till until and the
@@ -105,7 +105,7 @@ public interface UsersService extends BusinessService<Users, Integer> {
 	 *            the geohash
 	 * @return the list
 	 */
-	List<Users> findUsers(Integer from, Gender searchGender, Integer until,
+	List<Users> findUsers(Integer from, GenderType searchGender, Integer until,
 			final String geohash);
 
 }

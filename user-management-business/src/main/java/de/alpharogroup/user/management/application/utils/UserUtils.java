@@ -1,6 +1,6 @@
 package de.alpharogroup.user.management.application.utils;
 
-import de.alpharogroup.user.management.entities.UserData;
+import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.entities.Users;
 
 /**
@@ -28,7 +28,7 @@ public class UserUtils {
 	 * @param userData the user data
 	 * @return the full name
 	 */
-	public static String getFullName(UserData userData) {
+	public static String getFullName(UserDatas userData) {
 		String firstname = userData.getFirstname();
 		String lastname = userData.getLastname();
 		StringBuilder sb = new StringBuilder();

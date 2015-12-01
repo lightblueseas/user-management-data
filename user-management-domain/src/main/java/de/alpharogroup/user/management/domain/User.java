@@ -28,7 +28,7 @@ public class User extends BaseDomainObject<Integer> {
 	/** The salt that is used to compute the hash. */
 	private String salt;
 	/** The data of this user. */
-	private UserDataBusinessObject userData;
+	private UserData userData;
 	/** The user name. */
 	private String username;
 

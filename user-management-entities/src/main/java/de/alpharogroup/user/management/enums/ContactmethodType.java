@@ -1,9 +1,9 @@
 package de.alpharogroup.user.management.enums;
 
 /**
- * An enumeration for the contact methods for contact.
+ * An enumeration for the type of the contact method for contact.
  */
-public enum Contactmethod {
+public enum ContactmethodType {
 
 	/** The email. */
 	EMAIL,

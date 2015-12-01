@@ -5,7 +5,7 @@ import java.util.List;
 import de.alpharogroup.db.service.jpa.BusinessService;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Contactmethod;
+import de.alpharogroup.user.management.enums.ContactmethodType;
 
 /**
  * The Interface ContactmethodsService.
@@ -42,7 +42,7 @@ public interface ContactmethodsService extends BusinessService<Contactmethods, I
 	 * @return true, if successful
 	 */
 	boolean existsContact(String contactValue,
-			Contactmethod contactMethod);
+			ContactmethodType contactMethod);
 
 	/**
 	 * Find contact.
@@ -54,7 +54,7 @@ public interface ContactmethodsService extends BusinessService<Contactmethods, I
 	 * @return the list
 	 */
 	List<Contactmethods> findContact(String contactValue,
-			Contactmethod contactMethod);
+			ContactmethodType contactMethod);
 
 	/**
 	 * Find contact.
@@ -63,7 +63,7 @@ public interface ContactmethodsService extends BusinessService<Contactmethods, I
 	 * @param contactvalue the contactvalue
 	 * @return the list
 	 */
-	List<Contactmethods> find(final Contactmethod contactmethod, final String contactvalue);
+	List<Contactmethods> find(final ContactmethodType contactmethod, final String contactvalue);
 	
-	List<Contactmethods> findContactmethod(final Contactmethod contactmethod, final Users user);
+	List<Contactmethods> findContactmethod(final ContactmethodType contactmethod, final Users user);
 }

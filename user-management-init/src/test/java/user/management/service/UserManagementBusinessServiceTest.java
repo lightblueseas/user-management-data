@@ -26,8 +26,8 @@ import de.alpharogroup.user.management.application.models.UserModelConverter;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.Users;
-import de.alpharogroup.user.management.enums.Contactmethod;
-import de.alpharogroup.user.management.enums.Gender;
+import de.alpharogroup.user.management.enums.ContactmethodType;
+import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.factories.UserManagementModelFactory;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
@@ -61,7 +61,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 				"Knight",
 				CreateDateExtensions.newDate(1974, 8, 28),
 				"Michael",
-				Gender.MALE,
+				GenderType.MALE,
 				"127.0.0.1",
 				"Knight",
 				Locale.GERMAN,
@@ -85,7 +85,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 				"Frankenstein",
 				CreateDateExtensions.newDate(1974, 8, 28),
 				"Adolf",
-				Gender.MALE,
+				GenderType.MALE,
 				"127.0.0.1",
 				"Frankenstein",
 				Locale.GERMAN,
@@ -107,7 +107,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 				"Dean",
 				CreateDateExtensions.newDate(1974, 8, 28),
 				"James",
-				Gender.MALE,
+				GenderType.MALE,
 				"127.0.0.1",
 				"Dean",
 				Locale.GERMAN,
@@ -194,7 +194,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	@Test(enabled=false)
 	public void testfindContactmethods() throws BatchUpdateException {
 		Users michaelProvider = usersService.findUserWithEmail("james.dean@gmail.com");
-		Contactmethods contactmethod = UserManagementFactory.getInstance().newContactmethods(Contactmethod.INTERNET, "http://www.jamesdean.gr");
+		Contactmethods contactmethod = UserManagementFactory.getInstance().newContactmethods(ContactmethodType.INTERNET, "http://www.jamesdean.gr");
 		contactmethod = userManagementService.saveUserWithContactmethod(michaelProvider, contactmethod);
 		usersService.refresh(michaelProvider);
 		List<Contactmethods> cm = userManagementService.findAllInternetContactmethodsFromUser(michaelProvider);
@@ -205,7 +205,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	@Test(enabled=false)
 	public void testFindContactmethod() {
 		Users michaelProvider = usersService.findUserWithEmail("james.dean@gmail.com");
-		List<Contactmethods> cms = contactmethodsService.findContactmethod(Contactmethod.INTERNET, michaelProvider);
+		List<Contactmethods> cms = contactmethodsService.findContactmethod(ContactmethodType.INTERNET, michaelProvider);
 		for (Contactmethods contactmethods : cms) {
 			System.out.println(contactmethods);
 		}

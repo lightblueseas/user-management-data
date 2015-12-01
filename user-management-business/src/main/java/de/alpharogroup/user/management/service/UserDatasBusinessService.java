@@ -6,12 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 import de.alpharogroup.user.management.daos.UserDataDao;
-import de.alpharogroup.user.management.entities.UserData;
-import de.alpharogroup.user.management.service.api.UserDataService;
+import de.alpharogroup.user.management.entities.UserDatas;
+import de.alpharogroup.user.management.service.api.UserDatasService;
 
 @Transactional
-@Service("userDataService")
-public class UserDataBusinessService extends AbstractBusinessService<UserData, Integer, UserDataDao> implements UserDataService {
+@Service("userDatasService")
+public class UserDatasBusinessService extends AbstractBusinessService<UserDatas, Integer, UserDataDao> implements UserDatasService {
 	
 	/**
 	 * 
