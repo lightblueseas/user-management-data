@@ -8,12 +8,12 @@ import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 
 /**
- * The Interface ContactmethodsService.
+ * The interface {@link ContactmethodsService}.
  */
 public interface ContactmethodsService extends BusinessService<Contactmethods, Integer>{
 	
 	/**
-	 * Compare.
+	 * Compare the given {@link Contactmethods} objects.
 	 * 
 	 * @param contact
 	 *            the contact
@@ -24,7 +24,7 @@ public interface ContactmethodsService extends BusinessService<Contactmethods, I
 	boolean compare(Contactmethods contact, Contactmethods compare);
 
 	/**
-	 * Exists contact.
+	 * Check if a contact exist with given {@link Contactmethods}.
 	 * 
 	 * @param contact
 	 *            the contact
@@ -33,7 +33,7 @@ public interface ContactmethodsService extends BusinessService<Contactmethods, I
 	boolean existsContact(Contactmethods contact);
 
 	/**
-	 * Exists contact.
+	 * Check if a contact exist with given contact value and the given {@link ContactmethodType}.
 	 * 
 	 * @param contactValue
 	 *            the contact value
@@ -45,25 +45,32 @@ public interface ContactmethodsService extends BusinessService<Contactmethods, I
 			ContactmethodType contactMethod);
 
 	/**
-	 * Find contact.
+	 * Find all the {@link Contactmethods} objects from the given contact value and the given {@link ContactmethodType}.
 	 * 
 	 * @param contactValue
 	 *            the contact value
 	 * @param contactMethod
 	 *            the contact method
-	 * @return the list
+	 * @return the list of the found {@link Contactmethods} objects.
 	 */
 	List<Contactmethods> findContact(String contactValue,
 			ContactmethodType contactMethod);
 
 	/**
-	 * Find contact.
+	 * Find all the {@link Contactmethods} objects from the given contact value and the given {@link ContactmethodType}.
 	 *
-	 * @param contactmethod the contactmethod
-	 * @param contactvalue the contactvalue
-	 * @return the list
+	 * @param contactmethod the contact method
+	 * @param contactvalue the contact value
+	 * @return the list of the found {@link Contactmethods} objects.
 	 */
 	List<Contactmethods> find(final ContactmethodType contactmethod, final String contactvalue);
-	
+
+	/**
+	 * Find all the {@link Contactmethods} objects from the given user and the given {@link ContactmethodType}.
+	 *
+	 * @param contactmethod the contact method
+	 * @param user the user
+	 * @return the list of the found {@link Contactmethods} objects.
+	 */
 	List<Contactmethods> findContactmethod(final ContactmethodType contactmethod, final Users user);
 }

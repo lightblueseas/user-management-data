@@ -13,7 +13,7 @@ import de.alpharogroup.user.management.enums.ContactmethodType;
 public interface ContactmethodService extends DomainService<Integer, Contactmethod>  {
 	
 	/**
-	 * Compare the given contact objects.
+	 * Compare the given {@link Contactmethod} objects.
 	 * 
 	 * @param contact
 	 *            the contact
@@ -51,7 +51,7 @@ public interface ContactmethodService extends DomainService<Integer, Contactmeth
 	 *            the contact value
 	 * @param contactMethod
 	 *            the contact method
-	 * @return the list
+	 * @return the list of the found {@link Contactmethod} objects.
 	 */
 	List<Contactmethod> findContact(String contactValue,
 			ContactmethodType contactMethod);
@@ -61,7 +61,7 @@ public interface ContactmethodService extends DomainService<Integer, Contactmeth
 	 *
 	 * @param contactmethod the contactmethod
 	 * @param contactvalue the contactvalue
-	 * @return the list
+	 * @return the list of the found {@link Contactmethod} objects.
 	 */
 	List<Contactmethod> find(final ContactmethodType contactmethod, final String contactvalue);
 	
@@ -70,7 +70,7 @@ public interface ContactmethodService extends DomainService<Integer, Contactmeth
 	 *
 	 * @param contactmethod the contactmethod
 	 * @param user the user
-	 * @return the list
+	 * @return the list of the found {@link Contactmethod} objects.
 	 */
 	List<Contactmethod> findContactmethod(final ContactmethodType contactmethod, final User user);
 }
