@@ -53,15 +53,6 @@ public interface UsersManagementService extends UserExistenceService {
 	boolean existsUserWithEmail(final Contactmethods emailContact);
 
 	/**
-	 * Checks if a user exists with the given email or user name.
-	 *
-	 * @param emailOrUsername
-	 *            the email or user name
-	 * @return true, if successful
-	 */
-	boolean existsUserWithEmailOrUsername(final String emailOrUsername);
-
-	/**
 	 * Find all {@link Addresses} from the given {@link Users}.
 	 * 
 	 * @param user

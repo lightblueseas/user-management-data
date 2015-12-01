@@ -23,12 +23,23 @@ import lombok.Setter;
 public class ContactmethodDomainService
 		extends AbstractDomainService<Integer, Contactmethod, Contactmethods, ContactmethodsDao, ContactmethodsMapper>
 		implements ContactmethodService {
+	
 	/** The {@link ContactmethodsService}. */
 	@Autowired
 	@Getter
 	@Setter
 	private ContactmethodsService contactmethodsService;
 
+	/**
+	 * Sets the specific {@link ContactmethodsDao}.
+	 *
+	 * @param contactmethodsDao
+	 *            the new {@link ContactmethodsDao}.
+	 */
+	@Autowired
+	public void setContactmethodsDao(ContactmethodsDao contactmethodsDao){
+		setDao(contactmethodsDao);
+	}
 	/**
 	 * {@inheritDoc}
 	 */

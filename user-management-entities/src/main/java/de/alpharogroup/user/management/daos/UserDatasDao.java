@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import de.alpharogroup.db.dao.jpa.JpaEntityManagerDao;
 import de.alpharogroup.user.management.entities.UserDatas;
 
-@Repository("userDataDao")
-public class UserDataDao extends JpaEntityManagerDao<UserDatas, Integer>{
+@Repository("userDatasDao")
+public class UserDatasDao extends JpaEntityManagerDao<UserDatas, Integer>{
 
 	/**
 	 * The serialVersionUID.

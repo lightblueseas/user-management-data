@@ -94,8 +94,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean existsUserWithEmailOrUsername(
-			final String emailOrUsername) {
+	public boolean existsUserWithEmailOrUsername(final String emailOrUsername) {
 		boolean emailExists = usersService.findUserWithEmail(emailOrUsername) != null;
 		return emailExists || existsUserWithUsername(emailOrUsername);
 	}
@@ -389,6 +388,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void saveAddressFromUser(final Users user, Addresses address) {
 		if (!addressesService.exists(address.getId())) {
 			address = addressesService.merge(address);
@@ -445,6 +445,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public List<Contactmethods> saveUserWithContactmethods(final Users user,
 			final List<Contactmethods> contacts) throws BatchUpdateException {
 		List<Contactmethods> saved = contactmethodsService.merge(contacts);
@@ -667,6 +668,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Resources persistResource(final ResourcesModel resourceModel,
 			final Integer userId) {
 		Users user = usersService.get(userId);
@@ -687,6 +689,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void deleteResource(ResourcesModel resourceModel, final Integer userDataId) {		
 		UserDatas userData = userDatasService.get(userDataId);
 		Resources resource = resourcesService.get(resourceModel.getId());
@@ -708,6 +711,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public UserDatas deleteBlacklisted(Users blacklisted, final Integer userDataId) {
 		UserDatas userData = userDatasService.get(userDataId);
 		if(userData.getBlacklistedContacts().contains(blacklisted)) {			
@@ -720,7 +724,11 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		}
 		return userData;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public UserDatas deleteAddress(Addresses address, final UserDatas ud ) {
 		UserDatas userData = userDatasService.get(ud.getId());
 		if(userData.getAddresses().contains(address)) {
@@ -729,7 +737,11 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		}
 		return userData;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public Users addUserContact(Users user, Users contact) {
 		UserDatas userData = getUserDatasService().get(user.getUserData().getId());
 		userData.getUserContacts().add(contact);
