@@ -38,6 +38,8 @@ import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * The class {@link UsersManagementBusinessService}.
@@ -62,42 +64,31 @@ public class UsersManagementBusinessService implements UsersManagementService {
 
 	/** The contactmethods business service. */
 	@Autowired
+	@Getter
+	@Setter
 	private ContactmethodsService contactmethodsService;
 
 	/** The roles business service. */
 	@Autowired
+	@Getter
+	@Setter
 	private RolesService rolesService;
 
 	/** The users business service. */
 	@Autowired
+	@Getter
+	@Setter
 	private UsersService usersService;
 
 	/** The users business service. */
 	@Autowired
-	private UserDatasService userDataService;
+	@Getter
+	@Setter
+	private UserDatasService userDatasService;
 
 	/** The resources business service. */
 	@Autowired
 	private ResourcesService resourcesService;
-
-	/**
-	 * Gets the user data service.
-	 * 
-	 * @return the user data service
-	 */
-	public UserDatasService getUserDataService() {
-		return userDataService;
-	}
-
-	/**
-	 * Sets the user data service.
-	 * 
-	 * @param userDataService
-	 *            the new user data service
-	 */
-	public void setUserDataService(UserDatasService userDataService) {
-		this.userDataService = userDataService;
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -392,7 +383,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		}
 		UserDatas userData = user.getUserData();
 		userData.getAddresses().addAll(mergedAddresses);
-		userData = userDataService.merge(userData);
+		userData = userDatasService.merge(userData);
 	}
 
 	/**
@@ -404,7 +395,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		}
 		UserDatas userData = user.getUserData();
 		userData.getAddresses().add(address);
-		userData = userDataService.merge(userData);
+		userData = userDatasService.merge(userData);
 	}
 
 	/**
@@ -420,7 +411,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		}
 		final boolean exists = existsUserWithUsername(username);
 		if (!exists) {
-			user.setUserData(userDataService.merge(user.getUserData()));
+			user.setUserData(userDatasService.merge(user.getUserData()));
 			final Users mergedUser = usersService.merge(user);
 			return mergedUser.getId();
 		} else {
@@ -445,9 +436,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	public Contactmethods saveUserWithContactmethod(final Users user,
 			final Contactmethods contact) throws BatchUpdateException {
 		final Contactmethods saved = contactmethodsService.merge(contact);
-		UserDatas ud = userDataService.get(user.getUserData().getId());
+		UserDatas ud = userDatasService.get(user.getUserData().getId());
 		ud.getContactmethods().add(saved);
-		ud = userDataService.merge(ud);
+		ud = userDatasService.merge(ud);
 		return saved;
 	}
 
@@ -457,9 +448,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	public List<Contactmethods> saveUserWithContactmethods(final Users user,
 			final List<Contactmethods> contacts) throws BatchUpdateException {
 		List<Contactmethods> saved = contactmethodsService.merge(contacts);
-		UserDatas ud = userDataService.get(user.getUserData().getId());
+		UserDatas ud = userDatasService.get(user.getUserData().getId());
 		ud.getContactmethods().addAll(saved);
-		ud = userDataService.merge(ud);
+		ud = userDatasService.merge(ud);
 		return saved;
 	}
 
@@ -478,17 +469,6 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		}
 		user.getRoles().addAll(roles);
 		user = usersService.merge(user);
-	}
-
-	/**
-	 * Sets the contactmethods business service.
-	 * 
-	 * @param contactmethodsService
-	 *            the new contactmethods business service
-	 */
-	public void setContactmethodsService(
-			final ContactmethodsService contactmethodsService) {
-		this.contactmethodsService = contactmethodsService;
 	}
 
 	/**
@@ -516,16 +496,6 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	}
 
 	/**
-	 * Sets the roles business service.
-	 * 
-	 * @param rolesService
-	 *            the new roles business service
-	 */
-	public void setRolesService(final RolesService rolesService) {
-		this.rolesService = rolesService;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -537,16 +507,6 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		}
 		user.setUsername(username);
 		return true;
-	}
-
-	/**
-	 * Sets the users business service.
-	 * 
-	 * @param usersService
-	 *            the new users business service
-	 */
-	public void setUsersService(final UsersService usersService) {
-		this.usersService = usersService;
 	}
 
 	/**
@@ -685,7 +645,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			mergedContacts.add(contactmethod);
 		}
 		userData.setContactmethods(mergedContacts);
-		userData = userDataService.merge(userData);
+		userData = userDatasService.merge(userData);
 
 		if(userModel.getAddress() != null) {
 			Addresses address = addressesService.merge(userModel.getAddress());
@@ -694,7 +654,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			}
 		}
 
-		userData = userDataService.merge(userData);
+		userData = userDatasService.merge(userData);
 		newUser = UserManagementFactory.getInstance().newUsers(Boolean.TRUE,
 				hashedPassword, salt, username, Boolean.FALSE, userData, roles);
 
@@ -713,9 +673,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		Resources resource = UserModelConverter.convert(resourceModel);
 		resource = resourcesService.merge(resource);
 		resourceModel.setId(resource.getId());
-		UserDatas userData = userDataService.get(user.getUserData().getId());
+		UserDatas userData = userDatasService.get(user.getUserData().getId());
 		userData.getResources().add(resource);
-		userData = userDataService.merge(userData);
+		userData = userDatasService.merge(userData);
 		try {
 			user = usersService.merge(user);
 		} catch (HibernateException e) {
@@ -728,11 +688,11 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	public void deleteResource(ResourcesModel resourceModel, final Integer userDataId) {		
-		UserDatas userData = userDataService.get(userDataId);
+		UserDatas userData = userDatasService.get(userDataId);
 		Resources resource = resourcesService.get(resourceModel.getId());
 		if(userData.getResources().contains(resource)) {
 			if(userData.getResources().remove(resource)) {
-				userData = userDataService.merge(userData);
+				userData = userDatasService.merge(userData);
 			}
 			try {
 				if (resourcesService.exists(resource.getId())) {
@@ -749,11 +709,11 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	public UserDatas deleteBlacklisted(Users blacklisted, final Integer userDataId) {
-		UserDatas userData = userDataService.get(userDataId);
+		UserDatas userData = userDatasService.get(userDataId);
 		if(userData.getBlacklistedContacts().contains(blacklisted)) {			
 			try {
 				userData.getBlacklistedContacts().remove(blacklisted);
-				userData = userDataService.merge(userData);
+				userData = userDatasService.merge(userData);
 			} catch (HibernateException e) {
 				LOGGER.error("HibernateException on flush...", e);
 			}
@@ -762,18 +722,18 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	}
 	
 	public UserDatas deleteAddress(Addresses address, final UserDatas ud ) {
-		UserDatas userData = userDataService.get(ud.getId());
+		UserDatas userData = userDatasService.get(ud.getId());
 		if(userData.getAddresses().contains(address)) {
 			userData.getAddresses().remove(address);
-			userData = userDataService.merge(userData);
+			userData = userDatasService.merge(userData);
 		}
 		return userData;
 	}
 	
 	public Users addUserContact(Users user, Users contact) {
-		UserDatas userData = getUserDataService().get(user.getUserData().getId());
+		UserDatas userData = getUserDatasService().get(user.getUserData().getId());
 		userData.getUserContacts().add(contact);
-		userData = getUserDataService().merge(userData);
+		userData = getUserDatasService().merge(userData);
 		user.setUserData(userData);
 		user = usersService.merge(user);
 		return user;
