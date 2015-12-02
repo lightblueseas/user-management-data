@@ -4,8 +4,8 @@ import java.io.File;
 
 import de.alpharogroup.date.ConvertDateExtensions;
 import de.alpharogroup.file.checksum.Algorithm;
-import de.alpharogroup.file.checksum.ChecksumUtils;
-import de.alpharogroup.file.read.ReadFileUtils;
+import de.alpharogroup.file.checksum.ChecksumExtensions;
+import de.alpharogroup.file.read.ReadFileExtensions;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.entities.Resources;
 import de.alpharogroup.resource.system.factories.ResourceSystemFactory;
@@ -60,12 +60,12 @@ public class UserModelConverter {
 	 */
 	public static ResourcesModel toResourceModel(File file, String contentType, String description) {
 		ResourcesModel resourcesModel = new ResourcesModel();
-		resourcesModel.setContent(ReadFileUtils.getFilecontentAsByteObjectArray(file));
+		resourcesModel.setContent(ReadFileExtensions.getFilecontentAsByteObjectArray(file));
 		resourcesModel.setContentType(contentType);
 		resourcesModel.setDescription(description);
 		resourcesModel.setFilename(file.getName());
 		resourcesModel.setFilesize(file.length()+"");
-		resourcesModel.setChecksum(ChecksumUtils.getChecksumQuietly(file, Algorithm.SHA_256));
+		resourcesModel.setChecksum(ChecksumExtensions.getChecksumQuietly(file, Algorithm.SHA_256));
 		resourcesModel.setCreated(ConvertDateExtensions.toDate(file.lastModified()));
 		resourcesModel.setDeletedFlag(Boolean.FALSE);
 		return resourcesModel;
