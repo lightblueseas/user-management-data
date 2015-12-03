@@ -15,7 +15,7 @@ import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 
 import org.apache.log4j.Logger;
 
-import de.alpharogroup.jgeohash.GeoHashUtils;
+import de.alpharogroup.jgeohash.GeoHashExtensions;
 import de.alpharogroup.user.management.daos.UsersDao;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.Users;
@@ -177,7 +177,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		Map<String, String> adjacentAreas = null;
 		if (geohash != null && !geohash.trim().isEmpty())
 		{
-			adjacentAreas = GeoHashUtils.getTwentyFiveAreasMap(geohash);
+			adjacentAreas = GeoHashExtensions.getTwentyFiveAreasMap(geohash);
 		}
 		if (adjacentAreas != null)
 		{

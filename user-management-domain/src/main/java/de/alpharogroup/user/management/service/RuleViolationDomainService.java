@@ -10,6 +10,7 @@ import de.alpharogroup.user.management.daos.RuleViolationsDao;
 import de.alpharogroup.user.management.domain.RuleViolation;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.entities.RuleViolations;
+import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 import de.alpharogroup.user.management.mapper.RuleViolationsMapper;
 import de.alpharogroup.user.management.service.api.RuleViolationService;
@@ -46,8 +47,8 @@ public class RuleViolationDomainService
 	 */
 	@Override
 	public RuleViolation save(InfringementModel model) {
-		// TODO Auto-generated method stub
-		return null;
+		RuleViolations ruleViolations = ruleViolationsService.save(model);
+		return getMapper().toDomainObject(ruleViolations);
 	}
 
 	/**
@@ -55,7 +56,9 @@ public class RuleViolationDomainService
 	 */
 	@Override
 	public List<RuleViolation> find(User detector, User violator, RuleViolationReason reason, String description) {
-		// TODO Auto-generated method stub
-		return null;
+		Users detectors = getMapper().map(detector, Users.class);
+		Users violators = getMapper().map(violator, Users.class);
+		List<RuleViolations> ruleViolations = ruleViolationsService.find(detectors, violators, reason, description);
+		return getMapper().toDomainObjects(ruleViolations);
 	}
 }

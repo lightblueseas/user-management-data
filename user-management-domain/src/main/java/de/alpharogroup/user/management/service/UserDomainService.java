@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import de.alpharogroup.address.book.domain.Address;
+import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.daos.UsersDao;
 import de.alpharogroup.user.management.domain.Role;
 import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.mapper.UsersMapper;
@@ -45,8 +47,7 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public boolean existsUserWithUsername(String username) {
-		// TODO Auto-generated method stub
-		return false;
+		return usersService.existsUserWithUsername(username);
 	}
 
 	/**
@@ -54,8 +55,10 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public List<Address> findAddressesFromUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = getMapper().toEntity(user);
+		List<Addresses> addresses = usersService.findAddressesFromUser(users);
+		List<Address> addresss = getMapper().map(addresses, Address.class);
+		return addresss;
 	}
 
 	/**
@@ -63,8 +66,10 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public Address findAddressFromUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = getMapper().toEntity(user);
+		Addresses addresses  = usersService.findAddressFromUser(users);
+		Address addresss = getMapper().map(addresses, Address.class);
+		return addresss;
 	}
 
 	/**
@@ -72,8 +77,10 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public List<Role> findRolesFromUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = getMapper().toEntity(user);
+		List<Roles> roles  = usersService.findRolesFromUser(users);
+		List<Role> roless = getMapper().map(roles, Role.class);
+		return roless;
 	}
 
 	/**
@@ -81,8 +88,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public User findUserWithEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = usersService.findUserWithEmail(email);
+		User user = getMapper().toDomainObject(users);
+		return user;
 	}
 
 	/**
@@ -90,8 +98,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public User findUserWithUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = usersService.findUserWithUsername(username);
+		User user = getMapper().toDomainObject(users);
+		return user;
 	}
 
 	/**
@@ -99,8 +108,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public boolean userIsInRole(User user, Role role) {
-		// TODO Auto-generated method stub
-		return false;
+		Users users = getMapper().toEntity(user);
+		Roles roles =getMapper().map(role, Roles.class);
+		return usersService.userIsInRole(users, roles);
 	}
 
 	/**
@@ -108,8 +118,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public List<User> findUsers(Integer from, GenderType searchGender, Integer until) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Users> users = usersService.findUsers(from, searchGender, until);
+		List<User> userss = getMapper().map(users, User.class);
+		return userss;
 	}
 
 	/**
@@ -117,7 +128,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 */
 	@Override
 	public List<User> findUsers(Integer from, GenderType searchGender, Integer until, String geohash) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Users> users = usersService.findUsers(from, searchGender, until, geohash);
+		List<User> userss = getMapper().map(users, User.class);
+		return userss;
 	}
+	
 }

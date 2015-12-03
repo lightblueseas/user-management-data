@@ -1,5 +1,6 @@
 package de.alpharogroup.user.management.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.daos.RolesDao;
 import de.alpharogroup.user.management.domain.Permission;
 import de.alpharogroup.user.management.domain.Role;
+import de.alpharogroup.user.management.entities.Permissions;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.mapper.RolesMapper;
 import de.alpharogroup.user.management.service.api.RoleService;
@@ -44,8 +46,10 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 */
 	@Override
 	public List<Permission> findAllPermissions(Role role) {
-		// TODO Auto-generated method stub
-		return null;
+		Roles roles = getMapper().toEntity(role);
+		List<Permissions> permissions = rolesService.findAllPermissions(roles);
+		List<Permission> perms = getMapper().map(permissions, Permission.class);
+		return perms;
 	}
 
 	/**
@@ -53,8 +57,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 */
 	@Override
 	public Role findRole(String rolename) {
-		// TODO Auto-generated method stub
-		return null;
+		return getMapper().toDomainObject(rolesService.findRole(rolename));
 	}
 
 	/**
@@ -62,8 +65,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 */
 	@Override
 	public List<Role> findRoles(String rolename) {
-		// TODO Auto-generated method stub
-		return null;
+		return getMapper().toDomainObjects(rolesService.findRoles(rolename));
 	}
 
 	/**
@@ -71,8 +73,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 */
 	@Override
 	public boolean exists(String rolename) {
-		// TODO Auto-generated method stub
-		return false;
+		return rolesService.exists(rolename);
 	}
 
 	/**
@@ -80,8 +81,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 */
 	@Override
 	public Role createAndSaveRole(String rolename, String description) {
-		// TODO Auto-generated method stub
-		return null;
+		return getMapper().toDomainObject(rolesService.createAndSaveRole(rolename, description));
 	}
 
 	/**
@@ -89,8 +89,9 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 */
 	@Override
 	public Role createAndSaveRole(String rolename, String description, Set<Permission> permissions) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Permissions> perms = getMapper().map(permissions, Permissions.class);
+		Roles roles = rolesService.createAndSaveRole(rolename, description, new HashSet<>(perms));
+		return getMapper().toDomainObject(roles);
 	}
 
 }
