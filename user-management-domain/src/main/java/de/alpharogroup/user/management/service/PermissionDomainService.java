@@ -43,8 +43,7 @@ public class PermissionDomainService
 	 */
 	@Override
 	public Permission createAndSavePermissions(String name, String description) {
-		// TODO Auto-generated method stub
-		return null;
+		return getMapper().toDomainObject(permissionsService.createAndSavePermissions(name, description));
 	}
 
 	/**
@@ -52,8 +51,7 @@ public class PermissionDomainService
 	 */
 	@Override
 	public Permission createAndSavePermissions(String name, String description, String shortcut) {
-		// TODO Auto-generated method stub
-		return null;
+		return getMapper().toDomainObject(permissionsService.createAndSavePermissions(name, description, shortcut));
 	}
 
 	/**
@@ -61,8 +59,7 @@ public class PermissionDomainService
 	 */
 	@Override
 	public Permission findByShortcut(String shortcut) {
-		// TODO Auto-generated method stub
-		return null;
+		return getMapper().toDomainObject(permissionsService.findByShortcut(shortcut));
 	}
 
 	/**
@@ -70,8 +67,7 @@ public class PermissionDomainService
 	 */
 	@Override
 	public Permission findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return getMapper().toDomainObject(permissionsService.findByName(name));
 	}
 
 	/**
@@ -79,8 +75,7 @@ public class PermissionDomainService
 	 */
 	@Override
 	public List<Permission> find(String description, String permissionName, String shortcut) {
-		// TODO Auto-generated method stub
-		return null;
+		return getMapper().toDomainObjects(permissionsService.find(description, permissionName, shortcut));
 	}
 
 }

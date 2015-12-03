@@ -9,7 +9,9 @@ import de.alpharogroup.user.management.daos.RelationPermissionsDao;
 import de.alpharogroup.user.management.domain.Permission;
 import de.alpharogroup.user.management.domain.RelationPermission;
 import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.management.entities.Permissions;
 import de.alpharogroup.user.management.entities.RelationPermissions;
+import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.mapper.RelationPermissionsMapper;
 import de.alpharogroup.user.management.service.api.RelationPermissionService;
 import de.alpharogroup.user.management.service.api.RelationPermissionsService;
@@ -45,8 +47,10 @@ public class RelationPermissionDomainService extends
 	 */
 	@Override
 	public RelationPermission findRelationPermissions(User provider, User subscriber) {
-		// TODO Auto-generated method stub
-		return null;
+		Users providers = getMapper().map(provider, Users.class);
+		Users subscribers = getMapper().map(subscriber, Users.class);
+		RelationPermission relationPermission = getMapper().toDomainObject(relationPermissionsService.findRelationPermissions(providers, subscribers));
+		return relationPermission;
 	}
 
 	/**
@@ -54,8 +58,11 @@ public class RelationPermissionDomainService extends
 	 */
 	@Override
 	public RelationPermission findRelationPermissions(User provider, User subscriber, Permission permission) {
-		// TODO Auto-generated method stub
-		return null;
+		Users providers = getMapper().map(provider, Users.class);
+		Users subscribers = getMapper().map(subscriber, Users.class);
+		Permissions permissions = getMapper().map(permission, Permissions.class);
+		RelationPermission relationPermission = getMapper().toDomainObject(relationPermissionsService.findRelationPermissions(providers, subscribers, permissions));
+		return relationPermission;
 	}
 
 	/**
@@ -63,8 +70,10 @@ public class RelationPermissionDomainService extends
 	 */
 	@Override
 	public List<RelationPermission> find(User provider, User subscriber) {
-		// TODO Auto-generated method stub
-		return null;
+		Users providers = getMapper().map(provider, Users.class);
+		Users subscribers = getMapper().map(subscriber, Users.class);
+		List<RelationPermission> relationPermissions = getMapper().toDomainObjects(relationPermissionsService.find(providers, subscribers));
+		return relationPermissions;
 	}
 
 	/**
@@ -72,8 +81,11 @@ public class RelationPermissionDomainService extends
 	 */
 	@Override
 	public List<RelationPermission> find(User provider, User subscriber, Permission permission) {
-		// TODO Auto-generated method stub
-		return null;
+		Users providers = getMapper().map(provider, Users.class);
+		Users subscribers = getMapper().map(subscriber, Users.class);
+		Permissions permissions = getMapper().map(permission, Permissions.class);
+		List<RelationPermission> relationPermissions = getMapper().toDomainObjects(relationPermissionsService.find(providers, subscribers, permissions));
+		return relationPermissions;
 	}
 
 	/**
@@ -81,8 +93,10 @@ public class RelationPermissionDomainService extends
 	 */
 	@Override
 	public void addPermission(User provider, User subscriber, Permission permission) {
-		// TODO Auto-generated method stub
-		
+		Users providers = getMapper().map(provider, Users.class);
+		Users subscribers = getMapper().map(subscriber, Users.class);
+		Permissions permissions = getMapper().map(permission, Permissions.class);
+		relationPermissionsService.addPermission(providers, subscribers, permissions);
 	}
 
 	/**
@@ -90,8 +104,10 @@ public class RelationPermissionDomainService extends
 	 */
 	@Override
 	public void removePermission(User provider, User subscriber, Permission permission) {
-		// TODO Auto-generated method stub
-		
+		Users providers = getMapper().map(provider, Users.class);
+		Users subscribers = getMapper().map(subscriber, Users.class);
+		Permissions permissions = getMapper().map(permission, Permissions.class);
+		relationPermissionsService.removePermission(providers, subscribers, permissions);
 	}
 
 	/**
@@ -99,8 +115,9 @@ public class RelationPermissionDomainService extends
 	 */
 	@Override
 	public void removeAllPermissions(User provider, User subscriber) {
-		// TODO Auto-generated method stub
-		
+		Users providers = getMapper().map(provider, Users.class);
+		Users subscribers = getMapper().map(subscriber, Users.class);
+		relationPermissionsService.removeAllPermissions(providers, subscribers);		
 	}
 
 }

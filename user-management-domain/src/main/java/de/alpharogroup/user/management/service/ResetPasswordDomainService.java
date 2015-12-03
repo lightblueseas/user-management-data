@@ -7,6 +7,7 @@ import de.alpharogroup.user.management.daos.ResetPasswordsDao;
 import de.alpharogroup.user.management.domain.ResetPassword;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.entities.ResetPasswords;
+import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.mapper.ResetPasswordsMapper;
 import de.alpharogroup.user.management.service.api.ResetPasswordService;
 import de.alpharogroup.user.management.service.api.ResetPasswordsService;
@@ -42,8 +43,10 @@ public class ResetPasswordDomainService extends
 	 */
 	@Override
 	public ResetPassword findResetPassword(User user, String generatedPassword) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = getMapper().map(user, Users.class);
+		ResetPasswords resetPasswords = resetPasswordsService.findResetPassword(users, generatedPassword);
+		ResetPassword resetPassword = getMapper().toDomainObject(resetPasswords);
+		return resetPassword;
 	}
 
 	/**
@@ -51,7 +54,9 @@ public class ResetPasswordDomainService extends
 	 */
 	@Override
 	public ResetPassword findResetPassword(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = getMapper().map(user, Users.class);
+		ResetPasswords resetPasswords = resetPasswordsService.findResetPassword(users);	
+		ResetPassword resetPassword = getMapper().toDomainObject(resetPasswords);
+		return resetPassword;
 	}
 }

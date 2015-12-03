@@ -9,6 +9,7 @@ import de.alpharogroup.user.management.daos.RecommendationsDao;
 import de.alpharogroup.user.management.domain.Recommendation;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.entities.Recommendations;
+import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.mapper.RecommendationsMapper;
 import de.alpharogroup.user.management.service.api.RecommendationService;
 import de.alpharogroup.user.management.service.api.RecommendationsService;
@@ -44,8 +45,10 @@ public class RecommendationDomainService
 	 */
 	@Override
 	public List<Recommendation> find(User user, User recommended, String email) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = getMapper().map(user, Users.class);
+		Users recommendeds = getMapper().map(recommended, Users.class);
+		List<Recommendations> recommendations =recommendationsService.find(users, recommendeds, email);
+		return getMapper().toDomainObjects(recommendations);
 	}
 
 	/**
@@ -53,8 +56,9 @@ public class RecommendationDomainService
 	 */
 	@Override
 	public Recommendation findRecommendations(User user, User recommended, String email) {
-		// TODO Auto-generated method stub
-		return null;
+		Users users = getMapper().map(user, Users.class);
+		Users recommendeds = getMapper().map(recommended, Users.class);
+		return getMapper().toDomainObject(recommendationsService.findRecommendations(users, recommendeds, email));
 	}
 
 }
