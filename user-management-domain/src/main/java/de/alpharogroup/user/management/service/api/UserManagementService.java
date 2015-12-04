@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import de.alpharogroup.address.book.entities.Addresses;
+import de.alpharogroup.address.book.domain.Address;
 import de.alpharogroup.auth.exceptions.EmailAlreadyExistsException;
 import de.alpharogroup.auth.exceptions.UserAlreadyExistsException;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
@@ -56,29 +56,30 @@ public interface UserManagementService extends UserExistenceService {
 	 *            the email or user name
 	 * @return true, if successful
 	 */
+	@Override
 	boolean existsUserWithEmailOrUsername(final String emailOrUsername);
 
 	/**
-	 * Find all {@link Addresses} from the given {@link User}.
-	 * 
+	 * Find all {@link Address} from the given {@link User}.
+	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Addresses} from the given {@link User}.
+	 * @return the list of found {@link Address} from the given {@link User}.
 	 */
-	List<Addresses> findAddessesFromUser(final User user);
+	List<Address> findAddessesFromUser(final User user);
 
 	/**
-	 * Find the main {@link Addresses} from the given {@link User}.
-	 * 
+	 * Find the main {@link Address} from the given {@link User}.
+	 *
 	 * @param user
 	 *            the user
-	 * @return the main {@link Addresses} from the given {@link User}.
+	 * @return the main {@link Address} from the given {@link User}.
 	 */
-	Addresses findAddressFromUser(final User user);
+	Address findAddressFromUser(final User user);
 
 	/**
 	 * Find all email contacts from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethod} from the given
@@ -88,7 +89,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find all fax contacts from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethod} from the given
@@ -98,7 +99,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find all internet contacts from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethod} from the given
@@ -108,7 +109,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find all mobile contacts from user.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethod} from the given
@@ -118,7 +119,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find all telefon contacts from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethod} from the given
@@ -128,7 +129,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find email contact from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
@@ -137,7 +138,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find fax contact from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
@@ -146,7 +147,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find internet contact from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
@@ -155,7 +156,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find mobile contact from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
@@ -164,7 +165,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find roles from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Role} from the given {@link User}.
@@ -173,7 +174,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find telefon contact from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
@@ -182,7 +183,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find the {@link User} object with the given email.
-	 * 
+	 *
 	 * @param email
 	 *            the email
 	 * @return the found {@link User} object
@@ -191,7 +192,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find {@link User} object from the given email or user name.
-	 * 
+	 *
 	 * @param emailOrUsername
 	 *            the email or user name
 	 * @return the found {@link User} object
@@ -200,7 +201,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Find {@link User} object from the given user name.
-	 * 
+	 *
 	 * @param username
 	 *            the user name
 	 * @return the found {@link User} object
@@ -210,7 +211,7 @@ public interface UserManagementService extends UserExistenceService {
 	/**
 	 * Checks if the given {@link User} object is in the given role from the
 	 * given role name.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param rolename
@@ -221,18 +222,18 @@ public interface UserManagementService extends UserExistenceService {
 	boolean isUserInRole(final User user, String rolename);
 
 	/**
-	 * Persist the given collection of {@link Addresses} objects from the given
+	 * Persist the given collection of {@link Address} objects from the given
 	 * {@link User} object.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param addresses
 	 *            the addresses
 	 */
-	void saveAddressesFromUser(final User user, final Collection<Addresses> addresses);
+	void saveAddressesFromUser(final User user, final Collection<Address> addresses);
 
 	/**
-	 * Persist the given {@link Addresses} object from the given {@link User}
+	 * Persist the given {@link Address} object from the given {@link User}
 	 * object.
 	 *
 	 * @param user
@@ -240,11 +241,11 @@ public interface UserManagementService extends UserExistenceService {
 	 * @param address
 	 *            the address
 	 */
-	void saveAddressFromUser(final User user, Addresses address);
+	void saveAddressFromUser(final User user, Address address);
 
 	/**
 	 * Persist the given {@link User} object.
-	 * 
+	 *
 	 * @param user
 	 *            The {@link User} object to persist.
 	 * @return the id of the persisted {@link User} object.
@@ -256,7 +257,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Persist the given {@link User} object without checking the user name.
-	 * 
+	 *
 	 * @param user
 	 *            The {@link User} object to persist.
 	 * @return the id of the persisted {@link User} object.
@@ -298,7 +299,7 @@ public interface UserManagementService extends UserExistenceService {
 	/**
 	 * Persist the given {@link User} object with the given collection of
 	 * {@link Role} objects.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param roles
@@ -311,7 +312,7 @@ public interface UserManagementService extends UserExistenceService {
 	 * and return the new contactMethod object or the contactMethod that is
 	 * persist in database. Consider to check if the email already exists before
 	 * you call this method otherwise an exception is thrown.
-	 * 
+	 *
 	 * @param email
 	 *            the email
 	 * @param user
@@ -324,7 +325,7 @@ public interface UserManagementService extends UserExistenceService {
 
 	/**
 	 * Sets a new user name to the the given {@link User} object.
-	 * 
+	 *
 	 * @param username
 	 *            the username
 	 * @param user
@@ -340,7 +341,7 @@ public interface UserManagementService extends UserExistenceService {
 	 * Update an existing {@link Contactmethod} object. If the contact method
 	 * has changed the new {@link Contactmethod} object will be returned or
 	 * null if nothing changed.
-	 * 
+	 *
 	 * @param contactmethodValue
 	 *            the contact method value
 	 * @param contactmethodType
@@ -355,7 +356,7 @@ public interface UserManagementService extends UserExistenceService {
 	/**
 	 * Update user name from the given {@link User} object if the user name has
 	 * changed. Returns true if the user name has changed otherwise false.
-	 * 
+	 *
 	 * @param username
 	 *            the user name
 	 * @param user
@@ -370,7 +371,7 @@ public interface UserManagementService extends UserExistenceService {
 	/**
 	 * Checks if the given {@link User} object is in the given {@link Role}
 	 * object.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param role
@@ -432,20 +433,20 @@ public interface UserManagementService extends UserExistenceService {
 	 *            the black listed user
 	 * @param userDataId
 	 *            the user data id
-	 * @return the {@link UserDatas} object.
+	 * @return the {@link UserData} object.
 	 */
 	UserData deleteBlacklisted(User blacklisted, final Integer userDataId);
 
 	/**
-	 * Deletes the given {@link Addresses} object from the given {@link UserDatas} object.
+	 * Deletes the given {@link Address} object from the given {@link UserData} object.
 	 *
 	 * @param address
-	 *            the {@link Addresses} object
+	 *            the {@link Address} object
 	 * @param ud
-	 *            the {@link UserDatas} object
-	 * @return the {@link UserDatas} object.
+	 *            the {@link UserData} object
+	 * @return the {@link UserData} object.
 	 */
-	UserData deleteAddress(Addresses address, final UserData ud);
+	UserData deleteAddress(Address address, final UserData ud);
 
 	/**
 	 * Adds the given contact {@link User} object to the contacts of the given {@link User} object.
