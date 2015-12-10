@@ -3,6 +3,8 @@ package de.alpharogroup.user.management.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.daos.PermissionsDao;
@@ -17,6 +19,8 @@ import lombok.Setter;
 /**
  * The class {@link PermissionDomainService}.
  */
+@Transactional
+@Service("permissionDomainService")
 public class PermissionDomainService
 		extends AbstractDomainService<Integer, Permission, Permissions, PermissionsDao, PermissionsMapper>
 		implements PermissionService {
@@ -34,7 +38,7 @@ public class PermissionDomainService
 	 *            the new {@link PermissionsDao}.
 	 */
 	@Autowired
-	public void setPermissionsDao(PermissionsDao permissionsDao) {
+	public void setPermissionsDao(final PermissionsDao permissionsDao) {
 		setDao(permissionsDao);
 	}
 
@@ -42,7 +46,7 @@ public class PermissionDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Permission createAndSavePermissions(String name, String description) {
+	public Permission createAndSavePermissions(final String name, final String description) {
 		return getMapper().toDomainObject(permissionsService.createAndSavePermissions(name, description));
 	}
 
@@ -50,7 +54,7 @@ public class PermissionDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Permission createAndSavePermissions(String name, String description, String shortcut) {
+	public Permission createAndSavePermissions(final String name, final String description, final String shortcut) {
 		return getMapper().toDomainObject(permissionsService.createAndSavePermissions(name, description, shortcut));
 	}
 
@@ -58,7 +62,7 @@ public class PermissionDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Permission findByShortcut(String shortcut) {
+	public Permission findByShortcut(final String shortcut) {
 		return getMapper().toDomainObject(permissionsService.findByShortcut(shortcut));
 	}
 
@@ -66,7 +70,7 @@ public class PermissionDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Permission findByName(String name) {
+	public Permission findByName(final String name) {
 		return getMapper().toDomainObject(permissionsService.findByName(name));
 	}
 
@@ -74,7 +78,7 @@ public class PermissionDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Permission> find(String description, String permissionName, String shortcut) {
+	public List<Permission> find(final String description, final String permissionName, final String shortcut) {
 		return getMapper().toDomainObjects(permissionsService.find(description, permissionName, shortcut));
 	}
 

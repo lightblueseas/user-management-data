@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.daos.RolesDao;
@@ -21,6 +23,8 @@ import lombok.Setter;
 /**
  * The class {@link RoleDomainService}.
  */
+@Transactional
+@Service("roleDomainService")
 public class RoleDomainService extends AbstractDomainService<Integer, Role, Roles, RolesDao, RolesMapper>
 		implements RoleService {
 
@@ -37,7 +41,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 *            the new {@link RolesDao}.
 	 */
 	@Autowired
-	public void setRolesDao(RolesDao rolesDao) {
+	public void setRolesDao(final RolesDao rolesDao) {
 		setDao(rolesDao);
 	}
 
@@ -45,10 +49,10 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Permission> findAllPermissions(Role role) {
-		Roles roles = getMapper().toEntity(role);
-		List<Permissions> permissions = rolesService.findAllPermissions(roles);
-		List<Permission> perms = getMapper().map(permissions, Permission.class);
+	public List<Permission> findAllPermissions(final Role role) {
+		final Roles roles = getMapper().toEntity(role);
+		final List<Permissions> permissions = rolesService.findAllPermissions(roles);
+		final List<Permission> perms = getMapper().map(permissions, Permission.class);
 		return perms;
 	}
 
@@ -56,7 +60,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Role findRole(String rolename) {
+	public Role findRole(final String rolename) {
 		return getMapper().toDomainObject(rolesService.findRole(rolename));
 	}
 
@@ -64,7 +68,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Role> findRoles(String rolename) {
+	public List<Role> findRoles(final String rolename) {
 		return getMapper().toDomainObjects(rolesService.findRoles(rolename));
 	}
 
@@ -72,7 +76,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean exists(String rolename) {
+	public boolean exists(final String rolename) {
 		return rolesService.exists(rolename);
 	}
 
@@ -80,7 +84,7 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Role createAndSaveRole(String rolename, String description) {
+	public Role createAndSaveRole(final String rolename, final String description) {
 		return getMapper().toDomainObject(rolesService.createAndSaveRole(rolename, description));
 	}
 
@@ -88,9 +92,9 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Role createAndSaveRole(String rolename, String description, Set<Permission> permissions) {
-		List<Permissions> perms = getMapper().map(permissions, Permissions.class);
-		Roles roles = rolesService.createAndSaveRole(rolename, description, new HashSet<>(perms));
+	public Role createAndSaveRole(final String rolename, final String description, final Set<Permission> permissions) {
+		final List<Permissions> perms = getMapper().map(permissions, Permissions.class);
+		final Roles roles = rolesService.createAndSaveRole(rolename, description, new HashSet<>(perms));
 		return getMapper().toDomainObject(roles);
 	}
 

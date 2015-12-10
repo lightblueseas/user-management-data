@@ -1,6 +1,8 @@
 package de.alpharogroup.user.management.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.daos.UserCreditsDao;
@@ -15,6 +17,8 @@ import lombok.Setter;
 /**
  * The class {@link UserCreditDomainService}.
  */
+@Transactional
+@Service("userCreditDomainService")
 public class UserCreditDomainService
 		extends AbstractDomainService<Integer, UserCredit, UserCredits, UserCreditsDao, UserCreditsMapper>
 		implements UserCreditService {
@@ -32,7 +36,7 @@ public class UserCreditDomainService
 	 *            the new {@link UserCreditsDao}.
 	 */
 	@Autowired
-	public void setUserCreditsDao(UserCreditsDao userCreditsDao) {
+	public void setUserCreditsDao(final UserCreditsDao userCreditsDao) {
 		setDao(userCreditsDao);
 	}
 

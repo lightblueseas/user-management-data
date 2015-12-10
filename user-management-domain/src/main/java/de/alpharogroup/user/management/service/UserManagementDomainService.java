@@ -11,6 +11,8 @@ import java.util.Set;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.address.book.domain.Address;
 import de.alpharogroup.address.book.entities.Addresses;
@@ -19,6 +21,7 @@ import de.alpharogroup.auth.exceptions.EmailAlreadyExistsException;
 import de.alpharogroup.auth.exceptions.UserAlreadyExistsException;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
 import de.alpharogroup.auth.models.ValidationErrors;
+import de.alpharogroup.db.entitymapper.MapperExtensions;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.domain.Resource;
 import de.alpharogroup.resource.system.entities.Resources;
@@ -31,7 +34,6 @@ import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
-import de.alpharogroup.user.management.mapper.MapperExtensions;
 import de.alpharogroup.user.management.service.api.UserDatasService;
 import de.alpharogroup.user.management.service.api.UserManagementService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
@@ -43,6 +45,8 @@ import lombok.Setter;
 /**
  * The class {@link UserManagementDomainService}.
  */
+@Transactional
+@Service("userManagementDomainService")
 public class UserManagementDomainService implements UserManagementService {
 
 	/** The Constant serialVersionUID. */

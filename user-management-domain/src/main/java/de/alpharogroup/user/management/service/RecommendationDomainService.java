@@ -3,6 +3,8 @@ package de.alpharogroup.user.management.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.daos.RecommendationsDao;
@@ -19,6 +21,8 @@ import lombok.Setter;
 /**
  * The class {@link RecommendationDomainService}.
  */
+@Transactional
+@Service("recommendationDomainService")
 public class RecommendationDomainService
 		extends AbstractDomainService<Integer, Recommendation, Recommendations, RecommendationsDao, RecommendationsMapper>
 		implements RecommendationService {
@@ -36,7 +40,7 @@ public class RecommendationDomainService
 	 *            the new {@link RecommendationsDao}.
 	 */
 	@Autowired
-	public void setRecommendationsDao(RecommendationsDao recommendationsDao) {
+	public void setRecommendationsDao(final RecommendationsDao recommendationsDao) {
 		setDao(recommendationsDao);
 	}
 
@@ -44,10 +48,10 @@ public class RecommendationDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Recommendation> find(User user, User recommended, String email) {
-		Users users = getMapper().map(user, Users.class);
-		Users recommendeds = getMapper().map(recommended, Users.class);
-		List<Recommendations> recommendations =recommendationsService.find(users, recommendeds, email);
+	public List<Recommendation> find(final User user, final User recommended, final String email) {
+		final Users users = getMapper().map(user, Users.class);
+		final Users recommendeds = getMapper().map(recommended, Users.class);
+		final List<Recommendations> recommendations =recommendationsService.find(users, recommendeds, email);
 		return getMapper().toDomainObjects(recommendations);
 	}
 
@@ -55,9 +59,9 @@ public class RecommendationDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Recommendation findRecommendations(User user, User recommended, String email) {
-		Users users = getMapper().map(user, Users.class);
-		Users recommendeds = getMapper().map(recommended, Users.class);
+	public Recommendation findRecommendations(final User user, final User recommended, final String email) {
+		final Users users = getMapper().map(user, Users.class);
+		final Users recommendeds = getMapper().map(recommended, Users.class);
 		return getMapper().toDomainObject(recommendationsService.findRecommendations(users, recommendeds, email));
 	}
 

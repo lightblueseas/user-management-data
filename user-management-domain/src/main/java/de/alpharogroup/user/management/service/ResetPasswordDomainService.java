@@ -1,6 +1,8 @@
 package de.alpharogroup.user.management.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.daos.ResetPasswordsDao;
@@ -17,6 +19,8 @@ import lombok.Setter;
 /**
  * The class {@link ResetPasswordDomainService}.
  */
+@Transactional
+@Service("resetPasswordDomainService")
 public class ResetPasswordDomainService extends
 		AbstractDomainService<Integer, ResetPassword, ResetPasswords, ResetPasswordsDao, ResetPasswordsMapper>
 		implements ResetPasswordService {
@@ -34,7 +38,7 @@ public class ResetPasswordDomainService extends
 	 *            the new {@link ResetPasswordsDao}.
 	 */
 	@Autowired
-	public void setResetPasswordsDao(ResetPasswordsDao resetPasswordsDao) {
+	public void setResetPasswordsDao(final ResetPasswordsDao resetPasswordsDao) {
 		setDao(resetPasswordsDao);
 	}
 
@@ -42,10 +46,10 @@ public class ResetPasswordDomainService extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResetPassword findResetPassword(User user, String generatedPassword) {
-		Users users = getMapper().map(user, Users.class);
-		ResetPasswords resetPasswords = resetPasswordsService.findResetPassword(users, generatedPassword);
-		ResetPassword resetPassword = getMapper().toDomainObject(resetPasswords);
+	public ResetPassword findResetPassword(final User user, final String generatedPassword) {
+		final Users users = getMapper().map(user, Users.class);
+		final ResetPasswords resetPasswords = resetPasswordsService.findResetPassword(users, generatedPassword);
+		final ResetPassword resetPassword = getMapper().toDomainObject(resetPasswords);
 		return resetPassword;
 	}
 
@@ -53,10 +57,10 @@ public class ResetPasswordDomainService extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResetPassword findResetPassword(User user) {
-		Users users = getMapper().map(user, Users.class);
-		ResetPasswords resetPasswords = resetPasswordsService.findResetPassword(users);	
-		ResetPassword resetPassword = getMapper().toDomainObject(resetPasswords);
+	public ResetPassword findResetPassword(final User user) {
+		final Users users = getMapper().map(user, Users.class);
+		final ResetPasswords resetPasswords = resetPasswordsService.findResetPassword(users);
+		final ResetPassword resetPassword = getMapper().toDomainObject(resetPasswords);
 		return resetPassword;
 	}
 }

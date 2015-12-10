@@ -3,6 +3,8 @@ package de.alpharogroup.user.management.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.address.book.domain.Address;
 import de.alpharogroup.address.book.entities.Addresses;
@@ -22,6 +24,8 @@ import lombok.Setter;
 /**
  * The class {@link UserDomainService}.
  */
+@Transactional
+@Service("userDomainService")
 public class UserDomainService extends AbstractDomainService<Integer, User, Users, UsersDao, UsersMapper>
 		implements UserService {
 
@@ -38,7 +42,7 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 *            the new {@link UsersDao}.
 	 */
 	@Autowired
-	public void setUsersDao(UsersDao usersDao) {
+	public void setUsersDao(final UsersDao usersDao) {
 		setDao(usersDao);
 	}
 
@@ -46,7 +50,7 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean existsUserWithUsername(String username) {
+	public boolean existsUserWithUsername(final String username) {
 		return usersService.existsUserWithUsername(username);
 	}
 
@@ -54,10 +58,10 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Address> findAddressesFromUser(User user) {
-		Users users = getMapper().toEntity(user);
-		List<Addresses> addresses = usersService.findAddressesFromUser(users);
-		List<Address> addresss = getMapper().map(addresses, Address.class);
+	public List<Address> findAddressesFromUser(final User user) {
+		final Users users = getMapper().toEntity(user);
+		final List<Addresses> addresses = usersService.findAddressesFromUser(users);
+		final List<Address> addresss = getMapper().map(addresses, Address.class);
 		return addresss;
 	}
 
@@ -65,10 +69,10 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Address findAddressFromUser(User user) {
-		Users users = getMapper().toEntity(user);
-		Addresses addresses  = usersService.findAddressFromUser(users);
-		Address addresss = getMapper().map(addresses, Address.class);
+	public Address findAddressFromUser(final User user) {
+		final Users users = getMapper().toEntity(user);
+		final Addresses addresses  = usersService.findAddressFromUser(users);
+		final Address addresss = getMapper().map(addresses, Address.class);
 		return addresss;
 	}
 
@@ -76,10 +80,10 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Role> findRolesFromUser(User user) {
-		Users users = getMapper().toEntity(user);
-		List<Roles> roles  = usersService.findRolesFromUser(users);
-		List<Role> roless = getMapper().map(roles, Role.class);
+	public List<Role> findRolesFromUser(final User user) {
+		final Users users = getMapper().toEntity(user);
+		final List<Roles> roles  = usersService.findRolesFromUser(users);
+		final List<Role> roless = getMapper().map(roles, Role.class);
 		return roless;
 	}
 
@@ -87,9 +91,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User findUserWithEmail(String email) {
-		Users users = usersService.findUserWithEmail(email);
-		User user = getMapper().toDomainObject(users);
+	public User findUserWithEmail(final String email) {
+		final Users users = usersService.findUserWithEmail(email);
+		final User user = getMapper().toDomainObject(users);
 		return user;
 	}
 
@@ -97,9 +101,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User findUserWithUsername(String username) {
-		Users users = usersService.findUserWithUsername(username);
-		User user = getMapper().toDomainObject(users);
+	public User findUserWithUsername(final String username) {
+		final Users users = usersService.findUserWithUsername(username);
+		final User user = getMapper().toDomainObject(users);
 		return user;
 	}
 
@@ -107,9 +111,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean userIsInRole(User user, Role role) {
-		Users users = getMapper().toEntity(user);
-		Roles roles =getMapper().map(role, Roles.class);
+	public boolean userIsInRole(final User user, final Role role) {
+		final Users users = getMapper().toEntity(user);
+		final Roles roles =getMapper().map(role, Roles.class);
 		return usersService.userIsInRole(users, roles);
 	}
 
@@ -117,9 +121,9 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<User> findUsers(Integer from, GenderType searchGender, Integer until) {
-		List<Users> users = usersService.findUsers(from, searchGender, until);
-		List<User> userss = getMapper().map(users, User.class);
+	public List<User> findUsers(final Integer from, final GenderType searchGender, final Integer until) {
+		final List<Users> users = usersService.findUsers(from, searchGender, until);
+		final List<User> userss = getMapper().map(users, User.class);
 		return userss;
 	}
 
@@ -127,10 +131,10 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<User> findUsers(Integer from, GenderType searchGender, Integer until, String geohash) {
-		List<Users> users = usersService.findUsers(from, searchGender, until, geohash);
-		List<User> userss = getMapper().map(users, User.class);
+	public List<User> findUsers(final Integer from, final GenderType searchGender, final Integer until, final String geohash) {
+		final List<Users> users = usersService.findUsers(from, searchGender, until, geohash);
+		final List<User> userss = getMapper().map(users, User.class);
 		return userss;
 	}
-	
+
 }

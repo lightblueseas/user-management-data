@@ -3,6 +3,8 @@ package de.alpharogroup.user.management.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.application.models.InfringementModel;
@@ -21,6 +23,8 @@ import lombok.Setter;
 /**
  * The class {@link RuleViolationDomainService}.
  */
+@Transactional
+@Service("ruleViolationDomainService")
 public class RuleViolationDomainService
 		extends AbstractDomainService<Integer, RuleViolation, RuleViolations, RuleViolationsDao, RuleViolationsMapper>
 		implements RuleViolationService {
@@ -38,7 +42,7 @@ public class RuleViolationDomainService
 	 *            the new {@link RuleViolationsDao}.
 	 */
 	@Autowired
-	public void setRuleViolationsDao(RuleViolationsDao ruleViolationsDao) {
+	public void setRuleViolationsDao(final RuleViolationsDao ruleViolationsDao) {
 		setDao(ruleViolationsDao);
 	}
 
@@ -46,8 +50,8 @@ public class RuleViolationDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public RuleViolation save(InfringementModel model) {
-		RuleViolations ruleViolations = ruleViolationsService.save(model);
+	public RuleViolation save(final InfringementModel model) {
+		final RuleViolations ruleViolations = ruleViolationsService.save(model);
 		return getMapper().toDomainObject(ruleViolations);
 	}
 
@@ -55,10 +59,10 @@ public class RuleViolationDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<RuleViolation> find(User detector, User violator, RuleViolationReason reason, String description) {
-		Users detectors = getMapper().map(detector, Users.class);
-		Users violators = getMapper().map(violator, Users.class);
-		List<RuleViolations> ruleViolations = ruleViolationsService.find(detectors, violators, reason, description);
+	public List<RuleViolation> find(final User detector, final User violator, final RuleViolationReason reason, final String description) {
+		final Users detectors = getMapper().map(detector, Users.class);
+		final Users violators = getMapper().map(violator, Users.class);
+		final List<RuleViolations> ruleViolations = ruleViolationsService.find(detectors, violators, reason, description);
 		return getMapper().toDomainObjects(ruleViolations);
 	}
 }
