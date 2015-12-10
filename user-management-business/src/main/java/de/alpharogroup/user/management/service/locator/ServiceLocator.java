@@ -28,7 +28,7 @@ public interface ServiceLocator {
 	 * 
 	 * @return the permission service
 	 */
-	PermissionsService getPermissionService();
+	PermissionsService getPermissionsService();
 
 	/**
 	 * Gets the RecommendationsService.
@@ -84,7 +84,7 @@ public interface ServiceLocator {
 	 *
 	 * @return the user data service
 	 */
-	UserDatasService getUserDataService();
+	UserDatasService getUserDatasService();
 
 	/**
 	 * Gets the user management service.
@@ -114,7 +114,7 @@ public interface ServiceLocator {
 	 * @param permissionService
 	 *            the new permission business service
 	 */
-	void setPermissionService(PermissionsService permissionService);
+	void setPermissionsService(PermissionsService permissionService);
 
 	/**
 	 * Sets the RecommendationsService.
@@ -178,7 +178,7 @@ public interface ServiceLocator {
 	 * @param userDataService
 	 *            the user data service
 	 */
-	void setUserDataService(UserDatasService userDataService);
+	void setUserDatasService(UserDatasService userDataService);
 
 	/**
 	 * Sets the user management service.
