@@ -50,11 +50,11 @@
 
 	<properties>
 		<!-- MYSTIC-CRYPT versions -->
-		<mystic-crypt.version>4.6.0</mystic-crypt.version>
+		<mystic-crypt.version>4.7.0</mystic-crypt.version>
 		<crypt-core.version>${mystic-crypt.version}</crypt-core.version>
 		<auth-security.version>${mystic-crypt.version}</auth-security.version>
 		<!-- NEW EXTENSIONS LIB versions -->
-		<extensions-lib.version>4.7.0</extensions-lib.version>
+		<extensions-lib.version>4.8.0</extensions-lib.version>
 		<email-tails.version>${extensions-lib.version}</email-tails.version>
 		<!-- CONNECTION POOL versions -->
 		<bonecp.version>0.8.0.RELEASE</bonecp.version>
