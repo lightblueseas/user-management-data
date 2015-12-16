@@ -21,10 +21,10 @@ import de.alpharogroup.auth.exceptions.UserAlreadyExistsException;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
 import de.alpharogroup.auth.models.ValidationErrors;
 import de.alpharogroup.crypto.PasswordEncryptor;
+import de.alpharogroup.resource.system.application.model.ModelSynchronizer;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.entities.Resources;
 import de.alpharogroup.resource.system.service.api.ResourcesService;
-import de.alpharogroup.user.management.application.models.UserModelConverter;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.UserDatas;
@@ -43,7 +43,7 @@ import lombok.Setter;
 
 /**
  * The class {@link UsersManagementBusinessService}.
- * 
+ *
  * @author Asterios Raptis
  */
 @Transactional
@@ -95,7 +95,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public boolean existsUserWithEmailOrUsername(final String emailOrUsername) {
-		boolean emailExists = usersService.findUserWithEmail(emailOrUsername) != null;
+		final boolean emailExists = usersService.findUserWithEmail(emailOrUsername) != null;
 		return emailExists || existsUserWithUsername(emailOrUsername);
 	}
 
@@ -166,9 +166,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	@Override
 	public List<Contactmethods> findAllEmailContactmethodsFromUser(
 			final Users user) {
-		List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.EMAIL.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
@@ -182,9 +182,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	@Override
 	public List<Contactmethods> findAllFaxContactmethodsFromUser(
 			final Users user) {
-		List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.FAX.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
@@ -197,10 +197,10 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public List<Contactmethods> findAllInternetContactmethodsFromUser(
-			final Users user) {		
-		List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+			final Users user) {
+		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.INTERNET.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
@@ -214,9 +214,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	@Override
 	public List<Contactmethods> findAllMobileContactmethodsFromUser(
 			final Users user) {
-		List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.MOBILE.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
@@ -230,9 +230,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	@Override
 	public List<Contactmethods> findAllTelefonContactmethodsFromUser(
 			final Users user) {
-		List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.TELEFON.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
@@ -244,8 +244,8 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findEmailContactFromUser(final Users user) {
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.EMAIL.equals(cm.getContactmethod())) {
 				return cm;
 			}
@@ -258,8 +258,8 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findFaxContactFromUser(final Users user) {
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.FAX.equals(cm.getContactmethod())) {
 				return cm;
 			}
@@ -272,8 +272,8 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findInternetContactFromUser(final Users user) {
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.INTERNET.equals(cm.getContactmethod())) {
 				return cm;
 			}
@@ -286,8 +286,8 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findMobileContactFromUser(final Users user) {
-		Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (Contactmethods cm : userContactMethods) {
+		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		for (final Contactmethods cm : userContactMethods) {
 			if (ContactmethodType.MOBILE.equals(cm.getContactmethod())) {
 				return cm;
 			}
@@ -308,7 +308,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findTelefonContactFromUser(final Users user) {
-		for (Contactmethods cm : user.getUserData().getContactmethods()) {
+		for (final Contactmethods cm : user.getUserData().getContactmethods()) {
 			if (ContactmethodType.TELEFON.equals(cm.getContactmethod())) {
 				return cm;
 			}
@@ -329,7 +329,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Users findUserWithEmailOrUsername(final String emailOrUsername) {
-		Users user = findUserWithEmail(emailOrUsername);
+		final Users user = findUserWithEmail(emailOrUsername);
 		if (user != null) {
 			return user;
 		}
@@ -373,7 +373,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	@Override
 	public void saveAddressesFromUser(final Users user,
 			final Collection<Addresses> addresses) {
-		List<Addresses> mergedAddresses = new ArrayList<Addresses>();
+		final List<Addresses> mergedAddresses = new ArrayList<Addresses>();
 		for (Addresses address : addresses) {
 			if (!addressesService.exists(address.getId())) {
 				address = addressesService.merge(address);
@@ -448,7 +448,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	@Override
 	public List<Contactmethods> saveUserWithContactmethods(final Users user,
 			final List<Contactmethods> contacts) throws BatchUpdateException {
-		List<Contactmethods> saved = contactmethodsService.merge(contacts);
+		final List<Contactmethods> saved = contactmethodsService.merge(contacts);
 		UserDatas ud = userDatasService.get(user.getUserData().getId());
 		ud.getContactmethods().addAll(saved);
 		ud = userDatasService.merge(ud);
@@ -461,7 +461,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	@Override
 	public void saveUserWithRoles(Users user,
 			final Collection<Roles> roles) {
-		List<Roles> mergedRoles = new ArrayList<Roles>();
+		final List<Roles> mergedRoles = new ArrayList<Roles>();
 		for (Roles role : roles) {
 			if (!rolesService.exists(role.getId())) {
 				role = rolesService.merge(role);
@@ -524,8 +524,8 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			if (!contactmethodsService.compare(newContactMethod, contactmethod)) {
 				contactmethod.setContactvalue(contactmethodValue);
 				return contactmethod;
-			}			
-		} 
+			}
+		}
 		return newContactMethod;
 	}
 
@@ -555,7 +555,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ValidationErrors validate(UsernameSignUpModel model) {
+	public ValidationErrors validate(final UsernameSignUpModel model) {
 
 		final String password = model.getPassword();
 		final String repeatPassword = model.getRepeatPassword();
@@ -580,16 +580,16 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public SignUpUserResult signUpUser(UsernameSignUpModel model,
-			Set<Roles> roles, UserModel userModel) {
+	public SignUpUserResult signUpUser(final UsernameSignUpModel model,
+			final Set<Roles> roles, final UserModel userModel) {
 
-		SignUpUserResult result = new SignUpUserResult();
+		final SignUpUserResult result = new SignUpUserResult();
 
 		final String username = model.getUsername();
 		final String email = model.getEmail();
 		final String password = model.getPassword();
 
-		ValidationErrors validationErrors = validate(model);
+		final ValidationErrors validationErrors = validate(model);
 		if (validationErrors != null) {
 			result.setValidationErrors(validationErrors);
 			return result;
@@ -619,15 +619,15 @@ public class UsersManagementBusinessService implements UsersManagementService {
 
 		Users newUser = null;
 
-		PasswordEncryptor passwordService = PasswordEncryptor.getInstance();
+		final PasswordEncryptor passwordService = PasswordEncryptor.getInstance();
 
-		String salt = passwordService.getRandomSalt(8);
+		final String salt = passwordService.getRandomSalt(8);
 		String hashedPassword;
 		try {
 			hashedPassword = passwordService.hashAndHexPassword(password, salt);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new IllegalArgumentException(e);
-		} 
+		}
 		String locale = null;
 		if (userModel.getLocale() != null) {
 			locale = userModel.getLocale().toString();
@@ -649,7 +649,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		userData = userDatasService.merge(userData);
 
 		if(userModel.getAddress() != null) {
-			Addresses address = addressesService.merge(userModel.getAddress());
+			final Addresses address = addressesService.merge(userModel.getAddress());
 			if (address != null) {
 				userData.setPrimaryAddress(address);
 			}
@@ -672,7 +672,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	public Resources persistResource(final ResourcesModel resourceModel,
 			final Integer userId) {
 		Users user = usersService.get(userId);
-		Resources resource = UserModelConverter.convert(resourceModel);
+		Resources resource = ModelSynchronizer.convert(resourceModel);
 		resource = resourcesService.merge(resource);
 		resourceModel.setId(resource.getId());
 		UserDatas userData = userDatasService.get(user.getUserData().getId());
@@ -680,7 +680,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		userData = userDatasService.merge(userData);
 		try {
 			user = usersService.merge(user);
-		} catch (HibernateException e) {
+		} catch (final HibernateException e) {
 			LOGGER.error("Error by flushing...", e);
 		}
 		return resource;
@@ -690,7 +690,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteResource(ResourcesModel resourceModel, final Integer userDataId) {		
+	public void deleteResource(final ResourcesModel resourceModel, final Integer userDataId) {
 		UserDatas userData = userDatasService.get(userDataId);
 		Resources resource = resourcesService.get(resourceModel.getId());
 		if(userData.getResources().contains(resource)) {
@@ -702,7 +702,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 					resource.setDeletedFlag(Boolean.TRUE);
 					resource = resourcesService.merge(resource);
 				}
-			} catch (HibernateException e) {
+			} catch (final HibernateException e) {
 				LOGGER.error("Error by flushing...", e);
 			}
 		}
@@ -712,13 +712,13 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UserDatas deleteBlacklisted(Users blacklisted, final Integer userDataId) {
+	public UserDatas deleteBlacklisted(final Users blacklisted, final Integer userDataId) {
 		UserDatas userData = userDatasService.get(userDataId);
-		if(userData.getBlacklistedContacts().contains(blacklisted)) {			
+		if(userData.getBlacklistedContacts().contains(blacklisted)) {
 			try {
 				userData.getBlacklistedContacts().remove(blacklisted);
 				userData = userDatasService.merge(userData);
-			} catch (HibernateException e) {
+			} catch (final HibernateException e) {
 				LOGGER.error("HibernateException on flush...", e);
 			}
 		}
@@ -729,7 +729,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UserDatas deleteAddress(Addresses address, final UserDatas ud ) {
+	public UserDatas deleteAddress(final Addresses address, final UserDatas ud ) {
 		UserDatas userData = userDatasService.get(ud.getId());
 		if(userData.getAddresses().contains(address)) {
 			userData.getAddresses().remove(address);
@@ -742,7 +742,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Users addUserContact(Users user, Users contact) {
+	public Users addUserContact(Users user, final Users contact) {
 		UserDatas userData = getUserDatasService().get(user.getUserData().getId());
 		userData.getUserContacts().add(contact);
 		userData = getUserDatasService().merge(userData);
