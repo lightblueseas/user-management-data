@@ -37,5 +37,5 @@ Class-Path: user-management-rest-api.jar rest-api-3.9.0.jar domain-api
  .jar hibernate-ehcache-4.3.8.Final.jar ehcache-core-2.4.3.jar hiberna
  te-validator-5.1.3.Final.jar validation-api-1.1.0.Final.jar classmate
  -1.0.0.jar cglib-2.2.2.jar asm-3.3.1.jar h2-1.4.190.jar jetty-jmx-9.3
- .6.v20151106.jar
+ .0.v20150612.jar
 
