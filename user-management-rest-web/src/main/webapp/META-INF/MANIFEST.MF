@@ -24,7 +24,7 @@ Class-Path: user-management-rest-api.jar rest-api-3.9.0.jar domain-api
  ar address-book-entities-3.1.0.jar resource-system-entities-3.1.0.jar
   data-usertype-3.9.0.jar postgresql-9.2-1003-jdbc4.jar auth-security-
  4.7.0.jar randomizer-4.7.0.jar vintage-time-4.8.0.jar resourcebundle-
- inspector-2.6.0.jar test-objects-4.8.0.jar nv-i18n-1.11.jar user-mana
+ inspector-2.7.0.jar test-objects-4.8.0.jar nv-i18n-1.11.jar user-mana
  gement-business.jar business-api-3.9.0.jar resource-system-business-3
  .1.0.jar resource-system-domain-3.1.0.jar address-book-business-3.1.0
  .jar jgeohash-2.1.0.jar geoip-api-1.2.14.jar address-book-domain-3.1.
