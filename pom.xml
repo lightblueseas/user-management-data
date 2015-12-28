@@ -96,7 +96,7 @@
 				<artifactId>user-management-rest-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
+			<!-- ADDRESS-BOOK-DATA DEPENDENCIES -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>address-book-entities</artifactId>
@@ -114,7 +114,7 @@
 				<artifactId>address-book-domain</artifactId>
 				<version>${address-book-domain.version}</version>
 			</dependency>
-
+			<!-- RESOURCE-SYSTEM-DATA DEPENDENCIES -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>resource-system-entities</artifactId>
