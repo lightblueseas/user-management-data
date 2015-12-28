@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-persistence-parent</artifactId>
-		<version>2.23.0</version>
+		<version>2.25.0</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>user-management-data</artifactId>
 	<packaging>pom</packaging>
-	<version>3.1.0</version>
+	<version>3.6.0</version>
 	<inceptionYear>2015</inceptionYear>
 
 	<name>${project.artifactId}</name>
@@ -54,10 +54,19 @@
 		<crypt-core.version>${mystic-crypt.version}</crypt-core.version>
 		<auth-security.version>${mystic-crypt.version}</auth-security.version>
 		<!-- NEW EXTENSIONS LIB versions -->
-		<extensions-lib.version>4.8.0</extensions-lib.version>
 		<email-tails.version>${extensions-lib.version}</email-tails.version>
 		<!-- CONNECTION POOL versions -->
 		<bonecp.version>0.8.0.RELEASE</bonecp.version>
+		<!-- ADDRESS-BOOK-DATA versions -->
+		<address-book-data.version>${project.version}</address-book-data.version>
+		<address-book-entities.version>${address-book-data.version}</address-book-entities.version>
+		<address-book-business.version>${address-book-data.version}</address-book-business.version>
+		<address-book-domain.version>${address-book-data.version}</address-book-domain.version>
+		<!-- RESOURCE-SYSTEM-DATA versions -->
+		<resource-system-data.version>${project.version}</resource-system-data.version>
+		<resource-system-entities.version>${resource-system-data.version}</resource-system-entities.version>
+		<resource-system-domain.version>${resource-system-data.version}</resource-system-domain.version>
+		<resource-system-business.version>${resource-system-data.version}</resource-system-business.version>
 	</properties>
 
 	<dependencyManagement>
@@ -91,37 +100,37 @@
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>address-book-entities</artifactId>
-				<version>${project.version}</version>
+				<version>${address-book-entities.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>address-book-business</artifactId>
-				<version>${project.version}</version>
+				<version>${address-book-business.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>address-book-domain</artifactId>
-				<version>${project.version}</version>
+				<version>${address-book-domain.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>resource-system-entities</artifactId>
-				<version>${project.version}</version>
+				<version>${resource-system-entities.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>resource-system-domain</artifactId>
-				<version>${project.version}</version>
+				<version>${resource-system-domain.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>resource-system-business</artifactId>
-				<version>${project.version}</version>
+				<version>${resource-system-business.version}</version>
 			</dependency>
 
 			<dependency>

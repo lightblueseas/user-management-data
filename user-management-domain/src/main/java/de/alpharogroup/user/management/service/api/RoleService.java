@@ -13,14 +13,14 @@ import de.alpharogroup.user.management.domain.Role;
 public interface RoleService extends DomainService<Integer, Role> {
 
 	/**
-	 * Find all {@link Permissions} objects from the given {@link Role} object.
-	 * 
+	 * Find all {@link Permission} objects from the given {@link Role} object.
+	 *
 	 * @param role
 	 *            the given {@link Role} object
-	 * @return 's a list with all {@link Permissions} objects from the given {@link Role} object.
+	 * @return 's a list with all {@link Permission} objects from the given {@link Role} object.
 	 */
 	List<Permission> findAllPermissions(Role role);
-	
+
 	/**
 	 * Find the {@link Role} object with the given role name. If it does'nt exists it returns null.
 	 *
@@ -28,7 +28,7 @@ public interface RoleService extends DomainService<Integer, Role> {
 	 * @return the found {@link Role} object or if it does'nt exists it returns null.
 	 */
 	Role findRole(final String rolename);
-	
+
 	/**
 	 * Find the {@link Role} objects with the given role name.
 	 *
@@ -36,7 +36,7 @@ public interface RoleService extends DomainService<Integer, Role> {
 	 * @return the found {@link Role} objects
 	 */
 	List<Role> findRoles(final String rolename);
-	
+
 	/**
 	 * Checks if a role exists with the given role name.
 	 *
@@ -44,7 +44,7 @@ public interface RoleService extends DomainService<Integer, Role> {
 	 * @return true, if successful
 	 */
 	boolean exists(final String rolename);
-	
+
 	/**
 	 * Creates a new {@link Role} object with the given arguments and save it. If it does exists it will return the existing.
 	 *
@@ -53,7 +53,7 @@ public interface RoleService extends DomainService<Integer, Role> {
 	 * @return the created or existing {@link Role} object.
 	 */
 	Role createAndSaveRole(String rolename, String description);
-	
+
 	/**
 	 * Creates a new {@link Role} object with the given arguments and save it. If it does exists it will return the existing.
 	 *

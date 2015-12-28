@@ -21,11 +21,11 @@ public class ContactmethodsBusinessServiceTest {
 	private ContactmethodsService contactmethodsService;
 	@Autowired
 	private UsersService usersService;
-	@Test
+	@Test(enabled=false)
 	public void testFindContactmethod() {
-		Users michaelProvider = usersService.findUserWithEmail("michael.knight@gmail.com");
-		List<Contactmethods> cms = contactmethodsService.findContactmethod(ContactmethodType.INTERNET, michaelProvider);
-		for (Contactmethods contactmethods : cms) {
+		final Users michaelProvider = usersService.findUserWithEmail("michael.knight@gmail.com");
+		final List<Contactmethods> cms = contactmethodsService.findContactmethod(ContactmethodType.INTERNET, michaelProvider);
+		for (final Contactmethods contactmethods : cms) {
 			System.out.println(contactmethods);
 		}
 	}

@@ -21,13 +21,13 @@ Class-Path: user-management-rest-api.jar rest-api-3.9.0.jar domain-api
  1.7.5.jar javax.ws.rs-api-2.0.1.jar user-management-domain.jar user-m
  anagement-entities.jar spring-context-4.1.5.RELEASE.jar spring-aop-4.
  1.5.RELEASE.jar aopalliance-1.0.jar spring-expression-4.1.5.RELEASE.j
- ar address-book-entities-3.1.0.jar resource-system-entities-3.1.0.jar
+ ar address-book-entities-3.6.0.jar resource-system-entities-3.6.0.jar
   data-usertype-3.9.0.jar postgresql-9.2-1003-jdbc4.jar auth-security-
  4.7.0.jar randomizer-4.7.0.jar vintage-time-4.8.0.jar resourcebundle-
  inspector-2.7.0.jar test-objects-4.8.0.jar nv-i18n-1.11.jar user-mana
  gement-business.jar business-api-3.9.0.jar resource-system-business-3
- .1.0.jar resource-system-domain-3.1.0.jar address-book-business-3.1.0
- .jar jgeohash-2.1.0.jar geoip-api-1.2.14.jar address-book-domain-3.1.
+ .6.0.jar resource-system-domain-3.6.0.jar address-book-business-3.6.0
+ .jar jgeohash-2.2.0.jar geoip-api-1.2.14.jar address-book-domain-3.6.
  0.jar crypt-core-4.7.0.jar javax.servlet-api-3.1.0.jar spring-web-4.1
  .5.RELEASE.jar cxf-rt-frontend-jaxrs-3.1.4.jar cxf-core-3.1.4.jar woo
  dstox-core-asl-4.4.1.jar stax2-api-3.1.4.jar xmlschema-core-2.2.1.jar

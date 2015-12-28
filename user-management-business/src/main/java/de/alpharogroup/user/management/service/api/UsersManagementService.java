@@ -11,6 +11,7 @@ import de.alpharogroup.auth.exceptions.EmailAlreadyExistsException;
 import de.alpharogroup.auth.exceptions.UserAlreadyExistsException;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
 import de.alpharogroup.auth.models.ValidationErrors;
+import de.alpharogroup.auth.usermanagement.UserExistenceService;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.entities.Resources;
 import de.alpharogroup.user.management.entities.Contactmethods;
@@ -21,11 +22,9 @@ import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
 
-import de.alpharogroup.auth.usermanagement.UserExistenceService;
-
 /**
  * The interface {@link UsersManagementService}.
- * 
+ *
  * @author Asterios Raptis
  */
 public interface UsersManagementService extends UserExistenceService {
@@ -54,7 +53,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find all {@link Addresses} from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Addresses} from the given {@link Users}.
@@ -63,7 +62,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find the main {@link Addresses} from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the main {@link Addresses} from the given {@link Users}.
@@ -72,7 +71,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find all email contacts from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethods} from the given
@@ -82,7 +81,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find all fax contacts from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethods} from the given
@@ -92,7 +91,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find all internet contacts from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethods} from the given
@@ -102,7 +101,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find all mobile contacts from user.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethods} from the given
@@ -112,7 +111,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find all telefon contacts from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Contactmethods} from the given
@@ -122,7 +121,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find email contact from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethods} from the given {@link Users}.
@@ -131,7 +130,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find fax contact from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethods} from the given {@link Users}.
@@ -140,7 +139,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find internet contact from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethods} from the given {@link Users}.
@@ -149,7 +148,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find mobile contact from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethods} from the given {@link Users}.
@@ -158,7 +157,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find roles from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Roles} from the given {@link Users}.
@@ -167,7 +166,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find telefon contact from the given {@link Users}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the found {@link Contactmethods} from the given {@link Users}.
@@ -176,7 +175,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find the {@link Users} object with the given email.
-	 * 
+	 *
 	 * @param email
 	 *            the email
 	 * @return the found {@link Users} object
@@ -185,7 +184,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find {@link Users} object from the given email or user name.
-	 * 
+	 *
 	 * @param emailOrUsername
 	 *            the email or user name
 	 * @return the found {@link Users} object
@@ -194,7 +193,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Find {@link Users} object from the given user name.
-	 * 
+	 *
 	 * @param username
 	 *            the user name
 	 * @return the found {@link Users} object
@@ -204,7 +203,7 @@ public interface UsersManagementService extends UserExistenceService {
 	/**
 	 * Checks if the given {@link Users} object is in the given role from the
 	 * given role name.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param rolename
@@ -217,7 +216,7 @@ public interface UsersManagementService extends UserExistenceService {
 	/**
 	 * Persist the given collection of {@link Addresses} objects from the given
 	 * {@link Users} object.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param addresses
@@ -238,7 +237,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Persist the given {@link Users} object.
-	 * 
+	 *
 	 * @param user
 	 *            The {@link Users} object to persist.
 	 * @return the id of the persisted {@link Users} object.
@@ -250,7 +249,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Persist the given {@link Users} object without checking the user name.
-	 * 
+	 *
 	 * @param user
 	 *            The {@link Users} object to persist.
 	 * @return the id of the persisted {@link Users} object.
@@ -292,7 +291,7 @@ public interface UsersManagementService extends UserExistenceService {
 	/**
 	 * Persist the given {@link Users} object with the given collection of
 	 * {@link Roles} objects.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param roles
@@ -305,7 +304,7 @@ public interface UsersManagementService extends UserExistenceService {
 	 * and return the new contactMethod object or the contactMethod that is
 	 * persist in database. Consider to check if the email already exists before
 	 * you call this method otherwise an exception is thrown.
-	 * 
+	 *
 	 * @param email
 	 *            the email
 	 * @param user
@@ -318,7 +317,7 @@ public interface UsersManagementService extends UserExistenceService {
 
 	/**
 	 * Sets a new user name to the the given {@link Users} object.
-	 * 
+	 *
 	 * @param username
 	 *            the username
 	 * @param user
@@ -334,7 +333,7 @@ public interface UsersManagementService extends UserExistenceService {
 	 * Update an existing {@link Contactmethods} object. If the contact method
 	 * has changed the new {@link Contactmethods} object will be returned or
 	 * null if nothing changed.
-	 * 
+	 *
 	 * @param contactmethodValue
 	 *            the contact method value
 	 * @param contactmethodType
@@ -349,7 +348,7 @@ public interface UsersManagementService extends UserExistenceService {
 	/**
 	 * Update user name from the given {@link Users} object if the user name has
 	 * changed. Returns true if the user name has changed otherwise false.
-	 * 
+	 *
 	 * @param username
 	 *            the user name
 	 * @param user
@@ -364,7 +363,7 @@ public interface UsersManagementService extends UserExistenceService {
 	/**
 	 * Checks if the given {@link Users} object is in the given {@link Roles}
 	 * object.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param role
@@ -398,7 +397,7 @@ public interface UsersManagementService extends UserExistenceService {
 	SignUpUserResult signUpUser(UsernameSignUpModel model, Set<Roles> roles, UserModel userModel);
 
 	/**
-	 * Persist the given {@link ResourceModel} object with the given user id.
+	 * Persist the given resource model object with the given user id.
 	 *
 	 * @param resourceModel
 	 *            the resource model
@@ -409,7 +408,7 @@ public interface UsersManagementService extends UserExistenceService {
 	Resources persistResource(ResourcesModel resourceModel, final Integer userId);
 
 	/**
-	 * Deletes the {@link Resources} object from the given {@link ResourceModel}
+	 * Deletes the {@link Resources} object from the given resource model
 	 * object with the given user data id.
 	 *
 	 * @param resource

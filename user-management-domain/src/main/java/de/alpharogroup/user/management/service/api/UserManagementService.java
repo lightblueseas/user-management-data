@@ -405,18 +405,18 @@ public interface UserManagementService extends UserExistenceService {
 	SignUpUserResult signUpUser(UsernameSignUpModel model, Set<Role> roles, UserModel userModel);
 
 	/**
-	 * Persist the given {@link ResourceModel} object with the given user id.
+	 * Persist the given resource model object with the given user id.
 	 *
 	 * @param resourceModel
 	 *            the resource model
 	 * @param userId
 	 *            the user id
-	 * @return the persisted {@link Resources} object
+	 * @return the persisted {@link Resource} object
 	 */
 	Resource persistResource(ResourcesModel resourceModel, final Integer userId);
 
 	/**
-	 * Deletes the {@link Resources} object from the given {@link ResourceModel}
+	 * Deletes the {@link Resource} object from the given resource model
 	 * object with the given user data id.
 	 *
 	 * @param resource

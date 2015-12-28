@@ -17,9 +17,9 @@ public class ContactmethodsDaoTest extends AbstractTestNGSpringContextTests {
 	private ContactmethodsDao contactmethodsDao;
 
 
-	@Test
+	@Test(enabled=false)
 	public void testFindAll() {
-		List<Contactmethods> all =  contactmethodsDao.findAll();
+		final List<Contactmethods> all =  contactmethodsDao.findAll();
 		System.out.println(all);
 	}
 

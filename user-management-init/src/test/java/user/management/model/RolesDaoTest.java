@@ -15,11 +15,11 @@ public class RolesDaoTest extends AbstractTestNGSpringContextTests {
 	@Autowired
 	private RolesDao rolesDao;
 
-	
 
-	@Test
+
+	@Test(enabled=false)
 	public void testFindAll() {
-		List<Roles> all = rolesDao.findAll();
-		System.out.println(all);		
+		final List<Roles> all = rolesDao.findAll();
+		System.out.println(all);
 	}
 }

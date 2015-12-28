@@ -14,11 +14,11 @@ public class ResetPasswordsDaoTest extends AbstractTestNGSpringContextTests {
 	@Autowired
 	private ResetPasswordsDao resetPasswordsDao;
 
-	
 
-	@Test
+
+	@Test(enabled=false)
 	public void testFindAll() {
-		List<ResetPasswords> all = resetPasswordsDao.findAll();
-		System.out.println(all);		
+		final List<ResetPasswords> all = resetPasswordsDao.findAll();
+		System.out.println(all);
 	}
 }

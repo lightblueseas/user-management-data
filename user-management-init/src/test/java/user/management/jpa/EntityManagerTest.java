@@ -25,17 +25,18 @@ public class EntityManagerTest {
                       createEntityManager();
         }
     }
-    
-    @Test
+
+    @Test(enabled=false)
     public void testAllOps(){
     	em.getTransaction().begin();
-    	Query query = em.createQuery("select u from Users u where u.id=:userid");
+    	final Query query = em.createQuery("select u from Users u where u.id=:userid");
     	query.setParameter("userid", 4);
     	@SuppressWarnings("unchecked")
+		final
 		List<Users> users = query.getResultList();
-    	for (Users user : users) {
-    		Set<Resources> resources = user.getUserData().getResources();
-    		for (Resources resource : resources) {
+    	for (final Users user : users) {
+    		final Set<Resources> resources = user.getUserData().getResources();
+    		for (final Resources resource : resources) {
 				System.out.println(resource.getFilename());
 			}
 		}
