@@ -36,7 +36,7 @@ public enum GenderType {
 	/**
 	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED} and {@link GenderType#INCORPORATION}.
 	 *
-	 * @return the valid gender types
+	 * @return the human gender types
 	 */
 	public static List<GenderType> getHumanGenders() {
 		final GenderType[] genderValues = GenderType.values();
