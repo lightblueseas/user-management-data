@@ -119,6 +119,14 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>hibernate3-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>hbm2ddl</goal>
+								</goals>
+							</execution>
+						</executions>
 						<configuration>
 							<components>
 								<component>
@@ -163,6 +171,45 @@
 							<mainClass>de.alpharogroup.db.init.InitializeDatabase</mainClass>
 							<arguments>
 								<argument>delete</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+
+				</plugins>
+
+			</build>
+
+		</profile>
+
+
+		<profile>
+			<id>createemptydb</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+
+			<build>
+				<plugins>
+
+					<!--This plugin is used to execute java classes with a main method. -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>compile</phase>
+								<goals>
+									<goal>java</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<mainClass>de.alpharogroup.db.init.InitializeDatabase</mainClass>
+							<arguments>
+								<argument>create-empty</argument>
 							</arguments>
 						</configuration>
 					</plugin>
