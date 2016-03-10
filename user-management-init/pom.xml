@@ -100,7 +100,7 @@
 	<profiles>
 
 		<profile>
-			<id>createdb</id>
+			<id>create-db</id>
 			<activation>
 				<property>
 					<name>performRelease</name>
@@ -119,14 +119,6 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>hibernate3-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>process-classes</phase>
-								<goals>
-									<goal>hbm2ddl</goal>
-								</goals>
-							</execution>
-						</executions>
 						<configuration>
 							<components>
 								<component>
@@ -181,9 +173,8 @@
 
 		</profile>
 
-
 		<profile>
-			<id>createemptydb</id>
+			<id>create-empty-db</id>
 			<activation>
 				<property>
 					<name>performRelease</name>
