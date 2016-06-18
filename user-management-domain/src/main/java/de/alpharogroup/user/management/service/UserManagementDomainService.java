@@ -34,7 +34,6 @@ import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
-import de.alpharogroup.user.management.service.api.UserDatasService;
 import de.alpharogroup.user.management.service.api.UserManagementService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
@@ -52,7 +51,7 @@ public class UserManagementDomainService implements UserManagementService {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The {@link UserDatasService}. */
+	/** The {@link UsersManagementService}. */
 	@Autowired
 	@Getter
 	@Setter

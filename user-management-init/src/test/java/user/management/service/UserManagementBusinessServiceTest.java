@@ -19,10 +19,10 @@ import de.alpharogroup.auth.models.UsernameSignUpModel;
 import de.alpharogroup.date.CreateDateExtensions;
 import de.alpharogroup.email.messages.Mimetypes;
 import de.alpharogroup.file.search.PathFinder;
+import de.alpharogroup.resource.system.application.model.ModelSynchronizer;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.application.util.ModelConverter;
 import de.alpharogroup.resource.system.entities.Resources;
-import de.alpharogroup.user.management.application.models.UserModelConverter;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.Users;
@@ -30,10 +30,13 @@ import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.factories.UserManagementModelFactory;
+import de.alpharogroup.user.management.service.api.AuthenticationsService;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
+import de.alpharogroup.user.management.sign.in.AuthenticationErrors;
+import de.alpharogroup.user.management.sign.in.AuthenticationResult;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
 
@@ -52,8 +55,12 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	/** The contactmethods business service. */
 	@Autowired
 	private ContactmethodsService contactmethodsService;
+	
+	/** The attribute for {@link AuthenticationsService}. */
+	@Autowired		
+	private AuthenticationsService authenticationsService;
 
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void testSignUpUser() {
 		SignUpUserResult result;
 		final UserManagementModelFactory userManagementModelFactory = UserManagementModelFactory.getInstance();
@@ -80,7 +87,11 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 		final Set<Roles> roles = createRolesSet();
 
 		result = userManagementService.signUpUser(model, roles, userModel);
-
+		// Check if the user can authenticate ...
+		AuthenticationResult<Users, AuthenticationErrors> authenticationResult = authenticationsService.authenticate("michael.knight@gmail.com", "xxx");
+		Users user = authenticationResult.getUser();
+		System.out.println("Username:"+user.getUsername());
+		
 		userModel = userManagementModelFactory.newUserModel(
 				"Frankenstein",
 				CreateDateExtensions.newDate(1974, 8, 28),
@@ -175,7 +186,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 		final String mimeType = Mimetypes.getMimeType(img);
 		//
 
-		final ResourcesModel fileModel = UserModelConverter.toResourceModel(img, mimeType, "A photo from user "+michaelProvider.getUsername());
+		final ResourcesModel fileModel = ModelSynchronizer.toResourceModel(img, mimeType, "A photo from user "+michaelProvider.getUsername());
 		for (int i = 0; i < 100; i++) {
 			userManagementService.persistResource(fileModel, michaelProvider.getId());
 			System.out.println(i);
