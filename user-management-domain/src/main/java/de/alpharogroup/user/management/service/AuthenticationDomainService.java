@@ -1,18 +1,22 @@
 package de.alpharogroup.user.management.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import de.alpharogroup.auth.models.AuthenticationErrors;
+import de.alpharogroup.auth.models.AuthenticationResult;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.mapper.UsersMapper;
 import de.alpharogroup.user.management.service.api.AuthenticationService;
 import de.alpharogroup.user.management.service.api.AuthenticationsService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
-import de.alpharogroup.user.management.sign.in.AuthenticationErrors;
-import de.alpharogroup.user.management.sign.in.AuthenticationResult;
 import lombok.Getter;
 import lombok.Setter;
 
+@Transactional
+@Service("authenticationDomainService")
 public class AuthenticationDomainService implements AuthenticationService {
 	
 

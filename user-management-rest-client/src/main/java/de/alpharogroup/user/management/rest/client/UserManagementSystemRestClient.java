@@ -1,6 +1,7 @@
 package de.alpharogroup.user.management.rest.client;
 
 import de.alpharogroup.cxf.rest.client.AbstractRestClient;
+import de.alpharogroup.user.management.rest.api.AuthenticationsResource;
 import de.alpharogroup.user.management.rest.api.ContactmethodsResource;
 import de.alpharogroup.user.management.rest.api.PermissionsResource;
 import de.alpharogroup.user.management.rest.api.RecommendationsResource;
@@ -21,6 +22,12 @@ import lombok.Getter;
 public class UserManagementSystemRestClient extends AbstractRestClient
 {
 
+	/**
+	 * The {@link AuthenticationsResource}.
+	 */
+	@Getter
+	private final AuthenticationsResource authenticationsResource;
+	
 	/**
 	 * The {@link ContactmethodsResource}.
 	 */
@@ -104,6 +111,7 @@ public class UserManagementSystemRestClient extends AbstractRestClient
 	public UserManagementSystemRestClient(final String baseUrl)
 	{
 		super(baseUrl);
+		authenticationsResource = newResource(AuthenticationsResource.class);
 		contactmethodsResource = newResource(ContactmethodsResource.class);
 		permissionsResource = newResource(PermissionsResource.class);
 		recommendationsResource = newResource(RecommendationsResource.class);

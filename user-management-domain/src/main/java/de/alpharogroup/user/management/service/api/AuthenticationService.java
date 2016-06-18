@@ -1,8 +1,8 @@
 package de.alpharogroup.user.management.service.api;
 
+import de.alpharogroup.auth.models.AuthenticationErrors;
+import de.alpharogroup.auth.models.AuthenticationResult;
 import de.alpharogroup.user.management.domain.User;
-import de.alpharogroup.user.management.sign.in.AuthenticationErrors;
-import de.alpharogroup.user.management.sign.in.AuthenticationResult;
 
 public interface AuthenticationService {
 

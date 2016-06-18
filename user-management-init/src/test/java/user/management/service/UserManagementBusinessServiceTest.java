@@ -15,6 +15,8 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.address.book.service.api.AddressesService;
+import de.alpharogroup.auth.models.AuthenticationErrors;
+import de.alpharogroup.auth.models.AuthenticationResult;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
 import de.alpharogroup.date.CreateDateExtensions;
 import de.alpharogroup.email.messages.Mimetypes;
@@ -35,8 +37,6 @@ import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
-import de.alpharogroup.user.management.sign.in.AuthenticationErrors;
-import de.alpharogroup.user.management.sign.in.AuthenticationResult;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
 
