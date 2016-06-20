@@ -46,6 +46,17 @@ public class RoleDomainService extends AbstractDomainService<Integer, Role, Role
 	}
 
 	/**
+	 * Sets the specific {@link RolesMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link RolesMapper}.
+	 */
+	@Autowired
+	public void setRolesMapper(RolesMapper mapper) {
+		setMapper(mapper);
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

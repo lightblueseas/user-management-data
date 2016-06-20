@@ -1,6 +1,8 @@
 package de.alpharogroup.user.management.rest;
 
 
+import java.util.List;
+
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.rest.api.UsersResource;
@@ -12,5 +14,9 @@ public class UsersRestResource
 	implements
 		UsersResource
 {
+	
+	public List<User> findAll() {
+		return getDomainService().findAll();
+	}
 
 }

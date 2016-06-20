@@ -47,6 +47,17 @@ public class RelationPermissionDomainService extends
 	}
 
 	/**
+	 * Sets the specific {@link RelationPermissionsMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link RelationPermissionsMapper}.
+	 */
+	@Autowired
+	public void setRelationPermissionsMapper(RelationPermissionsMapper mapper) {
+		setMapper(mapper);
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

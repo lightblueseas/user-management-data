@@ -39,4 +39,16 @@ public class UserDataDomainService extends
 		setDao(userDatasDao);
 	}
 
+	/**
+	 * Sets the specific {@link UserDatasMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link UserDatasMapper}.
+	 */
+	@Autowired
+	public void setUserDatasMapper(UserDatasMapper mapper) {
+		setMapper(mapper);
+	}
+	
+
 }

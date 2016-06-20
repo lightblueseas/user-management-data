@@ -43,6 +43,17 @@ public class PermissionDomainService
 	}
 
 	/**
+	 * Sets the specific {@link PermissionsMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link PermissionsMapper}.
+	 */
+	@Autowired
+	public void setPermissionsMapper(PermissionsMapper mapper) {
+		setMapper(mapper);
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
