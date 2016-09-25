@@ -2,7 +2,7 @@ package de.alpharogroup.user.management.service.api;
 
 import java.util.List;
 
-import de.alpharogroup.db.service.jpa.BusinessService;
+import de.alpharogroup.db.service.api.BusinessService;
 import de.alpharogroup.user.management.entities.Permissions;
 import de.alpharogroup.user.management.entities.RelationPermissions;
 import de.alpharogroup.user.management.entities.Users;
