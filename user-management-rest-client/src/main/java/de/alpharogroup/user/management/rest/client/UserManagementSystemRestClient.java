@@ -1,5 +1,12 @@
 package de.alpharogroup.user.management.rest.client;
 
+import de.alpharogroup.address.book.rest.api.AddressesResource;
+import de.alpharogroup.address.book.rest.api.CountriesResource;
+import de.alpharogroup.address.book.rest.api.FederalstatesResource;
+import de.alpharogroup.address.book.rest.api.ZipcodesResource;
+
+import de.alpharogroup.resource.system.rest.api.ResourcesResource;
+
 import de.alpharogroup.cxf.rest.client.AbstractRestClient;
 import de.alpharogroup.user.management.rest.api.AuthenticationsResource;
 import de.alpharogroup.user.management.rest.api.ContactmethodsResource;
@@ -22,6 +29,36 @@ import lombok.Getter;
 public class UserManagementSystemRestClient extends AbstractRestClient
 {
 
+	/**
+	 * The {@link AddressesResource}.
+	 */
+	@Getter
+	private final AddressesResource addressesResource;
+
+	/**
+	 * The {@link CountriesResource}.
+	 */
+	@Getter
+	private final CountriesResource countriesResource;
+
+	/**
+	 * The {@link FederalstatesResource}.
+	 */
+	@Getter
+	private final FederalstatesResource federalstatesResource;
+
+	/**
+	 * The {@link ZipcodesResource}.
+	 */
+	@Getter
+	private final ZipcodesResource zipcodesResource;
+	
+	/**
+	 * The {@link ResourcesResource}.
+	 */
+	@Getter
+	private final ResourcesResource resourcesResource;
+	
 	/**
 	 * The {@link AuthenticationsResource}.
 	 */
@@ -123,6 +160,14 @@ public class UserManagementSystemRestClient extends AbstractRestClient
 		userCreditsResource = newResource(UserCreditsResource.class);
 		userDatasResource = newResource(UserDatasResource.class);
 		usersResource = newResource(UsersResource.class);
+		
+		
+		addressesResource = newResource(AddressesResource.class);
+		countriesResource = newResource(CountriesResource.class);
+		federalstatesResource = newResource(FederalstatesResource.class);
+		zipcodesResource =  newResource(ZipcodesResource.class);		
+
+        	resourcesResource  = newResource(ResourcesResource.class); 
 	}
 
 }
