@@ -38,4 +38,16 @@ public class RobinsonDomainService extends
 	public void setRobinsonsDao(final RobinsonsDao robinsonsDao) {
 		setDao(robinsonsDao);
 	}
+
+	/**
+	 * Sets the specific {@link RobinsonsMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link RobinsonsMapper}.
+	 */
+	@Autowired
+	public void setRobinsonsMapper(RobinsonsMapper mapper) {
+		setMapper(mapper);
+	}
+	
 }

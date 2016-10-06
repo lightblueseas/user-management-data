@@ -1,12 +1,18 @@
 package de.alpharogroup.user.management.rest;
 
 
+import java.util.List;
+
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 import de.alpharogroup.user.management.domain.Contactmethod;
+import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.rest.api.ContactmethodsResource;
 import de.alpharogroup.user.management.service.api.ContactmethodService;
 
+/**
+ * The class {@link ContactmethodsRestResource} .
+ */
 public class ContactmethodsRestResource
 	extends
 		AbstractRestfulResource<Integer, Contactmethod, ContactmethodService>
@@ -14,25 +20,58 @@ public class ContactmethodsRestResource
 		ContactmethodsResource
 {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean compare(final Contactmethod contact, final Contactmethod compare)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = getDomainService().compare(contact, compare);
+		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public boolean existsContact(final Contactmethod contact)
+	public boolean existsContact(final String contact)
 	{
-		// TODO Auto-generated method stub
+//		boolean result = getDomainService().existsContact(contact);
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean existsContact(final String contactValue, final ContactmethodType contactMethod)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = getDomainService().existsContact(contactValue, contactMethod);
+		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Contactmethod> findContact(String contactValue, ContactmethodType contactMethod) {		
+		return getDomainService().findContact(contactValue, contactMethod);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Contactmethod> find(ContactmethodType contactmethod, String contactvalue) {
+		return getDomainService().find(contactmethod, contactvalue);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Contactmethod> findContactmethod(ContactmethodType contactmethod, User user) {
+		return getDomainService().findContactmethod(contactmethod, user);
 	}
 
 }

@@ -12,6 +12,7 @@
 
 	<jaxrs:server id="service" address="/">
 		<jaxrs:serviceBeans>
+			<ref bean="authenticationsResource" />
 			<ref bean="contactmethodsResource" />
 			<ref bean="permissionsResource" />
 			<ref bean="recommendationsResource" />
@@ -30,6 +31,9 @@
 	</jaxrs:server>
 
 	<!-- web resources -->
+	<bean id="authenticationsResource" class="de.alpharogroup.user.management.rest.AuthenticationsRestResource">
+		<property name="authenticationService" ref="authenticationDomainService"></property>
+	</bean>
 	<bean id="contactmethodsResource" class="de.alpharogroup.user.management.rest.ContactmethodsRestResource">
 		<property name="domainService" ref="contactmethodDomainService"></property>
 	</bean>

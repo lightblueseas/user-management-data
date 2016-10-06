@@ -47,6 +47,17 @@ public class UserDomainService extends AbstractDomainService<Integer, User, User
 	}
 
 	/**
+	 * Sets the specific {@link UsersMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link UsersMapper}.
+	 */
+	@Autowired
+	public void setUsersMapper(UsersMapper mapper) {
+		setMapper(mapper);
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

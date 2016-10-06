@@ -47,6 +47,18 @@ public class RuleViolationDomainService
 	}
 
 	/**
+	 * Sets the specific {@link RuleViolationsMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link RuleViolationsMapper}.
+	 */
+	@Autowired
+	public void setRuleViolationsMapper(RuleViolationsMapper mapper) {
+		setMapper(mapper);
+	}
+	
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

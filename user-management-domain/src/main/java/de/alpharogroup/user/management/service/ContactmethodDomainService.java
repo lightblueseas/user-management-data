@@ -44,6 +44,20 @@ public class ContactmethodDomainService
 	public void setContactmethodsDao(final ContactmethodsDao contactmethodsDao){
 		setDao(contactmethodsDao);
 	}
+	
+
+	/**
+	 * Sets the specific {@link ContactmethodsMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link ContactmethodsMapper}.
+	 */
+	@Autowired
+	public void setContactmethodsMapper(ContactmethodsMapper mapper) {
+		setMapper(mapper);
+	}
+
+	
 	/**
 	 * {@inheritDoc}
 	 */

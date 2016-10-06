@@ -45,6 +45,17 @@ public class RecommendationDomainService
 	}
 
 	/**
+	 * Sets the specific {@link RecommendationsMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link RecommendationsMapper}.
+	 */
+	@Autowired
+	public void setRecommendationsMapper(RecommendationsMapper mapper) {
+		setMapper(mapper);
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

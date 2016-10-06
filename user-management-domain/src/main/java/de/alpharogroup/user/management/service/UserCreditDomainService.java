@@ -40,4 +40,15 @@ public class UserCreditDomainService
 		setDao(userCreditsDao);
 	}
 
+	/**
+	 * Sets the specific {@link UserCreditsMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link UserCreditsMapper}.
+	 */
+	@Autowired
+	public void setUserCreditsMapper(UserCreditsMapper mapper) {
+		setMapper(mapper);
+	}
+	
 }

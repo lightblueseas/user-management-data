@@ -43,6 +43,17 @@ public class ResetPasswordDomainService extends
 	}
 
 	/**
+	 * Sets the specific {@link ResetPasswordsMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link ResetPasswordsMapper}.
+	 */
+	@Autowired
+	public void setResetPasswordsMapper(ResetPasswordsMapper mapper) {
+		setMapper(mapper);
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

@@ -1,6 +1,9 @@
 package de.alpharogroup.user.management.rest.api;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -17,4 +20,7 @@ import de.alpharogroup.user.management.domain.User;
 public interface UsersResource extends RestfulResource<Integer, User>
 {
 
+	@GET
+	@Path("/findall/")
+	List<User> findAll();
 }

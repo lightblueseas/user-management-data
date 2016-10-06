@@ -8,8 +8,11 @@ import de.alpharogroup.address.book.domain.Address;
 import de.alpharogroup.domain.BaseDomainObject;
 import de.alpharogroup.resource.system.domain.Resource;
 import de.alpharogroup.user.management.enums.GenderType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,6 +20,9 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserData extends BaseDomainObject<Integer> {
 	/**
 	 * The serial Version UID.

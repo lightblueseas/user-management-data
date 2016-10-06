@@ -3,7 +3,7 @@ package de.alpharogroup.user.management.service.api;
 import java.util.List;
 
 import de.alpharogroup.address.book.entities.Addresses;
-import de.alpharogroup.db.service.jpa.BusinessService;
+import de.alpharogroup.db.service.api.BusinessService;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.GenderType;

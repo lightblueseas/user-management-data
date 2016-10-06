@@ -20,7 +20,7 @@ import de.alpharogroup.auth.exceptions.EmailAlreadyExistsException;
 import de.alpharogroup.auth.exceptions.UserAlreadyExistsException;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
 import de.alpharogroup.auth.models.ValidationErrors;
-import de.alpharogroup.crypto.PasswordEncryptor;
+import de.alpharogroup.crypto.pw.PasswordEncryptor;
 import de.alpharogroup.resource.system.application.model.ModelSynchronizer;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.entities.Resources;
