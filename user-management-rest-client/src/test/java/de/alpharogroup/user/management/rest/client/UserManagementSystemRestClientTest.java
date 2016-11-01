@@ -17,12 +17,15 @@ package de.alpharogroup.user.management.rest.client;
 
 import java.util.List;
 
+import org.testng.AssertJUnit;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.auth.models.AuthenticationErrors;
+import de.alpharogroup.auth.models.AuthenticationResult;
 import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.rest.api.AuthenticationsResource;
@@ -82,18 +85,15 @@ public class UserManagementSystemRestClientTest {
 	 */
 	@Test(enabled = true)
 	public void testAuthenticationsResource() {
-		AuthenticationsResource restResource = restClient.getAuthenticationsResource();
+		AuthenticationsResource authenticationsResource = restClient.getAuthenticationsResource();
 		
 		UsersResource usersResource = restClient.getUsersResource();
 		List<User> allUsers = usersResource.findAll();
 		System.out.println(allUsers);
 		
-		// restResource.authenticate(emailOrUsername, password)
+		AuthenticationResult<User, AuthenticationErrors>  result = authenticationsResource.authenticate("michael.knight@gmail.com", "xxx");
 		
-		
-		// http://localhost:8080/contactmethod/compare/{}/{}/
-//		boolean result = restResource.compare(contact, compare);
-//		System.out.println(result);
-
+		AssertJUnit.assertNotNull(result);
+		AssertJUnit.assertEquals(result.getUser().getUsername(), "michael.knight");
 	}
 }

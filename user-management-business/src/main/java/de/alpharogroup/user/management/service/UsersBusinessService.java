@@ -80,11 +80,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	public Addresses findAddressFromUser(final Users user)
 	{
 		final List<Addresses> addresses = findAddressesFromUser(user);
-		if (null != addresses && (!addresses.isEmpty()))
-		{
-			return addresses.get(0);
-		}
-		return null;
+		return ListExtensions.getFirst(addresses);
 	}
 
 	/**
