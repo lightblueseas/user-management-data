@@ -45,34 +45,35 @@ public class ContactmethodsRestResource
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean existsContact(final String contactValue, final ContactmethodType contactMethod)
-	{
-		boolean result = getDomainService().existsContact(contactValue, contactMethod);
+	public boolean existsContact(KeyValuePair<String, ContactmethodType> contactMethod) {
+		boolean result = getDomainService().existsContact(contactMethod.getKey(), contactMethod.getValue());
 		return result;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
+
 	@Override
-	public List<Contactmethod> findContact(String contactValue, ContactmethodType contactMethod) {		
-		return getDomainService().findContact(contactValue, contactMethod);
+	public List<Contactmethod> findContact(KeyValuePair<String, ContactmethodType> contactMethod) {	
+		return getDomainService().findContact(contactMethod.getKey(), contactMethod.getValue());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Contactmethod> find(ContactmethodType contactmethod, String contactvalue) {
-		return getDomainService().find(contactmethod, contactvalue);
+	public List<Contactmethod> find(KeyValuePair<String, ContactmethodType> contactMethod) {
+		return getDomainService().find(contactMethod.getValue(), contactMethod.getKey());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Contactmethod> findContactmethod(ContactmethodType contactmethod, User user) {
-		return getDomainService().findContactmethod(contactmethod, user);
+	public List<Contactmethod> findContactmethod(KeyValuePair<ContactmethodType, User> contactMethodsFromUser) {
+		return getDomainService().findContactmethod(contactMethodsFromUser.getKey(), contactMethodsFromUser.getValue());
 	}
+
 
 }

@@ -47,53 +47,44 @@ public interface ContactmethodsResource extends RestfulResource<Integer, Contact
 	boolean existsContact(@PathParam("contact")String contact);
 
 	/**
-	 * Check if a contact exist with given contact value and the given {@link ContactmethodType}.
+	 * Check if a contact exist with given contact value and the given {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
 	 *
-	 * @param contactValue
-	 *            the contact value
 	 * @param contactMethod
 	 *            the contact method
 	 * @return true, if successful
 	 */
-	@GET
-	@Path("/exists/contact/{contactValue}/{contactMethod}/")
-	boolean existsContact(@PathParam("contactValue")String contactValue,
-							@PathParam("contactMethod")ContactmethodType contactMethod);
+	@POST
+	@Path("/exists/contact")
+	boolean existsContact(KeyValuePair<String, ContactmethodType> contactMethod);
 	
 	/**
-	 * Find all the {@link Contactmethod} objects from the given contact value and the given {@link ContactmethodType}.
+	 * Find all the {@link Contactmethod} objects from the given contact value and the given {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
 	 * 
-	 * @param contactValue
-	 *            the contact value
 	 * @param contactMethod
 	 *            the contact method
 	 * @return the list of the found {@link Contactmethod} objects.
 	 */
-	@GET
-	@Path("/find/contact/{contactValue}/{contactMethod}/")
-	List<Contactmethod> findContact(@PathParam("contactValue")String contactValue,
-									@PathParam("contactMethod")ContactmethodType contactMethod);
+	@POST
+	@Path("/find/contact")
+	List<Contactmethod> findContact(KeyValuePair<String, ContactmethodType> contactMethod);
 
 	/**
 	 * Find all the {@link Contactmethod} objects from the given contact value and the given {@link ContactmethodType}.
 	 *
 	 * @param contactmethod the contact method
-	 * @param contactvalue the contact value
 	 * @return the list of the found {@link Contactmethod} objects.
 	 */
-	@GET
-	@Path("/find/{contactmethod}/{contactvalue}/")
-	List<Contactmethod> find(@PathParam("contactmethod")final ContactmethodType contactmethod, 
-								@PathParam("contactvalue")final String contactvalue);
-	
+	@POST
+	@Path("/find")
+	List<Contactmethod> find(KeyValuePair<String, ContactmethodType> contactMethod);
+		
 	/**
-	 * Find all the {@link Contactmethod} objects from the given user and the given {@link ContactmethodType}.
+	 * Find all the {@link Contactmethod} objects from the given user and the given {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
 	 *
 	 * @param contactmethod the contact method
-	 * @param user the user
 	 * @return the list of the found {@link Contactmethod} objects.
 	 */
-	@GET
-	@Path("/find/all/contactmethods/{contactmethod}/{user}/")
-	List<Contactmethod> findContactmethod(final ContactmethodType contactmethod, final User user);
+	@POST
+	@Path("/find/contactmethods/from/user/")
+	List<Contactmethod> findContactmethod(final KeyValuePair<ContactmethodType, User> contactMethodsFromUser);
 }
