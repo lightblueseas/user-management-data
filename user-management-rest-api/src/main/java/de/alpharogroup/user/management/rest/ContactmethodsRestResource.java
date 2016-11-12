@@ -3,6 +3,7 @@ package de.alpharogroup.user.management.rest;
 
 import java.util.List;
 
+import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.domain.User;
@@ -24,9 +25,9 @@ public class ContactmethodsRestResource
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean compare(final Contactmethod contact, final Contactmethod compare)
+	public boolean compare(final KeyValuePair<Contactmethod, Contactmethod> comparison)
 	{
-		boolean result = getDomainService().compare(contact, compare);
+		boolean result = getDomainService().compare(comparison.getKey(), comparison.getValue());
 		return result;
 	}
 

@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.service.rs.RestfulResource;
 import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.domain.User;
@@ -26,15 +27,13 @@ public interface ContactmethodsResource extends RestfulResource<Integer, Contact
 	/**
 	 * Compare the given {@link Contactmethod} objects.
 	 *
-	 * @param contact
-	 *            the contact
-	 * @param compare
-	 *            the compare
+	 * @param comparison
+	 *            the object to compare
 	 * @return true, if successful
 	 */
 	@POST
 	@Path("/compare/contactmethod/")
-	boolean compare(Contactmethod contact, Contactmethod compare);
+	boolean compare(KeyValuePair<Contactmethod, Contactmethod> comparison);
 
 	/**
 	 * Check if a contact exist with given {@link Contactmethod}.

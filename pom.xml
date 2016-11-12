@@ -98,6 +98,12 @@
 				<artifactId>user-management-rest-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>user-management-rest-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<!-- ADDRESS-BOOK-DATA DEPENDENCIES -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
