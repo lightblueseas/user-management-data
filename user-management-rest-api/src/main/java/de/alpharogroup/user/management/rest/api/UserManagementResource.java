@@ -34,45 +34,6 @@ import de.alpharogroup.user.management.sign.up.UserModel;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface UserManagementResource {
-	
-
-	/**
-	 * Checks if a user exists with the given email.
-	 * 
-	 * @param email
-	 *            the email
-	 * @return true, if successful
-	 */
-	boolean existsUserWithEmail(final String email);
-
-	/**
-	 * Checks if a user exists with the given user name.
-	 * 
-	 * @param username
-	 *            the user name
-	 * @return true, if successful
-	 */
-	boolean existsUserWithUsername(final String username);
-	
-	/**
-	 * Checks if a user exists with the given email or user name.
-	 *
-	 * @param emailOrUsername the email or user name
-	 * @return true, if successful
-	 */
-	boolean existsUserWithEmailOrUsername(final String emailOrUsername);
-
-	/**
-	 * Checks if a user exists with the given email or user name.
-	 * 
-	 * @param email
-	 *            the email
-	 * @param username
-	 *            the user name
-	 * @return the resulted {@link InsertUserState} object.
-	 */
-	InsertUserState existsUserWithEmailOrUsername(final String email, final String username);
-	
 
 	/**
 	 * Checks if a {@link Role} object exist in the given list with the given
@@ -493,5 +454,46 @@ public interface UserManagementResource {
 	 * @return the {@link User} object with the new contacts.
 	 */
 	User addUserContact(User user, User contact);
+	
+	// ****************************************
+	// methods from the interface UserExistenceService
+	// ****************************************
+	
+	/**
+	 * Checks if a user exists with the given email.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return true, if successful
+	 */
+	boolean existsUserWithEmail(final String email);
+
+	/**
+	 * Checks if a user exists with the given user name.
+	 * 
+	 * @param username
+	 *            the user name
+	 * @return true, if successful
+	 */
+	boolean existsUserWithUsername(final String username);
+	
+	/**
+	 * Checks if a user exists with the given email or user name.
+	 *
+	 * @param emailOrUsername the email or user name
+	 * @return true, if successful
+	 */
+	boolean existsUserWithEmailOrUsername(final String emailOrUsername);
+
+	/**
+	 * Checks if a user exists with the given email or user name.
+	 * 
+	 * @param email
+	 *            the email
+	 * @param username
+	 *            the user name
+	 * @return the resulted {@link InsertUserState} object.
+	 */
+	InsertUserState existsUserWithEmailOrUsername(final String email, final String username);
 
 }
