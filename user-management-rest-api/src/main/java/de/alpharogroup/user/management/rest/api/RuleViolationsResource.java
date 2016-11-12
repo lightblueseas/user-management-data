@@ -10,8 +10,7 @@ import javax.ws.rs.core.MediaType;
 import de.alpharogroup.service.rs.RestfulResource;
 import de.alpharogroup.user.management.application.models.InfringementModel;
 import de.alpharogroup.user.management.domain.RuleViolation;
-import de.alpharogroup.user.management.domain.User;
-import de.alpharogroup.user.management.enums.RuleViolationReason;
+import de.alpharogroup.user.management.domain.model.Infringement;
 
 /**
  * The interface {@link RuleViolationsResource} provides methods for resolve rule violations of
@@ -22,14 +21,14 @@ import de.alpharogroup.user.management.enums.RuleViolationReason;
 @Consumes(MediaType.APPLICATION_JSON)
 public interface RuleViolationsResource extends RestfulResource<Integer, RuleViolation>
 {
-
+	
 	/**
 	 * Persist the given domain object {@link InfringementModel}.
 	 *
 	 * @param model the model
 	 * @return the persisted {@link RuleViolation} object.
 	 */
-	RuleViolation save(InfringementModel model);
+	RuleViolation save(Infringement model);
 	
 	/**
 	 * Find a all {@link RuleViolation} objects from the given arguments.
@@ -40,6 +39,6 @@ public interface RuleViolationsResource extends RestfulResource<Integer, RuleVio
 	 * @param description the description
 	 * @return the found {@link RuleViolation} objects.
 	 */
-	List<RuleViolation> find(User detector, User violator, RuleViolationReason reason, String description);
+	List<RuleViolation> find(Infringement model);
 	
 }

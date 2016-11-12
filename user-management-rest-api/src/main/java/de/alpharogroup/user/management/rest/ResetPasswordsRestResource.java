@@ -1,6 +1,7 @@
 package de.alpharogroup.user.management.rest;
 
 
+import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 import de.alpharogroup.user.management.domain.ResetPassword;
 import de.alpharogroup.user.management.domain.User;
@@ -15,8 +16,8 @@ public class ResetPasswordsRestResource
 {
 
 	@Override
-	public ResetPassword findResetPassword(User user, String generatedPassword) {
-		return getDomainService().findResetPassword(user, generatedPassword);
+	public ResetPassword findResetPassword(KeyValuePair<User, String> userAndGenPw) {
+		return getDomainService().findResetPassword(userAndGenPw.getKey(), userAndGenPw.getValue());
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.service.rs.RestfulResource;
 import de.alpharogroup.user.management.domain.Permission;
 import de.alpharogroup.user.management.domain.Role;
@@ -62,7 +63,7 @@ public interface RolesResource extends RestfulResource<Integer, Role>
 	 * @return the created or existing {@link Role} object.
 	 */
 	Role createAndSaveRole(String rolename, String description);
-
+	
 	/**
 	 * Creates a new {@link Role} object with the given arguments and save it. If it does exists it will return the existing.
 	 *
@@ -71,5 +72,5 @@ public interface RolesResource extends RestfulResource<Integer, Role>
 	 * @param permissions the permissions to set for the role.
 	 * @return the created or existing {@link Role} object.
 	 */
-	Role createAndSaveRole(String rolename, String description, Set<Permission> permissions);
+	Role createAndSaveRole(final Triple<String, String, Set<Permission>> roleToCreate);
 }

@@ -5,6 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.service.rs.RestfulResource;
 import de.alpharogroup.user.management.domain.ResetPassword;
 import de.alpharogroup.user.management.domain.User;
@@ -26,7 +27,7 @@ public interface ResetPasswordsResource extends RestfulResource<Integer, ResetPa
 	 * @param generatedPassword the generated password(hashed) is the confirmationCode from the url query string
 	 * @return the entry of the found {@link ResetPassword} or null if not found
 	 */
-	ResetPassword findResetPassword(User user, String generatedPassword);
+	ResetPassword findResetPassword(final KeyValuePair<User, String> userAndGenPw);
 
 	/**
 	 * Finds the {@link ResetPassword} object from the given {@link User} object.

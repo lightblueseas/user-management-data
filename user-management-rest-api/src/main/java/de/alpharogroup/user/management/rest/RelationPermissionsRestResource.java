@@ -4,6 +4,7 @@ package de.alpharogroup.user.management.rest;
 import java.util.List;
 
 import de.alpharogroup.collections.pairs.KeyValuePair;
+import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 import de.alpharogroup.user.management.domain.Permission;
 import de.alpharogroup.user.management.domain.RelationPermission;
@@ -22,29 +23,42 @@ public class RelationPermissionsRestResource
 	public RelationPermission findRelationPermissions(KeyValuePair<User, User> providerToSubscriber) {
 		return getDomainService().findRelationPermissions(providerToSubscriber.getKey(), providerToSubscriber.getValue());
 	}
+
 	@Override
-	public RelationPermission findRelationPermissions(User provider, User subscriber, Permission permission) {
-		return getDomainService().findRelationPermissions(provider, subscriber, permission);
+	public RelationPermission findRelationPermissions(Triple<User, User, Permission> providerToSubscriberOfPerms) {
+		return getDomainService().findRelationPermissions(
+				providerToSubscriberOfPerms.getLeft(), 
+				providerToSubscriberOfPerms.getMiddle(), 
+				providerToSubscriberOfPerms.getRight());
+	}
+	
+	@Override
+	public List<RelationPermission> find(KeyValuePair<User, User> providerToSubscriber) {
+		return getDomainService().find(providerToSubscriber.getKey(), providerToSubscriber.getValue());
 	}
 
 	@Override
-	public List<RelationPermission> find(User provider, User subscriber) {
-		return getDomainService().find(provider, subscriber);
+	public List<RelationPermission> find(Triple<User, User, Permission> providerToSubscriberOfPerms) {
+		return getDomainService().find(
+				providerToSubscriberOfPerms.getLeft(), 
+				providerToSubscriberOfPerms.getMiddle(), 
+				providerToSubscriberOfPerms.getRight());
 	}
 
 	@Override
-	public List<RelationPermission> find(User provider, User subscriber, Permission permission) {
-		return getDomainService().find(provider, subscriber, permission);
+	public void addPermission(Triple<User, User, Permission> providerToSubscriberOfPerms) {
+		getDomainService().addPermission(
+				providerToSubscriberOfPerms.getLeft(), 
+				providerToSubscriberOfPerms.getMiddle(), 
+				providerToSubscriberOfPerms.getRight());
 	}
 
 	@Override
-	public void addPermission(User provider, User subscriber, Permission permission) {
-		getDomainService().addPermission(provider, subscriber, permission);
-	}
-
-	@Override
-	public void removePermission(User provider, User subscriber, Permission permission) {
-		getDomainService().removePermission(provider, subscriber, permission);
+	public void removePermission(Triple<User, User, Permission> providerToSubscriberOfPerms) {
+		getDomainService().removePermission(
+				providerToSubscriberOfPerms.getLeft(), 
+				providerToSubscriberOfPerms.getMiddle(), 
+				providerToSubscriberOfPerms.getRight());
 	}
 
 	@Override
@@ -52,5 +66,9 @@ public class RelationPermissionsRestResource
 		getDomainService().removeAllPermissions(provider, subscriber);
 	}
 
+	@Override
+	public void removeAllPermissions(KeyValuePair<User, User> providerToSubscriber) {
+		getDomainService().removeAllPermissions(providerToSubscriber.getKey(), providerToSubscriber.getValue());
+	}
 
 }

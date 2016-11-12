@@ -9,9 +9,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import de.alpharogroup.address.book.domain.Address;
+import de.alpharogroup.collections.pairs.KeyValuePair;
+import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.service.rs.RestfulResource;
 import de.alpharogroup.user.management.domain.Role;
 import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.management.domain.model.UserSearchCriteria;
 import de.alpharogroup.user.management.enums.GenderType;
 
 /**
@@ -92,7 +95,7 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the role
 	 * @return true, if successful
 	 */
-	boolean userIsInRole(final User user, final Role role);
+	boolean userIsInRole(final KeyValuePair<User, Role> user);
 
 	/**
 	 * Find users from the given {@link GenderType} object and the range from till until.
@@ -105,7 +108,7 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the until
 	 * @return the found list of {@link User} objects that matches the criteria.
 	 */
-	List<User> findUsers(Integer from, GenderType searchGender, Integer until);
+	List<User> findUsers(final Triple<Integer, GenderType, Integer> searchCriteria);
 
 	/**
 	 * Find users from the given {@link GenderType} object and the range from till until and the
@@ -121,7 +124,6 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the geohash
 	 * @return the found list of {@link User} objects that matches the criteria.
 	 */
-	List<User> findUsers(Integer from, GenderType searchGender, Integer until,
-			final String geohash);
+	List<User> findUsers(UserSearchCriteria userSearchCriteria);
 
 }

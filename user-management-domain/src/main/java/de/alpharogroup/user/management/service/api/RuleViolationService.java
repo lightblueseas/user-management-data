@@ -6,6 +6,7 @@ import de.alpharogroup.service.domain.DomainService;
 import de.alpharogroup.user.management.application.models.InfringementModel;
 import de.alpharogroup.user.management.domain.RuleViolation;
 import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.management.domain.model.Infringement;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 
 /**
@@ -18,8 +19,18 @@ public interface RuleViolationService extends DomainService<Integer, RuleViolati
 	 *
 	 * @param model the model
 	 * @return the persisted {@link RuleViolation} object.
+	 * @deprecated use instead {@link RuleViolationService#save(Infringement)}
 	 */
+	@Deprecated
 	RuleViolation save(InfringementModel model);
+	
+	/**
+	 * Persist the given domain object {@link Infringement}.
+	 *
+	 * @param model the model
+	 * @return the persisted {@link RuleViolation} object.
+	 */
+	RuleViolation save(Infringement model);
 	
 	/**
 	 * Find a all {@link RuleViolation} objects from the given arguments.

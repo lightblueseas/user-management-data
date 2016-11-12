@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import de.alpharogroup.lang.object.CopyObjectExtensions;
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.application.models.InfringementModel;
 import de.alpharogroup.user.management.daos.RuleViolationsDao;
 import de.alpharogroup.user.management.domain.RuleViolation;
 import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.management.domain.model.Infringement;
 import de.alpharogroup.user.management.entities.RuleViolations;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
@@ -61,9 +63,22 @@ public class RuleViolationDomainService
 	/**
 	 * {@inheritDoc}
 	 */
+	@Deprecated
 	@Override
 	public RuleViolation save(final InfringementModel model) {
+		
 		final RuleViolations ruleViolations = ruleViolationsService.save(model);
+		return getMapper().toDomainObject(ruleViolations);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RuleViolation save(Infringement model) {
+		InfringementModel infringementModel = InfringementModel.builder().build();
+		CopyObjectExtensions.copyQuietly(model, infringementModel);
+		final RuleViolations ruleViolations = ruleViolationsService.save(infringementModel);
 		return getMapper().toDomainObject(ruleViolations);
 	}
 
@@ -77,4 +92,5 @@ public class RuleViolationDomainService
 		final List<RuleViolations> ruleViolations = ruleViolationsService.find(detectors, violators, reason, description);
 		return getMapper().toDomainObjects(ruleViolations);
 	}
+
 }
