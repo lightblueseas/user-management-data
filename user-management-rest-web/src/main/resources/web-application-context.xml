@@ -23,6 +23,7 @@
 			<ref bean="ruleViolationsResource" />
 			<ref bean="userCreditsResource" />
 			<ref bean="userDatasResource" />
+			<ref bean="userManagementResource" />
 			<ref bean="usersResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
@@ -66,6 +67,9 @@
 	</bean>
 	<bean id="usersResource" class="de.alpharogroup.user.management.rest.UsersRestResource">
 		<property name="domainService" ref="userDomainService"></property>
+	</bean>
+	<bean id="userManagementResource" class="de.alpharogroup.user.management.rest.UserManagementRestResource">
+		<property name="domainService" ref="userManagementDomainService"></property>
 	</bean>
 
 </beans>
