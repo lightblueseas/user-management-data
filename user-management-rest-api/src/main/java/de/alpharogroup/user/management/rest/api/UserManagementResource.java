@@ -17,6 +17,8 @@ import de.alpharogroup.auth.exceptions.EmailAlreadyExistsException;
 import de.alpharogroup.auth.exceptions.UserAlreadyExistsException;
 import de.alpharogroup.auth.models.UsernameSignUpModel;
 import de.alpharogroup.auth.models.ValidationErrors;
+import de.alpharogroup.collections.pairs.KeyValuePair;
+import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.domain.Resource;
 import de.alpharogroup.user.management.domain.Contactmethod;
@@ -34,7 +36,7 @@ import de.alpharogroup.user.management.sign.up.UserModel;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface UserManagementResource {
-
+	
 	/**
 	 * Checks if a {@link Role} object exist in the given list with the given
 	 * role name.
@@ -46,7 +48,7 @@ public interface UserManagementResource {
 	 * @return true, if the {@link Role} object exist in the list otherwise
 	 *         false.
 	 */
-	boolean isInRole(final String rolename, final List<Role> roles);
+	boolean isInRole(final KeyValuePair<String, List<Role>> roleSearchModel);
 
 	/**
 	 * Checks if a user exists with the given email.
@@ -217,7 +219,7 @@ public interface UserManagementResource {
 	 * @return true, if the given {@link User} object is in role otherwise
 	 *         false.
 	 */
-	boolean isUserInRole(final User user, String rolename);
+	boolean isUserInRole(final KeyValuePair<User, String> userSearchModel);
 
 	/**
 	 * Persist the given collection of {@link Address} objects from the given
@@ -228,7 +230,7 @@ public interface UserManagementResource {
 	 * @param addresses
 	 *            the addresses
 	 */
-	void saveAddressesFromUser(final User user, final Collection<Address> addresses);
+	void saveAddressesFromUser(final KeyValuePair<User, Collection<Address>> userSaveModel);
 
 	/**
 	 * Persist the given {@link Address} object from the given {@link User}
@@ -239,7 +241,7 @@ public interface UserManagementResource {
 	 * @param address
 	 *            the address
 	 */
-	void saveAddressFromUser(final User user, Address address);
+	void saveAddressFromUser(final KeyValuePair<User, Address> userSaveModel);
 
 	/**
 	 * Persist the given {@link User} object.
@@ -277,7 +279,7 @@ public interface UserManagementResource {
 	 * @throws BatchUpdateException
 	 *             the batch update exception
 	 */
-	Contactmethod saveUserWithContactmethod(User user, Contactmethod contact) throws BatchUpdateException;
+	Contactmethod saveUserWithContactmethod(KeyValuePair<User, Contactmethod> userSaveModel) throws BatchUpdateException;
 
 	/**
 	 * Persist the given list of {@link Contactmethod} objects to the given
@@ -291,9 +293,9 @@ public interface UserManagementResource {
 	 * @throws BatchUpdateException
 	 *             the batch update exception
 	 */
-	List<Contactmethod> saveUserWithContactmethods(final User user, final List<Contactmethod> contacts)
+	List<Contactmethod> saveUserWithContactmethods(final KeyValuePair<User, List<Contactmethod>> userSaveModel)
 			throws BatchUpdateException;
-
+	
 	/**
 	 * Persist the given {@link User} object with the given collection of
 	 * {@link Role} objects.
@@ -303,7 +305,7 @@ public interface UserManagementResource {
 	 * @param roles
 	 *            the roles
 	 */
-	void saveUserWithRoles(User user, Collection<Role> roles);
+	void saveUserWithRoles(final KeyValuePair<User, Collection<Role>> userSaveModel);
 
 	/**
 	 * Update email from the given {@link User} object if the email has changed
@@ -319,8 +321,8 @@ public interface UserManagementResource {
 	 * @throws EmailAlreadyExistsException
 	 *             the email already exists exception
 	 */
-	Contactmethod setEmail(final String email, final User user) throws EmailAlreadyExistsException;
-
+	Contactmethod setEmail(final KeyValuePair<String, User> userSaveModel) throws EmailAlreadyExistsException;
+	
 	/**
 	 * Sets a new user name to the the given {@link User} object.
 	 *
@@ -333,7 +335,7 @@ public interface UserManagementResource {
 	 *             is thrown if the user already exists with the given user
 	 *             name.
 	 */
-	boolean setUsername(final String username, final User user) throws UserAlreadyExistsException;
+	boolean setUsername(final KeyValuePair<String, User> userSaveModel) throws UserAlreadyExistsException;
 
 	/**
 	 * Update an existing {@link Contactmethod} object. If the contact method
@@ -348,9 +350,8 @@ public interface UserManagementResource {
 	 *            the contact method
 	 * @return the {@link Contactmethod} object
 	 */
-	Contactmethod updateContactmethod(final String contactmethodValue, final ContactmethodType contactmethodType,
-			final Contactmethod contactmethod);
-
+	Contactmethod updateContactmethod(final Triple<String, ContactmethodType, Contactmethod> updateModel);
+	
 	/**
 	 * Update user name from the given {@link User} object if the user name has
 	 * changed. Returns true if the user name has changed otherwise false.
@@ -364,7 +365,7 @@ public interface UserManagementResource {
 	 *             is thrown if the user already exists with the given user
 	 *             name.
 	 */
-	boolean updateUsername(final String username, final User user) throws UserAlreadyExistsException;
+	boolean updateUsername(final KeyValuePair<String, User> updateModel) throws UserAlreadyExistsException;
 
 	/**
 	 * Checks if the given {@link User} object is in the given {@link Role}
@@ -376,7 +377,7 @@ public interface UserManagementResource {
 	 *            the role
 	 * @return true, if successful
 	 */
-	boolean userIsInRole(final User user, final Role role);
+	boolean userIsInRole(final KeyValuePair<User, Role> searchModel);
 
 	/**
 	 * Validate the given {@link UsernameSignUpModel} object.
@@ -400,7 +401,7 @@ public interface UserManagementResource {
 	 * @return the {@link SignUpUserResult} object with the result of the sign
 	 *         up process
 	 */
-	SignUpUserResult signUpUser(UsernameSignUpModel model, Set<Role> roles, UserModel userModel);
+	SignUpUserResult signUpUser(Triple<UsernameSignUpModel, Set<Role>, UserModel> saveModel);
 
 	/**
 	 * Persist the given resource model object with the given user id.
@@ -411,7 +412,7 @@ public interface UserManagementResource {
 	 *            the user id
 	 * @return the persisted {@link Resource} object
 	 */
-	Resource persistResource(ResourcesModel resourceModel, final Integer userId);
+	Resource persistResource(KeyValuePair<ResourcesModel, Integer> saveModel);
 
 	/**
 	 * Deletes the {@link Resource} object from the given resource model
@@ -422,7 +423,7 @@ public interface UserManagementResource {
 	 * @param userDataId
 	 *            the user data id
 	 */
-	void deleteResource(final ResourcesModel resource, final Integer userDataId);
+	void deleteResource(final KeyValuePair<ResourcesModel, Integer> deleteModel);
 
 	/**
 	 * Deletes the given black listed {@link User} object from the given user data id.
@@ -433,7 +434,7 @@ public interface UserManagementResource {
 	 *            the user data id
 	 * @return the {@link UserData} object.
 	 */
-	UserData deleteBlacklisted(User blacklisted, final Integer userDataId);
+	UserData deleteBlacklisted(final KeyValuePair<User, Integer> deleteModel);
 
 	/**
 	 * Deletes the given {@link Address} object from the given {@link UserData} object.
@@ -444,7 +445,7 @@ public interface UserManagementResource {
 	 *            the {@link UserData} object
 	 * @return the {@link UserData} object.
 	 */
-	UserData deleteAddress(Address address, final UserData ud);
+	UserData deleteAddress(final KeyValuePair<Address, UserData> deleteModel);
 
 	/**
 	 * Adds the given contact {@link User} object to the contacts of the given {@link User} object.
@@ -453,7 +454,7 @@ public interface UserManagementResource {
 	 * @param contact the contact to add
 	 * @return the {@link User} object with the new contacts.
 	 */
-	User addUserContact(User user, User contact);
+	User addUserContact(final KeyValuePair<User, User> saveModel);
 	
 	// ****************************************
 	// methods from the interface UserExistenceService
@@ -494,6 +495,6 @@ public interface UserManagementResource {
 	 *            the user name
 	 * @return the resulted {@link InsertUserState} object.
 	 */
-	InsertUserState existsUserWithEmailOrUsername(final String email, final String username);
+	InsertUserState existsUserWithEmailOrUsername(final KeyValuePair<String, String> searchModel);
 
 }
