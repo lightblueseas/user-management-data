@@ -1,6 +1,7 @@
 package de.alpharogroup.user.management.rest.api;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -27,6 +28,8 @@ public interface ResetPasswordsResource extends RestfulResource<Integer, ResetPa
 	 * @param generatedPassword the generated password(hashed) is the confirmationCode from the url query string
 	 * @return the entry of the found {@link ResetPassword} or null if not found
 	 */
+	@POST
+	@Path("/find/by/gpw")
 	ResetPassword findResetPassword(final KeyValuePair<User, String> userAndGenPw);
 
 	/**
@@ -35,5 +38,7 @@ public interface ResetPasswordsResource extends RestfulResource<Integer, ResetPa
 	 * @param user the user
 	 * @return the entry of the found {@link ResetPassword} or null if not found
 	 */
+	@POST
+	@Path("/find")
 	ResetPassword findResetPassword(User user);
 }

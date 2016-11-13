@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -29,6 +30,8 @@ public interface RolesResource extends RestfulResource<Integer, Role>
 	 *            the given {@link Role} object
 	 * @return 's a list with all {@link Permission} objects from the given {@link Role} object.
 	 */
+	@POST
+	@Path("/find/all/perms")
 	List<Permission> findAllPermissions(Role role);
 
 	/**
@@ -37,6 +40,8 @@ public interface RolesResource extends RestfulResource<Integer, Role>
 	 * @param rolename the role name
 	 * @return the found {@link Role} object or if it does'nt exists it returns null.
 	 */
+	@POST
+	@Path("/find")
 	Role findRole(final String rolename);
 
 	/**
@@ -45,6 +50,8 @@ public interface RolesResource extends RestfulResource<Integer, Role>
 	 * @param rolename the rolename
 	 * @return the found {@link Role} objects
 	 */
+	@POST
+	@Path("/find/by/name")
 	List<Role> findRoles(final String rolename);
 
 	/**
@@ -53,6 +60,8 @@ public interface RolesResource extends RestfulResource<Integer, Role>
 	 * @param rolename the role name
 	 * @return true, if successful
 	 */
+	@POST
+	@Path("/exists")
 	boolean exists(final String rolename);
 
 	/**
@@ -62,6 +71,8 @@ public interface RolesResource extends RestfulResource<Integer, Role>
 	 * @param description the description of the role.
 	 * @return the created or existing {@link Role} object.
 	 */
+	@POST
+	@Path("/new")
 	Role createAndSaveRole(String rolename, String description);
 	
 	/**
@@ -72,5 +83,7 @@ public interface RolesResource extends RestfulResource<Integer, Role>
 	 * @param permissions the permissions to set for the role.
 	 * @return the created or existing {@link Role} object.
 	 */
+	@POST
+	@Path("/new/with/perms")
 	Role createAndSaveRole(final Triple<String, String, Set<Permission>> roleToCreate);
 }

@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -48,6 +51,8 @@ public interface UserManagementResource {
 	 * @return true, if the {@link Role} object exist in the list otherwise
 	 *         false.
 	 */
+	@POST
+	@Path("/isin/role")
 	boolean isInRole(final KeyValuePair<String, List<Role>> roleSearchModel);
 
 	/**
@@ -57,6 +62,8 @@ public interface UserManagementResource {
 	 *            the email contact
 	 * @return true, if successful
 	 */
+	@POST
+	@Path("/exists/user/by/email")
 	boolean existsUserWithEmail(final Contactmethod emailContact);
 
 	/**
@@ -66,6 +73,8 @@ public interface UserManagementResource {
 	 *            the user
 	 * @return the list of found {@link Address} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/addresses")
 	List<Address> findAddessesFromUser(final User user);
 
 	/**
@@ -75,6 +84,8 @@ public interface UserManagementResource {
 	 *            the user
 	 * @return the main {@link Address} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/address")
 	Address findAddressFromUser(final User user);
 
 	/**
@@ -85,6 +96,8 @@ public interface UserManagementResource {
 	 * @return the list of found {@link Contactmethod} from the given
 	 *         {@link User}.
 	 */
+	@POST
+	@Path("/find/all/emails")
 	List<Contactmethod> findAllEmailContactmethodsFromUser(final User user);
 
 	/**
@@ -95,6 +108,8 @@ public interface UserManagementResource {
 	 * @return the list of found {@link Contactmethod} from the given
 	 *         {@link User}.
 	 */
+	@POST
+	@Path("/find/all/faxes")
 	List<Contactmethod> findAllFaxContactmethodsFromUser(final User user);
 
 	/**
@@ -105,6 +120,8 @@ public interface UserManagementResource {
 	 * @return the list of found {@link Contactmethod} from the given
 	 *         {@link User}.
 	 */
+	@POST
+	@Path("/find/all/internets")
 	List<Contactmethod> findAllInternetContactmethodsFromUser(final User user);
 
 	/**
@@ -115,6 +132,8 @@ public interface UserManagementResource {
 	 * @return the list of found {@link Contactmethod} from the given
 	 *         {@link User}.
 	 */
+	@POST
+	@Path("/find/all/mobiles")
 	List<Contactmethod> findAllMobileContactmethodsFromUser(final User user);
 
 	/**
@@ -125,6 +144,8 @@ public interface UserManagementResource {
 	 * @return the list of found {@link Contactmethod} from the given
 	 *         {@link User}.
 	 */
+	@POST
+	@Path("/find/all/tel")
 	List<Contactmethod> findAllTelefonContactmethodsFromUser(final User user);
 
 	/**
@@ -134,6 +155,8 @@ public interface UserManagementResource {
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/email")
 	Contactmethod findEmailContactFromUser(final User user);
 
 	/**
@@ -143,6 +166,8 @@ public interface UserManagementResource {
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/fax")
 	Contactmethod findFaxContactFromUser(final User user);
 
 	/**
@@ -152,6 +177,8 @@ public interface UserManagementResource {
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/internet")
 	Contactmethod findInternetContactFromUser(final User user);
 
 	/**
@@ -161,6 +188,8 @@ public interface UserManagementResource {
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/mobile")
 	Contactmethod findMobileContactFromUser(final User user);
 
 	/**
@@ -170,6 +199,8 @@ public interface UserManagementResource {
 	 *            the user
 	 * @return the list of found {@link Role} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/roles")
 	List<Role> findRolesFromUser(final User user);
 
 	/**
@@ -179,6 +210,8 @@ public interface UserManagementResource {
 	 *            the user
 	 * @return the found {@link Contactmethod} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/tel")
 	Contactmethod findTelefonContactFromUser(final User user);
 
 	/**
@@ -188,7 +221,9 @@ public interface UserManagementResource {
 	 *            the email
 	 * @return the found {@link User} object
 	 */
-	User findUserWithEmail(final String email);
+	@GET
+	@Path("/find/by/email/{email}")
+	User findUserWithEmail(@PathParam("email")final String email);
 
 	/**
 	 * Find {@link User} object from the given email or user name.
@@ -197,7 +232,9 @@ public interface UserManagementResource {
 	 *            the email or user name
 	 * @return the found {@link User} object
 	 */
-	User findUserWithEmailOrUsername(final String emailOrUsername);
+	@GET
+	@Path("/find/by/email/or/username/{emailOrUsername}")
+	User findUserWithEmailOrUsername(@PathParam("emailOrUsername")final String emailOrUsername);
 
 	/**
 	 * Find {@link User} object from the given user name.
@@ -206,7 +243,9 @@ public interface UserManagementResource {
 	 *            the user name
 	 * @return the found {@link User} object
 	 */
-	User findUserWithUsername(final String username);
+	@GET
+	@Path("/find/by/username/{username}")
+	User findUserWithUsername(@PathParam("username")final String username);
 
 	/**
 	 * Checks if the given {@link User} object is in the given role from the
@@ -219,6 +258,8 @@ public interface UserManagementResource {
 	 * @return true, if the given {@link User} object is in role otherwise
 	 *         false.
 	 */
+	@POST
+	@Path("/is/user/in/role")
 	boolean isUserInRole(final KeyValuePair<User, String> userSearchModel);
 
 	/**
@@ -230,6 +271,8 @@ public interface UserManagementResource {
 	 * @param addresses
 	 *            the addresses
 	 */
+	@POST
+	@Path("/save/addresses")
 	void saveAddressesFromUser(final KeyValuePair<User, Collection<Address>> userSaveModel);
 
 	/**
@@ -241,6 +284,8 @@ public interface UserManagementResource {
 	 * @param address
 	 *            the address
 	 */
+	@POST
+	@Path("/save/address")
 	void saveAddressFromUser(final KeyValuePair<User, Address> userSaveModel);
 
 	/**
@@ -253,6 +298,8 @@ public interface UserManagementResource {
 	 *             Thrown if the given {@link User} object already exists in
 	 *             the database.
 	 */
+	@POST
+	@Path("/new/user")
 	Serializable saveNewUser(User user) throws UserAlreadyExistsException;
 
 	/**
@@ -265,6 +312,8 @@ public interface UserManagementResource {
 	 *             Thrown if the given {@link User} object already exists in
 	 *             the database.
 	 */
+	@POST
+	@Path("/new/user/onlywith/email")
 	Serializable saveUserOnlyWithEmail(User user) throws UserAlreadyExistsException;
 
 	/**
@@ -279,6 +328,8 @@ public interface UserManagementResource {
 	 * @throws BatchUpdateException
 	 *             the batch update exception
 	 */
+	@POST
+	@Path("/save/user/with/contactmethod")
 	Contactmethod saveUserWithContactmethod(KeyValuePair<User, Contactmethod> userSaveModel) throws BatchUpdateException;
 
 	/**
@@ -293,6 +344,8 @@ public interface UserManagementResource {
 	 * @throws BatchUpdateException
 	 *             the batch update exception
 	 */
+	@POST
+	@Path("/save/user/with/contactmethods")
 	List<Contactmethod> saveUserWithContactmethods(final KeyValuePair<User, List<Contactmethod>> userSaveModel)
 			throws BatchUpdateException;
 	
@@ -305,6 +358,8 @@ public interface UserManagementResource {
 	 * @param roles
 	 *            the roles
 	 */
+	@POST
+	@Path("/save/user/with/roles")
 	void saveUserWithRoles(final KeyValuePair<User, Collection<Role>> userSaveModel);
 
 	/**
@@ -321,6 +376,8 @@ public interface UserManagementResource {
 	 * @throws EmailAlreadyExistsException
 	 *             the email already exists exception
 	 */
+	@POST
+	@Path("/set/email")
 	Contactmethod setEmail(final KeyValuePair<String, User> userSaveModel) throws EmailAlreadyExistsException;
 	
 	/**
@@ -335,6 +392,8 @@ public interface UserManagementResource {
 	 *             is thrown if the user already exists with the given user
 	 *             name.
 	 */
+	@POST
+	@Path("/set/username")
 	boolean setUsername(final KeyValuePair<String, User> userSaveModel) throws UserAlreadyExistsException;
 
 	/**
@@ -350,6 +409,8 @@ public interface UserManagementResource {
 	 *            the contact method
 	 * @return the {@link Contactmethod} object
 	 */
+	@POST
+	@Path("/update/contactmethod")
 	Contactmethod updateContactmethod(final Triple<String, ContactmethodType, Contactmethod> updateModel);
 	
 	/**
@@ -365,6 +426,8 @@ public interface UserManagementResource {
 	 *             is thrown if the user already exists with the given user
 	 *             name.
 	 */
+	@POST
+	@Path("/update/username")
 	boolean updateUsername(final KeyValuePair<String, User> updateModel) throws UserAlreadyExistsException;
 
 	/**
@@ -377,6 +440,8 @@ public interface UserManagementResource {
 	 *            the role
 	 * @return true, if successful
 	 */
+	@POST
+	@Path("/user/is/in/role")
 	boolean userIsInRole(final KeyValuePair<User, Role> searchModel);
 
 	/**
@@ -387,6 +452,8 @@ public interface UserManagementResource {
 	 * @return A {@link ValidationErrors} object if validation fail otherwise
 	 *         null if the validation is successful.
 	 */
+	@POST
+	@Path("/validate")
 	ValidationErrors validate(UsernameSignUpModel model);
 
 	/**
@@ -401,6 +468,8 @@ public interface UserManagementResource {
 	 * @return the {@link SignUpUserResult} object with the result of the sign
 	 *         up process
 	 */
+	@POST
+	@Path("/signup/user")
 	SignUpUserResult signUpUser(Triple<UsernameSignUpModel, Set<Role>, UserModel> saveModel);
 
 	/**
@@ -412,6 +481,8 @@ public interface UserManagementResource {
 	 *            the user id
 	 * @return the persisted {@link Resource} object
 	 */
+	@POST
+	@Path("/persist/resource")
 	Resource persistResource(KeyValuePair<ResourcesModel, Integer> saveModel);
 
 	/**
@@ -423,6 +494,8 @@ public interface UserManagementResource {
 	 * @param userDataId
 	 *            the user data id
 	 */
+	@POST
+	@Path("/delete/resource")
 	void deleteResource(final KeyValuePair<ResourcesModel, Integer> deleteModel);
 
 	/**
@@ -434,6 +507,8 @@ public interface UserManagementResource {
 	 *            the user data id
 	 * @return the {@link UserData} object.
 	 */
+	@POST
+	@Path("/delete/blacklisted")
 	UserData deleteBlacklisted(final KeyValuePair<User, Integer> deleteModel);
 
 	/**
@@ -445,6 +520,8 @@ public interface UserManagementResource {
 	 *            the {@link UserData} object
 	 * @return the {@link UserData} object.
 	 */
+	@POST
+	@Path("/delete/address")
 	UserData deleteAddress(final KeyValuePair<Address, UserData> deleteModel);
 
 	/**
@@ -454,6 +531,8 @@ public interface UserManagementResource {
 	 * @param contact the contact to add
 	 * @return the {@link User} object with the new contacts.
 	 */
+	@POST
+	@Path("/add/user/contact")
 	User addUserContact(final KeyValuePair<User, User> saveModel);
 	
 	// ****************************************
@@ -467,7 +546,9 @@ public interface UserManagementResource {
 	 *            the email
 	 * @return true, if successful
 	 */
-	boolean existsUserWithEmail(final String email);
+	@GET
+	@Path("/exists/user/with/email/{email}")
+	boolean existsUserWithEmail(@PathParam("email")final String email);
 
 	/**
 	 * Checks if a user exists with the given user name.
@@ -476,7 +557,9 @@ public interface UserManagementResource {
 	 *            the user name
 	 * @return true, if successful
 	 */
-	boolean existsUserWithUsername(final String username);
+	@GET
+	@Path("/exists/user/with/username/{username}")
+	boolean existsUserWithUsername(@PathParam("username")final String username);
 	
 	/**
 	 * Checks if a user exists with the given email or user name.
@@ -484,7 +567,9 @@ public interface UserManagementResource {
 	 * @param emailOrUsername the email or user name
 	 * @return true, if successful
 	 */
-	boolean existsUserWithEmailOrUsername(final String emailOrUsername);
+	@GET
+	@Path("/exists/user/with/emailOrUsername/{emailOrUsername}")
+	boolean existsUserWithEmailOrUsername(@PathParam("emailOrUsername")final String emailOrUsername);
 
 	/**
 	 * Checks if a user exists with the given email or user name.
@@ -495,6 +580,8 @@ public interface UserManagementResource {
 	 *            the user name
 	 * @return the resulted {@link InsertUserState} object.
 	 */
+	@POST
+	@Path("/exists/user/with/email/or/username")
 	InsertUserState existsUserWithEmailOrUsername(final KeyValuePair<String, String> searchModel);
 
 }

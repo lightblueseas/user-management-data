@@ -62,11 +62,6 @@ public class RelationPermissionsRestResource
 	}
 
 	@Override
-	public void removeAllPermissions(User provider, User subscriber) {
-		getDomainService().removeAllPermissions(provider, subscriber);
-	}
-
-	@Override
 	public void removeAllPermissions(KeyValuePair<User, User> providerToSubscriber) {
 		getDomainService().removeAllPermissions(providerToSubscriber.getKey(), providerToSubscriber.getValue());
 	}

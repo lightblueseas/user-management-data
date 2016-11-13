@@ -3,6 +3,7 @@ package de.alpharogroup.user.management.rest.api;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -34,6 +35,8 @@ public interface RelationPermissionsResource extends RestfulResource<Integer, Re
 	 *            the subscriber
 	 * @return the list
 	 */
+	@POST
+	@Path("/find/all")
 	RelationPermission findRelationPermissions(final KeyValuePair<User, User> providerToSubscriber);
 
 	/**
@@ -48,6 +51,8 @@ public interface RelationPermissionsResource extends RestfulResource<Integer, Re
 	 *            the permission
 	 * @return the relation permissions
 	 */
+	@POST
+	@Path("/find/rel/perm")
 	RelationPermission findRelationPermissions(final Triple<User, User, Permission> providerToSubscriberOfPerms);
 
 	/**
@@ -60,6 +65,8 @@ public interface RelationPermissionsResource extends RestfulResource<Integer, Re
 	 *            the subscriber
 	 * @return the list
 	 */
+	@POST
+	@Path("/find")
 	List<RelationPermission> find(final KeyValuePair<User, User> providerToSubscriber);
 	
 	/**
@@ -75,6 +82,8 @@ public interface RelationPermissionsResource extends RestfulResource<Integer, Re
 	 *            the permission
 	 * @return the list
 	 */
+	@POST
+	@Path("/find/by/perm")
 	List<RelationPermission> find(final Triple<User, User, Permission> providerToSubscriberOfPerms);
 	
 	/**
@@ -84,6 +93,8 @@ public interface RelationPermissionsResource extends RestfulResource<Integer, Re
 	 * @param subscriber the subscriber
 	 * @param permission the permission
 	 */
+	@POST
+	@Path("/add/perm")
 	void addPermission(final Triple<User, User, Permission> providerToSubscriberOfPerms);
 		
 	/**
@@ -93,15 +104,9 @@ public interface RelationPermissionsResource extends RestfulResource<Integer, Re
 	 * @param subscriber the subscriber
 	 * @param permission the permission
 	 */
+	@POST
+	@Path("/remove/perm")
 	void removePermission( final Triple<User, User, Permission> providerToSubscriberOfPerms);
-
-	/**
-	 * Removes all permissions that are given for both users.
-	 *
-	 * @param provider the provider
-	 * @param subscriber the subscriber
-	 */
-	void removeAllPermissions(User provider, User subscriber);
 	
 	/**
 	 * Removes all permissions that are given for both users.
@@ -109,5 +114,7 @@ public interface RelationPermissionsResource extends RestfulResource<Integer, Re
 	 * @param provider the provider
 	 * @param subscriber the subscriber
 	 */
+	@POST
+	@Path("/remove/all")
 	void removeAllPermissions(final KeyValuePair<User, User> providerToSubscriber);
 }

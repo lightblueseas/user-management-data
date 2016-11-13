@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -38,7 +40,9 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the user name
 	 * @return true, if successful
 	 */
-	boolean existsUserWithUsername(String username);
+	@GET
+	@Path("/exists/user/with/username/{username}")
+	boolean existsUserWithUsername(@PathParam("username")String username);
 
 	/**
 	 * Find all {@link Address} from the given {@link User}.
@@ -47,6 +51,8 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the user
 	 * @return the list of found {@link Address} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/addresses")
 	List<Address> findAddressesFromUser(final User user);
 
 	/**
@@ -56,6 +62,8 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the user
 	 * @return the main {@link Address} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/address")
 	Address findAddressFromUser(final User user);
 
 	/**
@@ -65,6 +73,8 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the user
 	 * @return the list of found {@link Role} from the given {@link User}.
 	 */
+	@POST
+	@Path("/find/roles")
 	List<Role> findRolesFromUser(final User user);
 
 	/**
@@ -74,7 +84,9 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the email
 	 * @return the found {@link User} object
 	 */
-	User findUserWithEmail(final String email);
+	@GET
+	@Path("/find/by/email/{email}")
+	User findUserWithEmail(@PathParam("email")final String email);
 
 	/**
 	 * Find {@link User} object from the given user name.
@@ -83,6 +95,8 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the user name
 	 * @return the found {@link User} object
 	 */
+	@GET
+	@Path("/find/by/username/{username}")
 	User findUserWithUsername(final String username);
 
 	/**
@@ -95,6 +109,8 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the role
 	 * @return true, if successful
 	 */
+	@POST
+	@Path("/user/is/in/role")
 	boolean userIsInRole(final KeyValuePair<User, Role> user);
 
 	/**
@@ -108,6 +124,8 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the until
 	 * @return the found list of {@link User} objects that matches the criteria.
 	 */
+	@POST
+	@Path("/find/users")
 	List<User> findUsers(final Triple<Integer, GenderType, Integer> searchCriteria);
 
 	/**
@@ -124,6 +142,8 @@ public interface UsersResource extends RestfulResource<Integer, User>
 	 *            the geohash
 	 * @return the found list of {@link User} objects that matches the criteria.
 	 */
+	@POST
+	@Path("/find/users/by/geo")
 	List<User> findUsers(UserSearchCriteria userSearchCriteria);
 
 }

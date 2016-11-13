@@ -29,7 +29,7 @@ public interface PermissionsResource extends RestfulResource<Integer, Permission
 	 * @return the new {@link Permission} object.
 	 */
 	@GET
-	@Path("/create/permission/{name}/{description}/")
+	@Path("/new/perm/{name}/{description}/")
 	Permission createAndSavePermissions(@PathParam("name") String name, @PathParam("description")String description);
 
 	/**
@@ -41,7 +41,7 @@ public interface PermissionsResource extends RestfulResource<Integer, Permission
 	 * @return the new {@link Permission} object.
 	 */
 	@GET
-	@Path("/new/permission/{name}/{description}/{shortcut}/")
+	@Path("/new/perm/{name}/{description}/{shortcut}/")
 	Permission createAndSavePermissions(@PathParam("name")String name, @PathParam("description")String description,
 			@PathParam("shortcut")String shortcut);
 	
