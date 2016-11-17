@@ -19,6 +19,7 @@ import de.alpharogroup.user.management.rest.api.RolesResource;
 import de.alpharogroup.user.management.rest.api.RuleViolationsResource;
 import de.alpharogroup.user.management.rest.api.UserCreditsResource;
 import de.alpharogroup.user.management.rest.api.UserDatasResource;
+import de.alpharogroup.user.management.rest.api.UserManagementResource;
 import de.alpharogroup.user.management.rest.api.UsersResource;
 import lombok.Getter;
 
@@ -126,6 +127,12 @@ public class UserManagementSystemRestClient extends AbstractRestClient
 	private final UserDatasResource userDatasResource;
 
 	/**
+	 * The {@link UserDatasResource}.
+	 */
+	@Getter
+	private final UserManagementResource userManagementResource;
+
+	/**
 	 * The {@link UsersResource}.
 	 */
 	@Getter
@@ -159,8 +166,8 @@ public class UserManagementSystemRestClient extends AbstractRestClient
 		ruleViolationsResource = newResource(RuleViolationsResource.class);
 		userCreditsResource = newResource(UserCreditsResource.class);
 		userDatasResource = newResource(UserDatasResource.class);
-		usersResource = newResource(UsersResource.class);
-		
+		userManagementResource = newResource(UserManagementResource.class);
+		usersResource = newResource(UsersResource.class);		
 		
 		addressesResource = newResource(AddressesResource.class);
 		countriesResource = newResource(CountriesResource.class);
