@@ -36,17 +36,6 @@ public interface ContactmethodsResource extends RestfulResource<Integer, Contact
 	boolean compare(KeyValuePair<Contactmethod, Contactmethod> comparison);
 
 	/**
-	 * Check if a contact exist with given {@link Contactmethod}.
-	 *
-	 * @param contact
-	 *            the contact
-	 * @return true, if successful
-	 */
-	@GET
-	@Path("/exists/{contact}/")
-	boolean existsContact(@PathParam("contact")String contact);
-
-	/**
 	 * Check if a contact exist with given contact value and the given {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
 	 *
 	 * @param contactMethod

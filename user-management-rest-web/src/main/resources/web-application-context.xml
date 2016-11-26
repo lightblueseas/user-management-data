@@ -69,7 +69,7 @@
 		<property name="domainService" ref="userDomainService"></property>
 	</bean>
 	<bean id="userManagementResource" class="de.alpharogroup.user.management.rest.UserManagementRestResource">
-		<property name="domainService" ref="userManagementDomainService"></property>
+		<property name="userManagementService" ref="userManagementDomainService"></property>
 	</bean>
 
 </beans>

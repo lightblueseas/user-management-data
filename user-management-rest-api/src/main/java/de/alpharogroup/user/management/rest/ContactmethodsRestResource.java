@@ -35,16 +35,6 @@ public class ContactmethodsRestResource
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean existsContact(final String contact)
-	{
-//		boolean result = getDomainService().existsContact(contact);
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public boolean existsContact(KeyValuePair<String, ContactmethodType> contactMethod) {
 		boolean result = getDomainService().existsContact(contactMethod.getKey(), contactMethod.getValue());
 		return result;
