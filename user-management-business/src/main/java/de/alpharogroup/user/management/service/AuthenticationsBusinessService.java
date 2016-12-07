@@ -24,5 +24,10 @@ public class AuthenticationsBusinessService implements AuthenticationsService {
 	@Getter
 	@Setter
 	private UsersManagementService usersManagementService;
+
+	@Override
+	public String newAuthenticationToken(String username) {		
+		return usersManagementService.newAuthenticationToken(username);
+	}
 	
 }

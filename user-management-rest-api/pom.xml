@@ -22,6 +22,11 @@
 			<artifactId>user-management-domain</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>auth-security</artifactId>
+		</dependency>
+
 	</dependencies>
 
 </project>

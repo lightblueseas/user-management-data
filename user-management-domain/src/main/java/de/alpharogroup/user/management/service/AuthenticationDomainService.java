@@ -20,7 +20,7 @@ import lombok.Setter;
 public class AuthenticationDomainService implements AuthenticationService {
 	
 
-	/** The {@link UsersManagementService}. */
+	/** The {@link AuthenticationsService}. */
 	@Autowired
 	@Getter
 	@Setter
@@ -35,6 +35,11 @@ public class AuthenticationDomainService implements AuthenticationService {
 		authenticationResult.setValidationErrors(authenticationResult.getValidationErrors());		
 		authenticationResult.setUser(mapper.toDomainObject(originalAuthenticationResult.getUser()));
 		return authenticationResult;
+	}
+
+	@Override
+	public String newAuthenticationToken(String username) {
+		return authenticationsService.newAuthenticationToken(username);
 	}
 
 }

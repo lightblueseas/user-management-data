@@ -75,6 +75,8 @@ public class ApplicationJettyRunner
 			.servletContextHandler(servletContextHandler)
 			.httpPort(8080)
 			.httpsPort(8443)
+			.keyStorePassword("wicket")
+			.keyStorePathResource("/keystore")
 			.build();
 		final Server server = new Server();
 		Jetty9Runner.runServletContextHandler(server, configuration);

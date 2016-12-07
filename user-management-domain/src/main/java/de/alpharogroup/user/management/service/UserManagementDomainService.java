@@ -501,4 +501,20 @@ public class UserManagementDomainService implements UserManagementService {
 		return userDomainObject;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isValid(String token) {
+		return usersManagementService.isValid(token);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String newAuthenticationToken(String username) {
+		return usersManagementService.newAuthenticationToken(username);
+	}
+
 }

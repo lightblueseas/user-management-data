@@ -26,6 +26,7 @@
 		<class>de.alpharogroup.user.management.entities.UserDatas</class>
 		<class>de.alpharogroup.user.management.entities.Users</class>
 		<class>de.alpharogroup.user.management.entities.UserCredits</class>
+		<class>de.alpharogroup.user.management.entities.UserTokens</class>
 
 		<properties>
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />

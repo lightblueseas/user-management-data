@@ -51,6 +51,7 @@ drop table user_data;
 drop table user_relation_permissions;
 drop table user_resources;
 drop table user_roles;
+drop table user_tokens;
 drop table users;
 drop table zipcodes;
 drop sequence hibernate_sequence;

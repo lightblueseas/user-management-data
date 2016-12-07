@@ -30,6 +30,22 @@ import de.alpharogroup.user.management.sign.up.UserModel;
 public interface UsersManagementService extends UserExistenceService {
 
 	/**
+	 * Checks if the given token is valid.
+	 *
+	 * @param token the token to validate
+	 * @return true, if the given token is valid otherwise false
+	 */
+	boolean isValid(String token);
+
+	/**
+	 * Factory method that creates a new authentication token from the given user name.
+	 *
+	 * @param username the username
+	 * @return the new authentication token
+	 */
+	String newAuthenticationToken(String username);
+
+	/**
 	 * Checks if a {@link Roles} object exist in the given list with the given
 	 * role name.
 	 *

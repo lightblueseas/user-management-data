@@ -90,5 +90,7 @@ public interface AuthenticationsService extends Serializable {
 	}
 
 	UsersManagementService getUsersManagementService();
+	
+	String newAuthenticationToken(String username);
 
 }

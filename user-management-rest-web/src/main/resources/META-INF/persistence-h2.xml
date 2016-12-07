@@ -26,18 +26,17 @@
 		<class>de.alpharogroup.user.management.entities.UserDatas</class>
 		<class>de.alpharogroup.user.management.entities.Users</class>
 		<class>de.alpharogroup.user.management.entities.UserCredits</class>
+		<class>de.alpharogroup.user.management.entities.UserTokens</class>
 
-	<properties>
-		<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
-		<property name="hibernate.connection.url"
-			value="jdbc:h2:mem:./usermanagement;MODE=PostgreSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1" />
-		<property name="hibernate.connection.user" value="sa" />
-		<property name="hibernate.connection.password" value="" />
-		<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-		<property name="hibernate.show_sql" value="true" />
-		<property name="hibernate.cache.region.factory_class"
-			value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
-	</properties>
+		<properties>
+			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:h2:mem:./usermanagement;MODE=PostgreSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1" />
+			<property name="hibernate.connection.user" value="sa" />
+			<property name="hibernate.connection.password" value="" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+		</properties>
 
 	</persistence-unit>
 </persistence>

@@ -153,6 +153,13 @@ create table user_roles (
         role_id int4 not null,
         primary key (user_id, role_id)
     );
+create table user_tokens (
+        id int4 not null,
+        expiry timestamp,
+        token varchar(128) unique,
+        username varchar(256) unique,
+        primary key (id)
+    );
 create table users (
         id int4 not null,
         active bool,

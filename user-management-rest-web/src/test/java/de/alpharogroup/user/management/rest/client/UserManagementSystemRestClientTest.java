@@ -17,6 +17,9 @@ package de.alpharogroup.user.management.rest.client;
 
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+
+import org.apache.cxf.jaxrs.client.WebClient;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -24,6 +27,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.auth.Credentials;
 import de.alpharogroup.auth.models.AuthenticationErrors;
 import de.alpharogroup.auth.models.AuthenticationResult;
 import de.alpharogroup.collections.pairs.KeyValuePair;
@@ -87,11 +91,17 @@ public class UserManagementSystemRestClientTest {
 		List<User> allUsers = usersResource.findAll();
 		System.out.println(allUsers);
 
-		// http://localhost:8080/authentication/compare/find/michael.knight/xxx
+		// http://localhost:8080/auth/compare/find/michael.knight/xxx
 		AuthenticationResult<User, AuthenticationErrors>  result = authenticationsResource.authenticate("michael.knight@gmail.com", "xxx");
 		
 		AssertJUnit.assertNotNull(result);
-		AssertJUnit.assertEquals(result.getUser().getUsername(), "michael.knight");
+		AssertJUnit.assertEquals(result.getUser().getUsername(), "michael.knight");		
+
+		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();
+		
+		Response tokenResponse = authenticationsResource.authenticate(credentials);
+		String token = tokenResponse.readEntity(String.class);
+		AssertJUnit.assertNotNull(token);
 	}
 	
 	/**
@@ -102,6 +112,7 @@ public class UserManagementSystemRestClientTest {
 	 */
 	@Test(enabled = true)
 	public void testContactmethodsResource() {
+		AuthenticationsResource authenticationsResource = restClient.getAuthenticationsResource();
 		ContactmethodsResource resource = restClient.getContactmethodsResource();
 		AssertJUnit.assertNotNull(resource);
 		
@@ -132,10 +143,53 @@ public class UserManagementSystemRestClientTest {
 		AssertJUnit.assertEquals(expected, actual);
 
 		// http://localhost:8080/contactmethod/exists/michael.knight@gmail.com
-		actual = resource.existsContact(email);
+		KeyValuePair<String, ContactmethodType> contactMethod = 
+				KeyValuePair.<String, ContactmethodType>builder()
+				.key(email)
+				.value(ContactmethodType.EMAIL)
+				.build();
+		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();
+		
+		Response tokenResponse = authenticationsResource.authenticate(credentials);
+		String token = tokenResponse.readEntity(String.class);
+		WebClient.client(resource).header("Authorization", "Bearer " + token);
+		actual = resource.existsContact(contactMethod);
 		expected = true;
 		AssertJUnit.assertEquals(expected, actual);
+
+		List<Contactmethod> cms = resource.findContact(contactMethod);		
+		AssertJUnit.assertNotNull(cms);
 		
+		cms = resource.find(contactMethod);		
+		AssertJUnit.assertNotNull(cms);
+		
+		KeyValuePair<ContactmethodType, User> contactMethodsFromUser = 
+				KeyValuePair.<ContactmethodType, User>builder()
+				.key(ContactmethodType.EMAIL)
+				.value(getTestUser())
+				.build();
+		
+		cms = resource.findContactmethod(contactMethodsFromUser);	
+		AssertJUnit.assertNotNull(cms);	
+		
+		Contactmethod cm = Contactmethod.builder()
+				.contactvalue("foo@bar.org")
+				.contactmethod(ContactmethodType.EMAIL)
+				.build();
+		cm = resource.create(cm);	
+		AssertJUnit.assertNotNull(cms);	
+		cm.setContactvalue("foo.bla@bar.org");
+		
+		resource.update(cm);
+		
+		cm = resource.read(cm.getId());
+		AssertJUnit.assertEquals(cm.getContactvalue(), "foo.bla@bar.org");
+		
+		resource.delete(cm.getId());
+		
+		cm = resource.read(cm.getId());
+		
+		AssertJUnit.assertNull(cm);
 		
 	}
 	
@@ -202,6 +256,13 @@ public class UserManagementSystemRestClientTest {
 
 		AssertJUnit.assertEquals(expected.getEmail(), actual.getEmail());
 		AssertJUnit.assertEquals(expected.getInvitationText(), actual.getInvitationText());		
+	}
+	
+	public User getTestUser() {
+		UsersResource usersResource = restClient.getUsersResource();
+		String promoterEmail ="michael.knight@gmail.com";
+		User testUser = usersResource.findUserWithEmail(promoterEmail);
+		return testUser;
 	}
 	
 	/**

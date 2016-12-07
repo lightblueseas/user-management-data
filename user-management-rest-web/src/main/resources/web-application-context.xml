@@ -27,10 +27,14 @@
 			<ref bean="usersResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
+			<ref bean="authenticationFilter"/>
 			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
 
+	<bean id="authenticationFilter" class="de.alpharogroup.user.management.filter.UserAuthenticationFilter">
+		<property name="userManagementService" ref="userManagementDomainService"></property>
+	</bean>
 	<!-- web resources -->
 	<bean id="authenticationsResource" class="de.alpharogroup.user.management.rest.AuthenticationsRestResource">
 		<property name="authenticationService" ref="authenticationDomainService"></property>

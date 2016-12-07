@@ -3,15 +3,14 @@ package de.alpharogroup.user.management.rest.api;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.service.rs.RestfulResource;
+import de.alpharogroup.service.rs.Securable;
 import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.enums.ContactmethodType;
@@ -43,6 +42,7 @@ public interface ContactmethodsResource extends RestfulResource<Integer, Contact
 	 * @return true, if successful
 	 */
 	@POST
+    @Securable
 	@Path("/exists/contact")
 	boolean existsContact(KeyValuePair<String, ContactmethodType> contactMethod);
 	
