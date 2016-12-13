@@ -143,7 +143,7 @@ public class UserManagementSystemRestClient extends AbstractRestClient
 	 */
 	public UserManagementSystemRestClient()
 	{
-		this(DEFAULT_BASE_URL);
+		this(DEFAULT_BASE_HTTP_URL);
 	}
 
 	/**

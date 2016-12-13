@@ -2,18 +2,13 @@ package de.alpharogroup.user.management.rest.api;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import de.alpharogroup.auth.Credentials;
-import de.alpharogroup.auth.models.AuthenticationErrors;
-import de.alpharogroup.auth.models.AuthenticationResult;
-import de.alpharogroup.user.management.domain.User;
 
 
 /**
@@ -25,17 +20,6 @@ import de.alpharogroup.user.management.domain.User;
 public interface AuthenticationsResource {
 
 	/**
-	 * Checks if the given email and returns a result of the authentication.
-	 *
-	 * @param emailOrUsername the email or username
-	 * @param password the password
-	 * @return the {@link AuthenticationResult} object
-	 */
-	@GET
-	@Path("/find/{emailOrUsername}/{password}")
-	AuthenticationResult<User, AuthenticationErrors> authenticate(@PathParam("emailOrUsername")String emailOrUsername, @PathParam("password")String password);
-	
-	/**
 	 * Authenticate a user with the given {@link Credentials}.
 	 *
 	 * @param credentials the credentials
@@ -46,12 +30,13 @@ public interface AuthenticationsResource {
 	Response authenticate(Credentials credentials);	
 	
 	/**
-	 * Authenticate a user with the given {@link Credentials}.
+	 * Authenticate a user with the given email or username and the given password.
 	 *
-	 * @param credentials the credentials
-	 * @return the response
+	 * @param username the email or username
+	 * @param password the password
+	 * @return the {@link Response} object
 	 */
 	@POST
-	@Path("/formauth")
-	Response formAuthentication(@FormParam("username") String username, @FormParam("password") String password);
+	@Path("/form")
+	Response authenticate(@FormParam("username") String username, @FormParam("password") String password);
 }

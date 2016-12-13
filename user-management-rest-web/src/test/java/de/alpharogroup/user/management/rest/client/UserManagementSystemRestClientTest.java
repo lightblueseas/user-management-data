@@ -15,10 +15,21 @@
  */
 package de.alpharogroup.user.management.rest.client;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.List;
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManagerFactory;
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.configuration.jsse.TLSClientParameters;
+import org.apache.cxf.configuration.security.FiltersType;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterClass;
@@ -28,10 +39,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.auth.Credentials;
-import de.alpharogroup.auth.models.AuthenticationErrors;
-import de.alpharogroup.auth.models.AuthenticationResult;
 import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.collections.pairs.Triple;
+import de.alpharogroup.cxf.rest.client.AbstractRestClient;
+import de.alpharogroup.cxf.rest.client.WebClientExtensions;
+import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.domain.Permission;
 import de.alpharogroup.user.management.domain.Recommendation;
@@ -83,25 +95,55 @@ public class UserManagementSystemRestClientTest {
 	 * Note: you have to start a rest server to test this or you have to mock
 	 * it.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testAuthenticationsResource() {
 		AuthenticationsResource authenticationsResource = restClient.getAuthenticationsResource();
+
+		try {
+			WebClientExtensions.setTLSClientParameters(authenticationsResource, getTLSClientParameters());
+		} catch (UnrecoverableKeyException | NoSuchAlgorithmException | CertificateException | KeyStoreException
+				| IOException e) {
+			e.printStackTrace();
+		}
+		
+
 		
 		UsersResource usersResource = restClient.getUsersResource();
 		List<User> allUsers = usersResource.findAll();
 		System.out.println(allUsers);
 
-		// http://localhost:8080/auth/compare/find/michael.knight/xxx
-		AuthenticationResult<User, AuthenticationErrors>  result = authenticationsResource.authenticate("michael.knight@gmail.com", "xxx");
-		
-		AssertJUnit.assertNotNull(result);
-		AssertJUnit.assertEquals(result.getUser().getUsername(), "michael.knight");		
+		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();			
 
-		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();
-		
+		// final String json = JsonTransformer.toJsonQuietly(credentials);
+		// {"username":"michael.knight","password":"xxx"}
+		// http://localhost:8080/auth/credentials
 		Response tokenResponse = authenticationsResource.authenticate(credentials);
 		String token = tokenResponse.readEntity(String.class);
 		AssertJUnit.assertNotNull(token);
+		
+	}
+	
+	public TLSClientParameters getTLSClientParameters() throws UnrecoverableKeyException, NoSuchAlgorithmException,
+			CertificateException, FileNotFoundException, KeyStoreException, IOException {
+
+		File keystoreFile = new File(PathFinder.getSrcTestResourcesDir(), "keystore.ks");
+		String keystoreType = "JKS";
+		String keystorePassword = "wicket";
+		File trustManagersKeystoreFile = keystoreFile;
+		String trustManagerAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+		String trustManagersKeystoreType = keystoreType;
+		String trustManagersKeystorePassword = keystorePassword;
+		boolean disableCNCheck = true;
+		String keyManagerAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
+		File keyManagersKeystoreFile = keystoreFile;
+		String keyManagersKeystoreType = keystoreType;
+		String keyManagersKeystorePassword = keystorePassword;
+		FiltersType cipherSuitesFilter = WebClientExtensions.newCipherSuitesFilter();
+		TLSClientParameters tlsClientParameters = WebClientExtensions.newTLSClientParameters(trustManagersKeystoreFile,
+				trustManagerAlgorithm, trustManagersKeystoreType, trustManagersKeystorePassword,
+				keyManagersKeystoreFile, keyManagerAlgorithm, keyManagersKeystoreType, keyManagersKeystorePassword,
+				cipherSuitesFilter, disableCNCheck);
+		return tlsClientParameters;
 	}
 	
 	/**
@@ -110,7 +152,7 @@ public class UserManagementSystemRestClientTest {
 	 * Note: you have to start a rest server to test this or you have to mock
 	 * it.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testContactmethodsResource() {
 		AuthenticationsResource authenticationsResource = restClient.getAuthenticationsResource();
 		ContactmethodsResource resource = restClient.getContactmethodsResource();
