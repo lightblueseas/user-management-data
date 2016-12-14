@@ -38,5 +38,7 @@ public interface AuthenticationsResource {
 	 */
 	@POST
 	@Path("/form")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	Response authenticate(@FormParam("username") String username, @FormParam("password") String password);
 }

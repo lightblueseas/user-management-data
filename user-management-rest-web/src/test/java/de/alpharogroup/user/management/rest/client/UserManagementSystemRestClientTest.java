@@ -39,6 +39,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.auth.Credentials;
+import de.alpharogroup.auth.token.AuthToken;
 import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.cxf.rest.client.AbstractRestClient;
@@ -67,7 +68,10 @@ import de.alpharogroup.user.management.rest.api.UsersResource;
  * The class {@link UserManagementSystemRestClientTest}.
  */
 public class UserManagementSystemRestClientTest {
-	UserManagementSystemRestClient restClient;
+	
+	private TLSClientParameters tlsClientParameters;
+	
+	 private UserManagementSystemRestClient restClient;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -81,7 +85,8 @@ public class UserManagementSystemRestClientTest {
 	@BeforeMethod
 	public void setUpMethod() throws Exception {
 		if (restClient == null) {
-			restClient = new UserManagementSystemRestClient();
+			restClient = new UserManagementSystemRestClient(AbstractRestClient.DEFAULT_BASE_HTTPS_URL);
+			tlsClientParameters = getTLSClientParameters();
 		}
 	}
 
@@ -90,45 +95,53 @@ public class UserManagementSystemRestClientTest {
 	}
 	
 	/**
-	 * Test the {@link AuthenticationsResource}.
+	 * Gets the TLS client parameters for the keystore and sets the key and trust managers.
 	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
+	 * @return the TLS client parameters
+	 * @throws UnrecoverableKeyException the unrecoverable key exception
+	 * @throws NoSuchAlgorithmException the no such algorithm exception
+	 * @throws CertificateException the certificate exception
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws KeyStoreException the key store exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	@Test(enabled = true)
-	public void testAuthenticationsResource() {
-		AuthenticationsResource authenticationsResource = restClient.getAuthenticationsResource();
-
-		try {
-			WebClientExtensions.setTLSClientParameters(authenticationsResource, getTLSClientParameters());
-		} catch (UnrecoverableKeyException | NoSuchAlgorithmException | CertificateException | KeyStoreException
-				| IOException e) {
-			e.printStackTrace();
-		}
-		
-
-		
-		UsersResource usersResource = restClient.getUsersResource();
-		List<User> allUsers = usersResource.findAll();
-		System.out.println(allUsers);
-
-		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();			
-
-		// final String json = JsonTransformer.toJsonQuietly(credentials);
-		// {"username":"michael.knight","password":"xxx"}
-		// http://localhost:8080/auth/credentials
-		Response tokenResponse = authenticationsResource.authenticate(credentials);
-		String token = tokenResponse.readEntity(String.class);
-		AssertJUnit.assertNotNull(token);
-		
-	}
-	
 	public TLSClientParameters getTLSClientParameters() throws UnrecoverableKeyException, NoSuchAlgorithmException,
 			CertificateException, FileNotFoundException, KeyStoreException, IOException {
-
-		File keystoreFile = new File(PathFinder.getSrcTestResourcesDir(), "keystore.ks");
-		String keystoreType = "JKS";
-		String keystorePassword = "wicket";
+//		File keystoreFile = new File(PathFinder.getSrcTestResourcesDir(), "keystore.ks");
+//		String keystoreType = "JKS";
+//		String keystorePassword = "wicket";
+//		File trustManagersKeystoreFile = keystoreFile;
+//		String trustManagerAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+//		String trustManagersKeystoreType = keystoreType;
+//		String trustManagersKeystorePassword = keystorePassword;
+//		boolean disableCNCheck = true;
+//		String keyManagerAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
+//		File keyManagersKeystoreFile = keystoreFile;
+//		String keyManagersKeystoreType = keystoreType;
+//		String keyManagersKeystorePassword = keystorePassword;
+//		FiltersType cipherSuitesFilter = WebClientExtensions.newCipherSuitesFilter();
+//		TLSClientParameters tlsClientParameters = WebClientExtensions.newTLSClientParameters(trustManagersKeystoreFile,
+//				trustManagerAlgorithm, trustManagersKeystoreType, trustManagersKeystorePassword,
+//				keyManagersKeystoreFile, keyManagerAlgorithm, keyManagersKeystoreType, keyManagersKeystorePassword,
+//				cipherSuitesFilter, disableCNCheck);
+		return getTLSClientParameters(PathFinder.getSrcTestResourcesDir(), "keystore.ks", "JKS", "wicket");
+	}
+	
+	
+	/**
+	 * Gets the TLS client parameters for the keystore and sets the key and trust managers.
+	 *
+	 * @return the TLS client parameters
+	 * @throws UnrecoverableKeyException the unrecoverable key exception
+	 * @throws NoSuchAlgorithmException the no such algorithm exception
+	 * @throws CertificateException the certificate exception
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws KeyStoreException the key store exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public TLSClientParameters getTLSClientParameters(File keystoreDir, String keystoreFilename, String keystoreType, String keystorePassword) throws UnrecoverableKeyException, NoSuchAlgorithmException,
+			CertificateException, FileNotFoundException, KeyStoreException, IOException {
+		File keystoreFile = new File(keystoreDir, keystoreFilename);
 		File trustManagersKeystoreFile = keystoreFile;
 		String trustManagerAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
 		String trustManagersKeystoreType = keystoreType;
@@ -145,6 +158,35 @@ public class UserManagementSystemRestClientTest {
 				cipherSuitesFilter, disableCNCheck);
 		return tlsClientParameters;
 	}
+	
+	/**
+	 * Test the {@link AuthenticationsResource}.
+	 *
+	 * Note: you have to start a rest server to test this or you have to mock
+	 * it.
+	 */
+	@Test(enabled = true)
+	public void testAuthenticationsResource() {
+		AuthenticationsResource authenticationsResource = restClient.getAuthenticationsResource();
+		// set client params with key and trust managers. The keystore is the same as jetty
+		WebClientExtensions.setTLSClientParameters(authenticationsResource, tlsClientParameters);
+
+		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();			
+
+		// final String json = JsonTransformer.toJsonQuietly(credentials);
+		// {"username":"michael.knight","password":"xxx"}
+		// https://localhost:8443/auth/credentials
+		Response tokenResponse = authenticationsResource.authenticate(credentials);
+		AuthToken token = tokenResponse.readEntity(AuthToken.class);
+		AssertJUnit.assertNotNull(token);		
+
+		// https://localhost:8443/auth/form 
+//		tokenResponse = authenticationsResource.authenticate("michael.knight", "xxx");
+//		token = tokenResponse.readEntity(AuthToken.class);
+//		AssertJUnit.assertNotNull(token);
+		
+	}
+
 	
 	/**
 	 * Test the {@link ContactmethodsResource}.

@@ -28,7 +28,8 @@
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="authenticationFilter"/>
-			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+			<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+			<bean id="multipartProvider" class="org.apache.cxf.jaxrs.provider.MultipartProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
 
