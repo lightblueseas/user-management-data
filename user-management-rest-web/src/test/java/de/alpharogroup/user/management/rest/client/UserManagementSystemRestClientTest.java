@@ -68,10 +68,14 @@ import de.alpharogroup.user.management.rest.api.UsersResource;
  * The class {@link UserManagementSystemRestClientTest}.
  */
 public class UserManagementSystemRestClientTest {
-	
+
 	private TLSClientParameters tlsClientParameters;
-	
-	 private UserManagementSystemRestClient restClient;
+
+	private UserManagementSystemRestClient restClient;
+
+	private AuthenticationsResource authenticationsResource;
+
+	private UsersResource usersResource;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -87,15 +91,21 @@ public class UserManagementSystemRestClientTest {
 		if (restClient == null) {
 			restClient = new UserManagementSystemRestClient(AbstractRestClient.DEFAULT_BASE_HTTPS_URL);
 			tlsClientParameters = getTLSClientParameters();
+			authenticationsResource = restClient.getAuthenticationsResource();
+
+			usersResource = restClient.getUsersResource();
+			// set client params with key and trust managers. The keystore is the same as jetty
+			WebClientExtensions.setTLSClientParameters(authenticationsResource, tlsClientParameters);
+			WebClientExtensions.setTLSClientParameters(usersResource, tlsClientParameters);
 		}
 	}
 
 	@AfterMethod
 	public void tearDownMethod() throws Exception {
 	}
-	
+
 	/**
-	 * Gets the TLS client parameters for the keystore and sets the key and trust managers.
+	 * Gets the TLS client parameters.
 	 *
 	 * @return the TLS client parameters
 	 * @throws UnrecoverableKeyException the unrecoverable key exception
@@ -107,30 +117,16 @@ public class UserManagementSystemRestClientTest {
 	 */
 	public TLSClientParameters getTLSClientParameters() throws UnrecoverableKeyException, NoSuchAlgorithmException,
 			CertificateException, FileNotFoundException, KeyStoreException, IOException {
-//		File keystoreFile = new File(PathFinder.getSrcTestResourcesDir(), "keystore.ks");
-//		String keystoreType = "JKS";
-//		String keystorePassword = "wicket";
-//		File trustManagersKeystoreFile = keystoreFile;
-//		String trustManagerAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
-//		String trustManagersKeystoreType = keystoreType;
-//		String trustManagersKeystorePassword = keystorePassword;
-//		boolean disableCNCheck = true;
-//		String keyManagerAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
-//		File keyManagersKeystoreFile = keystoreFile;
-//		String keyManagersKeystoreType = keystoreType;
-//		String keyManagersKeystorePassword = keystorePassword;
-//		FiltersType cipherSuitesFilter = WebClientExtensions.newCipherSuitesFilter();
-//		TLSClientParameters tlsClientParameters = WebClientExtensions.newTLSClientParameters(trustManagersKeystoreFile,
-//				trustManagerAlgorithm, trustManagersKeystoreType, trustManagersKeystorePassword,
-//				keyManagersKeystoreFile, keyManagerAlgorithm, keyManagersKeystoreType, keyManagersKeystorePassword,
-//				cipherSuitesFilter, disableCNCheck);
 		return getTLSClientParameters(PathFinder.getSrcTestResourcesDir(), "keystore.ks", "JKS", "wicket");
 	}
-	
-	
+
 	/**
-	 * Gets the TLS client parameters for the keystore and sets the key and trust managers.
+	 * Gets the TLS client parameters.
 	 *
+	 * @param keystoreDir the keystore dir
+	 * @param keystoreFilename the keystore filename
+	 * @param keystoreType the keystore type
+	 * @param keystorePassword the keystore password
 	 * @return the TLS client parameters
 	 * @throws UnrecoverableKeyException the unrecoverable key exception
 	 * @throws NoSuchAlgorithmException the no such algorithm exception
@@ -167,10 +163,6 @@ public class UserManagementSystemRestClientTest {
 	 */
 	@Test(enabled = true)
 	public void testAuthenticationsResource() {
-		AuthenticationsResource authenticationsResource = restClient.getAuthenticationsResource();
-		// set client params with key and trust managers. The keystore is the same as jetty
-		WebClientExtensions.setTLSClientParameters(authenticationsResource, tlsClientParameters);
-
 		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();			
 
 		// final String json = JsonTransformer.toJsonQuietly(credentials);
@@ -179,11 +171,6 @@ public class UserManagementSystemRestClientTest {
 		Response tokenResponse = authenticationsResource.authenticate(credentials);
 		AuthToken token = tokenResponse.readEntity(AuthToken.class);
 		AssertJUnit.assertNotNull(token);		
-
-		// https://localhost:8443/auth/form 
-//		tokenResponse = authenticationsResource.authenticate("michael.knight", "xxx");
-//		token = tokenResponse.readEntity(AuthToken.class);
-//		AssertJUnit.assertNotNull(token);
 		
 	}
 
@@ -194,10 +181,11 @@ public class UserManagementSystemRestClientTest {
 	 * Note: you have to start a rest server to test this or you have to mock
 	 * it.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testContactmethodsResource() {
-		AuthenticationsResource authenticationsResource = restClient.getAuthenticationsResource();
 		ContactmethodsResource resource = restClient.getContactmethodsResource();
+		// set client params with key and trust managers. The keystore is the same as jetty
+		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
 		
 		String email = "michael.knight@gmail.com";
@@ -235,8 +223,8 @@ public class UserManagementSystemRestClientTest {
 		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();
 		
 		Response tokenResponse = authenticationsResource.authenticate(credentials);
-		String token = tokenResponse.readEntity(String.class);
-		WebClient.client(resource).header("Authorization", "Bearer " + token);
+		AuthToken token = tokenResponse.readEntity(AuthToken.class);
+		WebClient.client(resource).header("Authorization", "Bearer " + token.getValue());
 		actual = resource.existsContact(contactMethod);
 		expected = true;
 		AssertJUnit.assertEquals(expected, actual);
@@ -273,8 +261,7 @@ public class UserManagementSystemRestClientTest {
 		
 		cm = resource.read(cm.getId());
 		
-		AssertJUnit.assertNull(cm);
-		
+		AssertJUnit.assertNull(cm);		
 	}
 	
 	/**
@@ -343,7 +330,6 @@ public class UserManagementSystemRestClientTest {
 	}
 	
 	public User getTestUser() {
-		UsersResource usersResource = restClient.getUsersResource();
 		String promoterEmail ="michael.knight@gmail.com";
 		User testUser = usersResource.findUserWithEmail(promoterEmail);
 		return testUser;
