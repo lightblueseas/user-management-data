@@ -64,7 +64,7 @@
 		<address-book-domain.version>${address-book-data.version}</address-book-domain.version>
 		<address-book-rest-api.version>${address-book-data.version}</address-book-rest-api.version>
 		<!-- RESOURCE-SYSTEM-DATA versions -->
-		<resource-system-data.version>3.9.0</resource-system-data.version>
+		<resource-system-data.version>${project.version}</resource-system-data.version>
 		<resource-system-entities.version>${resource-system-data.version}</resource-system-entities.version>
 		<resource-system-domain.version>${resource-system-data.version}</resource-system-domain.version>
 		<resource-system-business.version>${resource-system-data.version}</resource-system-business.version>
