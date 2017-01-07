@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import de.alpharogroup.db.entity.BaseEntity;
@@ -18,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Entity class {@link Users} is keeping the information for the users from
+ * The entity class {@link Users} is keeping the information for the users from
  * the application.
  */
 @Entity
@@ -49,10 +48,6 @@ implements Cloneable {
 	/** The salt that is used to compute the hash. */
 	@Column(name = "salt", length = 8)
 	private String salt;
-	/** The data of this user. */
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "user_data")
-	private UserDatas userData;
 	/** The user name. */
 	@Column(name = "username", length = 256, unique = true)
 	private String username;

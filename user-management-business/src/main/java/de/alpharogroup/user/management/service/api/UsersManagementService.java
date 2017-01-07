@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.auth.exceptions.EmailAlreadyExistsException;
 import de.alpharogroup.auth.exceptions.UserAlreadyExistsException;
@@ -32,15 +34,18 @@ public interface UsersManagementService extends UserExistenceService {
 	/**
 	 * Checks if the given token is valid.
 	 *
-	 * @param token the token to validate
+	 * @param token
+	 *            the token to validate
 	 * @return true, if the given token is valid otherwise false
 	 */
 	boolean isValid(String token);
 
 	/**
-	 * Factory method that creates a new authentication token from the given user name.
+	 * Factory method that creates a new authentication token from the given
+	 * user name.
 	 *
-	 * @param username the username
+	 * @param username
+	 *            the username
 	 * @return the new authentication token
 	 */
 	String newAuthenticationToken(String username);
@@ -134,6 +139,34 @@ public interface UsersManagementService extends UserExistenceService {
 	 *         {@link Users}.
 	 */
 	List<Contactmethods> findAllTelefonContactmethodsFromUser(final Users user);
+
+	/**
+	 * Find all contacts by the given {@link Users} object and the given
+	 * {@link ContactmethodType} object.
+	 *
+	 * @param user
+	 *            the user
+	 * @param contactmethodType
+	 *            the contactmethod type
+	 * @return the list of found {@link Contactmethods} from the given
+	 *         {@link Users} and the given {@link ContactmethodType} object.
+	 */
+	List<Contactmethods> findAllContactmethodsByType(final @Nonnull Users user,
+			final @Nonnull ContactmethodType contactmethodType);
+
+	/**
+	 * Find contact by the given {@link Users} object and the given
+	 * {@link ContactmethodType} object.
+	 *
+	 * @param user
+	 *            the user
+	 * @param contactmethodType
+	 *            the contactmethod type
+	 * @return the found {@link Contactmethods} from the given {@link Users} and
+	 *         the given {@link ContactmethodType} object.
+	 */
+	Contactmethods findContactmethodByType(final @Nonnull Users user,
+			final @Nonnull ContactmethodType contactmethodType);
 
 	/**
 	 * Find email contact from the given {@link Users}.
@@ -424,8 +457,8 @@ public interface UsersManagementService extends UserExistenceService {
 	Resources persistResource(ResourcesModel resourceModel, final Integer userId);
 
 	/**
-	 * Deletes the {@link Resources} object from the given resource model
-	 * object with the given user data id.
+	 * Deletes the {@link Resources} object from the given resource model object
+	 * with the given user data id.
 	 *
 	 * @param resource
 	 *            the resource
@@ -435,7 +468,8 @@ public interface UsersManagementService extends UserExistenceService {
 	void deleteResource(final ResourcesModel resource, final Integer userDataId);
 
 	/**
-	 * Deletes the given black listed {@link Users} object from the given user data id.
+	 * Deletes the given black listed {@link Users} object from the given user
+	 * data id.
 	 *
 	 * @param blacklisted
 	 *            the black listed user
@@ -446,7 +480,8 @@ public interface UsersManagementService extends UserExistenceService {
 	UserDatas deleteBlacklisted(Users blacklisted, final Integer userDataId);
 
 	/**
-	 * Deletes the given {@link Addresses} object from the given {@link UserDatas} object.
+	 * Deletes the given {@link Addresses} object from the given
+	 * {@link UserDatas} object.
 	 *
 	 * @param address
 	 *            the {@link Addresses} object
@@ -457,10 +492,13 @@ public interface UsersManagementService extends UserExistenceService {
 	UserDatas deleteAddress(Addresses address, final UserDatas ud);
 
 	/**
-	 * Adds the given contact {@link Users} object to the contacts of the given {@link Users} object.
+	 * Adds the given contact {@link Users} object to the contacts of the given
+	 * {@link Users} object.
 	 *
-	 * @param user the user
-	 * @param contact the contact to add
+	 * @param user
+	 *            the user
+	 * @param contact
+	 *            the contact to add
 	 * @return the {@link Users} object with the new contacts.
 	 */
 	Users addUserContact(Users user, Users contact);

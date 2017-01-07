@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,14 +176,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public List<Contactmethods> findAllEmailContactmethodsFromUser(final Users user) {
-		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.EMAIL.equals(cm.getContactmethod())) {
-				cms.add(cm);
-			}
-		}
-		return cms;
+		return findAllContactmethodsByType(user, ContactmethodType.EMAIL);
 	}
 
 	/**
@@ -189,14 +184,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public List<Contactmethods> findAllFaxContactmethodsFromUser(final Users user) {
-		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.FAX.equals(cm.getContactmethod())) {
-				cms.add(cm);
-			}
-		}
-		return cms;
+		return findAllContactmethodsByType(user, ContactmethodType.FAX);
 	}
 
 	/**
@@ -204,14 +192,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public List<Contactmethods> findAllInternetContactmethodsFromUser(final Users user) {
-		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.INTERNET.equals(cm.getContactmethod())) {
-				cms.add(cm);
-			}
-		}
-		return cms;
+		return findAllContactmethodsByType(user, ContactmethodType.INTERNET);
 	}
 
 	/**
@@ -219,14 +200,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public List<Contactmethods> findAllMobileContactmethodsFromUser(final Users user) {
-		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.MOBILE.equals(cm.getContactmethod())) {
-				cms.add(cm);
-			}
-		}
-		return cms;
+		return findAllContactmethodsByType(user, ContactmethodType.MOBILE);
 	}
 
 	/**
@@ -234,10 +208,19 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public List<Contactmethods> findAllTelefonContactmethodsFromUser(final Users user) {
+		return findAllContactmethodsByType(user, ContactmethodType.TELEFON);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Contactmethods> findAllContactmethodsByType(final @Nonnull Users user, final @Nonnull ContactmethodType contactmethodType) {
 		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+		UserDatas userData = userDatasService.findBy(user);
+		final Set<Contactmethods> userContactMethods = userData.getContactmethods();
 		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.TELEFON.equals(cm.getContactmethod())) {
+			if (contactmethodType.equals(cm.getContactmethod())) {
 				cms.add(cm);
 			}
 		}
@@ -247,15 +230,23 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	public Contactmethods findEmailContactFromUser(final Users user) {
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
+	public Contactmethods findContactmethodByType(final @Nonnull Users user, final @Nonnull ContactmethodType contactmethodType) {
+		UserDatas userData = userDatasService.findBy(user);
+		final Set<Contactmethods> userContactMethods = userData.getContactmethods();
 		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.EMAIL.equals(cm.getContactmethod())) {
+			if (contactmethodType.equals(cm.getContactmethod())) {
 				return cm;
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Contactmethods findEmailContactFromUser(final Users user) {
+		return findContactmethodByType(user, ContactmethodType.EMAIL);
 	}
 
 	/**
@@ -263,13 +254,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findFaxContactFromUser(final Users user) {
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.FAX.equals(cm.getContactmethod())) {
-				return cm;
-			}
-		}
-		return null;
+		return findContactmethodByType(user, ContactmethodType.FAX);
 	}
 
 	/**
@@ -277,13 +262,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findInternetContactFromUser(final Users user) {
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.INTERNET.equals(cm.getContactmethod())) {
-				return cm;
-			}
-		}
-		return null;
+		return findContactmethodByType(user, ContactmethodType.INTERNET);
 	}
 
 	/**
@@ -291,13 +270,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findMobileContactFromUser(final Users user) {
-		final Set<Contactmethods> userContactMethods = user.getUserData().getContactmethods();
-		for (final Contactmethods cm : userContactMethods) {
-			if (ContactmethodType.MOBILE.equals(cm.getContactmethod())) {
-				return cm;
-			}
-		}
-		return null;
+		return findContactmethodByType(user, ContactmethodType.MOBILE);
 	}
 
 	/**
@@ -313,12 +286,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Contactmethods findTelefonContactFromUser(final Users user) {
-		for (final Contactmethods cm : user.getUserData().getContactmethods()) {
-			if (ContactmethodType.TELEFON.equals(cm.getContactmethod())) {
-				return cm;
-			}
-		}
-		return null;
+		return findContactmethodByType(user, ContactmethodType.TELEFON);
 	}
 
 	/**
@@ -384,7 +352,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			}
 			mergedAddresses.add(address);
 		}
-		UserDatas userData = user.getUserData();
+		UserDatas userData = userDatasService.findBy(user);
 		userData.getAddresses().addAll(mergedAddresses);
 		userData = userDatasService.merge(userData);
 	}
@@ -397,7 +365,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		if (!addressesService.exists(address.getId())) {
 			address = addressesService.merge(address);
 		}
-		UserDatas userData = user.getUserData();
+		UserDatas userData = userDatasService.findBy(user);
 		userData.getAddresses().add(address);
 		userData = userDatasService.merge(userData);
 	}
@@ -413,8 +381,10 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		}
 		final boolean exists = existsUserWithUsername(username);
 		if (!exists) {
-			user.setUserData(userDatasService.merge(user.getUserData()));
+			// TODO FIXME set UserDatas object with this user object
+			//user.setUserData(userDatasService.merge(user.getUserData()));
 			final Users mergedUser = usersService.merge(user);
+			
 			return mergedUser.getId();
 		} else {
 			throw new UserAlreadyExistsException("User with username " + username + " allready exists.");
@@ -437,7 +407,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	public Contactmethods saveUserWithContactmethod(final Users user, final Contactmethods contact)
 			throws BatchUpdateException {
 		final Contactmethods saved = contactmethodsService.merge(contact);
-		UserDatas ud = userDatasService.get(user.getUserData().getId());
+		UserDatas ud = userDatasService.findBy(user);
 		ud.getContactmethods().add(saved);
 		ud = userDatasService.merge(ud);
 		return saved;
@@ -450,7 +420,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	public List<Contactmethods> saveUserWithContactmethods(final Users user, final List<Contactmethods> contacts)
 			throws BatchUpdateException {
 		final List<Contactmethods> saved = contactmethodsService.merge(contacts);
-		UserDatas ud = userDatasService.get(user.getUserData().getId());
+		UserDatas ud = userDatasService.findBy(user);
 		ud.getContactmethods().addAll(saved);
 		ud = userDatasService.merge(ud);
 		return saved;
@@ -624,10 +594,19 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			if (5 < locale.length()) {
 				locale = locale.substring(0, 5);
 			}
-		}
+		}		
+
+		newUser = UserManagementFactory.getInstance().newUsers(Boolean.TRUE, hashedPassword, salt, username,
+				Boolean.FALSE, roles);
+
+		// save user
+		newUser = usersService.merge(newUser);
+		
 		UserDatas userData = UserManagementFactory.getInstance().newUserData(userModel.getBirthname(),
 				userModel.getDateofbirth(), userModel.getFirstname(), userModel.getGender(), userModel.getIpAddress(),
 				userModel.getLastname(), locale);
+
+		userData.setOwner(newUser);
 
 		final Set<Contactmethods> mergedContacts = new HashSet<Contactmethods>();
 		for (Contactmethods contactmethod : contacts) {
@@ -643,13 +622,8 @@ public class UsersManagementBusinessService implements UsersManagementService {
 				userData.setPrimaryAddress(address);
 			}
 		}
-
 		userData = userDatasService.merge(userData);
-		newUser = UserManagementFactory.getInstance().newUsers(Boolean.TRUE, hashedPassword, salt, username,
-				Boolean.FALSE, userData, roles);
-
-		// save user
-		newUser = usersService.merge(newUser);
+		
 		result.setUser(newUser);
 		return result;
 	}
@@ -663,7 +637,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		Resources resource = ModelSynchronizer.convert(resourceModel);
 		resource = resourcesService.merge(resource);
 		resourceModel.setId(resource.getId());
-		UserDatas userData = userDatasService.get(user.getUserData().getId());
+		UserDatas userData = userDatasService.findBy(user);
 		userData.getResources().add(resource);
 		userData = userDatasService.merge(userData);
 		try {
@@ -731,11 +705,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public Users addUserContact(Users user, final Users contact) {
-		UserDatas userData = getUserDatasService().get(user.getUserData().getId());
+		UserDatas userData = userDatasService.findBy(user);
 		userData.getUserContacts().add(contact);
 		userData = getUserDatasService().merge(userData);
-		user.setUserData(userData);
-		user = usersService.merge(user);
 		return user;
 	}
 

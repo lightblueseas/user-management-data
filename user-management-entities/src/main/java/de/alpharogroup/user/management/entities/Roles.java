@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Entity class {@link Roles} is keeping the information for the user
+ * The entity class {@link Roles} is keeping the information for the user
  * roles.
  */
 @Entity

@@ -20,6 +20,7 @@ alter table user_contactmethods add constraint FKA59F568644566562 foreign key (c
 alter table user_contacts add constraint FKE130BA475A197AAE foreign key (user_contact_id) references users;
 alter table user_contacts add constraint FKE130BA474E23EC72 foreign key (user_data_id) references user_data;
 alter table user_credits add constraint FK983F4C26F969622F foreign key (user_id) references users;
+alter table user_data add constraint FK1435639E88266D3 foreign key (owner) references users;
 alter table user_data add constraint FK1435639E8089EA06 foreign key (primary_address_id) references addresses;
 alter table user_relation_permissions add constraint FKDBE83EB5B7538E27 foreign key (permission_id) references permissions;
 alter table user_relation_permissions add constraint FKDBE83EB53304507C foreign key (user_relation_permission_id) references relation_permissions;
@@ -27,6 +28,5 @@ alter table user_resources add constraint FKE734A2B1D0AAF549 foreign key (resour
 alter table user_resources add constraint FKE734A2B14E23EC72 foreign key (user_data_id) references user_data;
 alter table user_roles add constraint FK7342994954140A59 foreign key (role_id) references roles;
 alter table user_roles add constraint FK73429949F969622F foreign key (user_id) references users;
-alter table users add constraint FK6A68E08B1644EB4 foreign key (user_data) references user_data;
 alter table zipcodes add constraint FKF88385A5AE853FD9 foreign key (country_id) references countries;
 create sequence hibernate_sequence;

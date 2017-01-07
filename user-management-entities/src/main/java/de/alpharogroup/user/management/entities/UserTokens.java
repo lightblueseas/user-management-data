@@ -15,7 +15,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The Entity class {@link UserTokens} is keeping the information for
+ * The entity class {@link UserTokens} is keeping the information for
  * the token of users.
  */
 @Entity

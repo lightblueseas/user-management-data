@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Entity class {@link UserCredits} is keeping the
+ * The entity class {@link UserCredits} is keeping the
  * information for the credits from a user. A user can buy credits that is
  * inserted in this table.
  */

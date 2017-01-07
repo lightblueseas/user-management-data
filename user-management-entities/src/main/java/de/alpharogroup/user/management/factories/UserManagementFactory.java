@@ -48,21 +48,27 @@ public class UserManagementFactory implements Serializable {
 	 */
 	private UserManagementFactory() {
 		super();
-	}		
+	}
 
-	
 	/**
 	 * Gets the recommendation.
 	 *
-	 * @param id the id
-	 * @param user the user
-	 * @param recommended the recommended
-	 * @param email the email
-	 * @param invitationText the invitationText
-	 * @param sent the sent
+	 * @param id
+	 *            the id
+	 * @param user
+	 *            the user
+	 * @param recommended
+	 *            the recommended
+	 * @param email
+	 *            the email
+	 * @param invitationText
+	 *            the invitationText
+	 * @param sent
+	 *            the sent
 	 * @return the recommendation
 	 */
-	public Recommendations newRecommendations(Integer id, Users user, Users recommended, String email, String invitationText, Boolean sent) {
+	public Recommendations newRecommendations(Integer id, Users user, Users recommended, String email,
+			String invitationText, Boolean sent) {
 		Recommendations recommendation = new Recommendations();
 		recommendation.setId(id);
 		recommendation.setUser(user);
@@ -71,29 +77,39 @@ public class UserManagementFactory implements Serializable {
 		recommendation.setInvitationText(invitationText);
 		recommendation.setSent(sent);
 		return recommendation;
-	}	
-	
+	}
+
 	/**
 	 * Gets the recommendation.
 	 *
-	 * @param user the user
-	 * @param recommended the recommended
-	 * @param email the email
-	 * @param invitationText the invitationText
-	 * @param sent the sent
+	 * @param user
+	 *            the user
+	 * @param recommended
+	 *            the recommended
+	 * @param email
+	 *            the email
+	 * @param invitationText
+	 *            the invitationText
+	 * @param sent
+	 *            the sent
 	 * @return the recommendation
 	 */
-	public Recommendations newRecommendations(Users user, Users recommended, String email, String invitationText, Boolean sent) {
+	public Recommendations newRecommendations(Users user, Users recommended, String email, String invitationText,
+			Boolean sent) {
 		return newRecommendations(null, user, recommended, email, invitationText, sent);
-	}	
-	
+	}
+
 	/**
 	 * Gets the recommendation.
 	 *
-	 * @param user the user
-	 * @param recommended the recommended
-	 * @param email the email
-	 * @param invitationText the invitationText
+	 * @param user
+	 *            the user
+	 * @param recommended
+	 *            the recommended
+	 * @param email
+	 *            the email
+	 * @param invitationText
+	 *            the invitationText
 	 * @return the recommendation
 	 */
 	public Recommendations newRecommendations(Users user, Users recommended, String email, String invitationText) {
@@ -115,8 +131,8 @@ public class UserManagementFactory implements Serializable {
 	 *            the user
 	 * @return the reset passwords
 	 */
-	public ResetPasswords newResetPasswords(Integer id, Date expiryDate,
-			String generatedPassword, Date starttime, Users user) {
+	public ResetPasswords newResetPasswords(Integer id, Date expiryDate, String generatedPassword, Date starttime,
+			Users user) {
 		ResetPasswords resetPasswords = new ResetPasswords();
 		resetPasswords.setExpiryDate(expiryDate);
 		resetPasswords.setGeneratedPassword(generatedPassword);
@@ -126,12 +142,14 @@ public class UserManagementFactory implements Serializable {
 
 		return resetPasswords;
 	}
-	
+
 	/**
 	 * New robinsons.
 	 *
-	 * @param id the id
-	 * @param robinson the robinson
+	 * @param id
+	 *            the id
+	 * @param robinson
+	 *            the robinson
 	 * @return the robinsons
 	 */
 	public Robinsons newRobinsons(Integer id, Users robinson) {
@@ -140,50 +158,61 @@ public class UserManagementFactory implements Serializable {
 		robinsons.setRobinson(robinson);
 		return robinsons;
 	}
-	
+
 	/**
 	 * New robinsons.
 	 *
-	 * @param robinson the robinson
+	 * @param robinson
+	 *            the robinson
 	 * @return the robinsons
 	 */
 	public Robinsons newRobinsons(Users robinson) {
 		return newRobinsons(null, robinson);
 	}
-	
+
 	/**
 	 * Gets the relation permissions.
 	 *
-	 * @param provider the provider
-	 * @param subscriber the subscriber
+	 * @param provider
+	 *            the provider
+	 * @param subscriber
+	 *            the subscriber
 	 * @return the relation permissions
 	 */
 	public RelationPermissions newRelationPermissions(Users provider, Users subscriber) {
 		return newRelationPermissions(provider, subscriber, new HashSet<Permissions>());
 	}
-	
+
 	/**
 	 * Gets the relation permissions.
 	 *
-	 * @param provider the provider
-	 * @param subscriber the subscriber
-	 * @param permissions the permissions
+	 * @param provider
+	 *            the provider
+	 * @param subscriber
+	 *            the subscriber
+	 * @param permissions
+	 *            the permissions
 	 * @return the relation permissions
 	 */
 	public RelationPermissions newRelationPermissions(Users provider, Users subscriber, Set<Permissions> permissions) {
 		return newRelationPermissions(null, provider, subscriber, permissions);
 	}
-	
+
 	/**
 	 * Gets the relation permissions.
 	 *
-	 * @param id the id
-	 * @param provider the provider
-	 * @param subscriber the subscriber
-	 * @param permissions the permissions
+	 * @param id
+	 *            the id
+	 * @param provider
+	 *            the provider
+	 * @param subscriber
+	 *            the subscriber
+	 * @param permissions
+	 *            the permissions
 	 * @return the relation permissions
 	 */
-	public RelationPermissions newRelationPermissions(Integer id, Users provider, Users subscriber, Set<Permissions> permissions) {
+	public RelationPermissions newRelationPermissions(Integer id, Users provider, Users subscriber,
+			Set<Permissions> permissions) {
 		RelationPermissions relationPermissions = new RelationPermissions();
 		relationPermissions.setId(id);
 		relationPermissions.setProvider(provider);
@@ -205,10 +234,8 @@ public class UserManagementFactory implements Serializable {
 	 *            the user
 	 * @return the reset passwords
 	 */
-	public ResetPasswords newResetPasswords(Date expiryDate,
-			String generatedPassword, Date starttime, Users user) {
-		return newResetPasswords(null, expiryDate, generatedPassword,
-				starttime, user);
+	public ResetPasswords newResetPasswords(Date expiryDate, String generatedPassword, Date starttime, Users user) {
+		return newResetPasswords(null, expiryDate, generatedPassword, starttime, user);
 	}
 
 	/**
@@ -222,8 +249,7 @@ public class UserManagementFactory implements Serializable {
 	 *            the id
 	 * @return Contactmethods A Contactmethods object
 	 */
-	public Contactmethods newContactmethods(ContactmethodType contactmethod,
-			String contactvalue, Integer id) {
+	public Contactmethods newContactmethods(ContactmethodType contactmethod, String contactvalue, Integer id) {
 		Contactmethods contactmethods = new Contactmethods();
 
 		contactmethods.setContactmethod(contactmethod);
@@ -242,8 +268,7 @@ public class UserManagementFactory implements Serializable {
 	 *            the contactvalue
 	 * @return Contactmethods A Contactmethods object
 	 */
-	public Contactmethods newContactmethods(ContactmethodType contactmethod,
-			String contactvalue) {
+	public Contactmethods newContactmethods(ContactmethodType contactmethod, String contactvalue) {
 		return newContactmethods(contactmethod, contactvalue, null);
 	}
 
@@ -260,8 +285,7 @@ public class UserManagementFactory implements Serializable {
 	 *            the shortcut
 	 * @return Permissions A Permissions object
 	 */
-	public Permissions newPermissions(Integer id, String permission,
-			String description, String shortcut) {
+	public Permissions newPermissions(Integer id, String permission, String description, String shortcut) {
 		Permissions permissions = new Permissions();
 
 		permissions.setDescription(description);
@@ -283,8 +307,7 @@ public class UserManagementFactory implements Serializable {
 	 *            the shortcut
 	 * @return the permissions
 	 */
-	public Permissions newPermissions(String permission, String description,
-			String shortcut) {
+	public Permissions newPermissions(String permission, String description, String shortcut) {
 		return newPermissions(null, permission, description, shortcut);
 	}
 
@@ -314,8 +337,7 @@ public class UserManagementFactory implements Serializable {
 	 *            the permissions
 	 * @return Roles A Roles object
 	 */
-	public Roles newRoles(Integer id, String rolename, String description,
-			Set<Permissions> permissions) {
+	public Roles newRoles(Integer id, String rolename, String description, Set<Permissions> permissions) {
 		Roles roles = new Roles();
 
 		roles.setDescription(description);
@@ -338,8 +360,7 @@ public class UserManagementFactory implements Serializable {
 	 *            the permissions
 	 * @return the roles
 	 */
-	public Roles newRoles(String rolename, String description,
-			Set<Permissions> permissions) {
+	public Roles newRoles(String rolename, String description, Set<Permissions> permissions) {
 		return newRoles(null, rolename, description, permissions);
 	}
 
@@ -375,11 +396,9 @@ public class UserManagementFactory implements Serializable {
 	 *            the locale
 	 * @return the user data
 	 */
-	public UserDatas newUserData(String birthname, Date dateofbirth,
-			String firstname, GenderType gender, String ipAddress, String lastname,
-			String locale) {
-		return newUserData(null, birthname, dateofbirth, firstname, gender,
-				ipAddress, lastname, locale);
+	public UserDatas newUserData(String birthname, Date dateofbirth, String firstname, GenderType gender,
+			String ipAddress, String lastname, String locale) {
+		return newUserData(null, birthname, dateofbirth, firstname, gender, ipAddress, lastname, locale);
 	}
 
 	/**
@@ -403,11 +422,10 @@ public class UserManagementFactory implements Serializable {
 	 *            the locale
 	 * @return UserData A UserData object
 	 */
-	public UserDatas newUserData(Integer id, String birthname, Date dateofbirth,
-			String firstname, GenderType gender, String ipAddress, String lastname,
-			String locale) {
-		return newUserData(id, birthname, dateofbirth, firstname, gender,
-				ipAddress, lastname, locale, null, null, null, null);
+	public UserDatas newUserData(Integer id, String birthname, Date dateofbirth, String firstname, GenderType gender,
+			String ipAddress, String lastname, String locale) {
+		return newUserData(id, birthname, dateofbirth, firstname, gender, ipAddress, lastname, locale, null, null, null,
+				null);
 	}
 
 	/**
@@ -439,12 +457,49 @@ public class UserManagementFactory implements Serializable {
 	 *            the user contacts
 	 * @return UserData A UserData object
 	 */
-	public UserDatas newUserData(Integer id, String birthname, Date dateofbirth,
-			String firstname, GenderType gender, String ipAddress, String lastname,
-			String locale, Set<Addresses> addresses,
-			Set<Contactmethods> contactmethods, Set<Resources> resources,
-			Set<Users> userContacts) {
+	public UserDatas newUserData(Integer id, String birthname, Date dateofbirth, String firstname, GenderType gender,
+			String ipAddress, String lastname, String locale, Set<Addresses> addresses,
+			Set<Contactmethods> contactmethods, Set<Resources> resources, Set<Users> userContacts) {
+		return newUserData(id, null, birthname, dateofbirth, firstname, gender, ipAddress, lastname, locale, null, null,
+				null, null);
+	}
+
+	/**
+	 * Factory method for create an UserData object.
+	 *
+	 * @param id
+	 *            the id
+	 * @param owner
+	 *            the owner
+	 * @param birthname
+	 *            the birthname
+	 * @param dateofbirth
+	 *            the dateofbirth
+	 * @param firstname
+	 *            the firstname
+	 * @param gender
+	 *            the gender
+	 * @param ipAddress
+	 *            the ip address
+	 * @param lastname
+	 *            the lastname
+	 * @param locale
+	 *            the locale
+	 * @param addresses
+	 *            the addresses
+	 * @param contactmethods
+	 *            the contactmethods
+	 * @param resources
+	 *            the resources
+	 * @param userContacts
+	 *            the user contacts
+	 * @return UserData A UserData object
+	 */
+	public UserDatas newUserData(Integer id, Users owner, String birthname, Date dateofbirth, String firstname,
+			GenderType gender, String ipAddress, String lastname, String locale, Set<Addresses> addresses,
+			Set<Contactmethods> contactmethods, Set<Resources> resources, Set<Users> userContacts) {
 		UserDatas userData = new UserDatas();
+		userData.setOwner(owner);
 		userData.setBirthname(birthname);
 		userData.setContactmethods(contactmethods);
 		userData.setDateofbirth(dateofbirth);
@@ -482,16 +537,12 @@ public class UserManagementFactory implements Serializable {
 	 *            the username
 	 * @param locked
 	 *            the locked
-	 * @param userData
-	 *            the user data
 	 * @param roles
 	 *            the roles
 	 * @return the users
 	 */
-	public Users newUsers(Boolean active, String pw, String salt,
-			String username, Boolean locked, UserDatas userData, Set<Roles> roles) {
-		return newUsers(null, active, pw, salt, username, locked, userData,
-				roles);
+	public Users newUsers(Boolean active, String pw, String salt, String username, Boolean locked, Set<Roles> roles) {
+		return newUsers(null, active, pw, salt, username, locked, roles);
 	}
 
 	/**
@@ -509,14 +560,12 @@ public class UserManagementFactory implements Serializable {
 	 *            the username
 	 * @param locked
 	 *            the locked
-	 * @param userData
-	 *            the user data
 	 * @param roles
 	 *            the roles
 	 * @return Users A Users object
 	 */
-	public Users newUsers(Integer id, Boolean active, String pw, String salt,
-			String username, Boolean locked, UserDatas userData, Set<Roles> roles) {
+	public Users newUsers(Integer id, Boolean active, String pw, String salt, String username, Boolean locked,
+			Set<Roles> roles) {
 		Users users = new Users();
 		users.setActive(active);
 		users.setLocked(locked);
@@ -524,7 +573,6 @@ public class UserManagementFactory implements Serializable {
 		users.setPw(pw);
 		users.setSalt(salt);
 		users.setUsername(username);
-		users.setUserData(userData);
 		if (roles != null) {
 			users.setRoles(roles);
 		}
@@ -534,15 +582,20 @@ public class UserManagementFactory implements Serializable {
 	/**
 	 * Gets the rule violations.
 	 *
-	 * @param id the id
-	 * @param detector the detector
-	 * @param violator the violator
-	 * @param description the description
-	 * @param reason the reason
+	 * @param id
+	 *            the id
+	 * @param detector
+	 *            the detector
+	 * @param violator
+	 *            the violator
+	 * @param description
+	 *            the description
+	 * @param reason
+	 *            the reason
 	 * @return the rule violations
 	 */
-	public RuleViolations newRuleViolations(Integer id, Users detector,
-			Users violator, String description, RuleViolationReason reason) {
+	public RuleViolations newRuleViolations(Integer id, Users detector, Users violator, String description,
+			RuleViolationReason reason) {
 		RuleViolations ruleViolations = new RuleViolations();
 		ruleViolations.setId(id);
 		ruleViolations.setDetector(detector);
@@ -555,14 +608,18 @@ public class UserManagementFactory implements Serializable {
 	/**
 	 * Gets the rule violations.
 	 *
-	 * @param detector the detector
-	 * @param violator the violator
-	 * @param description the description
-	 * @param reason the reason
+	 * @param detector
+	 *            the detector
+	 * @param violator
+	 *            the violator
+	 * @param description
+	 *            the description
+	 * @param reason
+	 *            the reason
 	 * @return the rule violations
 	 */
-	public RuleViolations newRuleViolations(Users detector, Users violator,
-			String description, RuleViolationReason reason) {
+	public RuleViolations newRuleViolations(Users detector, Users violator, String description,
+			RuleViolationReason reason) {
 		return newRuleViolations(null, detector, violator, description, reason);
 	}
 }
