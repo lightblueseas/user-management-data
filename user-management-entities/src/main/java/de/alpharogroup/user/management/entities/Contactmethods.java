@@ -18,7 +18,7 @@ import de.alpharogroup.db.entity.BaseEntity;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 
 /**
- * The Entity class {@link Contactmethods} is keeping the
+ * The entity class {@link Contactmethods} is keeping the
  * information for the contact methods and the corresponding value.
  */
 @Entity

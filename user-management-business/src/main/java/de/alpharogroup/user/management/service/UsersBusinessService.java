@@ -7,24 +7,21 @@ import java.util.Map.Entry;
 
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.address.book.service.util.HqlStringCreator;
 import de.alpharogroup.collections.ListExtensions;
 import de.alpharogroup.date.CalculateDateExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
-
-import org.apache.log4j.Logger;
-
 import de.alpharogroup.jgeohash.GeoHashExtensions;
 import de.alpharogroup.user.management.daos.UsersDao;
 import de.alpharogroup.user.management.entities.Roles;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.GenderType;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import de.alpharogroup.user.management.service.api.UsersService;
 
 @Transactional
@@ -103,7 +100,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	@SuppressWarnings("unchecked")
 	public Users findUserWithEmail(final String email)
 	{
-		final String hqlString = "select u from Users u inner join u.userData.contactmethods cc "
+		final String hqlString = "select u from Users u, UserDatas ud inner join ud.contactmethods cc "
 			+ "where cc.contactmethod='EMAIL' " + "and cc.contactmethod.contactvalue=:email";
 		final Query query = getQuery(hqlString);
 		query.setParameter("email", email);
@@ -146,9 +143,10 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		Date now = new Date(System.currentTimeMillis());
 		Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
 		Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
-		final String hqlString = "select u from Users u " + "where u.userData.gender=:gender "
-		// + "and u.userData.dateofbirth between :start and :end"
-			+ "and u.userData.dateofbirth >= :start " + "and u.userData.dateofbirth <= :end";
+		final String hqlString = "select u from Users u, UserDatas ud " 
+		+ "where ud.gender=:gender "
+		// + "and ud.dateofbirth between :start and :end"
+			+ "and ud.dateofbirth >= :start " + "and ud.dateofbirth <= :end";
 		final Query query = getQuery(hqlString);
 		query.setParameter("gender", searchGender);
 		query.setParameter("start", start);
@@ -166,9 +164,9 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
 
 		final StringBuilder hqlString = new StringBuilder();
-		hqlString.append("select u from Users u " + "where u.userData.gender=:gender "
-		// + "and u.userData.dateofbirth between :start and :end"
-			+ "and u.userData.dateofbirth >= :start " + "and u.userData.dateofbirth <= :end ");
+		hqlString.append("select u from Users u, UserDatas ud " + "where ud.gender=:gender "
+		// + "and ud.dateofbirth between :start and :end"
+			+ "and ud.dateofbirth >= :start " + "and ud.dateofbirth <= :end ");
 
 		Map<String, String> adjacentAreas = null;
 		if (geohash != null && !geohash.trim().isEmpty())
@@ -179,7 +177,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		{
 			String firstAndSecondRingSubQuery = HqlStringCreator
 				.getGeohashFirstAndSecondRingSubQuery();
-			hqlString.append("and u.userData.primaryAddress.geohash in "
+			hqlString.append("and ud.primaryAddress.geohash in "
 				+ firstAndSecondRingSubQuery);
 		}
 

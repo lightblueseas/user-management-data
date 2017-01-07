@@ -1,26 +1,11 @@
 package de.alpharogroup.user.management.application.utils;
 
 import de.alpharogroup.user.management.entities.UserDatas;
-import de.alpharogroup.user.management.entities.Users;
 
 /**
  * The Class UserUtils.
  */
 public class UserUtils {
-
-	/**
-	 * Gets the full name from the given Users object.
-	 *
-	 * @param user the user
-	 * @return the full name
-	 */
-	public static String getFullName(Users user) {
-		String fullName = getFullName(user.getUserData());
-		if(fullName.isEmpty()) {
-			return user.getUsername();
-		}
-		return fullName;		
-	}
 
 	/**
 	 * Gets the full name from the given UserData object.

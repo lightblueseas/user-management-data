@@ -4,6 +4,7 @@ package de.alpharogroup.user.management.rest;
 import java.util.List;
 import java.util.Set;
 
+import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 import de.alpharogroup.user.management.domain.Permission;
@@ -39,8 +40,8 @@ public class RolesRestResource
 	}
 
 	@Override
-	public Role createAndSaveRole(String rolename, String description) {
-		return getDomainService().createAndSaveRole(rolename, description);
+	public Role createAndSaveRole(KeyValuePair<String, String> newRole) {
+		return getDomainService().createAndSaveRole(newRole.getKey(), newRole.getValue());
 	}
 
 	@Override

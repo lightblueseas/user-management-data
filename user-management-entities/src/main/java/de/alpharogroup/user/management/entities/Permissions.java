@@ -11,7 +11,7 @@ import de.alpharogroup.auth.interfaces.Permission;
 import de.alpharogroup.db.entity.BaseEntity;
 
 /**
- * The Entity class {@link Permissions} is keeping the information for
+ * The entity class {@link Permissions} is keeping the information for
  * the permissions of a role or roles.
  */
 @Entity

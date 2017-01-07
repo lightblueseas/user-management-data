@@ -27,6 +27,7 @@ import de.alpharogroup.resource.system.application.util.ModelConverter;
 import de.alpharogroup.resource.system.entities.Resources;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.entities.Roles;
+import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.enums.GenderType;
@@ -35,10 +36,13 @@ import de.alpharogroup.user.management.factories.UserManagementModelFactory;
 import de.alpharogroup.user.management.service.api.AuthenticationsService;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.api.RolesService;
+import de.alpharogroup.user.management.service.api.UserDatasService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
+import lombok.Getter;
+import lombok.Setter;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
 public class UserManagementBusinessServiceTest extends AbstractTestNGSpringContextTests {
@@ -52,6 +56,12 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	private RolesService rolesService;
 	@Autowired
 	private UsersService usersService;
+
+	/** The users business service. */
+	@Autowired
+	@Getter
+	@Setter
+	private UserDatasService userDatasService;
 	/** The contactmethods business service. */
 	@Autowired
 	private ContactmethodsService contactmethodsService;
@@ -196,10 +206,11 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	public void testRemoveUserResource() {
 		final Users michaelProvider = usersService.findUserWithEmail("michael.knight@gmail.com");
 		//
-		final Set<Resources> resources = michaelProvider.getUserData().getResources();
+		UserDatas userData = userDatasService.findBy(michaelProvider);
+		final Set<Resources> resources = userData.getResources();
 		System.out.println("resources size:"+resources.size());
 		for (final Resources resource : resources) {
-			userManagementService.deleteResource(ModelConverter.toResourcesModel(resource), michaelProvider.getUserData().getId());
+			userManagementService.deleteResource(ModelConverter.toResourcesModel(resource), userData.getId());
 		}
 	}
 	@Test(enabled=false)

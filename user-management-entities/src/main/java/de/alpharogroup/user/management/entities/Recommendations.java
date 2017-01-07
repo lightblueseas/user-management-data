@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Entity class {@link Recommendations} is keeping the
+ * The entity class {@link Recommendations} is keeping the
  * information for the recommendations that a user recommended another user to an email with an invitation text.
  */
 @Entity

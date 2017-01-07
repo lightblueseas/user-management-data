@@ -19,17 +19,19 @@ import de.alpharogroup.user.management.service.util.HqlStringCreator;
 @Transactional
 @Service("contactmethodsService")
 public class ContactmethodsBusinessService extends AbstractBusinessService<Contactmethods, Integer, ContactmethodsDao> implements ContactmethodsService {
-	
-	/**
-	 * 
-	 */
+
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Sets the given specific repository object.
+	 *
+	 * @param repository the repository object to set
+	 */
 	@Autowired
-	public void setContactmethodsDao(ContactmethodsDao contactmethodsDao) {
-		setDao(contactmethodsDao);
-	}
-	
+	public void setContactmethodsDao(ContactmethodsDao repository) {
+		setDao(repository);
+	}	
 
 	/**
 	 * {@inheritDoc}
@@ -105,8 +107,8 @@ public class ContactmethodsBusinessService extends AbstractBusinessService<Conta
 	@SuppressWarnings("unchecked")
 	public List<Contactmethods> findContactmethod(final ContactmethodType contactmethod, final Users user) {
 		final String hqlString = 
-				  "select distinct cm from Users u inner join u.userData.contactmethods cm "
-				+ "where u=:user "
+				  "select distinct cm from UserDatas u inner join u.contactmethods cm "
+				+ "where u.owner=:user "
 				+ "and cm.contactmethod.contactmethod=:contactmethod";
 		final Query query = getQuery(hqlString);
 		if(user != null){

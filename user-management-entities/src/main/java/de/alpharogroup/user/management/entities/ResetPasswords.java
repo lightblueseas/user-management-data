@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The Entity class {@link ResetPasswords} is keeping the
+ * The entity class {@link ResetPasswords} is keeping the
  * information for reseting the password from a user. Data will be inserted when
  * a user forgets his password and enter his data in the form.
  */

@@ -15,10 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -31,6 +28,9 @@ import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.db.entity.BaseEntity;
 import de.alpharogroup.resource.system.entities.Resources;
 import de.alpharogroup.user.management.enums.GenderType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * The Class UserData hold user specific data.
@@ -48,7 +48,11 @@ implements Cloneable {
 	/**
 	 * The serial Version UID.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	
+	/** The owner of this user data. */
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "owner")
+	private Users owner;
 	/** The addresses of the user. */
 	@ManyToMany(fetch=FetchType.EAGER)
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
