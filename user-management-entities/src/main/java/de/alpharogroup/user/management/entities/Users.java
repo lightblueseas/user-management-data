@@ -33,10 +33,10 @@ implements Cloneable {
 	private static final long serialVersionUID = 1L;
 	/** The attribute active, if true the user account is active. */
 	@Column(name = "active")
-	private Boolean active;
+	private boolean active;
 	/** A Flag that indicates if the user account is locked or not. */
 	@Column(name = "locked")
-	private Boolean locked;
+	private boolean locked;
 	/** The hash from the password hashed with sha512. */
 	@Column(name = "pw", length = 1024)
 	private String pw;
@@ -63,8 +63,5 @@ implements Cloneable {
 		return roles.add(role);
 	}
 
-	public boolean isActive() {
-		return getActive();
-	}
 
 }

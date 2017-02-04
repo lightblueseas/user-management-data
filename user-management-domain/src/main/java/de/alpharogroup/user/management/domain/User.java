@@ -23,7 +23,7 @@ public class User extends BaseDomainObject<Integer> {
 
 	/** The serial Version UID. */
 	private static final long serialVersionUID = 1L;
-	/** The attribute active, if true the user account is active. */
+	/** The attribute active, if true the user account is active. */	
 	private Boolean active;
 	/** A Flag that indicates if the user account is locked or not. */
 	private Boolean locked;

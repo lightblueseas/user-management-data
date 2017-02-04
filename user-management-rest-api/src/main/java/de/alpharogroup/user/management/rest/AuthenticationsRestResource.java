@@ -47,8 +47,9 @@ public class AuthenticationsRestResource implements AuthenticationsResource {
             		.build();			
 		}
         String authenticationToken = authenticationService.newAuthenticationToken(username);
+        AuthToken authToken = AuthToken.builder().value(authenticationToken).build();
         // Set the auth token in the response
-		return Response.ok(AuthToken.builder().value(authenticationToken).build())
+		return Response.ok(authToken.getValue())
 				.header("Access-Control-Allow-Origin", "*")// allow cors...
 				.build();
 	}

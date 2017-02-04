@@ -40,9 +40,9 @@ public class RolesBusinessService extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Permissions> findAllPermissions(final Roles role) {
-		final String hqlString = "select rp.permission from RolePermissions rp where rp.role=:role";
+		final String hqlString = "select r.permissions from Roles r where r.rolename=:rolename";
 		final Query query = getQuery(hqlString);
-		query.setParameter("role", role);
+		query.setParameter("rolename", role.getRolename());
 		final List<Permissions> permissions = query.getResultList();
 		return permissions;
 	}

@@ -62,7 +62,7 @@ public interface PermissionsResource extends RestfulResource<Integer, Permission
 	 * @return the found {@link Permission} object or null if not.
 	 */
 	@GET
-	@Path("/find/by/shortcut/{name}/")
+	@Path("/find/by/name/{name}/")
 	Permission findByName(@PathParam("name")String name);
 
 	/**
@@ -74,7 +74,7 @@ public interface PermissionsResource extends RestfulResource<Integer, Permission
 	 * @return the list of the found {@link Permission} objects.
 	 */
 	@GET
-	@Path("/find/by/{description}/{name}/{shortcut}/")
+	@Path("/find/by/description/{description}/{name}/{shortcut}/")
 	List<Permission> find(@PathParam("description")String description, @PathParam("name")String name,
 			@PathParam("shortcut")String shortcut);
 }

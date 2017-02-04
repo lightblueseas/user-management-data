@@ -1,6 +1,5 @@
 package de.alpharogroup.user.management.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -31,11 +30,11 @@ implements Cloneable {
 	 */
 	private static final long serialVersionUID = 1L;
 	/** The user that made the recommendation. */
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_RECOMMENDATIONS_USER_ID"))
 	private Users user;
 	/** The user that is recommended. */
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "recommended_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_RECOMMENDATIONS_RECOMMENDED_ID"))
 	private Users recommended; 
 	/** The email where this recommendation is send. */

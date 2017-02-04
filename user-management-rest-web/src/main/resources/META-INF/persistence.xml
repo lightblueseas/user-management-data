@@ -35,6 +35,7 @@
 			<property name="hibernate.connection.password" value="r2SB2FvFKHLcnyL0" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.cache.use_second_level_cache" value="false" />
+			<property name="hibernate.event.merge.entity_copy_observer" value="allow"/>
 		</properties>
 
 	</persistence-unit>

@@ -55,20 +55,22 @@ public class UsersBusinessServiceTest extends AbstractTestNGSpringContextTests {
 		List<Users> users = usersService.findUsers(from, GenderType.MALE, until, "u0ww");
 		System.out.println(users);		
 	}
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void testFindRelationPermissions() {
-		Users michaelProvider = usersService.findUserWithEmail("michael.knight@gmail.com");
-		Users adolfSubscriber = usersService.findUserWithEmail("adolf.frankenstein@gmail.com");
-		Permissions permission = permissionsService.findByShortcut("vui");
-		Set<Permissions> permissions = new HashSet<Permissions>();
-		permissions.add(permission);
-		RelationPermissions relationPermission = relationPermissionsService.findRelationPermissions(michaelProvider, adolfSubscriber, permission);
-		if(relationPermission != null) {
-			relationPermission = UserManagementFactory.getInstance().newRelationPermissions(michaelProvider, adolfSubscriber, permissions);
-			relationPermission = relationPermissionsService.merge(relationPermission);
-		}
-		RelationPermissions relationPermissions = relationPermissionsService.findRelationPermissions(michaelProvider, adolfSubscriber);
-		System.out.println(relationPermissions);		
+		Users michaelProvider = usersService.findUserWithEmail("james.dean@gmail.com");
+		michaelProvider.setActive(true);
+		usersService.merge(michaelProvider);
+//		Users adolfSubscriber = usersService.findUserWithEmail("adolf.frankenstein@gmail.com");
+//		Permissions permission = permissionsService.findByShortcut("vui");
+//		Set<Permissions> permissions = new HashSet<Permissions>();
+//		permissions.add(permission);
+//		RelationPermissions relationPermission = relationPermissionsService.findRelationPermissions(michaelProvider, adolfSubscriber, permission);
+//		if(relationPermission != null) {
+//			relationPermission = UserManagementFactory.getInstance().newRelationPermissions(michaelProvider, adolfSubscriber, permissions);
+//			relationPermission = relationPermissionsService.merge(relationPermission);
+//		}
+//		RelationPermissions relationPermissions = relationPermissionsService.findRelationPermissions(michaelProvider, adolfSubscriber);
+//		System.out.println(relationPermissions);		
 	}
 
 }
