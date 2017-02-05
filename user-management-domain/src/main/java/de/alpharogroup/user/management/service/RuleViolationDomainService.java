@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import de.alpharogroup.lang.object.CopyObjectExtensions;
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.application.models.InfringementModel;
 import de.alpharogroup.user.management.daos.RuleViolationsDao;
@@ -28,8 +27,11 @@ import lombok.Setter;
 @Transactional
 @Service("ruleViolationDomainService")
 public class RuleViolationDomainService
-		extends AbstractDomainService<Integer, RuleViolation, RuleViolations, RuleViolationsDao, RuleViolationsMapper>
-		implements RuleViolationService {
+	extends
+		AbstractDomainService<Integer, RuleViolation, RuleViolations, RuleViolationsDao, RuleViolationsMapper>
+	implements
+		RuleViolationService
+{
 
 	/** The {@link RuleViolationsService}. */
 	@Autowired
@@ -44,7 +46,8 @@ public class RuleViolationDomainService
 	 *            the new {@link RuleViolationsDao}.
 	 */
 	@Autowired
-	public void setRuleViolationsDao(final RuleViolationsDao ruleViolationsDao) {
+	public void setRuleViolationsDao(final RuleViolationsDao ruleViolationsDao)
+	{
 		setDao(ruleViolationsDao);
 	}
 
@@ -55,18 +58,19 @@ public class RuleViolationDomainService
 	 *            the new {@link RuleViolationsMapper}.
 	 */
 	@Autowired
-	public void setRuleViolationsMapper(RuleViolationsMapper mapper) {
+	public void setRuleViolationsMapper(final RuleViolationsMapper mapper)
+	{
 		setMapper(mapper);
 	}
-	
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Deprecated
 	@Override
-	public RuleViolation save(final InfringementModel model) {
-		
+	public RuleViolation save(final InfringementModel model)
+	{
+
 		final RuleViolations ruleViolations = ruleViolationsService.save(model);
 		return getMapper().toDomainObject(ruleViolations);
 	}
@@ -75,21 +79,32 @@ public class RuleViolationDomainService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public RuleViolation save(Infringement model) {
-		InfringementModel infringementModel = InfringementModel.builder().build();
-		CopyObjectExtensions.copyQuietly(model, infringementModel);
+	public RuleViolation save(final Infringement model)
+	{
+		final InfringementModel infringementModel = toInfringementModel(model);
 		final RuleViolations ruleViolations = ruleViolationsService.save(infringementModel);
 		return getMapper().toDomainObject(ruleViolations);
+	}
+
+	private InfringementModel toInfringementModel(final Infringement model)
+	{
+		return InfringementModel.builder()
+			.violator(getMapper().map(model.getViolator(), Users.class))
+			.detector(getMapper().map(model.getDetector(), Users.class))
+			.description(model.getDescription()).reason(model.getReason()).build();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<RuleViolation> find(final User detector, final User violator, final RuleViolationReason reason, final String description) {
+	public List<RuleViolation> find(final User detector, final User violator,
+		final RuleViolationReason reason, final String description)
+	{
 		final Users detectors = getMapper().map(detector, Users.class);
 		final Users violators = getMapper().map(violator, Users.class);
-		final List<RuleViolations> ruleViolations = ruleViolationsService.find(detectors, violators, reason, description);
+		final List<RuleViolations> ruleViolations = ruleViolationsService.find(detectors, violators,
+			reason, description);
 		return getMapper().toDomainObjects(ruleViolations);
 	}
 

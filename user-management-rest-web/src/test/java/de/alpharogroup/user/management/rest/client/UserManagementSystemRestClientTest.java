@@ -15,24 +15,14 @@
  */
 package de.alpharogroup.user.management.rest.client;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.TrustManagerFactory;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
-import org.apache.cxf.configuration.security.FiltersType;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterClass;
@@ -42,7 +32,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.auth.Credentials;
-import de.alpharogroup.auth.token.AuthToken;
+import de.alpharogroup.collections.ListExtensions;
 import de.alpharogroup.collections.SetExtensions;
 import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.collections.pairs.Triple;
@@ -50,7 +40,6 @@ import de.alpharogroup.cxf.rest.client.AbstractRestClient;
 import de.alpharogroup.cxf.rest.client.WebClientExtensions;
 import de.alpharogroup.date.CalculateDateExtensions;
 import de.alpharogroup.date.CreateDateExtensions;
-import de.alpharogroup.date.DateExtensions;
 import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.domain.Permission;
@@ -59,8 +48,11 @@ import de.alpharogroup.user.management.domain.RelationPermission;
 import de.alpharogroup.user.management.domain.ResetPassword;
 import de.alpharogroup.user.management.domain.Robinson;
 import de.alpharogroup.user.management.domain.Role;
+import de.alpharogroup.user.management.domain.RuleViolation;
 import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.management.domain.model.Infringement;
 import de.alpharogroup.user.management.enums.ContactmethodType;
+import de.alpharogroup.user.management.enums.RuleViolationReason;
 import de.alpharogroup.user.management.rest.api.AuthenticationsResource;
 import de.alpharogroup.user.management.rest.api.ContactmethodsResource;
 import de.alpharogroup.user.management.rest.api.PermissionsResource;
@@ -77,8 +69,11 @@ import de.alpharogroup.user.management.rest.api.UsersResource;
 
 /**
  * The class {@link UserManagementSystemRestClientTest}.
+ *
+ * Note: you have to start a rest server to test this or you have to mock it.
  */
-public class UserManagementSystemRestClientTest {
+public class UserManagementSystemRestClientTest
+{
 
 	private TLSClientParameters tlsClientParameters;
 
@@ -87,467 +82,460 @@ public class UserManagementSystemRestClientTest {
 	private AuthenticationsResource authenticationsResource;
 
 	private UsersResource usersResource;
-	
+
 	private PermissionsResource permissionsResource;
-	
+
+	private User promoterUser;
+
+	private User recommendedUser;
+
+	private RolesResource rolesResource;
+
 
 	@BeforeClass
-	public static void setUpClass() throws Exception {
+	public static void setUpClass() throws Exception
+	{
 
 	}
 
 	@AfterClass
-	public static void tearDownClass() throws Exception {
+	public static void tearDownClass() throws Exception
+	{
 	}
 
 	@BeforeMethod
-	public void setUpMethod() throws Exception {
-		if (restClient == null) {
-			restClient = new UserManagementSystemRestClient(AbstractRestClient.DEFAULT_BASE_HTTPS_URL);
-			tlsClientParameters = getTLSClientParameters();
+	public void setUpMethod() throws Exception
+	{
+		if (restClient == null)
+		{
+			restClient = new UserManagementSystemRestClient(
+				AbstractRestClient.DEFAULT_BASE_HTTPS_URL);
+			tlsClientParameters = WebClientExtensions.newTLSClientParameters(PathFinder.getSrcTestResourcesDir(),
+				"keystore.ks", "JKS", "wicket");
 			authenticationsResource = restClient.getAuthenticationsResource();
 
 			usersResource = restClient.getUsersResource();
 			permissionsResource = restClient.getPermissionsResource();
+			rolesResource = restClient.getRolesResource();
 			// set client params with key and trust managers. The keystore is the same as jetty
-			WebClientExtensions.setTLSClientParameters(authenticationsResource, tlsClientParameters);
+			WebClientExtensions.setTLSClientParameters(authenticationsResource,
+				tlsClientParameters);
 			WebClientExtensions.setTLSClientParameters(usersResource, tlsClientParameters);
 			WebClientExtensions.setTLSClientParameters(permissionsResource, tlsClientParameters);
+			WebClientExtensions.setTLSClientParameters(rolesResource, tlsClientParameters);
 		}
 	}
 
 	@AfterMethod
-	public void tearDownMethod() throws Exception {
+	public void tearDownMethod() throws Exception
+	{
 	}
 
 	/**
-	 * Gets the TLS client parameters.
-	 *
-	 * @return the TLS client parameters
-	 * @throws UnrecoverableKeyException the unrecoverable key exception
-	 * @throws NoSuchAlgorithmException the no such algorithm exception
-	 * @throws CertificateException the certificate exception
-	 * @throws FileNotFoundException the file not found exception
-	 * @throws KeyStoreException the key store exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public TLSClientParameters getTLSClientParameters() throws UnrecoverableKeyException, NoSuchAlgorithmException,
-			CertificateException, FileNotFoundException, KeyStoreException, IOException {
-		return WebClientExtensions.newTLSClientParameters(PathFinder.getSrcTestResourcesDir(), "keystore.ks", "JKS", "wicket");
-	}
-	
-	/**
 	 * Test the {@link AuthenticationsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = true)
-	public void testAuthenticationsResource() {
-		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();			
+	public void testAuthenticationsResource()
+	{
+		final Credentials credentials = Credentials.builder().username("michael.knight")
+			.password("xxx").build();
 
 		// final String json = JsonTransformer.toJsonQuietly(credentials);
 		// {"username":"michael.knight","password":"xxx"}
 		// https://localhost:8443/auth/credentials
-		Response tokenResponse = authenticationsResource.authenticate(credentials);
-		String token = tokenResponse.readEntity(String.class);
-		AssertJUnit.assertNotNull(token);		
-		
+		final Response tokenResponse = authenticationsResource.authenticate(credentials);
+		final String token = tokenResponse.readEntity(String.class);
+		AssertJUnit.assertNotNull(token);
+
 	}
 
-	
+
 	/**
 	 * Test the {@link ContactmethodsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = false)
-	public void testContactmethodsResource() {
-		ContactmethodsResource resource = restClient.getContactmethodsResource();
+	public void testContactmethodsResource()
+	{
+		final ContactmethodsResource resource = restClient.getContactmethodsResource();
 		// set client params with key and trust managers. The keystore is the same as jetty
 		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
-		
-		String email = "michael.knight@gmail.com";
-				
-		KeyValuePair<Contactmethod, Contactmethod> comparison = 
-				KeyValuePair.<Contactmethod, Contactmethod>builder()
-				.key(Contactmethod.builder()
-						.contactmethod(ContactmethodType.EMAIL)
-						.contactvalue(email)
-						.build())
-				.value(Contactmethod.builder()
-						.contactmethod(ContactmethodType.EMAIL)
-						.contactvalue(email)
-						.build())
-				.build();
+
+		final String email = "michael.knight@gmail.com";
+
+		final KeyValuePair<Contactmethod, Contactmethod> comparison = KeyValuePair
+			.<Contactmethod, Contactmethod> builder()
+			.key(Contactmethod.builder().contactmethod(ContactmethodType.EMAIL).contactvalue(email)
+				.build())
+			.value(Contactmethod.builder().contactmethod(ContactmethodType.EMAIL)
+				.contactvalue(email).build())
+			.build();
 		// http://localhost:8080/contactmethod/compare/contactmethod/
 		boolean actual = resource.compare(comparison);
 
 		boolean expected = true;
 		AssertJUnit.assertEquals(expected, actual);
-		
+
 		comparison.getValue().setContactvalue("james.dean@gmail.com");
 
 		actual = resource.compare(comparison);
-		
+
 		expected = false;
 		AssertJUnit.assertEquals(expected, actual);
 
 		// http://localhost:8080/contactmethod/exists/michael.knight@gmail.com
-		KeyValuePair<String, ContactmethodType> contactMethod = 
-				KeyValuePair.<String, ContactmethodType>builder()
-				.key(email)
-				.value(ContactmethodType.EMAIL)
-				.build();
-		Credentials credentials = Credentials.builder().username("michael.knight").password("xxx").build();
-		
-		Response tokenResponse = authenticationsResource.authenticate(credentials);
-		String token = tokenResponse.readEntity(String.class);
+		final KeyValuePair<String, ContactmethodType> contactMethod = KeyValuePair
+			.<String, ContactmethodType> builder().key(email).value(ContactmethodType.EMAIL)
+			.build();
+		final Credentials credentials = Credentials.builder().username("michael.knight")
+			.password("xxx").build();
+
+		final Response tokenResponse = authenticationsResource.authenticate(credentials);
+		final String token = tokenResponse.readEntity(String.class);
 		WebClient.client(resource).header("Authorization", "Bearer " + token);
 		actual = resource.existsContact(contactMethod);
 		expected = true;
 		AssertJUnit.assertEquals(expected, actual);
 
-		List<Contactmethod> cms = resource.findContact(contactMethod);		
+		List<Contactmethod> cms = resource.findContact(contactMethod);
 		AssertJUnit.assertNotNull(cms);
-		
-		cms = resource.find(contactMethod);		
+
+		cms = resource.find(contactMethod);
 		AssertJUnit.assertNotNull(cms);
-		
-		KeyValuePair<ContactmethodType, User> contactMethodsFromUser = 
-				KeyValuePair.<ContactmethodType, User>builder()
-				.key(ContactmethodType.EMAIL)
-				.value(getPromoterUser())
-				.build();
-		
-		cms = resource.findContactmethod(contactMethodsFromUser);	
-		AssertJUnit.assertNotNull(cms);	
-		
-		Contactmethod cm = Contactmethod.builder()
-				.contactvalue("foo@bar.org")
-				.contactmethod(ContactmethodType.EMAIL)
-				.build();
-		cm = resource.create(cm);	
-		AssertJUnit.assertNotNull(cms);	
+
+		final KeyValuePair<ContactmethodType, User> contactMethodsFromUser = KeyValuePair
+			.<ContactmethodType, User> builder().key(ContactmethodType.EMAIL)
+			.value(getPromoterUser()).build();
+
+		cms = resource.findContactmethod(contactMethodsFromUser);
+		AssertJUnit.assertNotNull(cms);
+
+		Contactmethod cm = Contactmethod.builder().contactvalue("foo@bar.org")
+			.contactmethod(ContactmethodType.EMAIL).build();
+		cm = resource.create(cm);
+		AssertJUnit.assertNotNull(cms);
 		cm.setContactvalue("foo.bla@bar.org");
-		
+
 		resource.update(cm);
-		
+
 		cm = resource.read(cm.getId());
 		AssertJUnit.assertEquals(cm.getContactvalue(), "foo.bla@bar.org");
-		
+
 		resource.delete(cm.getId());
-		
+
 		cm = resource.read(cm.getId());
-		
-		AssertJUnit.assertNull(cm);		
+
+		AssertJUnit.assertNull(cm);
 	}
-	
+
 	/**
 	 * Test the {@link PermissionsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = true)
-	public void testPermissionsResource() {
-		
-		String permissionName = "view_user_images";
-		
-		Permission expected = Permission.builder()
-				.permissionName(permissionName)
-				.shortcut("vui")
-				.description("This permission grant to view the images of a user")
-				.build();
-		
+	public void testPermissionsResource()
+	{
+
+		final String permissionName = "view_user_images";
+
+		final Permission expected = Permission.builder().permissionName(permissionName)
+			.shortcut("vui").description("This permission grant to view the images of a user")
+			.build();
+
 		Permission actual = permissionsResource.findByName(expected.getPermissionName());
-		
-		if(actual == null) {
+
+		if (actual == null)
+		{
 			actual = permissionsResource.create(expected);
 		}
 
 		AssertJUnit.assertEquals(expected.getDescription(), actual.getDescription());
 		AssertJUnit.assertEquals(expected.getPermissionName(), actual.getPermissionName());
 		AssertJUnit.assertEquals(expected.getShortcut(), actual.getShortcut());
-		
-	}
-	
 
-	
+	}
+
+
 	/**
 	 * Test the {@link RecommendationsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = true)
-	public void testRecommendationsResource() {
-		RecommendationsResource recommendationsResource = restClient.getRecommendationsResource();
+	public void testRecommendationsResource()
+	{
+		final RecommendationsResource recommendationsResource = restClient
+			.getRecommendationsResource();
 		// set client params with key and trust managers. The keystore is the same as jetty
 		WebClientExtensions.setTLSClientParameters(recommendationsResource, tlsClientParameters);
 		AssertJUnit.assertNotNull(recommendationsResource);
-		String sendToEmail = "foo@bar.org";
-		User promoter = getPromoterUser();
-		User recommendedUser = getRecommendedUser();
-		
-		Recommendation expected = Recommendation.builder()
-				.email(sendToEmail)
-				.user(promoter)
-				.recommended(recommendedUser)
-				.invitationText("See this profile is cool.")
-				.sent(Boolean.FALSE)
-				.build();
-		Triple<User, User, String> searchCriteria = Triple.<User, User, String>builder()
-				.left(promoter)
-				.middle(recommendedUser)
-				.right(sendToEmail)
-				.build();
+		final String sendToEmail = "foo@bar.org";
+		final User promoter = getPromoterUser();
+		final User recommendedUser = getRecommendedUser();
+
+		final Recommendation expected = Recommendation.builder().email(sendToEmail).user(promoter)
+			.recommended(recommendedUser).invitationText("See this profile is cool.")
+			.sent(Boolean.FALSE).build();
+		final Triple<User, User, String> searchCriteria = Triple.<User, User, String> builder()
+			.left(promoter).middle(recommendedUser).right(sendToEmail).build();
 		Recommendation actual = recommendationsResource.findRecommendations(searchCriteria);
-		
-		if(actual == null) {
+
+		if (actual == null)
+		{
 			actual = recommendationsResource.create(expected);
 		}
 
 		AssertJUnit.assertEquals(expected.getEmail(), actual.getEmail());
-		AssertJUnit.assertEquals(expected.getInvitationText(), actual.getInvitationText());		
+		AssertJUnit.assertEquals(expected.getInvitationText(), actual.getInvitationText());
 	}
-	
+
 	/**
 	 * Test the {@link RelationPermissionsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = true)
-	public void testRelationPermissionsResource() {
-		RelationPermissionsResource resource = restClient.getRelationPermissionsResource();	
-		// set client params with key and trust managers. The keystore is the same as jetty
-		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
-		AssertJUnit.assertNotNull(resource);	
-
-		User promoter = getPromoterUser();
-		User recommendedUser = getRecommendedUser();
-		
-		Permission permission = permissionsResource.findByName("view_user_images");
-				
-		RelationPermission expected = RelationPermission.builder()
-				.provider(promoter)
-				.subscriber(recommendedUser)
-				.permissions(SetExtensions.newHashSet(permission))
-				.build();
-		
-		// http://localhost:8080/relation/permission/find/all
-		KeyValuePair<User, User> providerToSubscriber = 
-				KeyValuePair.<User, User>builder()
-				.key(promoter)
-				.value(recommendedUser)
-				.build();
-		
-		RelationPermission relationPermission = resource.findRelationPermissions(providerToSubscriber);
-		
-		if(relationPermission == null) {
-			relationPermission = resource.create(expected);
-		}
-		AssertJUnit.assertNotNull(relationPermission);	
-
-		Triple<User, User, Permission> searchCriteria = Triple.<User, User, Permission>builder()
-				.left(promoter)
-				.middle(recommendedUser)
-				.right(permission)
-				.build();
-		
-		List<RelationPermission> relationPermissions = resource.find(searchCriteria);
-		System.out.println(relationPermissions);
-//		AssertJUnit.assertNotNull(relationPermission);
-
-	}
-	
-	/**
-	 * Test the {@link ResetPasswordsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
-	 */
-	@Test(enabled = true)
-	public void testResetPasswordsResource() {
-		ResetPasswordsResource resource = restClient.getResetPasswordsResource();
+	public void testRelationPermissionsResource()
+	{
+		final RelationPermissionsResource resource = restClient.getRelationPermissionsResource();
 		// set client params with key and trust managers. The keystore is the same as jetty
 		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
-		Date now = CreateDateExtensions.now();
-		Date expiryDate = CalculateDateExtensions.addDays(now, 1);
-		
+
+		final User promoter = getPromoterUser();
+		final User recommendedUser = getRecommendedUser();
+
+		final Permission permission = permissionsResource.findByName("view_user_images");
+
+		final RelationPermission expected = RelationPermission.builder().provider(promoter)
+			.subscriber(recommendedUser).permissions(SetExtensions.newHashSet(permission)).build();
+
+		// http://localhost:8080/relation/permission/find/all
+		final KeyValuePair<User, User> providerToSubscriber = KeyValuePair.<User, User> builder()
+			.key(promoter).value(recommendedUser).build();
+
+		RelationPermission relationPermission = resource
+			.findRelationPermissions(providerToSubscriber);
+
+		if (relationPermission == null)
+		{
+			relationPermission = resource.create(expected);
+		}
+		AssertJUnit.assertNotNull(relationPermission);
+
+		final Triple<User, User, Permission> searchCriteria = Triple
+			.<User, User, Permission> builder().left(promoter).middle(recommendedUser)
+			.right(permission).build();
+
+		final List<RelationPermission> relationPermissions = resource.find(searchCriteria);
+		System.out.println(relationPermissions);
+		// AssertJUnit.assertNotNull(relationPermission);
+
+	}
+
+	/**
+	 * Test the {@link ResetPasswordsResource}.
+	 */
+	@Test(enabled = true)
+	public void testResetPasswordsResource()
+	{
+		final ResetPasswordsResource resource = restClient.getResetPasswordsResource();
+		// set client params with key and trust managers. The keystore is the same as jetty
+		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
+		AssertJUnit.assertNotNull(resource);
+		final Date now = CreateDateExtensions.now();
+		final Date expiryDate = CalculateDateExtensions.addDays(now, 1);
+
 		ResetPassword resetPassword;
-		
+
 		resetPassword = resource.findResetPassword(getPromoterUser());
-		if(resetPassword == null){
-			resetPassword = ResetPassword.builder()
-					.starttime(now)
-					.expiryDate(expiryDate)
-					.user(getPromoterUser())
-					.generatedPassword("very-secret")
-					.build();
+		if (resetPassword == null)
+		{
+			resetPassword = ResetPassword.builder().starttime(now).expiryDate(expiryDate)
+				.user(getPromoterUser()).generatedPassword("very-secret").build();
 			resetPassword = resource.create(resetPassword);
 		}
 		AssertJUnit.assertNotNull(resetPassword);
-		
-		KeyValuePair<User, String> userAndGenPw = KeyValuePair.<User, String>builder()
-				.key(getPromoterUser())
-				.value("very-secret")
-				.build();
-		
-		ResetPassword actual = resource.findResetPassword(userAndGenPw);
+
+		final KeyValuePair<User, String> userAndGenPw = KeyValuePair.<User, String> builder()
+			.key(getPromoterUser()).value("very-secret").build();
+
+		final ResetPassword actual = resource.findResetPassword(userAndGenPw);
 		AssertJUnit.assertNotNull(actual);
-		
+
 
 	}
-	
+
 	/**
 	 * Test the {@link RobinsonsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = false)
-	public void testRobinsonsResource() {
-		RobinsonsResource resource = restClient.getRobinsonsResource();
+	public void testRobinsonsResource()
+	{
+		final RobinsonsResource resource = restClient.getRobinsonsResource();
 		// set client params with key and trust managers. The keystore is the same as jetty
 		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
-		
-		Robinson robinson =  Robinson.builder().robinson(getPromoterUser()).build();
-		
-		Robinson robinson2 = resource.read(50);
+
+//		final Robinson robinson = Robinson.builder().robinson(getPromoterUser()).build();
+
+		final Robinson robinson2 = resource.read(50);
 		AssertJUnit.assertNotNull(robinson2);
-		
-		
+
+
 	}
-	
+
 	/**
 	 * Test the {@link RolesResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = true)
-	public void testRolesResource() {
-		RolesResource resource = restClient.getRolesResource();
-		// set client params with key and trust managers. The keystore is the same as jetty
-		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
-		AssertJUnit.assertNotNull(resource);
-		Role role;
-		
-		role = resource.findRole("ADMIN");
-		if(role == null) {
-			role = Role.builder()
-					.rolename("ADMIN")
-					.description("The admin role")
-					.build();
-			role = resource.create(role);
-		}
-		
+	public void testRolesResource()
+	{
+		AssertJUnit.assertNotNull(rolesResource);
+		final Role role = getAdminRole();
 		AssertJUnit.assertNotNull(role);
-		
-		List<Permission> permissions = resource.findAllPermissions(role);
+
+		final List<Permission> permissions = rolesResource.findAllPermissions(role);
 		AssertJUnit.assertNotNull(permissions);
-		
-		
+
+
 	}
-	
+
+	private Role getAdminRole() {
+		Role role = rolesResource.findRole("ADMIN");
+		if (role == null)
+		{
+			role = Role.builder().rolename("ADMIN").description("The admin role").build();
+			role = rolesResource.create(role);
+		}
+		return role;
+	}
+
 	/**
 	 * Test the {@link RuleViolationsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
+	 */
+	@Test(enabled = true)
+	public void testRuleViolationsResource()
+	{
+		final RuleViolationsResource resource = restClient.getRuleViolationsResource();
+		// set client params with key and trust managers. The keystore is the same as jetty
+		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
+		AssertJUnit.assertNotNull(resource);
+		final Infringement model = Infringement.builder().detector(getPromoterUser())
+			.violator(getRecommendedUser()).reason(RuleViolationReason.ADVERTISING)
+			.description("The user makes advertising.").build();
+
+		List<RuleViolation> ruleViolations = resource.find(model);
+		AssertJUnit.assertNotNull(ruleViolations);
+
+		final RuleViolation ruleViolation;
+		if (ListExtensions.isEmpty(ruleViolations))
+		{
+			ruleViolation = resource.save(model);
+			AssertJUnit.assertNotNull(ruleViolation);
+		}
+		ruleViolations = resource.find(model);
+		AssertJUnit.assertTrue(ListExtensions.isNotEmpty(ruleViolations));
+
+	}
+
+	/**
+	 * Test the {@link UserCreditsResource}.
 	 */
 	@Test(enabled = false)
-	public void testRuleViolationsResource() {
-		RuleViolationsResource resource = restClient.getRuleViolationsResource();
+	public void testUserCreditsResource()
+	{
+		final UserCreditsResource resource = restClient.getUserCreditsResource();
 		// set client params with key and trust managers. The keystore is the same as jetty
 		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
 	}
-	
-	/**
-	 * Test the {@link UserCreditsResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
-	 */
-	@Test(enabled = false)
-	public void testUserCreditsResource() {
-		UserCreditsResource resource = restClient.getUserCreditsResource();
-		AssertJUnit.assertNotNull(resource);
-	}
-	
+
 	/**
 	 * Test the {@link UserDatasResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = false)
-	public void testUserDatasResource() {
-		UserDatasResource resource = restClient.getUserDatasResource();
+	public void testUserDatasResource()
+	{
+		final UserDatasResource resource = restClient.getUserDatasResource();
+		// set client params with key and trust managers. The keystore is the same as jetty
+		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
 	}
-	
+
 	/**
 	 * Test the {@link UserManagementResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
-	@Test(enabled = false)
-	public void testUserManagementResource() {
-		UserManagementResource resource = restClient.getUserManagementResource();
+	@Test(enabled = true)
+	public void testUserManagementResource()
+	{
+		final UserManagementResource resource = restClient.getUserManagementResource();
+		// set client params with key and trust managers. The keystore is the same as jetty
+		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
+
+		final KeyValuePair<String, List<Role>> roleSearchModel = KeyValuePair.<String, List<Role>>builder()
+			.key("ADMIN")
+			.value(newArrayList(getAdminRole()))
+			.build();
+		final boolean actual = resource.isInRole(roleSearchModel);
+		final boolean expected = true;
+		AssertJUnit.assertEquals(expected, actual);
 	}
-	
+
 	/**
 	 * Test the {@link UsersResource}.
-	 *
-	 * Note: you have to start a rest server to test this or you have to mock
-	 * it.
 	 */
 	@Test(enabled = false)
-	public void testUsersResource() {
-		UsersResource resource = restClient.getUsersResource();
+	public void testUsersResource()
+	{
+		AssertJUnit.assertNotNull(usersResource);
 
-		String userEmail = "james.dean@gmail.com";
-		User expected = resource.findUserWithEmail(userEmail);
+		final String userEmail = "james.dean@gmail.com";
+		final User expected = usersResource.findUserWithEmail(userEmail);
 
 		AssertJUnit.assertEquals(expected.getUsername(), "james.dean");
 	}
-	
-	public User getPromoterUser() {
-		if(promoterUser == null) {
-			String promoterEmail ="michael.knight@gmail.com";
-			promoterUser = usersResource.findUserWithEmail(promoterEmail);	
-			if(promoterUser.getActive() == null) {
+
+	public User getPromoterUser()
+	{
+		if (promoterUser == null)
+		{
+			final String promoterEmail = "michael.knight@gmail.com";
+			promoterUser = usersResource.findUserWithEmail(promoterEmail);
+			if (promoterUser.getActive() == null)
+			{
 				promoterUser.setActive(true);
 				usersResource.update(promoterUser);
-			}		
+			}
 		}
 		return promoterUser;
 	}
-	
-	public User getRecommendedUser() {
-		if(recommendedUser == null) {
-			String promoterEmail ="james.dean@gmail.com";
+
+	public User getRecommendedUser()
+	{
+		if (recommendedUser == null)
+		{
+			final String promoterEmail = "james.dean@gmail.com";
 			recommendedUser = usersResource.findUserWithEmail(promoterEmail);
-			if(recommendedUser.getActive() == null) {
+			if (recommendedUser.getActive() == null)
+			{
 				recommendedUser.setActive(true);
 				usersResource.update(recommendedUser);
 			}
 		}
 		return recommendedUser;
 	}
-	
-	private User promoterUser;
-	
-	private User recommendedUser;
-	
+
+	/**
+	 * Factory method for create new {@link ArrayList} and returns as {@link List}.
+	 *
+	 * @param <T>            the generic type
+	 * @param elements the elements to add in the new {@link ArrayList}.
+	 * @return the new {@link List}.
+	 * @deprecated use the synonyme method in ListExtensions.
+	 */
+	@Deprecated
+	@SafeVarargs
+	public static <T> List<T> newArrayList(final T... elements) {
+		final List<T> list = new ArrayList<>();
+		Collections.addAll(list, elements);
+		return list;
+	}
+
 }
