@@ -1,27 +1,28 @@
 package de.alpharogroup.user.management.enums;
 
 /**
- * An enumeration for the type of the contact method for contact.
+ * The enum {@link ContactmethodType} for the type of the contact method for contact.
  */
-public enum ContactmethodType {
+public enum ContactmethodType
+{
 
-	/** The email. */
+	/** The constant for the contact method email. */
 	EMAIL,
-	/** The mail. */
+	/** The constant for the contact method mail. */
 	MAIL,
-	/** The telefon. */
+	/** The constant for the contact method telefon. */
 	TELEFON,
-	/** The fax. */
+	/** The constant for the contact method fax. */
 	FAX,
-	/** The mobile. */
+	/** The constant for the contact method mobile. */
 	MOBILE,
-	/** The sms. */
+	/** The constant for the contact method sms. */
 	SMS,
-	/** The messenger. */
+	/** The constant for the contact method messenger. */
 	MESSENGER,
-	/** The internet. */
+	/** The constant for the contact method internet. */
 	INTERNET,
-	/** The newsgroup. */
+	/** The constant for the contact method newsgroup. */
 	NEWSGROUP;
 
 }

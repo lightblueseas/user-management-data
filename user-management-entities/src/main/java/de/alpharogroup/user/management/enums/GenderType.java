@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Defines the type of the gender.
+ * The enum {@link GenderType} defines the type of the gender.
  */
 public enum GenderType {
 
-	/** The male. */
+	/** The constant for the gender male. */
 	MALE,
-	/** The female. */
+	/** The constant for the gender female. */
 	FEMALE,
-	/** represents a company. */
+	/** The constant for the gender that represents a company. */
 	INCORPORATION,
-	/** The undefined. */
+	/** The constant if the gender is undefined. */
 	UNDEFINED;
 
 	/**
@@ -24,7 +24,7 @@ public enum GenderType {
 	 */
 	public static List<GenderType> getValidGenders() {
 		final GenderType[] genderValues = GenderType.values();
-		final List<GenderType> genders = new ArrayList<GenderType>();
+		final List<GenderType> genders = new ArrayList<>();
 		for (int i = 0; i < genderValues.length; i++) {
 			if (!genderValues[i].equals(GenderType.UNDEFINED)) {
 				genders.add(genderValues[i]);
@@ -40,7 +40,7 @@ public enum GenderType {
 	 */
 	public static List<GenderType> getHumanGenders() {
 		final GenderType[] genderValues = GenderType.values();
-		final List<GenderType> genders = new ArrayList<GenderType>();
+		final List<GenderType> genders = new ArrayList<>();
 		for (int i = 0; i < genderValues.length; i++) {
 			if (!genderValues[i].equals(GenderType.UNDEFINED)&& !genderValues[i].equals(GenderType.INCORPORATION)) {
 				genders.add(genderValues[i]);
