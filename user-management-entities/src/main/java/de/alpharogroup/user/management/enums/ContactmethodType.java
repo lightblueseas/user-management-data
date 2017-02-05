@@ -1,7 +1,8 @@
 package de.alpharogroup.user.management.enums;
 
 /**
- * The enum {@link ContactmethodType} for the type of the contact method for contact.
+ * The enum {@link ContactmethodType} defines a view of the types for contact methods that are used
+ * for contact.
  */
 public enum ContactmethodType
 {
