@@ -2,8 +2,10 @@ package de.alpharogroup.user.management.service.api;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -74,10 +76,12 @@ public interface AuthenticationsService extends Serializable {
 	        		UnsupportedEncodingException | 
 	        		NoSuchPaddingException | 
 	        		IllegalBlockSizeException | 
-	        		BadPaddingException e ) {
+	        		BadPaddingException |
+	        		InvalidKeySpecException |
+	        		InvalidAlgorithmParameterException e  ) {
 	        	authenticationResult.getValidationErrors().add(AuthenticationErrors.PASSWORD_INVALID);	
 	    		return authenticationResult;        	
-	        }
+	        } 
 			if (passwordService.match(hashedPassword, dbHashedPassword)) {
 				authenticationResult.setUser(user);				
 			} else { 
