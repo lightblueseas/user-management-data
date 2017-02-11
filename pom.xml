@@ -50,7 +50,7 @@
 
 	<properties>
 		<!-- MYSTIC-CRYPT versions -->
-		<mystic-crypt.version>4.14.0</mystic-crypt.version>
+		<mystic-crypt.version>4.19.0</mystic-crypt.version>
 		<crypt-core.version>${mystic-crypt.version}</crypt-core.version>
 		<auth-security.version>${mystic-crypt.version}</auth-security.version>
 		<!-- NEW EXTENSIONS LIB versions -->
