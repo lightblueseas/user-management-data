@@ -14,8 +14,8 @@ import de.alpharogroup.address.book.domain.Address;
 import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.service.rs.RestfulResource;
-import de.alpharogroup.user.management.domain.Role;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.Role;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.domain.model.UserSearchCriteria;
 import de.alpharogroup.user.management.enums.GenderType;
 

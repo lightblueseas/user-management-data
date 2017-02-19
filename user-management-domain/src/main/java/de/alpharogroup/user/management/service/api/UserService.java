@@ -4,8 +4,8 @@ import java.util.List;
 
 import de.alpharogroup.address.book.domain.Address;
 import de.alpharogroup.service.domain.DomainService;
-import de.alpharogroup.user.management.domain.Role;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.Role;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.enums.GenderType;
 
 /**
@@ -15,7 +15,7 @@ public interface UserService extends DomainService<Integer, User> {
 
 	/**
 	 * Checks if a user exists with the given user name.
-	 * 
+	 *
 	 * @param username
 	 *            the user name
 	 * @return true, if successful
@@ -24,7 +24,7 @@ public interface UserService extends DomainService<Integer, User> {
 
 	/**
 	 * Find all {@link Address} from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Address} from the given {@link User}.
@@ -33,7 +33,7 @@ public interface UserService extends DomainService<Integer, User> {
 
 	/**
 	 * Find the main {@link Address} from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the main {@link Address} from the given {@link User}.
@@ -42,7 +42,7 @@ public interface UserService extends DomainService<Integer, User> {
 
 	/**
 	 * Find roles from the given {@link User}.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @return the list of found {@link Role} from the given {@link User}.
@@ -51,7 +51,7 @@ public interface UserService extends DomainService<Integer, User> {
 
 	/**
 	 * Find the {@link User} object with the given email.
-	 * 
+	 *
 	 * @param email
 	 *            the email
 	 * @return the found {@link User} object
@@ -60,7 +60,7 @@ public interface UserService extends DomainService<Integer, User> {
 
 	/**
 	 * Find {@link User} object from the given user name.
-	 * 
+	 *
 	 * @param username
 	 *            the user name
 	 * @return the found {@link User} object
@@ -70,7 +70,7 @@ public interface UserService extends DomainService<Integer, User> {
 	/**
 	 * Checks if the given {@link User} object is in the given {@link Role}
 	 * object.
-	 * 
+	 *
 	 * @param user
 	 *            the user
 	 * @param role
@@ -81,7 +81,7 @@ public interface UserService extends DomainService<Integer, User> {
 
 	/**
 	 * Find users from the given {@link GenderType} object and the range from till until.
-	 * 
+	 *
 	 * @param from
 	 *            the from
 	 * @param searchGender
@@ -95,7 +95,7 @@ public interface UserService extends DomainService<Integer, User> {
 	/**
 	 * Find users from the given {@link GenderType} object and the range from till until and the
 	 * given geohash code.
-	 * 
+	 *
 	 * @param from
 	 *            the from
 	 * @param searchGender

@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.user.repositories.PermissionsDao;
 import de.alpharogroup.user.entities.Permissions;
-import de.alpharogroup.user.management.service.api.PermissionsService;
+import de.alpharogroup.user.service.api.PermissionsService;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
 public class PermissionsDaoTest extends AbstractTestNGSpringContextTests {
@@ -22,7 +22,7 @@ public class PermissionsDaoTest extends AbstractTestNGSpringContextTests {
 
 	@Test(enabled = false)
 	public void getAllPermissions() {
-		List<Permissions> list = permissionsService.findAll();
+		final List<Permissions> list = permissionsService.findAll();
 		AssertJUnit.assertEquals(2, list.size());
 
 	}

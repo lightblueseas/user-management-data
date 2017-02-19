@@ -39,9 +39,9 @@ import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
-import de.alpharogroup.user.management.service.api.RolesService;
+import de.alpharogroup.user.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.UserDatasService;
-import de.alpharogroup.user.management.service.api.UserTokensService;
+import de.alpharogroup.user.service.api.UserTokensService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
@@ -216,8 +216,8 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public List<Contactmethods> findAllContactmethodsByType(final @Nonnull Users user, final @Nonnull ContactmethodType contactmethodType) {
-		final List<Contactmethods> cms = new ArrayList<Contactmethods>();
-		UserDatas userData = userDatasService.findBy(user);
+		final List<Contactmethods> cms = new ArrayList<>();
+		final UserDatas userData = userDatasService.findBy(user);
 		final Set<Contactmethods> userContactMethods = userData.getContactmethods();
 		for (final Contactmethods cm : userContactMethods) {
 			if (contactmethodType.equals(cm.getContactmethod())) {
@@ -230,8 +230,9 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Contactmethods findContactmethodByType(final @Nonnull Users user, final @Nonnull ContactmethodType contactmethodType) {
-		UserDatas userData = userDatasService.findBy(user);
+		final UserDatas userData = userDatasService.findBy(user);
 		final Set<Contactmethods> userContactMethods = userData.getContactmethods();
 		for (final Contactmethods cm : userContactMethods) {
 			if (contactmethodType.equals(cm.getContactmethod())) {
@@ -345,7 +346,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public void saveAddressesFromUser(final Users user, final Collection<Addresses> addresses) {
-		final List<Addresses> mergedAddresses = new ArrayList<Addresses>();
+		final List<Addresses> mergedAddresses = new ArrayList<>();
 		for (Addresses address : addresses) {
 			if (!addressesService.exists(address.getId())) {
 				address = addressesService.merge(address);
@@ -384,7 +385,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			// TODO FIXME set UserDatas object with this user object
 			//user.setUserData(userDatasService.merge(user.getUserData()));
 			final Users mergedUser = usersService.merge(user);
-			
+
 			return mergedUser.getId();
 		} else {
 			throw new UserAlreadyExistsException("User with username " + username + " allready exists.");
@@ -431,7 +432,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 */
 	@Override
 	public void saveUserWithRoles(Users user, final Collection<Roles> roles) {
-		final List<Roles> mergedRoles = new ArrayList<Roles>();
+		final List<Roles> mergedRoles = new ArrayList<>();
 		for (Roles role : roles) {
 			if (!rolesService.exists(role.getId())) {
 				role = rolesService.merge(role);
@@ -557,7 +558,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			result.setValidationErrors(validationErrors);
 			return result;
 		}
-		final Set<Contactmethods> contacts = new HashSet<Contactmethods>();
+		final Set<Contactmethods> contacts = new HashSet<>();
 		final Contactmethods emailContact = UserManagementFactory.getInstance()
 				.newContactmethods(ContactmethodType.EMAIL, email);
 		contacts.add(emailContact);
@@ -594,21 +595,21 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			if (5 < locale.length()) {
 				locale = locale.substring(0, 5);
 			}
-		}		
+		}
 
 		newUser = UserManagementFactory.getInstance().newUsers(Boolean.TRUE, hashedPassword, salt, username,
 				Boolean.FALSE, roles);
 
 		// save user
 		newUser = usersService.merge(newUser);
-		
+
 		UserDatas userData = UserManagementFactory.getInstance().newUserData(userModel.getBirthname(),
 				userModel.getDateofbirth(), userModel.getFirstname(), userModel.getGender(), userModel.getIpAddress(),
 				userModel.getLastname(), locale);
 
 		userData.setOwner(newUser);
 
-		final Set<Contactmethods> mergedContacts = new HashSet<Contactmethods>();
+		final Set<Contactmethods> mergedContacts = new HashSet<>();
 		for (Contactmethods contactmethod : contacts) {
 			contactmethod = contactmethodsService.merge(contactmethod);
 			mergedContacts.add(contactmethod);
@@ -623,7 +624,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 			}
 		}
 		userData = userDatasService.merge(userData);
-		
+
 		result.setUser(newUser);
 		return result;
 	}
@@ -704,7 +705,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Users addUserContact(Users user, final Users contact) {
+	public Users addUserContact(final Users user, final Users contact) {
 		UserDatas userData = userDatasService.findBy(user);
 		userData.getUserContacts().add(contact);
 		userData = getUserDatasService().merge(userData);
@@ -715,18 +716,18 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String newAuthenticationToken(String username) {
+	public String newAuthenticationToken(final String username) {
 		UserTokens userTokens = userTokensService.find(username);
 		if (userTokens == null) {
 			userTokens = userTokensService.merge(newUserTokens(username));
 		}
 		// check if expired
-		Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+		final Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 		if (userTokens.getExpiry().before(now)) {
 			// expires in one year
-			Date expiry = Date.from(LocalDateTime.now().plusMonths(12).atZone(ZoneId.systemDefault()).toInstant());
+			final Date expiry = Date.from(LocalDateTime.now().plusMonths(12).atZone(ZoneId.systemDefault()).toInstant());
 			// create a token
-			String token = RandomExtensions.randomToken();
+			final String token = RandomExtensions.randomToken();
 			userTokens.setExpiry(expiry);
 			userTokens.setToken(token);
 			userTokens = userTokensService.merge(userTokens);
@@ -738,7 +739,7 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isValid(String token) {
+	public boolean isValid(final String token) {
 		return userTokensService.isValid(token);
 	}
 
@@ -748,12 +749,12 @@ public class UsersManagementBusinessService implements UsersManagementService {
 	 * @param username the username
 	 * @return the user tokens
 	 */
-	private UserTokens newUserTokens(String username) {
+	private UserTokens newUserTokens(final String username) {
 		UserTokens userTokens;
 		// expires in one year
-		Date expiry = Date.from(LocalDateTime.now().plusMonths(12).atZone(ZoneId.systemDefault()).toInstant());
+		final Date expiry = Date.from(LocalDateTime.now().plusMonths(12).atZone(ZoneId.systemDefault()).toInstant());
 		// create a token
-		String token = RandomExtensions.randomToken();
+		final String token = RandomExtensions.randomToken();
 		userTokens = UserTokens.builder().expiry(expiry).username(username).token(token).build();
 		return userTokens;
 	}

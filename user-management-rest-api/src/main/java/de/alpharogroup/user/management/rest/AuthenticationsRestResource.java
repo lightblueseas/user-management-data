@@ -8,7 +8,7 @@ import de.alpharogroup.auth.Credentials;
 import de.alpharogroup.auth.models.AuthenticationErrors;
 import de.alpharogroup.auth.models.AuthenticationResult;
 import de.alpharogroup.auth.token.AuthToken;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.rest.api.AuthenticationsResource;
 import de.alpharogroup.user.management.service.api.AuthenticationService;
 import lombok.Getter;

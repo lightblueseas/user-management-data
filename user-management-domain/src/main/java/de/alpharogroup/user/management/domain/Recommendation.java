@@ -1,6 +1,7 @@
 package de.alpharogroup.user.management.domain;
 
 import de.alpharogroup.domain.BaseDomainObject;
+import de.alpharogroup.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -24,7 +25,7 @@ public class Recommendation extends BaseDomainObject<Integer> {
 	/** The user that made the recommendation. */
 	private User user;
 	/** The user that is recommended. */
-	private User recommended; 
+	private User recommended;
 	/** The email where this recommendation is send. */
 	private String email;
 	/** The text from the invitation from the user. This is optional. */

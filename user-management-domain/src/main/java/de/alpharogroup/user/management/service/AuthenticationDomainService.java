@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.auth.models.AuthenticationErrors;
 import de.alpharogroup.auth.models.AuthenticationResult;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.entities.Users;
-import de.alpharogroup.user.management.mapper.UsersMapper;
+import de.alpharogroup.user.mapper.UsersMapper;
 import de.alpharogroup.user.management.service.api.AuthenticationService;
 import de.alpharogroup.user.management.service.api.AuthenticationsService;
 import lombok.Getter;

@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.service.rs.RestfulResource;
 import de.alpharogroup.user.management.domain.Recommendation;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 
 /**
  * The interface {@link RecommendationsResource} provides methods for resolving recommendation

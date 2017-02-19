@@ -34,12 +34,12 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	/** The Constant LOGGER. */
 	private final static Logger LOGGER = Logger.getLogger(UsersBusinessService.class.getName());
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	public void setUsersDao(UsersDao usersDao)
+	public void setUsersDao(final UsersDao usersDao)
 	{
 		setDao(usersDao);
 	}
@@ -47,6 +47,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean existsUserWithUsername(final String username)
 	{
 		final Users users = findUserWithUsername(username);
@@ -74,6 +75,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Addresses findAddressFromUser(final Users user)
 	{
 		final List<Addresses> addresses = findAddressesFromUser(user);
@@ -83,6 +85,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Roles> findRolesFromUser(final Users user)
 	{
@@ -96,6 +99,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	@Transactional
 	@SuppressWarnings("unchecked")
 	public Users findUserWithEmail(final String email)
@@ -111,6 +115,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public Users findUserWithUsername(final String username)
 	{
@@ -124,6 +129,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean userIsInRole(final Users user, final Roles role)
 	{
 		final List<Roles> roles = findRolesFromUser(user);
@@ -137,13 +143,14 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		return false;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
-	public List<Users> findUsers(Integer from, GenderType searchGender, Integer until)
+	public List<Users> findUsers(final Integer from, final GenderType searchGender, final Integer until)
 	{
-		Date now = new Date(System.currentTimeMillis());
-		Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
-		Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
-		final String hqlString = "select u from Users u, UserDatas ud " 
+		final Date now = new Date(System.currentTimeMillis());
+		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
+		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
+		final String hqlString = "select u from Users u, UserDatas ud "
 		+ "where ud.gender=:gender "
 		// + "and ud.dateofbirth between :start and :end"
 			+ "and ud.dateofbirth >= :start " + "and ud.dateofbirth <= :end";
@@ -155,13 +162,14 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		return users;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
-	public List<Users> findUsers(Integer from, GenderType searchGender, Integer until,
+	public List<Users> findUsers(final Integer from, final GenderType searchGender, final Integer until,
 		final String geohash)
 	{
-		Date now = new Date(System.currentTimeMillis());
-		Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
-		Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
+		final Date now = new Date(System.currentTimeMillis());
+		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
+		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
 
 		final StringBuilder hqlString = new StringBuilder();
 		hqlString.append("select u from Users u, UserDatas ud " + "where ud.gender=:gender "
@@ -175,13 +183,13 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		}
 		if (adjacentAreas != null)
 		{
-			String firstAndSecondRingSubQuery = HqlStringCreator
+			final String firstAndSecondRingSubQuery = HqlStringCreator
 				.getGeohashFirstAndSecondRingSubQuery();
 			hqlString.append("and ud.primaryAddress.geohash in "
 				+ firstAndSecondRingSubQuery);
 		}
 
-		String queryString = hqlString.toString();
+		final String queryString = hqlString.toString();
 		LOGGER.info("Query String from method findUsers:" + queryString);
 		final Query query = getQuery(queryString);
 		// Set parameters...
@@ -190,7 +198,7 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		query.setParameter("end", end);
 		if (adjacentAreas != null)
 		{
-			for (Entry<String, String> entry : adjacentAreas.entrySet())
+			for (final Entry<String, String> entry : adjacentAreas.entrySet())
 			{
 				query.setParameter(entry.getKey(), entry.getValue() + "%");
 			}

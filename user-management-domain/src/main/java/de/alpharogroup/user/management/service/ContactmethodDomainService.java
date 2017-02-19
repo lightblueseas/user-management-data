@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.daos.ContactmethodsDao;
 import de.alpharogroup.user.management.domain.Contactmethod;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;

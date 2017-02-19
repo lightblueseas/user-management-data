@@ -10,12 +10,12 @@ import de.alpharogroup.resource.system.rest.api.ResourcesResource;
 import de.alpharogroup.cxf.rest.client.AbstractRestClient;
 import de.alpharogroup.user.management.rest.api.AuthenticationsResource;
 import de.alpharogroup.user.management.rest.api.ContactmethodsResource;
-import de.alpharogroup.user.management.rest.api.PermissionsResource;
+import de.alpharogroup.user.rest.api.PermissionsResource;
 import de.alpharogroup.user.management.rest.api.RecommendationsResource;
-import de.alpharogroup.user.management.rest.api.RelationPermissionsResource;
-import de.alpharogroup.user.management.rest.api.ResetPasswordsResource;
+import de.alpharogroup.user.rest.api.RelationPermissionsResource;
+import de.alpharogroup.user.rest.api.ResetPasswordsResource;
 import de.alpharogroup.user.management.rest.api.RobinsonsResource;
-import de.alpharogroup.user.management.rest.api.RolesResource;
+import de.alpharogroup.user.rest.api.RolesResource;
 import de.alpharogroup.user.management.rest.api.RuleViolationsResource;
 import de.alpharogroup.user.management.rest.api.UserCreditsResource;
 import de.alpharogroup.user.management.rest.api.UserDatasResource;
@@ -53,19 +53,19 @@ public class UserManagementSystemRestClient extends AbstractRestClient
 	 */
 	@Getter
 	private final ZipcodesResource zipcodesResource;
-	
+
 	/**
 	 * The {@link ResourcesResource}.
 	 */
 	@Getter
 	private final ResourcesResource resourcesResource;
-	
+
 	/**
 	 * The {@link AuthenticationsResource}.
 	 */
 	@Getter
 	private final AuthenticationsResource authenticationsResource;
-	
+
 	/**
 	 * The {@link ContactmethodsResource}.
 	 */
@@ -167,14 +167,14 @@ public class UserManagementSystemRestClient extends AbstractRestClient
 		userCreditsResource = newResource(UserCreditsResource.class);
 		userDatasResource = newResource(UserDatasResource.class);
 		userManagementResource = newResource(UserManagementResource.class);
-		usersResource = newResource(UsersResource.class);		
-		
+		usersResource = newResource(UsersResource.class);
+
 		addressesResource = newResource(AddressesResource.class);
 		countriesResource = newResource(CountriesResource.class);
 		federalstatesResource = newResource(FederalstatesResource.class);
-		zipcodesResource =  newResource(ZipcodesResource.class);		
+		zipcodesResource =  newResource(ZipcodesResource.class);
 
-        	resourcesResource  = newResource(ResourcesResource.class); 
+        	resourcesResource  = newResource(ResourcesResource.class);
 	}
 
 }

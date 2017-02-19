@@ -12,7 +12,7 @@ import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.service.rs.RestfulResource;
 import de.alpharogroup.service.rs.Securable;
 import de.alpharogroup.user.management.domain.Contactmethod;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 
 /**

@@ -7,7 +7,7 @@ import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 import de.alpharogroup.service.rs.Securable;
 import de.alpharogroup.user.management.domain.Contactmethod;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.rest.api.ContactmethodsResource;
 import de.alpharogroup.user.management.service.api.ContactmethodService;

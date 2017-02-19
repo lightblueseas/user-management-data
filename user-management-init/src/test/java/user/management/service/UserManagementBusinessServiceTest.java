@@ -1,6 +1,5 @@
 package user.management.service;
 
-
 import java.io.File;
 import java.sql.BatchUpdateException;
 import java.util.HashSet;
@@ -35,7 +34,7 @@ import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.factories.UserManagementModelFactory;
 import de.alpharogroup.user.management.service.api.AuthenticationsService;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
-import de.alpharogroup.user.management.service.api.RolesService;
+import de.alpharogroup.user.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.UserDatasService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
@@ -65,9 +64,9 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	/** The contactmethods business service. */
 	@Autowired
 	private ContactmethodsService contactmethodsService;
-	
+
 	/** The attribute for {@link AuthenticationsService}. */
-	@Autowired		
+	@Autowired
 	private AuthenticationsService authenticationsService;
 
 	@Test(enabled=true)
@@ -98,10 +97,10 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 
 		result = userManagementService.signUpUser(model, roles, userModel);
 		// Check if the user can authenticate ...
-		AuthenticationResult<Users, AuthenticationErrors> authenticationResult = authenticationsService.authenticate("michael.knight@gmail.com", "xxx");
-		Users user = authenticationResult.getUser();
+		final AuthenticationResult<Users, AuthenticationErrors> authenticationResult = authenticationsService.authenticate("michael.knight@gmail.com", "xxx");
+		final Users user = authenticationResult.getUser();
 		System.out.println("Username:"+user.getUsername());
-		
+
 		userModel = userManagementModelFactory.newUserModel(
 				"Frankenstein",
 				CreateDateExtensions.newDate(1974, 8, 28),
@@ -152,7 +151,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 
 	public Set<Roles> createRolesSet() {
 		final List<Roles> r = rolesService.findAll();
-		final Set<Roles> roles = new HashSet<Roles>();
+		final Set<Roles> roles = new HashSet<>();
 		if(r != null && !r.isEmpty()) {
 			roles.add(r.get(0));
 		} else {
@@ -206,7 +205,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	public void testRemoveUserResource() {
 		final Users michaelProvider = usersService.findUserWithEmail("michael.knight@gmail.com");
 		//
-		UserDatas userData = userDatasService.findBy(michaelProvider);
+		final UserDatas userData = userDatasService.findBy(michaelProvider);
 		final Set<Resources> resources = userData.getResources();
 		System.out.println("resources size:"+resources.size());
 		for (final Resources resource : resources) {

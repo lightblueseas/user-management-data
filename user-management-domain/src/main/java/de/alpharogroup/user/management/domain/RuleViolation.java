@@ -1,6 +1,7 @@
 package de.alpharogroup.user.management.domain;
 
 import de.alpharogroup.domain.BaseDomainObject;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

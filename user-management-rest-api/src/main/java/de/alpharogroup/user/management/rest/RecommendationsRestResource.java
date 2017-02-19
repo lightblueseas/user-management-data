@@ -6,7 +6,7 @@ import java.util.List;
 import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 import de.alpharogroup.user.management.domain.Recommendation;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.rest.api.RecommendationsResource;
 import de.alpharogroup.user.management.service.api.RecommendationService;
 

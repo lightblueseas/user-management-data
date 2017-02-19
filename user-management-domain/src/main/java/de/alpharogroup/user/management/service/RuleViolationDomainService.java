@@ -10,7 +10,7 @@ import de.alpharogroup.service.domain.AbstractDomainService;
 import de.alpharogroup.user.management.application.models.InfringementModel;
 import de.alpharogroup.user.management.daos.RuleViolationsDao;
 import de.alpharogroup.user.management.domain.RuleViolation;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.domain.model.Infringement;
 import de.alpharogroup.user.management.entities.RuleViolations;
 import de.alpharogroup.user.entities.Users;

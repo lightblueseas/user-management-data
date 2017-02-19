@@ -4,7 +4,7 @@ import java.util.List;
 
 import de.alpharogroup.service.domain.DomainService;
 import de.alpharogroup.user.management.domain.Recommendation;
-import de.alpharogroup.user.management.domain.User;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.entities.Recommendations;
 
 /**

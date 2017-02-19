@@ -7,6 +7,7 @@ import java.util.Set;
 import de.alpharogroup.address.book.domain.Address;
 import de.alpharogroup.domain.BaseDomainObject;
 import de.alpharogroup.resource.system.domain.Resource;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.enums.GenderType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +29,7 @@ public class UserData extends BaseDomainObject<Integer> {
 	 * The serial Version UID.
 	 */
 	private static final long serialVersionUID = 1L;
+	private User owner;
 	/** The addresses of the user. */
 	private Set<Address> addresses = new HashSet<>();
 	/** The birth name from the user if he or she had one. */
@@ -50,7 +52,7 @@ public class UserData extends BaseDomainObject<Integer> {
 	private String lastname;
 	/** The locale from the user when she/he registered. */
 	private String locale;
-	/** The primary address of the user. */	
+	/** The primary address of the user. */
 	private Address primaryAddress;
 	/** The contacts of the user to other users. */
 	private Set<User> userContacts = new HashSet<>();
