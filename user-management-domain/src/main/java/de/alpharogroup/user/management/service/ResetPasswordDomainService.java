@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
-import de.alpharogroup.user.management.daos.ResetPasswordsDao;
+import de.alpharogroup.user.repositories.ResetPasswordsDao;
 import de.alpharogroup.user.management.domain.ResetPassword;
 import de.alpharogroup.user.management.domain.User;
-import de.alpharogroup.user.management.entities.ResetPasswords;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.ResetPasswords;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.mapper.ResetPasswordsMapper;
 import de.alpharogroup.user.management.service.api.ResetPasswordService;
 import de.alpharogroup.user.management.service.api.ResetPasswordsService;

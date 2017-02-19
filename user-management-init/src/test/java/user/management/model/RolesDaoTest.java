@@ -7,8 +7,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.user.management.daos.RolesDao;
-import de.alpharogroup.user.management.entities.Roles;
+import de.alpharogroup.user.repositories.RolesDao;
+import de.alpharogroup.user.entities.Roles;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
 public class RolesDaoTest extends AbstractTestNGSpringContextTests {

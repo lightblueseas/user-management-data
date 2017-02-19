@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 
 public class EntityManagerTest {
 

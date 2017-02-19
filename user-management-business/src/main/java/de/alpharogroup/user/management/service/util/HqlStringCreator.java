@@ -3,12 +3,12 @@ package de.alpharogroup.user.management.service.util;
 import java.util.Date;
 
 import de.alpharogroup.user.management.entities.Contactmethods;
-import de.alpharogroup.user.management.entities.Permissions;
+import de.alpharogroup.user.entities.Permissions;
 import de.alpharogroup.user.management.entities.Recommendations;
-import de.alpharogroup.user.management.entities.RelationPermissions;
-import de.alpharogroup.user.management.entities.ResetPasswords;
+import de.alpharogroup.user.entities.RelationPermissions;
+import de.alpharogroup.user.entities.ResetPasswords;
 import de.alpharogroup.user.management.entities.RuleViolations;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 

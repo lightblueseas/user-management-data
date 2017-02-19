@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
-import de.alpharogroup.user.management.daos.RolesDao;
+import de.alpharogroup.user.repositories.RolesDao;
 import de.alpharogroup.user.management.domain.Permission;
 import de.alpharogroup.user.management.domain.Role;
-import de.alpharogroup.user.management.entities.Permissions;
-import de.alpharogroup.user.management.entities.Roles;
+import de.alpharogroup.user.entities.Permissions;
+import de.alpharogroup.user.entities.Roles;
 import de.alpharogroup.user.management.mapper.RolesMapper;
 import de.alpharogroup.user.management.service.api.RoleService;
 import de.alpharogroup.user.management.service.api.RolesService;

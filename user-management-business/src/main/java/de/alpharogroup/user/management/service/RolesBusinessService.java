@@ -7,9 +7,9 @@ import javax.persistence.Query;
 
 import de.alpharogroup.collections.ListExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
-import de.alpharogroup.user.management.daos.RolesDao;
-import de.alpharogroup.user.management.entities.Permissions;
-import de.alpharogroup.user.management.entities.Roles;
+import de.alpharogroup.user.repositories.RolesDao;
+import de.alpharogroup.user.entities.Permissions;
+import de.alpharogroup.user.entities.Roles;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;

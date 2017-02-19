@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import de.alpharogroup.db.entitymapper.AbstractEntityDOMapper;
 import de.alpharogroup.user.management.domain.ResetPassword;
-import de.alpharogroup.user.management.entities.ResetPasswords;
+import de.alpharogroup.user.entities.ResetPasswords;
 
 /**
  * The class {@link ResetPasswordsMapper}.

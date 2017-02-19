@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Set;
 
 import de.alpharogroup.db.service.api.BusinessService;
-import de.alpharogroup.user.management.entities.Permissions;
-import de.alpharogroup.user.management.entities.Roles;
+import de.alpharogroup.user.entities.Permissions;
+import de.alpharogroup.user.entities.Roles;
 
 /**
  * The interface {@link RolesService}.

@@ -18,9 +18,9 @@ import de.alpharogroup.collections.ListExtensions;
 import de.alpharogroup.date.CalculateDateExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 import de.alpharogroup.jgeohash.GeoHashExtensions;
-import de.alpharogroup.user.management.daos.UsersDao;
-import de.alpharogroup.user.management.entities.Roles;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.repositories.UsersDao;
+import de.alpharogroup.user.entities.Roles;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.service.api.UsersService;
 

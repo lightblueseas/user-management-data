@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import de.alpharogroup.db.entity.BaseEntity;
+import de.alpharogroup.user.entities.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

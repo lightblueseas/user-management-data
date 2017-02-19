@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
-import de.alpharogroup.user.management.daos.RelationPermissionsDao;
+import de.alpharogroup.user.repositories.RelationPermissionsDao;
 import de.alpharogroup.user.management.domain.Permission;
 import de.alpharogroup.user.management.domain.RelationPermission;
 import de.alpharogroup.user.management.domain.User;
-import de.alpharogroup.user.management.entities.Permissions;
-import de.alpharogroup.user.management.entities.RelationPermissions;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Permissions;
+import de.alpharogroup.user.entities.RelationPermissions;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.mapper.RelationPermissionsMapper;
 import de.alpharogroup.user.management.service.api.RelationPermissionService;
 import de.alpharogroup.user.management.service.api.RelationPermissionsService;

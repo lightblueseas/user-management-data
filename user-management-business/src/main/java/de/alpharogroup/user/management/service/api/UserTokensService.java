@@ -3,7 +3,7 @@ package de.alpharogroup.user.management.service.api;
 import java.util.List;
 
 import de.alpharogroup.db.service.api.BusinessService;
-import de.alpharogroup.user.management.entities.UserTokens;
+import de.alpharogroup.user.entities.UserTokens;
 
 /**
  * The interface {@link UserTokensService}.

@@ -2,7 +2,7 @@ package de.alpharogroup.user.management.application.models;
 
 import java.io.Serializable;
 
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

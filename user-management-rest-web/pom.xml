@@ -28,11 +28,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>user-management-business</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>

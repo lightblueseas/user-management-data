@@ -8,8 +8,8 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.user.management.daos.PermissionsDao;
-import de.alpharogroup.user.management.entities.Permissions;
+import de.alpharogroup.user.repositories.PermissionsDao;
+import de.alpharogroup.user.entities.Permissions;
 import de.alpharogroup.user.management.service.api.PermissionsService;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")

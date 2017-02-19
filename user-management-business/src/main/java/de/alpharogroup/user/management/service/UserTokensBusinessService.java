@@ -10,8 +10,8 @@ import org.torpedoquery.jpa.Torpedo;
 
 import de.alpharogroup.collections.ListExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
-import de.alpharogroup.user.management.daos.UserTokensDao;
-import de.alpharogroup.user.management.entities.UserTokens;
+import de.alpharogroup.user.repositories.UserTokensDao;
+import de.alpharogroup.user.entities.UserTokens;
 import de.alpharogroup.user.management.service.api.UserTokensService;
 
 @Transactional

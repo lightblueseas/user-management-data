@@ -11,7 +11,7 @@ import de.alpharogroup.user.management.daos.ContactmethodsDao;
 import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.entities.Contactmethods;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.mapper.ContactmethodsMapper;
 import de.alpharogroup.user.management.service.api.ContactmethodService;

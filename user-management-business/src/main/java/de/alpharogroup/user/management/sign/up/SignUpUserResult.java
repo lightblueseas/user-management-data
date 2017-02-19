@@ -3,7 +3,7 @@ package de.alpharogroup.user.management.sign.up;
 import java.io.Serializable;
 
 import de.alpharogroup.auth.models.ValidationErrors;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

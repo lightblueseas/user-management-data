@@ -11,7 +11,7 @@ import de.alpharogroup.collections.ListExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 import de.alpharogroup.user.management.daos.UserDatasDao;
 import de.alpharogroup.user.management.entities.UserDatas;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.service.api.UserDatasService;
 
 @Transactional

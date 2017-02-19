@@ -11,9 +11,9 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.resource.system.service.api.ResourcesService;
-import de.alpharogroup.user.management.entities.Permissions;
-import de.alpharogroup.user.management.entities.RelationPermissions;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Permissions;
+import de.alpharogroup.user.entities.RelationPermissions;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.service.api.PermissionsService;

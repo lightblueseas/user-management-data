@@ -27,6 +27,7 @@ import org.hibernate.annotations.TypeDefs;
 import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.db.entity.BaseEntity;
 import de.alpharogroup.resource.system.entities.Resources;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.GenderType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,14 +42,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserDatas 
-extends BaseEntity<Integer> 
+public class UserDatas
+extends BaseEntity<Integer>
 implements Cloneable {
 
 	/**
 	 * The serial Version UID.
 	 */
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
 	/** The owner of this user data. */
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "owner")
@@ -56,27 +57,27 @@ implements Cloneable {
 	/** The addresses of the user. */
 	@ManyToMany(fetch=FetchType.EAGER)
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-	@JoinTable(name = "user_addresses", joinColumns = { 
-			@JoinColumn(name = "user_data_id", referencedColumnName = "id") }, inverseJoinColumns = { 
+	@JoinTable(name = "user_addresses", joinColumns = {
+			@JoinColumn(name = "user_data_id", referencedColumnName = "id") }, inverseJoinColumns = {
 			@JoinColumn(name = "addresses_id", referencedColumnName = "id") })
-	private Set<Addresses> addresses = new HashSet<Addresses>();
+	private Set<Addresses> addresses = new HashSet<>();
 	/** The birth name from the user if he or she had one. */
 	@Column(name = "birthname", length = 64)
 	private String birthname;
 	/** The contacts of the user that are black listed. */
 	@ManyToMany(fetch=FetchType.EAGER)
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-	@JoinTable(name = "blacklisted_contacts", 
-	joinColumns = { @JoinColumn(name = "user_data_id", referencedColumnName = "id") }, 
-	inverseJoinColumns = { @JoinColumn(name = "blacklisted_id", referencedColumnName = "id") })	
-	private Set<Users> blacklistedContacts = new HashSet<Users>();
+	@JoinTable(name = "blacklisted_contacts",
+	joinColumns = { @JoinColumn(name = "user_data_id", referencedColumnName = "id") },
+	inverseJoinColumns = { @JoinColumn(name = "blacklisted_id", referencedColumnName = "id") })
+	private Set<Users> blacklistedContacts = new HashSet<>();
 	/** The contact data of the user. */
 	@ManyToMany(fetch=FetchType.EAGER)
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-	@JoinTable(name = "user_contactmethods", joinColumns = { 
-			@JoinColumn(name = "user_data_id", referencedColumnName = "id") }, inverseJoinColumns = { 
+	@JoinTable(name = "user_contactmethods", joinColumns = {
+			@JoinColumn(name = "user_data_id", referencedColumnName = "id") }, inverseJoinColumns = {
 			@JoinColumn(name = "contactmethods_id", referencedColumnName = "id") })
-	private Set<Contactmethods> contactmethods = new HashSet<Contactmethods>();
+	private Set<Contactmethods> contactmethods = new HashSet<>();
 	/** The date of birth from the user. */
 	private Date dateofbirth;
 	/** The first name of the user. */
@@ -90,10 +91,10 @@ implements Cloneable {
 	/** The resources of the user. */
 	@ManyToMany(fetch=FetchType.EAGER)
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-	@JoinTable(name = "user_resources", joinColumns = { 
-			@JoinColumn(name = "user_data_id", referencedColumnName = "id") }, inverseJoinColumns = { 
+	@JoinTable(name = "user_resources", joinColumns = {
+			@JoinColumn(name = "user_data_id", referencedColumnName = "id") }, inverseJoinColumns = {
 			@JoinColumn(name = "resources_id", referencedColumnName = "id") })
-	private Set<Resources> resources = new HashSet<Resources>();
+	private Set<Resources> resources = new HashSet<>();
 	/** The ip address from where the user has register his self. */
 	@Column(name = "ip_address", length = 16)
 	private String ipAddress;
@@ -103,16 +104,16 @@ implements Cloneable {
 	/** The locale from the user when she/he registered. */
 	@Column(name = "locale", length = 12)
 	private String locale;
-	/** The primary address of the user. */	
+	/** The primary address of the user. */
 	@ManyToOne
     @Cascade({CascadeType.ALL})
 	@JoinColumn(name = "primary_address_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_USER_DATA_PRIMARY_ADDRESS_ID"))
 	private Addresses primaryAddress;
 	/** The contacts of the user to other users. */
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name = "user_contacts", joinColumns = { 
-			@JoinColumn(name = "user_data_id", referencedColumnName = "id") }, inverseJoinColumns = { 
+	@JoinTable(name = "user_contacts", joinColumns = {
+			@JoinColumn(name = "user_data_id", referencedColumnName = "id") }, inverseJoinColumns = {
 			@JoinColumn(name = "user_contact_id", referencedColumnName = "id") })
-	private Set<Users> userContacts = new HashSet<Users>();
+	private Set<Users> userContacts = new HashSet<>();
 
 }

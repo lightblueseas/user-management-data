@@ -21,6 +21,11 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>user-management-rest-api</artifactId>
 		</dependency>
+		<!-- USER-REST-API DEPENDENCIES -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>user-rest-api</artifactId>
+		</dependency>
 		<!-- ADDRESS-BOOK-REST-API DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>

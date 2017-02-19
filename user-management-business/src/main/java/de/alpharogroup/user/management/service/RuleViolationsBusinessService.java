@@ -12,7 +12,7 @@ import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 import de.alpharogroup.user.management.application.models.InfringementModel;
 import de.alpharogroup.user.management.daos.RuleViolationsDao;
 import de.alpharogroup.user.management.entities.RuleViolations;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.service.api.RuleViolationsService;

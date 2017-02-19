@@ -20,14 +20,15 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import de.alpharogroup.db.entity.BaseEntity;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 
 /**
- * Object mapping for hibernate-handled table: rule_violations 
+ * Object mapping for hibernate-handled table: rule_violations
  */
 @Entity
 @Table(name="rule_violations")
-@TypeDefs({ 
+@TypeDefs({
 	@TypeDef(name = "reasonConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = { @Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.RuleViolationReason") }) })
 @Getter
 @Setter
@@ -37,7 +38,7 @@ extends BaseEntity<Integer>
 implements Cloneable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import de.alpharogroup.db.entitymapper.AbstractEntityDOMapper;
 import de.alpharogroup.user.management.domain.Role;
-import de.alpharogroup.user.management.entities.Roles;
+import de.alpharogroup.user.entities.Roles;
 
 /**
  * The class {@link RolesMapper}.

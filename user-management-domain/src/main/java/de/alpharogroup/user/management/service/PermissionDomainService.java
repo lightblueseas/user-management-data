@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
-import de.alpharogroup.user.management.daos.PermissionsDao;
+import de.alpharogroup.user.repositories.PermissionsDao;
 import de.alpharogroup.user.management.domain.Permission;
-import de.alpharogroup.user.management.entities.Permissions;
+import de.alpharogroup.user.entities.Permissions;
 import de.alpharogroup.user.management.mapper.PermissionsMapper;
 import de.alpharogroup.user.management.service.api.PermissionService;
 import de.alpharogroup.user.management.service.api.PermissionsService;

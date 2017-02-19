@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import de.alpharogroup.db.entitymapper.AbstractEntityDOMapper;
 import de.alpharogroup.user.management.domain.Permission;
-import de.alpharogroup.user.management.entities.Permissions;
+import de.alpharogroup.user.entities.Permissions;
 
 /**
  * The class {@link PermissionsMapper}.

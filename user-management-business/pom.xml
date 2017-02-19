@@ -29,12 +29,7 @@
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>resource-system-business</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>resource-system-domain</artifactId>
+			<artifactId>user-business</artifactId>
 		</dependency>
 
 		<dependency>
@@ -44,7 +39,7 @@
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>address-book-domain</artifactId>
+			<artifactId>resource-system-business</artifactId>
 		</dependency>
 
 		<dependency>

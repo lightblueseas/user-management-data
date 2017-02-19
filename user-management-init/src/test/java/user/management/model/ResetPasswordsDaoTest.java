@@ -6,8 +6,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.user.management.daos.ResetPasswordsDao;
-import de.alpharogroup.user.management.entities.ResetPasswords;
+import de.alpharogroup.user.repositories.ResetPasswordsDao;
+import de.alpharogroup.user.entities.ResetPasswords;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
 public class ResetPasswordsDaoTest extends AbstractTestNGSpringContextTests {

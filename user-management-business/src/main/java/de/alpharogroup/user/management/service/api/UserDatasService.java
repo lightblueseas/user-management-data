@@ -2,7 +2,7 @@ package de.alpharogroup.user.management.service.api;
 
 import de.alpharogroup.db.service.api.BusinessService;
 import de.alpharogroup.user.management.entities.UserDatas;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 
 /**
  * The interface {@link UserDatasService}.

@@ -5,7 +5,7 @@ import java.util.List;
 import de.alpharogroup.db.service.api.BusinessService;
 import de.alpharogroup.user.management.application.models.InfringementModel;
 import de.alpharogroup.user.management.entities.RuleViolations;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 
 /**

@@ -7,9 +7,9 @@ import javax.persistence.Query;
 
 import de.alpharogroup.collections.ListExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
-import de.alpharogroup.user.management.daos.ResetPasswordsDao;
-import de.alpharogroup.user.management.entities.ResetPasswords;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.repositories.ResetPasswordsDao;
+import de.alpharogroup.user.entities.ResetPasswords;
+import de.alpharogroup.user.entities.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

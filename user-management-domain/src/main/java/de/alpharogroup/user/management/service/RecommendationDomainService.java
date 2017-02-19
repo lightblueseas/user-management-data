@@ -11,7 +11,7 @@ import de.alpharogroup.user.management.daos.RecommendationsDao;
 import de.alpharogroup.user.management.domain.Recommendation;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.entities.Recommendations;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.mapper.RecommendationsMapper;
 import de.alpharogroup.user.management.service.api.RecommendationService;
 import de.alpharogroup.user.management.service.api.RecommendationsService;

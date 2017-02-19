@@ -14,7 +14,7 @@ import javax.crypto.NoSuchPaddingException;
 import de.alpharogroup.auth.models.AuthenticationErrors;
 import de.alpharogroup.auth.models.AuthenticationResult;
 import de.alpharogroup.crypto.pw.PasswordEncryptor;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 
 public interface AuthenticationsService extends Serializable {
 

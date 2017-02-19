@@ -13,7 +13,7 @@ import de.alpharogroup.user.management.domain.RuleViolation;
 import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.domain.model.Infringement;
 import de.alpharogroup.user.management.entities.RuleViolations;
-import de.alpharogroup.user.management.entities.Users;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 import de.alpharogroup.user.management.mapper.RuleViolationsMapper;
 import de.alpharogroup.user.management.service.api.RuleViolationService;

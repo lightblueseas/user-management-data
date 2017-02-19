@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import de.alpharogroup.db.entity.BaseEntity;
+import de.alpharogroup.user.entities.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Recommendations
 extends BaseEntity<Integer>
-implements Cloneable { 
+implements Cloneable {
 
 	/**
 	 * The serial Version UID
@@ -36,7 +37,7 @@ implements Cloneable {
 	/** The user that is recommended. */
 	@ManyToOne
 	@JoinColumn(name = "recommended_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_RECOMMENDATIONS_RECOMMENDED_ID"))
-	private Users recommended; 
+	private Users recommended;
 	/** The email where this recommendation is send. */
 	@Column( name="email", length = 1024  )
 	private String email;
