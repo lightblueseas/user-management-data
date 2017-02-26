@@ -69,7 +69,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 	@Autowired
 	private AuthenticationsService authenticationsService;
 
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void testSignUpUser() {
 		SignUpUserResult result;
 		final UserManagementModelFactory userManagementModelFactory = UserManagementModelFactory.getInstance();
@@ -175,7 +175,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 		AssertJUnit.assertNotNull(user);
 	}
 
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void testFindEmailContactFromUser() {
 		final String emailOrUsername = "michael.knight";
 	final Users user = userManagementService
@@ -231,4 +231,5 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 			System.out.println(contactmethods);
 		}
 	}
+
 }

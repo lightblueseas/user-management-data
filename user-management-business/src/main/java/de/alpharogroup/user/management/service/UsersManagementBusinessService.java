@@ -31,21 +31,21 @@ import de.alpharogroup.resource.system.application.model.ModelSynchronizer;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.entities.Resources;
 import de.alpharogroup.resource.system.service.api.ResourcesService;
-import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.entities.Roles;
-import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.entities.UserTokens;
 import de.alpharogroup.user.entities.Users;
+import de.alpharogroup.user.management.entities.Contactmethods;
+import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.factories.UserManagementFactory;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
-import de.alpharogroup.user.service.api.RolesService;
 import de.alpharogroup.user.management.service.api.UserDatasService;
-import de.alpharogroup.user.service.api.UserTokensService;
 import de.alpharogroup.user.management.service.api.UsersManagementService;
 import de.alpharogroup.user.management.service.api.UsersService;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
+import de.alpharogroup.user.service.api.RolesService;
+import de.alpharogroup.user.service.api.UserTokensService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -235,7 +235,8 @@ public class UsersManagementBusinessService implements UsersManagementService {
 		final UserDatas userData = userDatasService.findBy(user);
 		final Set<Contactmethods> userContactMethods = userData.getContactmethods();
 		for (final Contactmethods cm : userContactMethods) {
-			if (contactmethodType.equals(cm.getContactmethod())) {
+			ContactmethodType currentContactmethodType = cm.getContactmethod();			
+			if (contactmethodType.equals(currentContactmethodType)) {
 				return cm;
 			}
 		}
