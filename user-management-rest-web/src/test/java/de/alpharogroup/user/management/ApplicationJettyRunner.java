@@ -84,15 +84,25 @@ public class ApplicationJettyRunner
 	}
 
 	/**
-	 * Gets the project name.
+	 * Gets the project name from the 'project.properties'.
+	 * In this properties file is only a reference of the artifactId from the pom.
 	 *
 	 * @return the project name
 	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @deprecated use instead the method from PropertiesExtensions
 	 */
-	protected static String getProjectName() throws IOException {
+	@Deprecated
+	public static String getProjectName() throws IOException {
 		final Properties projectProperties = PropertiesExtensions.loadProperties("project.properties");
-		final String projectName = projectProperties.getProperty("artifactId");
-		return projectName;
+		if(projectProperties != null) {
+			final String projectName = projectProperties.getProperty("artifactId");
+			if(projectName == null) {
+				throw new RuntimeException("No properties key 'artifactId' found in the properties file project.properties exist.");
+			}
+			return projectName;
+		} else {
+			throw new RuntimeException("No properties file project.properties exist.");
+		}
 	}
 
 	/**
