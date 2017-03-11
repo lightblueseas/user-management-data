@@ -17,4 +17,13 @@ public interface UserDatasService extends BusinessService<UserDatas, Integer> {
 	 */
 	UserDatas findBy(Users user);
 
+
+	/**
+	 * Find the {@link UserDatas} object by the given {@link Integer} user id.
+	 *
+	 * @param userid the user id
+	 * @return the found {@link UserDatas} object or null if does not exist.
+	 */
+	UserDatas findBy(final Integer userid);
+
 }

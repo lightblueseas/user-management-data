@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
+import de.alpharogroup.user.domain.User;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.daos.UserDatasDao;
 import de.alpharogroup.user.management.domain.UserData;
 import de.alpharogroup.user.management.entities.UserDatas;
@@ -46,9 +48,24 @@ public class UserDataDomainService extends
 	 *            the new {@link UserDatasMapper}.
 	 */
 	@Autowired
-	public void setUserDatasMapper(UserDatasMapper mapper) {
+	public void setUserDatasMapper(final UserDatasMapper mapper) {
 		setMapper(mapper);
 	}
-	
+
+	@Override
+	public UserData findBy(final User user)
+	{
+		final Users userEntity = getMapper().map(user, Users.class);
+		final UserData userData = getMapper().toDomainObject(userDatasService.findBy(userEntity));
+		return userData;
+	}
+
+	@Override
+	public UserData findBy(final Integer userid)
+	{
+		final UserData userData = getMapper().toDomainObject(userDatasService.findBy(userid));
+		return userData;
+	}
+
 
 }

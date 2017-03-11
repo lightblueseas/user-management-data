@@ -21,21 +21,22 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Autowired
-	public void setUserDataDao(UserDatasDao userDataDao) {
+	public void setUserDataDao(final UserDatasDao userDataDao) {
 		setDao(userDataDao);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
-	public UserDatas findBy(Users user) {
-		final String hqlString = 
+	public UserDatas findBy(final Users user) {
+		final String hqlString =
 				  "select ud from UserDatas ud "
 				+ "where ud.owner=:user";
 		final Query query = getQuery(hqlString);
@@ -43,7 +44,24 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 			query.setParameter("user", user);
 		}
 		final List<UserDatas> userDatas = query.getResultList();
-		return ListExtensions.getFirst(userDatas);			
+		return ListExtensions.getFirst(userDatas);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public UserDatas findBy(final Integer userid) {
+		final String hqlString =
+				  "select ud from UserDatas ud "
+				+ "where ud.owner.id=:userid";
+		final Query query = getQuery(hqlString);
+		if(userid != null){
+			query.setParameter("userid", userid);
+		}
+		final List<UserDatas> userDatas = query.getResultList();
+		return ListExtensions.getFirst(userDatas);
 	}
 
 }
