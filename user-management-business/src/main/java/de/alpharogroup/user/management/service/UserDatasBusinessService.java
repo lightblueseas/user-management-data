@@ -40,9 +40,7 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 				  "select ud from UserDatas ud "
 				+ "where ud.owner=:user";
 		final Query query = getQuery(hqlString);
-		if(user != null){
-			query.setParameter("user", user);
-		}
+		query.setParameter("user", user);
 		final List<UserDatas> userDatas = query.getResultList();
 		return ListExtensions.getFirst(userDatas);
 	}
@@ -57,9 +55,7 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 				  "select ud from UserDatas ud "
 				+ "where ud.owner.id=:userid";
 		final Query query = getQuery(hqlString);
-		if(userid != null){
-			query.setParameter("userid", userid);
-		}
+		query.setParameter("userid", userid);
 		final List<UserDatas> userDatas = query.getResultList();
 		return ListExtensions.getFirst(userDatas);
 	}
