@@ -143,7 +143,7 @@ public class UserManagementSystemRestClientTest
 	/**
 	 * Test the {@link AuthenticationsResource}.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testAuthenticationsResource()
 	{
 		final Credentials credentials = Credentials.builder().username("michael.knight")
@@ -240,7 +240,7 @@ public class UserManagementSystemRestClientTest
 	/**
 	 * Test the {@link PermissionsResource}.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testPermissionsResource()
 	{
 
@@ -267,7 +267,7 @@ public class UserManagementSystemRestClientTest
 	/**
 	 * Test the {@link RecommendationsResource}.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testRecommendationsResource()
 	{
 		final RecommendationsResource recommendationsResource = restClient
@@ -298,7 +298,7 @@ public class UserManagementSystemRestClientTest
 	/**
 	 * Test the {@link RelationPermissionsResource}.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testRelationPermissionsResource()
 	{
 		final RelationPermissionsResource resource = restClient.getRelationPermissionsResource();
@@ -340,7 +340,7 @@ public class UserManagementSystemRestClientTest
 	/**
 	 * Test the {@link ResetPasswordsResource}.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testResetPasswordsResource()
 	{
 		final ResetPasswordsResource resource = restClient.getResetPasswordsResource();
@@ -392,7 +392,7 @@ public class UserManagementSystemRestClientTest
 	/**
 	 * Test the {@link RolesResource}.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testRolesResource()
 	{
 		AssertJUnit.assertNotNull(rolesResource);
@@ -418,7 +418,7 @@ public class UserManagementSystemRestClientTest
 	/**
 	 * Test the {@link RuleViolationsResource}.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testRuleViolationsResource()
 	{
 		final RuleViolationsResource resource = restClient.getRuleViolationsResource();
@@ -470,7 +470,7 @@ public class UserManagementSystemRestClientTest
 	/**
 	 * Test the {@link UserManagementResource}.
 	 */
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testUserManagementResource()
 	{
 		final UserManagementResource resource = restClient.getUserManagementResource();

@@ -199,7 +199,7 @@ public class UserManagementBusinessServiceTest extends AbstractTestNGSpringConte
 		AssertJUnit.assertNotNull(user);
 	}
 
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void testFindEmailContactFromUser() {
 		final String emailOrUsername = "michael.knight";
 	final Users user = userManagementService
