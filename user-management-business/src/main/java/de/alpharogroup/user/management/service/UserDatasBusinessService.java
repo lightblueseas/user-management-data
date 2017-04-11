@@ -24,19 +24,27 @@
  */
 package de.alpharogroup.user.management.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import de.alpharogroup.address.book.service.util.HqlStringCreator;
 import de.alpharogroup.collections.ListExtensions;
+import de.alpharogroup.date.CalculateDateExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
+import de.alpharogroup.jgeohash.GeoHashExtensions;
 import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.daos.UserDatasDao;
 import de.alpharogroup.user.management.entities.UserDatas;
+import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.service.api.UserDatasService;
 
 @Transactional
@@ -46,6 +54,9 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The Constant LOGGER. */
+	private final static Logger LOGGER = Logger.getLogger(UserDatasBusinessService.class.getName());
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -82,6 +93,74 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 		query.setParameter("userid", userid);
 		final List<UserDatas> userDatas = query.getResultList();
 		return ListExtensions.getFirst(userDatas);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender, final Integer until)
+	{
+		final Date now = new Date(System.currentTimeMillis());
+		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
+		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
+		final String hqlString = "select ud from UserDatas ud "
+		+ "where ud.gender=:gender "
+			+ "and ud.dateofbirth >= :start " + "and ud.dateofbirth <= :end";
+		final Query query = getQuery(hqlString);
+		query.setParameter("gender", searchGender);
+		query.setParameter("start", start);
+		query.setParameter("end", end);
+		final List<UserDatas> userDatas = query.getResultList();
+		return userDatas;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender, final Integer until,
+		final String geohash)
+	{
+		final Date now = new Date(System.currentTimeMillis());
+		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
+		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
+
+		final StringBuilder hqlString = new StringBuilder();
+		hqlString.append("select ud from UserDatas ud " + "where ud.gender=:gender "
+			+ "and ud.dateofbirth >= :start " + "and ud.dateofbirth <= :end ");
+
+		Map<String, String> adjacentAreas = null;
+		if (geohash != null && !geohash.trim().isEmpty())
+		{
+			adjacentAreas = GeoHashExtensions.getTwentyFiveAreasMap(geohash);
+		}
+		if (adjacentAreas != null)
+		{
+			final String firstAndSecondRingSubQuery = HqlStringCreator
+				.getGeohashFirstAndSecondRingSubQuery();
+			hqlString.append("and ud.primaryAddress.geohash in "
+				+ firstAndSecondRingSubQuery);
+		}
+
+		final String queryString = hqlString.toString();
+		LOGGER.info("Query String from method findUsers:" + queryString);
+		final Query query = getQuery(queryString);
+		// Set parameters...
+		query.setParameter("gender", searchGender);
+		query.setParameter("start", start);
+		query.setParameter("end", end);
+		if (adjacentAreas != null)
+		{
+			for (final Entry<String, String> entry : adjacentAreas.entrySet())
+			{
+				query.setParameter(entry.getKey(), entry.getValue() + "%");
+			}
+		}
+		final List<UserDatas> userDatas = query.getResultList();
+		return userDatas;
 	}
 
 }
