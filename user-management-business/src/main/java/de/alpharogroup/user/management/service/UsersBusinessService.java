@@ -174,10 +174,10 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		final Date now = new Date(System.currentTimeMillis());
 		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
 		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
-		final String hqlString = "select u from Users u, UserDatas ud "
-		+ "where ud.gender=:gender "
-		// + "and ud.dateofbirth between :start and :end"
-			+ "and ud.dateofbirth >= :start " + "and ud.dateofbirth <= :end";
+		final String hqlString = "select distinct ud.owner from UserDatas ud "
+								+ "where ud.gender=:gender "
+								+ "and ud.dateofbirth >= :start " 
+								+ "and ud.dateofbirth <= :end";
 		final Query query = getQuery(hqlString);
 		query.setParameter("gender", searchGender);
 		query.setParameter("start", start);
@@ -196,9 +196,10 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
 
 		final StringBuilder hqlString = new StringBuilder();
-		hqlString.append("select u from Users u, UserDatas ud " + "where ud.gender=:gender "
-		// + "and ud.dateofbirth between :start and :end"
-			+ "and ud.dateofbirth >= :start " + "and ud.dateofbirth <= :end ");
+		hqlString.append("select distinct ud.owner from UserDatas ud ")
+		.append(" where ud.gender=:gender ")
+		.append(" and ud.dateofbirth >= :start ") 
+		.append(" and ud.dateofbirth <= :end ");
 
 		Map<String, String> adjacentAreas = null;
 		if (geohash != null && !geohash.trim().isEmpty())
