@@ -16,9 +16,10 @@ create table user_addresses (user_data_id int4 not null, addresses_id int4 not n
 create table user_contactmethods (user_data_id int4 not null, contactmethods_id int4 not null, primary key (user_data_id, contactmethods_id));
 create table user_contacts (user_data_id int4 not null, user_contact_id int4 not null, primary key (user_data_id, user_contact_id));
 create table user_credits (id int4 not null, credits int4, user_id int4, primary key (id));
-create table user_data (id int4 not null, birthname varchar(64), dateofbirth timestamp, firstname varchar(64), gender varchar(255), ip_address varchar(16), lastname varchar(64), locale varchar(12), primary_address_id int4, primary key (id));
+create table user_data (id int4 not null, birthname varchar(64), dateofbirth timestamp, firstname varchar(64), gender varchar(255), ip_address varchar(16), lastname varchar(64), locale varchar(12), owner int4, primary_address_id int4, primary key (id));
 create table user_relation_permissions (user_relation_permission_id int4 not null, permission_id int4 not null, primary key (user_relation_permission_id, permission_id));
 create table user_resources (user_data_id int4 not null, resources_id int4 not null, primary key (user_data_id, resources_id));
 create table user_roles (user_id int4 not null, role_id int4 not null, primary key (user_id, role_id));
-create table users (id int4 not null, active bool, locked bool, pw varchar(1024), salt varchar(8), username varchar(256) unique, user_data int4, primary key (id));
+create table user_tokens (id int4 not null, expiry timestamp, token varchar(128) unique, username varchar(256) unique, primary key (id));
+create table users (id int4 not null, active bool, locked bool, pw varchar(1024), salt varchar(8), username varchar(256) unique, primary key (id));
 create table zipcodes (id int4 not null, city varchar(128), zipcode varchar(10) not null, country_id int4, primary key (id));

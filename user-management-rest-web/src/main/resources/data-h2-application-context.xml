@@ -28,6 +28,13 @@
 	<context:component-scan base-package="de.alpharogroup.resource.system.mapper" />
 	<context:component-scan base-package="de.alpharogroup.resource.system.service.api" />
 	<context:component-scan base-package="de.alpharogroup.resource.system.service" />
+	
+	<context:component-scan base-package="de.alpharogroup.user.repositories" />
+	<context:component-scan base-package="de.alpharogroup.user.entities" />
+	<context:component-scan base-package="de.alpharogroup.user.mapper" />
+	<context:component-scan base-package="de.alpharogroup.user.service.api" />
+	<context:component-scan base-package="de.alpharogroup.user.service" />
+	<context:component-scan base-package="de.alpharogroup.user.service.mapper" />
 
 	<context:component-scan base-package="de.alpharogroup.user.management.daos" />
 	<context:component-scan base-package="de.alpharogroup.user.management.entities" />
@@ -55,6 +62,7 @@
 	<jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="classpath:dll/inserts/insertPermissions.sql" />
 		<jdbc:script location="classpath:dll/inserts/insertCountries.sql" />
+		<jdbc:script location="classpath:dll/inserts/insertContactmethods.sql" />
 		<jdbc:script location="classpath:dll/inserts/insertAllFederalStates.sql" />
 		<jdbc:script location="classpath:dll/inserts/insertAllKnownZipcodes.sql" />
 		<jdbc:script location="classpath:dll/inserts/insertGermanSpeekingCountriesZipcodesToAddresses.sql" />

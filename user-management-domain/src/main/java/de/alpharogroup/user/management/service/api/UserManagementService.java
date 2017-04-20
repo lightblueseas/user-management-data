@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (C) 2015 Asterios Raptis
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *  *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *  *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package de.alpharogroup.user.management.service.api;
 
 import java.io.Serializable;
@@ -14,9 +38,9 @@ import de.alpharogroup.auth.models.ValidationErrors;
 import de.alpharogroup.auth.usermanagement.UserExistenceService;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.domain.Resource;
+import de.alpharogroup.user.domain.Role;
+import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.domain.Contactmethod;
-import de.alpharogroup.user.management.domain.Role;
-import de.alpharogroup.user.management.domain.User;
 import de.alpharogroup.user.management.domain.UserData;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
@@ -25,20 +49,52 @@ import de.alpharogroup.user.management.sign.up.UserModel;
 /**
  * The interface {@link UserManagementService}.
  */
-public interface UserManagementService extends UserExistenceService {
+public interface UserManagementService extends UserExistenceService
+{
 
 	/**
-	 * Checks if a {@link Role} object exist in the given list with the given
-	 * role name.
+	 * Adds the given contact {@link User} object to the contacts of the given {@link User} object.
 	 *
-	 * @param rolename
-	 *            the role name
-	 * @param roles
-	 *            the roles
-	 * @return true, if the {@link Role} object exist in the list otherwise
-	 *         false.
+	 * @param user
+	 *            the user
+	 * @param contact
+	 *            the contact to add
+	 * @return the {@link User} object with the new contacts.
 	 */
-	boolean isInRole(final String rolename, final List<Role> roles);
+	User addUserContact(User user, User contact);
+
+	/**
+	 * Deletes the given {@link Address} object from the given {@link UserData} object.
+	 *
+	 * @param address
+	 *            the {@link Address} object
+	 * @param ud
+	 *            the {@link UserData} object
+	 * @return the {@link UserData} object.
+	 */
+	UserData deleteAddress(Address address, final UserData ud);
+
+	/**
+	 * Deletes the given black listed {@link User} object from the given user data id.
+	 *
+	 * @param blacklisted
+	 *            the black listed user
+	 * @param userDataId
+	 *            the user data id
+	 * @return the {@link UserData} object.
+	 */
+	UserData deleteBlacklisted(User blacklisted, final Integer userDataId);
+
+	/**
+	 * Deletes the {@link Resource} object from the given resource model object with the given user
+	 * data id.
+	 *
+	 * @param resource
+	 *            the resource
+	 * @param userDataId
+	 *            the user data id
+	 */
+	void deleteResource(final ResourcesModel resource, final Integer userDataId);
 
 	/**
 	 * Checks if a user exists with the given email.
@@ -82,8 +138,7 @@ public interface UserManagementService extends UserExistenceService {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	List<Contactmethod> findAllEmailContactmethodsFromUser(final User user);
 
@@ -92,8 +147,7 @@ public interface UserManagementService extends UserExistenceService {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	List<Contactmethod> findAllFaxContactmethodsFromUser(final User user);
 
@@ -102,8 +156,7 @@ public interface UserManagementService extends UserExistenceService {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	List<Contactmethod> findAllInternetContactmethodsFromUser(final User user);
 
@@ -112,8 +165,7 @@ public interface UserManagementService extends UserExistenceService {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	List<Contactmethod> findAllMobileContactmethodsFromUser(final User user);
 
@@ -122,8 +174,7 @@ public interface UserManagementService extends UserExistenceService {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	List<Contactmethod> findAllTelefonContactmethodsFromUser(final User user);
 
@@ -209,21 +260,58 @@ public interface UserManagementService extends UserExistenceService {
 	User findUserWithUsername(final String username);
 
 	/**
-	 * Checks if the given {@link User} object is in the given role from the
-	 * given role name.
+	 * Checks if a {@link Role} object exist in the given list with the given role name.
+	 *
+	 * @param rolename
+	 *            the role name
+	 * @param roles
+	 *            the roles
+	 * @return true, if the {@link Role} object exist in the list otherwise false.
+	 */
+	boolean isInRole(final String rolename, final List<Role> roles);
+
+	/**
+	 * Checks if the given {@link User} object is in the given role from the given role name.
 	 *
 	 * @param user
 	 *            the user
 	 * @param rolename
 	 *            the role name
-	 * @return true, if the given {@link User} object is in role otherwise
-	 *         false.
+	 * @return true, if the given {@link User} object is in role otherwise false.
 	 */
 	boolean isUserInRole(final User user, String rolename);
 
 	/**
-	 * Persist the given collection of {@link Address} objects from the given
-	 * {@link User} object.
+	 * Checks if the given token is valid.
+	 *
+	 * @param token
+	 *            the token to validate
+	 * @return true, if the given token is valid otherwise false
+	 */
+	boolean isValid(String token);
+
+	/**
+	 * Factory method that creates a new authentication token from the given user name.
+	 *
+	 * @param username
+	 *            the username
+	 * @return the new authentication token
+	 */
+	String newAuthenticationToken(String username);
+
+	/**
+	 * Persist the given resource model object with the given user id.
+	 *
+	 * @param resourceModel
+	 *            the resource model
+	 * @param userId
+	 *            the user id
+	 * @return the persisted {@link Resource} object
+	 */
+	Resource persistResource(ResourcesModel resourceModel, final Integer userId);
+
+	/**
+	 * Persist the given collection of {@link Address} objects from the given {@link User} object.
 	 *
 	 * @param user
 	 *            the user
@@ -233,8 +321,7 @@ public interface UserManagementService extends UserExistenceService {
 	void saveAddressesFromUser(final User user, final Collection<Address> addresses);
 
 	/**
-	 * Persist the given {@link Address} object from the given {@link User}
-	 * object.
+	 * Persist the given {@link Address} object from the given {@link User} object.
 	 *
 	 * @param user
 	 *            the user
@@ -250,8 +337,7 @@ public interface UserManagementService extends UserExistenceService {
 	 *            The {@link User} object to persist.
 	 * @return the id of the persisted {@link User} object.
 	 * @throws UserAlreadyExistsException
-	 *             Thrown if the given {@link User} object already exists in
-	 *             the database.
+	 *             Thrown if the given {@link User} object already exists in the database.
 	 */
 	Serializable saveNewUser(User user) throws UserAlreadyExistsException;
 
@@ -262,14 +348,12 @@ public interface UserManagementService extends UserExistenceService {
 	 *            The {@link User} object to persist.
 	 * @return the id of the persisted {@link User} object.
 	 * @throws UserAlreadyExistsException
-	 *             Thrown if the given {@link User} object already exists in
-	 *             the database.
+	 *             Thrown if the given {@link User} object already exists in the database.
 	 */
 	Serializable saveUserOnlyWithEmail(User user) throws UserAlreadyExistsException;
 
 	/**
-	 * Persist the given {@link Contactmethod} object to the given
-	 * {@link User} object contacts.
+	 * Persist the given {@link Contactmethod} object to the given {@link User} object contacts.
 	 *
 	 * @param user
 	 *            the user
@@ -279,11 +363,12 @@ public interface UserManagementService extends UserExistenceService {
 	 * @throws BatchUpdateException
 	 *             the batch update exception
 	 */
-	Contactmethod saveUserWithContactmethod(User user, Contactmethod contact) throws BatchUpdateException;
+	Contactmethod saveUserWithContactmethod(User user, Contactmethod contact)
+		throws BatchUpdateException;
 
 	/**
-	 * Persist the given list of {@link Contactmethod} objects to the given
-	 * {@link User} object contacts.
+	 * Persist the given list of {@link Contactmethod} objects to the given {@link User} object
+	 * contacts.
 	 *
 	 * @param user
 	 *            the user
@@ -293,12 +378,11 @@ public interface UserManagementService extends UserExistenceService {
 	 * @throws BatchUpdateException
 	 *             the batch update exception
 	 */
-	List<Contactmethod> saveUserWithContactmethods(final User user, final List<Contactmethod> contacts)
-			throws BatchUpdateException;
+	List<Contactmethod> saveUserWithContactmethods(final User user,
+		final List<Contactmethod> contacts) throws BatchUpdateException;
 
 	/**
-	 * Persist the given {@link User} object with the given collection of
-	 * {@link Role} objects.
+	 * Persist the given {@link User} object with the given collection of {@link Role} objects.
 	 *
 	 * @param user
 	 *            the user
@@ -308,10 +392,9 @@ public interface UserManagementService extends UserExistenceService {
 	void saveUserWithRoles(User user, Collection<Role> roles);
 
 	/**
-	 * Update email from the given {@link User} object if the email has changed
-	 * and return the new contactMethod object or the contactMethod that is
-	 * persist in database. Consider to check if the email already exists before
-	 * you call this method otherwise an exception is thrown.
+	 * Update email from the given {@link User} object if the email has changed and return the new
+	 * contactMethod object or the contactMethod that is persist in database. Consider to check if
+	 * the email already exists before you call this method otherwise an exception is thrown.
 	 *
 	 * @param email
 	 *            the email
@@ -332,15 +415,26 @@ public interface UserManagementService extends UserExistenceService {
 	 *            the user
 	 * @return true, if successful
 	 * @throws UserAlreadyExistsException
-	 *             is thrown if the user already exists with the given user
-	 *             name.
+	 *             is thrown if the user already exists with the given user name.
 	 */
 	boolean setUsername(final String username, final User user) throws UserAlreadyExistsException;
 
 	/**
-	 * Update an existing {@link Contactmethod} object. If the contact method
-	 * has changed the new {@link Contactmethod} object will be returned or
-	 * null if nothing changed.
+	 * Sign up process for insert a new user in the database.
+	 *
+	 * @param model
+	 *            the model
+	 * @param roles
+	 *            the roles
+	 * @param userModel
+	 *            the user model
+	 * @return the {@link SignUpUserResult} object with the result of the sign up process
+	 */
+	SignUpUserResult signUpUser(UsernameSignUpModel model, Set<Role> roles, UserModel userModel);
+
+	/**
+	 * Update an existing {@link Contactmethod} object. If the contact method has changed the new
+	 * {@link Contactmethod} object will be returned or null if nothing changed.
 	 *
 	 * @param contactmethodValue
 	 *            the contact method value
@@ -350,12 +444,12 @@ public interface UserManagementService extends UserExistenceService {
 	 *            the contact method
 	 * @return the {@link Contactmethod} object
 	 */
-	Contactmethod updateContactmethod(final String contactmethodValue, final ContactmethodType contactmethodType,
-			final Contactmethod contactmethod);
+	Contactmethod updateContactmethod(final String contactmethodValue,
+		final ContactmethodType contactmethodType, final Contactmethod contactmethod);
 
 	/**
-	 * Update user name from the given {@link User} object if the user name has
-	 * changed. Returns true if the user name has changed otherwise false.
+	 * Update user name from the given {@link User} object if the user name has changed. Returns
+	 * true if the user name has changed otherwise false.
 	 *
 	 * @param username
 	 *            the user name
@@ -363,14 +457,13 @@ public interface UserManagementService extends UserExistenceService {
 	 *            the user
 	 * @return Returns true if the user name has changed otherwise false.
 	 * @throws UserAlreadyExistsException
-	 *             is thrown if the user already exists with the given user
-	 *             name.
+	 *             is thrown if the user already exists with the given user name.
 	 */
-	boolean updateUsername(final String username, final User user) throws UserAlreadyExistsException;
+	boolean updateUsername(final String username, final User user)
+		throws UserAlreadyExistsException;
 
 	/**
-	 * Checks if the given {@link User} object is in the given {@link Role}
-	 * object.
+	 * Checks if the given {@link User} object is in the given {@link Role} object.
 	 *
 	 * @param user
 	 *            the user
@@ -385,76 +478,9 @@ public interface UserManagementService extends UserExistenceService {
 	 *
 	 * @param model
 	 *            the {@link UsernameSignUpModel} object.
-	 * @return A {@link ValidationErrors} object if validation fail otherwise
-	 *         null if the validation is successful.
+	 * @return A {@link ValidationErrors} object if validation fail otherwise null if the validation
+	 *         is successful.
 	 */
 	ValidationErrors validate(UsernameSignUpModel model);
-
-	/**
-	 * Sign up process for insert a new user in the database.
-	 *
-	 * @param model
-	 *            the model
-	 * @param roles
-	 *            the roles
-	 * @param userModel
-	 *            the user model
-	 * @return the {@link SignUpUserResult} object with the result of the sign
-	 *         up process
-	 */
-	SignUpUserResult signUpUser(UsernameSignUpModel model, Set<Role> roles, UserModel userModel);
-
-	/**
-	 * Persist the given resource model object with the given user id.
-	 *
-	 * @param resourceModel
-	 *            the resource model
-	 * @param userId
-	 *            the user id
-	 * @return the persisted {@link Resource} object
-	 */
-	Resource persistResource(ResourcesModel resourceModel, final Integer userId);
-
-	/**
-	 * Deletes the {@link Resource} object from the given resource model
-	 * object with the given user data id.
-	 *
-	 * @param resource
-	 *            the resource
-	 * @param userDataId
-	 *            the user data id
-	 */
-	void deleteResource(final ResourcesModel resource, final Integer userDataId);
-
-	/**
-	 * Deletes the given black listed {@link User} object from the given user data id.
-	 *
-	 * @param blacklisted
-	 *            the black listed user
-	 * @param userDataId
-	 *            the user data id
-	 * @return the {@link UserData} object.
-	 */
-	UserData deleteBlacklisted(User blacklisted, final Integer userDataId);
-
-	/**
-	 * Deletes the given {@link Address} object from the given {@link UserData} object.
-	 *
-	 * @param address
-	 *            the {@link Address} object
-	 * @param ud
-	 *            the {@link UserData} object
-	 * @return the {@link UserData} object.
-	 */
-	UserData deleteAddress(Address address, final UserData ud);
-
-	/**
-	 * Adds the given contact {@link User} object to the contacts of the given {@link User} object.
-	 *
-	 * @param user the user
-	 * @param contact the contact to add
-	 * @return the {@link User} object with the new contacts.
-	 */
-	User addUserContact(User user, User contact);
 
 }
