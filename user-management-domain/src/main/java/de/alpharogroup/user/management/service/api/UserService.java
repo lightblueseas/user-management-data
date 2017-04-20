@@ -35,7 +35,8 @@ import de.alpharogroup.user.management.enums.GenderType;
 /**
  * The interface {@link UserService}.
  */
-public interface UserService extends DomainService<Integer, User> {
+public interface UserService extends DomainService<Integer, User>
+{
 
 	/**
 	 * Checks if a user exists with the given user name.
@@ -74,36 +75,6 @@ public interface UserService extends DomainService<Integer, User> {
 	List<Role> findRolesFromUser(final User user);
 
 	/**
-	 * Find the {@link User} object with the given email.
-	 *
-	 * @param email
-	 *            the email
-	 * @return the found {@link User} object
-	 */
-	User findUserWithEmail(final String email);
-
-	/**
-	 * Find {@link User} object from the given user name.
-	 *
-	 * @param username
-	 *            the user name
-	 * @return the found {@link User} object
-	 */
-	User findUserWithUsername(final String username);
-
-	/**
-	 * Checks if the given {@link User} object is in the given {@link Role}
-	 * object.
-	 *
-	 * @param user
-	 *            the user
-	 * @param role
-	 *            the role
-	 * @return true, if successful
-	 */
-	boolean userIsInRole(final User user, final Role role);
-
-	/**
 	 * Find users from the given {@link GenderType} object and the range from till until.
 	 *
 	 * @param from
@@ -131,6 +102,35 @@ public interface UserService extends DomainService<Integer, User> {
 	 * @return the found list of {@link User} objects that matches the criteria.
 	 */
 	List<User> findUsers(Integer from, GenderType searchGender, Integer until,
-			final String geohash);
+		final String geohash);
+
+	/**
+	 * Find the {@link User} object with the given email.
+	 *
+	 * @param email
+	 *            the email
+	 * @return the found {@link User} object
+	 */
+	User findUserWithEmail(final String email);
+
+	/**
+	 * Find {@link User} object from the given user name.
+	 *
+	 * @param username
+	 *            the user name
+	 * @return the found {@link User} object
+	 */
+	User findUserWithUsername(final String username);
+
+	/**
+	 * Checks if the given {@link User} object is in the given {@link Role} object.
+	 *
+	 * @param user
+	 *            the user
+	 * @param role
+	 *            the role
+	 * @return true, if successful
+	 */
+	boolean userIsInRole(final User user, final Role role);
 
 }

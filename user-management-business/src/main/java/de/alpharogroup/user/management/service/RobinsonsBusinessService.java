@@ -35,15 +35,21 @@ import de.alpharogroup.user.management.service.api.RobinsonsService;
 
 @Transactional
 @Service("robinsonsService")
-public class RobinsonsBusinessService extends AbstractBusinessService<Robinsons, Integer, RobinsonsDao> implements RobinsonsService {
-	
+public class RobinsonsBusinessService
+	extends
+		AbstractBusinessService<Robinsons, Integer, RobinsonsDao>
+	implements
+		RobinsonsService
+{
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	public void setRobinsonsDao(RobinsonsDao robinsonsDao) {
+	public void setRobinsonsDao(RobinsonsDao robinsonsDao)
+	{
 		setDao(robinsonsDao);
 	}
 

@@ -48,37 +48,69 @@ import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.resource.system.application.model.ResourcesModel;
 import de.alpharogroup.resource.system.domain.Resource;
-import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.domain.Role;
 import de.alpharogroup.user.domain.User;
+import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.domain.UserData;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.sign.up.SignUpUserResult;
 import de.alpharogroup.user.management.sign.up.UserModel;
 
 /**
- * The interface {@link UserManagementResource} provides methods for
- * authenticate users of a given application.
+ * The interface {@link UserManagementResource} provides methods for authenticate users of a given
+ * application.
  */
 @Path("/usermanagement/")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public interface UserManagementResource {
+public interface UserManagementResource
+{
 
 	/**
-	 * Checks if a {@link Role} object exist in the given list with the given
-	 * role name.
-	 * 
-	 * @param roleSearchModel
-	 *            the {@link KeyValuePair} object that encapsulate the role name
-	 *            and roles
-	 * 
-	 * @return true, if the {@link Role} object exist in the list otherwise
-	 *         false.
+	 * Adds the given contact {@link User} object to the contacts of the given {@link User} object.
+	 *
+	 * @param saveModel
+	 *            the {@link KeyValuePair} object that encapsulate the user and the contact
+	 * @return the {@link User} object with the new contacts.
 	 */
 	@POST
-	@Path("/isin/role")
-	boolean isInRole(final KeyValuePair<String, List<Role>> roleSearchModel);
+	@Path("/add/user/contact")
+	User addUserContact(final KeyValuePair<User, User> saveModel);
+
+	/**
+	 * Deletes the given {@link Address} object from the given {@link UserData} object.
+	 *
+	 * @param deleteModel
+	 *            the {@link KeyValuePair} object that encapsulate the {@link Address} object and
+	 *            the {@link UserData} object
+	 * @return the {@link UserData} object.
+	 */
+	@POST
+	@Path("/delete/address")
+	UserData deleteAddress(final KeyValuePair<Address, UserData> deleteModel);
+
+	/**
+	 * Deletes the given black listed {@link User} object from the given user data id.
+	 *
+	 * @param deleteModel
+	 *            the {@link KeyValuePair} object that encapsulate the black listed user and the
+	 *            user data id
+	 * @return the {@link UserData} object.
+	 */
+	@POST
+	@Path("/delete/blacklisted")
+	UserData deleteBlacklisted(final KeyValuePair<User, Integer> deleteModel);
+
+	/**
+	 * Deletes the {@link Resource} object from the given resource model object with the given user
+	 * data id.
+	 *
+	 * @param deleteModel
+	 *            the {@link KeyValuePair} object that encapsulate the resource and the user data id
+	 */
+	@POST
+	@Path("/delete/resource")
+	void deleteResource(final KeyValuePair<ResourcesModel, Integer> deleteModel);
 
 	/**
 	 * Checks if a user exists with the given email.
@@ -90,6 +122,51 @@ public interface UserManagementResource {
 	@POST
 	@Path("/exists/user/by/email")
 	boolean existsUserWithEmail(final Contactmethod emailContact);
+
+	/**
+	 * Checks if a user exists with the given email.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return true, if successful
+	 */
+	@GET
+	@Path("/exists/user/with/email/{email}")
+	boolean existsUserWithEmail(@PathParam("email") final String email);
+
+	/**
+	 * Checks if a user exists with the given email or user name.
+	 *
+	 * @param searchModel
+	 *            the {@link KeyValuePair} object that encapsulate the email and the user name
+	 * @return the resulted {@link InsertUserState} object.
+	 */
+	@POST
+	@Path("/exists/user/with/email/or/username")
+	InsertUserState existsUserWithEmailOrUsername(final KeyValuePair<String, String> searchModel);
+
+	/**
+	 * Checks if a user exists with the given email or user name.
+	 *
+	 * @param emailOrUsername
+	 *            the email or user name
+	 * @return true, if successful
+	 */
+	@GET
+	@Path("/exists/user/with/emailOrUsername/{emailOrUsername}")
+	boolean existsUserWithEmailOrUsername(
+		@PathParam("emailOrUsername") final String emailOrUsername);
+
+	/**
+	 * Checks if a user exists with the given user name.
+	 * 
+	 * @param username
+	 *            the user name
+	 * @return true, if successful
+	 */
+	@GET
+	@Path("/exists/user/with/username/{username}")
+	boolean existsUserWithUsername(@PathParam("username") final String username);
 
 	/**
 	 * Find all {@link Address} from the given {@link User}.
@@ -118,8 +195,7 @@ public interface UserManagementResource {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	@POST
 	@Path("/find/all/emails")
@@ -130,8 +206,7 @@ public interface UserManagementResource {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	@POST
 	@Path("/find/all/faxes")
@@ -142,8 +217,7 @@ public interface UserManagementResource {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	@POST
 	@Path("/find/all/internets")
@@ -154,8 +228,7 @@ public interface UserManagementResource {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	@POST
 	@Path("/find/all/mobiles")
@@ -166,8 +239,7 @@ public interface UserManagementResource {
 	 *
 	 * @param user
 	 *            the user
-	 * @return the list of found {@link Contactmethod} from the given
-	 *         {@link User}.
+	 * @return the list of found {@link Contactmethod} from the given {@link User}.
 	 */
 	@POST
 	@Path("/find/all/tel")
@@ -273,38 +345,55 @@ public interface UserManagementResource {
 	User findUserWithUsername(@PathParam("username") final String username);
 
 	/**
-	 * Checks if the given {@link User} object is in the given role from the
-	 * given role name.
+	 * Checks if a {@link Role} object exist in the given list with the given role name.
+	 * 
+	 * @param roleSearchModel
+	 *            the {@link KeyValuePair} object that encapsulate the role name and roles
+	 * 
+	 * @return true, if the {@link Role} object exist in the list otherwise false.
+	 */
+	@POST
+	@Path("/isin/role")
+	boolean isInRole(final KeyValuePair<String, List<Role>> roleSearchModel);
+
+	/**
+	 * Checks if the given {@link User} object is in the given role from the given role name.
 	 * 
 	 * @param userSearchModel
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the role name
-	 * @return true, if the given {@link User} object is in role otherwise
-	 *         false.
+	 *            the {@link KeyValuePair} object that encapsulate the user and the role name
+	 * @return true, if the given {@link User} object is in role otherwise false.
 	 */
 	@POST
 	@Path("/is/user/in/role")
 	boolean isUserInRole(final KeyValuePair<User, String> userSearchModel);
 
 	/**
-	 * Persist the given collection of {@link Address} objects from the given
-	 * {@link User} object.
+	 * Persist the given resource model object with the given user id.
+	 *
+	 * @param saveModel
+	 *            the {@link KeyValuePair} object that encapsulate the {@link ResourcesModel} object
+	 *            and the user id.
+	 * @return the persisted {@link Resource} object
+	 */
+	@POST
+	@Path("/persist/resource")
+	Resource persistResource(KeyValuePair<ResourcesModel, Integer> saveModel);
+
+	/**
+	 * Persist the given collection of {@link Address} objects from the given {@link User} object.
 	 * 
 	 * @param userSaveModel
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the addresses
+	 *            the {@link KeyValuePair} object that encapsulate the user and the addresses
 	 */
 	@POST
 	@Path("/save/addresses")
 	void saveAddressesFromUser(final KeyValuePair<User, Collection<Address>> userSaveModel);
 
 	/**
-	 * Persist the given {@link Address} object from the given {@link User}
-	 * object.
+	 * Persist the given {@link Address} object from the given {@link User} object.
 	 *
 	 * @param userSaveModel
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the address
+	 *            the {@link KeyValuePair} object that encapsulate the user and the address
 	 */
 	@POST
 	@Path("/save/address")
@@ -317,8 +406,7 @@ public interface UserManagementResource {
 	 *            The {@link User} object to persist.
 	 * @return the id of the persisted {@link User} object.
 	 * @throws UserAlreadyExistsException
-	 *             Thrown if the given {@link User} object already exists in the
-	 *             database.
+	 *             Thrown if the given {@link User} object already exists in the database.
 	 */
 	@POST
 	@Path("/new/user")
@@ -331,20 +419,17 @@ public interface UserManagementResource {
 	 *            The {@link User} object to persist.
 	 * @return the id of the persisted {@link User} object.
 	 * @throws UserAlreadyExistsException
-	 *             Thrown if the given {@link User} object already exists in the
-	 *             database.
+	 *             Thrown if the given {@link User} object already exists in the database.
 	 */
 	@POST
 	@Path("/new/user/onlywith/email")
 	Serializable saveUserOnlyWithEmail(User user) throws UserAlreadyExistsException;
 
 	/**
-	 * Persist the given {@link Contactmethod} object to the given {@link User}
-	 * object contacts.
+	 * Persist the given {@link Contactmethod} object to the given {@link User} object contacts.
 	 * 
 	 * @param userSaveModel
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the contact to save
+	 *            the {@link KeyValuePair} object that encapsulate the user and the contact to save
 	 * @return the persisted {@link Contactmethod} object.
 	 * @throws BatchUpdateException
 	 *             is thrown if a batch update occured
@@ -352,106 +437,114 @@ public interface UserManagementResource {
 	@POST
 	@Path("/save/user/with/contactmethod")
 	Contactmethod saveUserWithContactmethod(KeyValuePair<User, Contactmethod> userSaveModel)
-			throws BatchUpdateException;
+		throws BatchUpdateException;
 
 	/**
-	 * Persist the given list of {@link Contactmethod} objects to the given
-	 * {@link User} object contacts.
+	 * Persist the given list of {@link Contactmethod} objects to the given {@link User} object
+	 * contacts.
 	 *
 	 * @param userSaveModel
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the contacts to save
+	 *            the {@link KeyValuePair} object that encapsulate the user and the contacts to save
 	 * @return the persisted list of {@link Contactmethod} objects.
 	 * @throws BatchUpdateException
 	 *             is thrown if a batch update occured
 	 */
 	@POST
 	@Path("/save/user/with/contactmethods")
-	List<Contactmethod> saveUserWithContactmethods(final KeyValuePair<User, List<Contactmethod>> userSaveModel)
-			throws BatchUpdateException;
+	List<Contactmethod> saveUserWithContactmethods(
+		final KeyValuePair<User, List<Contactmethod>> userSaveModel) throws BatchUpdateException;
 
 	/**
-	 * Persist the given {@link User} object with the given collection of
-	 * {@link Role} objects.
+	 * Persist the given {@link User} object with the given collection of {@link Role} objects.
 	 *
 	 * @param userSaveModel
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the roles to save
+	 *            the {@link KeyValuePair} object that encapsulate the user and the roles to save
 	 */
 	@POST
 	@Path("/save/user/with/roles")
 	void saveUserWithRoles(final KeyValuePair<User, Collection<Role>> userSaveModel);
 
 	/**
-	 * Update email from the given {@link User} object if the email has changed
-	 * and return the new contactMethod object or the contactMethod that is
-	 * persist in database. Consider to check if the email already exists before
-	 * you call this method otherwise an exception is thrown.
+	 * Update email from the given {@link User} object if the email has changed and return the new
+	 * contactMethod object or the contactMethod that is persist in database. Consider to check if
+	 * the email already exists before you call this method otherwise an exception is thrown.
 	 *
 	 * 
 	 * @param userSaveModel
-	 *            the {@link KeyValuePair} object that encapsulate the email and
-	 *            the user
+	 *            the {@link KeyValuePair} object that encapsulate the email and the user
 	 * @return the {@link Contactmethod} object
 	 * @throws EmailAlreadyExistsException
 	 *             is thrown if the email already exists.
 	 */
 	@POST
 	@Path("/set/email")
-	Contactmethod setEmail(final KeyValuePair<String, User> userSaveModel) throws EmailAlreadyExistsException;
+	Contactmethod setEmail(final KeyValuePair<String, User> userSaveModel)
+		throws EmailAlreadyExistsException;
 
 	/**
 	 * Sets a new user name to the the given {@link User} object.
 	 *
 	 * @param userSaveModel
-	 *            the {@link KeyValuePair} object that encapsulate the user name
-	 *            and the user to set
+	 *            the {@link KeyValuePair} object that encapsulate the user name and the user to set
 	 * @return true, if successful
 	 * @throws UserAlreadyExistsException
-	 *             is thrown if the user already exists with the given user
-	 *             name.
+	 *             is thrown if the user already exists with the given user name.
 	 */
 	@POST
 	@Path("/set/username")
-	boolean setUsername(final KeyValuePair<String, User> userSaveModel) throws UserAlreadyExistsException;
+	boolean setUsername(final KeyValuePair<String, User> userSaveModel)
+		throws UserAlreadyExistsException;
 
 	/**
-	 * Update an existing {@link Contactmethod} object. If the contact method
-	 * has changed the new {@link Contactmethod} object will be returned or null
-	 * if nothing changed.
+	 * Sign up process for insert a new user in the database.
+	 * 
+	 * @param saveModel
+	 *            the {@link Triple} object that encapsulate the {@link UsernameSignUpModel} object,
+	 *            the roles and the {@link UserModel} object.
+	 * @return the {@link SignUpUserResult} object with the result of the sign up process
+	 */
+	@POST
+	@Path("/signup/user")
+	SignUpUserResult signUpUser(Triple<UsernameSignUpModel, Set<Role>, UserModel> saveModel);
+
+	// ****************************************
+	// methods from the interface UserExistenceService
+	// ****************************************
+
+	/**
+	 * Update an existing {@link Contactmethod} object. If the contact method has changed the new
+	 * {@link Contactmethod} object will be returned or null if nothing changed.
 	 *
 	 * @param updateModel
-	 *            the {@link Triple} object that encapsulate the contact method
-	 *            value and type and the contact method to update.
+	 *            the {@link Triple} object that encapsulate the contact method value and type and
+	 *            the contact method to update.
 	 * @return the {@link Contactmethod} object
 	 */
 	@POST
 	@Path("/update/contactmethod")
-	Contactmethod updateContactmethod(final Triple<String, ContactmethodType, Contactmethod> updateModel);
+	Contactmethod updateContactmethod(
+		final Triple<String, ContactmethodType, Contactmethod> updateModel);
 
 	/**
-	 * Update user name from the given {@link User} object if the user name has
-	 * changed. Returns true if the user name has changed otherwise false.
+	 * Update user name from the given {@link User} object if the user name has changed. Returns
+	 * true if the user name has changed otherwise false.
 	 *
 	 * @param updateModel
-	 *            the {@link KeyValuePair} object that encapsulate the user name
-	 *            and the user
+	 *            the {@link KeyValuePair} object that encapsulate the user name and the user
 	 * @return Returns true if the user name has changed otherwise false.
 	 * @throws UserAlreadyExistsException
-	 *             is thrown if the user already exists with the given user
-	 *             name.
+	 *             is thrown if the user already exists with the given user name.
 	 */
 	@POST
 	@Path("/update/username")
-	boolean updateUsername(final KeyValuePair<String, User> updateModel) throws UserAlreadyExistsException;
+	boolean updateUsername(final KeyValuePair<String, User> updateModel)
+		throws UserAlreadyExistsException;
 
 	/**
-	 * Checks if the given {@link User} object is in the given {@link Role}
-	 * object.
+	 * Checks if the given {@link User} object is in the given {@link Role} object.
 	 *
 	 * @param searchModel
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the role
+	 *            the {@link KeyValuePair} object that encapsulate the user and the role
 	 * @return true, if successful
 	 */
 	@POST
@@ -463,137 +556,11 @@ public interface UserManagementResource {
 	 *
 	 * @param model
 	 *            the {@link UsernameSignUpModel} object.
-	 * @return A {@link ValidationErrors} object if validation fail otherwise
-	 *         null if the validation is successful.
+	 * @return A {@link ValidationErrors} object if validation fail otherwise null if the validation
+	 *         is successful.
 	 */
 	@POST
 	@Path("/validate")
 	ValidationErrors validate(UsernameSignUpModel model);
-
-	/**
-	 * Sign up process for insert a new user in the database.
-	 * 
-	 * @param saveModel
-	 *            the {@link Triple} object that encapsulate the
-	 *            {@link UsernameSignUpModel} object, the roles and the
-	 *            {@link UserModel} object.
-	 * @return the {@link SignUpUserResult} object with the result of the sign
-	 *         up process
-	 */
-	@POST
-	@Path("/signup/user")
-	SignUpUserResult signUpUser(Triple<UsernameSignUpModel, Set<Role>, UserModel> saveModel);
-
-	/**
-	 * Persist the given resource model object with the given user id.
-	 *
-	 * @param saveModel
-	 *            the {@link KeyValuePair} object that encapsulate the
-	 *            {@link ResourcesModel} object and the user id.
-	 * @return the persisted {@link Resource} object
-	 */
-	@POST
-	@Path("/persist/resource")
-	Resource persistResource(KeyValuePair<ResourcesModel, Integer> saveModel);
-
-	/**
-	 * Deletes the {@link Resource} object from the given resource model object
-	 * with the given user data id.
-	 *
-	 * @param deleteModel
-	 *            the {@link KeyValuePair} object that encapsulate the resource
-	 *            and the user data id
-	 */
-	@POST
-	@Path("/delete/resource")
-	void deleteResource(final KeyValuePair<ResourcesModel, Integer> deleteModel);
-
-	/**
-	 * Deletes the given black listed {@link User} object from the given user
-	 * data id.
-	 *
-	 * @param deleteModel
-	 *            the {@link KeyValuePair} object that encapsulate the black
-	 *            listed user and the user data id
-	 * @return the {@link UserData} object.
-	 */
-	@POST
-	@Path("/delete/blacklisted")
-	UserData deleteBlacklisted(final KeyValuePair<User, Integer> deleteModel);
-
-	/**
-	 * Deletes the given {@link Address} object from the given {@link UserData}
-	 * object.
-	 *
-	 * @param deleteModel
-	 *            the {@link KeyValuePair} object that encapsulate the
-	 *            {@link Address} object and the {@link UserData} object
-	 * @return the {@link UserData} object.
-	 */
-	@POST
-	@Path("/delete/address")
-	UserData deleteAddress(final KeyValuePair<Address, UserData> deleteModel);
-
-	/**
-	 * Adds the given contact {@link User} object to the contacts of the given
-	 * {@link User} object.
-	 *
-	 * @param saveModel
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the contact
-	 * @return the {@link User} object with the new contacts.
-	 */
-	@POST
-	@Path("/add/user/contact")
-	User addUserContact(final KeyValuePair<User, User> saveModel);
-
-	// ****************************************
-	// methods from the interface UserExistenceService
-	// ****************************************
-
-	/**
-	 * Checks if a user exists with the given email.
-	 * 
-	 * @param email
-	 *            the email
-	 * @return true, if successful
-	 */
-	@GET
-	@Path("/exists/user/with/email/{email}")
-	boolean existsUserWithEmail(@PathParam("email") final String email);
-
-	/**
-	 * Checks if a user exists with the given user name.
-	 * 
-	 * @param username
-	 *            the user name
-	 * @return true, if successful
-	 */
-	@GET
-	@Path("/exists/user/with/username/{username}")
-	boolean existsUserWithUsername(@PathParam("username") final String username);
-
-	/**
-	 * Checks if a user exists with the given email or user name.
-	 *
-	 * @param emailOrUsername
-	 *            the email or user name
-	 * @return true, if successful
-	 */
-	@GET
-	@Path("/exists/user/with/emailOrUsername/{emailOrUsername}")
-	boolean existsUserWithEmailOrUsername(@PathParam("emailOrUsername") final String emailOrUsername);
-
-	/**
-	 * Checks if a user exists with the given email or user name.
-	 *
-	 * @param searchModel
-	 *            the {@link KeyValuePair} object that encapsulate the email and
-	 *            the user name
-	 * @return the resulted {@link InsertUserState} object.
-	 */
-	@POST
-	@Path("/exists/user/with/email/or/username")
-	InsertUserState existsUserWithEmailOrUsername(final KeyValuePair<String, String> searchModel);
 
 }

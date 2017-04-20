@@ -36,19 +36,20 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(callSuper=true)
-@EqualsAndHashCode(callSuper=true)
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Contactmethod extends BaseDomainObject<Integer> {
+public class Contactmethod extends BaseDomainObject<Integer>
+{
 	/** The serial Version UID */
 	private static final long serialVersionUID = 1L;
 	/** The contact method like email, telefon etc. */
 	private ContactmethodType contactmethod;
 	/**
-	 * The value from the contact method. For instance 'abc@gmail.com' for email
-	 * or 'http://www.google.com' for internet.
+	 * The value from the contact method. For instance 'abc@gmail.com' for email or
+	 * 'http://www.google.com' for internet.
 	 */
 	private String contactvalue;
 }

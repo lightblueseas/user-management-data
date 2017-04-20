@@ -30,6 +30,7 @@ import de.alpharogroup.user.management.domain.Robinson;
 /**
  * The interface {@link RobinsonService}.
  */
-public interface RobinsonService extends DomainService<Integer, Robinson> {
+public interface RobinsonService extends DomainService<Integer, Robinson>
+{
 
 }

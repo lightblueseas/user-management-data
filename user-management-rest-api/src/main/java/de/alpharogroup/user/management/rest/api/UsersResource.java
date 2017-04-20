@@ -49,11 +49,8 @@ import de.alpharogroup.user.management.enums.GenderType;
 @Path("/user/")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public interface UsersResource extends RestfulResource<Integer, User> {
-
-	@GET
-	@Path("/findall/")
-	List<User> findAll();
+public interface UsersResource extends RestfulResource<Integer, User>
+{
 
 	/**
 	 * Checks if a user exists with the given user name.
@@ -88,6 +85,10 @@ public interface UsersResource extends RestfulResource<Integer, User> {
 	@Path("/find/address")
 	Address findAddressFromUser(final User user);
 
+	@GET
+	@Path("/findall/")
+	List<User> findAll();
+
 	/**
 	 * Find roles from the given {@link User}.
 	 * 
@@ -98,6 +99,31 @@ public interface UsersResource extends RestfulResource<Integer, User> {
 	@POST
 	@Path("/find/roles")
 	List<Role> findRolesFromUser(final User user);
+
+	/**
+	 * Find users from the given {@link GenderType} object and the range from till until.
+	 *
+	 * @param searchCriteria
+	 *            the {@link KeyValuePair} object that encapsulate the from age the gender and the
+	 *            until age.
+	 * @return the found list of {@link User} objects that matches the criteria.
+	 */
+	@POST
+	@Path("/find/users")
+	List<User> findUsers(final Triple<Integer, GenderType, Integer> searchCriteria);
+
+	/**
+	 * Find users from the given {@link GenderType} object and the range from till until and the
+	 * given geohash code.
+	 *
+	 * @param userSearchCriteria
+	 *            the {@link UserSearchCriteria} object that encapsulate the search criteria for
+	 *            find users
+	 * @return the found list of {@link User} objects that matches the criteria.
+	 */
+	@POST
+	@Path("/find/users/by/geo")
+	List<User> findUsers(UserSearchCriteria userSearchCriteria);
 
 	/**
 	 * Find the {@link User} object with the given email.
@@ -122,40 +148,14 @@ public interface UsersResource extends RestfulResource<Integer, User> {
 	User findUserWithUsername(final String username);
 
 	/**
-	 * Checks if the given {@link User} object is in the given {@link Role}
-	 * object.
+	 * Checks if the given {@link User} object is in the given {@link Role} object.
 	 *
 	 * @param user
-	 *            the {@link KeyValuePair} object that encapsulate the user and
-	 *            the role
+	 *            the {@link KeyValuePair} object that encapsulate the user and the role
 	 * @return true, if successful
 	 */
 	@POST
 	@Path("/user/is/in/role")
 	boolean userIsInRole(final KeyValuePair<User, Role> user);
-
-	/**
-	 * Find users from the given {@link GenderType} object and the range from
-	 * till until.
-	 *
-	 * @param searchCriteria
-	 *            the {@link KeyValuePair} object that encapsulate the from age
-	 *            the gender and the until age.
-	 * @return the found list of {@link User} objects that matches the criteria.
-	 */
-	@POST
-	@Path("/find/users")
-	List<User> findUsers(final Triple<Integer, GenderType, Integer> searchCriteria);
-
-	/**
-	 * Find users from the given {@link GenderType} object and the range from
-	 * till until and the given geohash code.
-	 *
-	 * @param userSearchCriteria the {@link UserSearchCriteria} object that encapsulate the search criteria for find users
-	 * @return the found list of {@link User} objects that matches the criteria.
-	 */
-	@POST
-	@Path("/find/users/by/geo")
-	List<User> findUsers(UserSearchCriteria userSearchCriteria);
 
 }

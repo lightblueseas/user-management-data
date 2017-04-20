@@ -41,13 +41,16 @@ public class RuleViolationsRestResource
 {
 
 	@Override
-	public RuleViolation save(Infringement model) {
-		return getDomainService().save(model);
+	public List<RuleViolation> find(Infringement model)
+	{
+		return getDomainService().find(model.getDetector(), model.getViolator(), model.getReason(),
+			model.getDescription());
 	}
-	
+
 	@Override
-	public List<RuleViolation> find(Infringement model) {
-		return getDomainService().find(model.getDetector(), model.getViolator(), model.getReason(), model.getDescription());
+	public RuleViolation save(Infringement model)
+	{
+		return getDomainService().save(model);
 	}
 
 }

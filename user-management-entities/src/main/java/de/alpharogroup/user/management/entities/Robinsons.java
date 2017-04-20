@@ -54,7 +54,7 @@ public class Robinsons extends BaseEntity<Integer> implements Cloneable
 	 * The value associated with the column: robinson
 	 */
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "robinson_user_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_ROBINSON_USER_ID") )
+	@JoinColumn(name = "robinson_user_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_ROBINSON_USER_ID"))
 	private Users robinson;
 
 }

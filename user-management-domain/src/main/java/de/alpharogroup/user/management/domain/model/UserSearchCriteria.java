@@ -43,17 +43,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserSearchCriteria {
-	
+public class UserSearchCriteria
+{
+
 	/** The from. */
-	private Integer from; 
-	
+	private Integer from;
+
 	/** The search gender. */
-	private GenderType searchGender; 
-	
+	private GenderType searchGender;
+
 	/** The until. */
 	private Integer until;
-	
+
 	/** The geohash. */
 	private String geohash;
 }

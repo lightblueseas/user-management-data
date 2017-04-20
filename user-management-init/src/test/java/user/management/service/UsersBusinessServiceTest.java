@@ -36,42 +36,52 @@ import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.service.api.UsersService;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
-public class UsersBusinessServiceTest extends AbstractTestNGSpringContextTests {
+public class UsersBusinessServiceTest extends AbstractTestNGSpringContextTests
+{
 
 	@Autowired
 	private UsersService usersService;
 
-	@Test(enabled=false)
-	public void testFindUsers() {
+	@Test(enabled = false)
+	public void testFindRelationPermissions()
+	{
+		final Users michaelProvider = usersService.findUserWithEmail("james.dean@gmail.com");
+		michaelProvider.setActive(true);
+		usersService.merge(michaelProvider);
+		// Users adolfSubscriber = usersService.findUserWithEmail("adolf.frankenstein@gmail.com");
+		// Permissions permission = permissionsService.findByShortcut("vui");
+		// Set<Permissions> permissions = new HashSet<Permissions>();
+		// permissions.add(permission);
+		// RelationPermissions relationPermission =
+		// relationPermissionsService.findRelationPermissions(michaelProvider, adolfSubscriber,
+		// permission);
+		// if(relationPermission != null) {
+		// relationPermission =
+		// UserManagementFactory.getInstance().newRelationPermissions(michaelProvider,
+		// adolfSubscriber, permissions);
+		// relationPermission = relationPermissionsService.merge(relationPermission);
+		// }
+		// RelationPermissions relationPermissions =
+		// relationPermissionsService.findRelationPermissions(michaelProvider, adolfSubscriber);
+		// System.out.println(relationPermissions);
+	}
+
+	@Test(enabled = false)
+	public void testFindUsers()
+	{
 		final Integer from = 18;
 		final Integer until = 50;
 		final List<Users> users = usersService.findUsers(from, GenderType.MALE, until);
 		System.out.println(users);
 	}
 
-	@Test(enabled=false)
-	public void testFindUsersWithGeohash() {
+	@Test(enabled = false)
+	public void testFindUsersWithGeohash()
+	{
 		final Integer from = 18;
 		final Integer until = 50;
 		final List<Users> users = usersService.findUsers(from, GenderType.MALE, until, "u0ww");
 		System.out.println(users);
-	}
-	@Test(enabled=false)
-	public void testFindRelationPermissions() {
-		final Users michaelProvider = usersService.findUserWithEmail("james.dean@gmail.com");
-		michaelProvider.setActive(true);
-		usersService.merge(michaelProvider);
-//		Users adolfSubscriber = usersService.findUserWithEmail("adolf.frankenstein@gmail.com");
-//		Permissions permission = permissionsService.findByShortcut("vui");
-//		Set<Permissions> permissions = new HashSet<Permissions>();
-//		permissions.add(permission);
-//		RelationPermissions relationPermission = relationPermissionsService.findRelationPermissions(michaelProvider, adolfSubscriber, permission);
-//		if(relationPermission != null) {
-//			relationPermission = UserManagementFactory.getInstance().newRelationPermissions(michaelProvider, adolfSubscriber, permissions);
-//			relationPermission = relationPermissionsService.merge(relationPermission);
-//		}
-//		RelationPermissions relationPermissions = relationPermissionsService.findRelationPermissions(michaelProvider, adolfSubscriber);
-//		System.out.println(relationPermissions);
 	}
 
 }

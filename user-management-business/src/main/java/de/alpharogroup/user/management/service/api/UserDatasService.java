@@ -27,23 +27,15 @@ package de.alpharogroup.user.management.service.api;
 import java.util.List;
 
 import de.alpharogroup.db.service.api.BusinessService;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.entities.UserDatas;
 import de.alpharogroup.user.management.enums.GenderType;
-import de.alpharogroup.user.entities.Users;
 
 /**
  * The interface {@link UserDatasService}.
  */
-public interface UserDatasService extends BusinessService<UserDatas, Integer> {
-
-	/**
-	 * Find the {@link UserDatas} object by the given {@link Users} object.
-	 *
-	 * @param user
-	 *            the user
-	 * @return the found {@link UserDatas} object or null if does not exist.
-	 */
-	UserDatas findBy(Users user);
+public interface UserDatasService extends BusinessService<UserDatas, Integer>
+{
 
 	/**
 	 * Find the {@link UserDatas} object by the given {@link Integer} user id.
@@ -55,8 +47,16 @@ public interface UserDatasService extends BusinessService<UserDatas, Integer> {
 	UserDatas findBy(final Integer userid);
 
 	/**
-	 * Find users from the given {@link GenderType} object and the range from
-	 * till until.
+	 * Find the {@link UserDatas} object by the given {@link Users} object.
+	 *
+	 * @param user
+	 *            the user
+	 * @return the found {@link UserDatas} object or null if does not exist.
+	 */
+	UserDatas findBy(Users user);
+
+	/**
+	 * Find users from the given {@link GenderType} object and the range from till until.
 	 *
 	 * @param from
 	 *            the from
@@ -64,14 +64,14 @@ public interface UserDatasService extends BusinessService<UserDatas, Integer> {
 	 *            the search gender
 	 * @param until
 	 *            the until
-	 * @return the found list of {@link Users} objects that matches the
-	 *         criteria.
+	 * @return the found list of {@link Users} objects that matches the criteria.
 	 */
-	List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender, final Integer until);
+	List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender,
+		final Integer until);
 
 	/**
-	 * Find users from the given {@link GenderType} object and the range from
-	 * till until and the given geohash code.
+	 * Find users from the given {@link GenderType} object and the range from till until and the
+	 * given geohash code.
 	 *
 	 * @param from
 	 *            the from
@@ -81,10 +81,9 @@ public interface UserDatasService extends BusinessService<UserDatas, Integer> {
 	 *            the until
 	 * @param geohash
 	 *            the geohash
-	 * @return the found list of {@link Users} objects that matches the
-	 *         criteria.
+	 * @return the found list of {@link Users} objects that matches the criteria.
 	 */
-	List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender, final Integer until,
-			final String geohash);
+	List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender,
+		final Integer until, final String geohash);
 
 }

@@ -50,31 +50,31 @@ import de.alpharogroup.cxf.rest.client.WebClientExtensions;
 import de.alpharogroup.date.CalculateDateExtensions;
 import de.alpharogroup.date.CreateDateExtensions;
 import de.alpharogroup.file.search.PathFinder;
-import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.domain.Permission;
-import de.alpharogroup.user.management.domain.Recommendation;
 import de.alpharogroup.user.domain.RelationPermission;
 import de.alpharogroup.user.domain.ResetPassword;
-import de.alpharogroup.user.management.domain.Robinson;
 import de.alpharogroup.user.domain.Role;
-import de.alpharogroup.user.management.domain.RuleViolation;
 import de.alpharogroup.user.domain.User;
+import de.alpharogroup.user.management.domain.Contactmethod;
+import de.alpharogroup.user.management.domain.Recommendation;
+import de.alpharogroup.user.management.domain.Robinson;
+import de.alpharogroup.user.management.domain.RuleViolation;
 import de.alpharogroup.user.management.domain.model.Infringement;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.enums.RuleViolationReason;
 import de.alpharogroup.user.management.rest.api.AuthenticationsResource;
 import de.alpharogroup.user.management.rest.api.ContactmethodsResource;
-import de.alpharogroup.user.rest.api.PermissionsResource;
 import de.alpharogroup.user.management.rest.api.RecommendationsResource;
-import de.alpharogroup.user.rest.api.RelationPermissionsResource;
-import de.alpharogroup.user.rest.api.ResetPasswordsResource;
 import de.alpharogroup.user.management.rest.api.RobinsonsResource;
-import de.alpharogroup.user.rest.api.RolesResource;
 import de.alpharogroup.user.management.rest.api.RuleViolationsResource;
 import de.alpharogroup.user.management.rest.api.UserCreditsResource;
 import de.alpharogroup.user.management.rest.api.UserDatasResource;
 import de.alpharogroup.user.management.rest.api.UserManagementResource;
 import de.alpharogroup.user.management.rest.api.UsersResource;
+import de.alpharogroup.user.rest.api.PermissionsResource;
+import de.alpharogroup.user.rest.api.RelationPermissionsResource;
+import de.alpharogroup.user.rest.api.ResetPasswordsResource;
+import de.alpharogroup.user.rest.api.RolesResource;
 
 /**
  * The class {@link UserManagementSystemRestClientTest}.
@@ -84,22 +84,24 @@ import de.alpharogroup.user.management.rest.api.UsersResource;
 public class UserManagementSystemRestClientTest
 {
 
-	private TLSClientParameters tlsClientParameters;
-
-	private UserManagementSystemRestClient restClient;
-
-	private AuthenticationsResource authenticationsResource;
-
-	private UsersResource usersResource;
-
-	private PermissionsResource permissionsResource;
-
-	private User promoterUser;
-
-	private User recommendedUser;
-
-	private RolesResource rolesResource;
-
+	/**
+	 * Factory method for create new {@link ArrayList} and returns as {@link List}.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param elements
+	 *            the elements to add in the new {@link ArrayList}.
+	 * @return the new {@link List}.
+	 * @deprecated use the synonyme method in ListExtensions.
+	 */
+	@Deprecated
+	@SafeVarargs
+	public static <T> List<T> newArrayList(final T... elements)
+	{
+		final List<T> list = new ArrayList<>();
+		Collections.addAll(list, elements);
+		return list;
+	}
 
 	@BeforeClass
 	public static void setUpClass() throws Exception
@@ -112,6 +114,65 @@ public class UserManagementSystemRestClientTest
 	{
 	}
 
+	private TLSClientParameters tlsClientParameters;
+
+	private UserManagementSystemRestClient restClient;
+
+	private AuthenticationsResource authenticationsResource;
+
+	private UsersResource usersResource;
+
+	private PermissionsResource permissionsResource;
+
+
+	private User promoterUser;
+
+	private User recommendedUser;
+
+	private RolesResource rolesResource;
+
+	private Role getAdminRole()
+	{
+		Role role = rolesResource.findRole("ADMIN");
+		if (role == null)
+		{
+			role = Role.builder().rolename("ADMIN").description("The admin role").build();
+			role = rolesResource.create(role);
+		}
+		return role;
+	}
+
+	public User getPromoterUser()
+	{
+		if (promoterUser == null)
+		{
+			final String promoterEmail = "michael.knight@gmail.com";
+			promoterUser = usersResource.findUserWithEmail(promoterEmail);
+			if (promoterUser.getActive() == null)
+			{
+				promoterUser.setActive(true);
+				usersResource.update(promoterUser);
+			}
+		}
+		return promoterUser;
+	}
+
+
+	public User getRecommendedUser()
+	{
+		if (recommendedUser == null)
+		{
+			final String promoterEmail = "james.dean@gmail.com";
+			recommendedUser = usersResource.findUserWithEmail(promoterEmail);
+			if (recommendedUser.getActive() == null)
+			{
+				recommendedUser.setActive(true);
+				usersResource.update(recommendedUser);
+			}
+		}
+		return recommendedUser;
+	}
+
 	@BeforeMethod
 	public void setUpMethod() throws Exception
 	{
@@ -119,8 +180,8 @@ public class UserManagementSystemRestClientTest
 		{
 			restClient = new UserManagementSystemRestClient(
 				AbstractRestClient.DEFAULT_BASE_HTTPS_URL);
-			tlsClientParameters = WebClientExtensions.newTLSClientParameters(PathFinder.getSrcTestResourcesDir(),
-				"keystore.ks", "JKS", "wicket");
+			tlsClientParameters = WebClientExtensions.newTLSClientParameters(
+				PathFinder.getSrcTestResourcesDir(), "keystore.ks", "JKS", "wicket");
 			authenticationsResource = restClient.getAuthenticationsResource();
 
 			usersResource = restClient.getUsersResource();
@@ -134,6 +195,7 @@ public class UserManagementSystemRestClientTest
 			WebClientExtensions.setTLSClientParameters(rolesResource, tlsClientParameters);
 		}
 	}
+
 
 	@AfterMethod
 	public void tearDownMethod() throws Exception
@@ -157,7 +219,6 @@ public class UserManagementSystemRestClientTest
 		AssertJUnit.assertNotNull(token);
 
 	}
-
 
 	/**
 	 * Test the {@link ContactmethodsResource}.
@@ -262,7 +323,6 @@ public class UserManagementSystemRestClientTest
 		AssertJUnit.assertEquals(expected.getShortcut(), actual.getShortcut());
 
 	}
-
 
 	/**
 	 * Test the {@link RecommendationsResource}.
@@ -381,7 +441,7 @@ public class UserManagementSystemRestClientTest
 		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
 
-//		final Robinson robinson = Robinson.builder().robinson(getPromoterUser()).build();
+		// final Robinson robinson = Robinson.builder().robinson(getPromoterUser()).build();
 
 		final Robinson robinson2 = resource.read(50);
 		AssertJUnit.assertNotNull(robinson2);
@@ -403,16 +463,6 @@ public class UserManagementSystemRestClientTest
 		AssertJUnit.assertNotNull(permissions);
 
 
-	}
-
-	private Role getAdminRole() {
-		Role role = rolesResource.findRole("ADMIN");
-		if (role == null)
-		{
-			role = Role.builder().rolename("ADMIN").description("The admin role").build();
-			role = rolesResource.create(role);
-		}
-		return role;
 	}
 
 	/**
@@ -478,9 +528,8 @@ public class UserManagementSystemRestClientTest
 		WebClientExtensions.setTLSClientParameters(resource, tlsClientParameters);
 		AssertJUnit.assertNotNull(resource);
 
-		final KeyValuePair<String, List<Role>> roleSearchModel = KeyValuePair.<String, List<Role>>builder()
-			.key("ADMIN")
-			.value(newArrayList(getAdminRole()))
+		final KeyValuePair<String, List<Role>> roleSearchModel = KeyValuePair
+			.<String, List<Role>> builder().key("ADMIN").value(newArrayList(getAdminRole()))
 			.build();
 		final boolean actual = resource.isInRole(roleSearchModel);
 		final boolean expected = true;
@@ -499,52 +548,6 @@ public class UserManagementSystemRestClientTest
 		final User expected = usersResource.findUserWithEmail(userEmail);
 
 		AssertJUnit.assertEquals(expected.getUsername(), "james.dean");
-	}
-
-	public User getPromoterUser()
-	{
-		if (promoterUser == null)
-		{
-			final String promoterEmail = "michael.knight@gmail.com";
-			promoterUser = usersResource.findUserWithEmail(promoterEmail);
-			if (promoterUser.getActive() == null)
-			{
-				promoterUser.setActive(true);
-				usersResource.update(promoterUser);
-			}
-		}
-		return promoterUser;
-	}
-
-	public User getRecommendedUser()
-	{
-		if (recommendedUser == null)
-		{
-			final String promoterEmail = "james.dean@gmail.com";
-			recommendedUser = usersResource.findUserWithEmail(promoterEmail);
-			if (recommendedUser.getActive() == null)
-			{
-				recommendedUser.setActive(true);
-				usersResource.update(recommendedUser);
-			}
-		}
-		return recommendedUser;
-	}
-
-	/**
-	 * Factory method for create new {@link ArrayList} and returns as {@link List}.
-	 *
-	 * @param <T>            the generic type
-	 * @param elements the elements to add in the new {@link ArrayList}.
-	 * @return the new {@link List}.
-	 * @deprecated use the synonyme method in ListExtensions.
-	 */
-	@Deprecated
-	@SafeVarargs
-	public static <T> List<T> newArrayList(final T... elements) {
-		final List<T> list = new ArrayList<>();
-		Collections.addAll(list, elements);
-		return list;
 	}
 
 }

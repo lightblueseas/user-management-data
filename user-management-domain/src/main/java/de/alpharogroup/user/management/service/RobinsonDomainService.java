@@ -43,8 +43,12 @@ import lombok.Setter;
  */
 @Transactional
 @Service("robinsonDomainService")
-public class RobinsonDomainService extends
-		AbstractDomainService<Integer, Robinson, Robinsons, RobinsonsDao, RobinsonsMapper> implements RobinsonService {
+public class RobinsonDomainService
+	extends
+		AbstractDomainService<Integer, Robinson, Robinsons, RobinsonsDao, RobinsonsMapper>
+	implements
+		RobinsonService
+{
 
 	/** The {@link RobinsonsService}. */
 	@Autowired
@@ -59,7 +63,8 @@ public class RobinsonDomainService extends
 	 *            the new {@link RobinsonsDao}.
 	 */
 	@Autowired
-	public void setRobinsonsDao(final RobinsonsDao robinsonsDao) {
+	public void setRobinsonsDao(final RobinsonsDao robinsonsDao)
+	{
 		setDao(robinsonsDao);
 	}
 
@@ -70,8 +75,9 @@ public class RobinsonDomainService extends
 	 *            the new {@link RobinsonsMapper}.
 	 */
 	@Autowired
-	public void setRobinsonsMapper(RobinsonsMapper mapper) {
+	public void setRobinsonsMapper(RobinsonsMapper mapper)
+	{
 		setMapper(mapper);
 	}
-	
+
 }

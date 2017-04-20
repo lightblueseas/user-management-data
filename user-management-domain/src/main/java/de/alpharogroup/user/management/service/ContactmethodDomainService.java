@@ -31,11 +31,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.service.domain.AbstractDomainService;
+import de.alpharogroup.user.domain.User;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.daos.ContactmethodsDao;
 import de.alpharogroup.user.management.domain.Contactmethod;
-import de.alpharogroup.user.domain.User;
 import de.alpharogroup.user.management.entities.Contactmethods;
-import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.mapper.ContactmethodsMapper;
 import de.alpharogroup.user.management.service.api.ContactmethodService;
@@ -49,8 +49,11 @@ import lombok.Setter;
 @Transactional
 @Service("contactmethodDomainService")
 public class ContactmethodDomainService
-		extends AbstractDomainService<Integer, Contactmethod, Contactmethods, ContactmethodsDao, ContactmethodsMapper>
-		implements ContactmethodService {
+	extends
+		AbstractDomainService<Integer, Contactmethod, Contactmethods, ContactmethodsDao, ContactmethodsMapper>
+	implements
+		ContactmethodService
+{
 
 	/** The {@link ContactmethodsService}. */
 	@Autowired
@@ -59,16 +62,79 @@ public class ContactmethodDomainService
 	private ContactmethodsService contactmethodsService;
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean compare(final Contactmethod contact, final Contactmethod compare)
+	{
+		return contactmethodsService.compare(getMapper().toEntity(contact),
+			getMapper().toEntity(compare));
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean existsContact(final Contactmethod contact)
+	{
+		return contactmethodsService.existsContact(getMapper().toEntity(contact));
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean existsContact(final String contactValue, final ContactmethodType contactMethod)
+	{
+		return contactmethodsService.existsContact(contactValue, contactMethod);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Contactmethod> find(final ContactmethodType contactmethod,
+		final String contactvalue)
+	{
+		return getMapper().toDomainObjects(contactmethodsService.find(contactmethod, contactvalue));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Contactmethod> findContact(final String contactValue,
+		final ContactmethodType contactMethod)
+	{
+		return getMapper()
+			.toDomainObjects(contactmethodsService.findContact(contactValue, contactMethod));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Contactmethod> findContactmethod(final ContactmethodType contactmethod,
+		final User user)
+	{
+		final Users users = getMapper().map(user, Users.class);
+		return getMapper()
+			.toDomainObjects(contactmethodsService.findContactmethod(contactmethod, users));
+	}
+
+	/**
 	 * Sets the specific {@link ContactmethodsDao}.
 	 *
 	 * @param contactmethodsDao
 	 *            the new {@link ContactmethodsDao}.
 	 */
 	@Autowired
-	public void setContactmethodsDao(final ContactmethodsDao contactmethodsDao){
+	public void setContactmethodsDao(final ContactmethodsDao contactmethodsDao)
+	{
 		setDao(contactmethodsDao);
 	}
-	
 
 	/**
 	 * Sets the specific {@link ContactmethodsMapper}.
@@ -77,58 +143,9 @@ public class ContactmethodDomainService
 	 *            the new {@link ContactmethodsMapper}.
 	 */
 	@Autowired
-	public void setContactmethodsMapper(ContactmethodsMapper mapper) {
+	public void setContactmethodsMapper(ContactmethodsMapper mapper)
+	{
 		setMapper(mapper);
-	}
-
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean compare(final Contactmethod contact, final Contactmethod compare) {
-		return contactmethodsService.compare(getMapper().toEntity(contact), getMapper().toEntity(compare));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean existsContact(final Contactmethod contact) {
-		return contactmethodsService.existsContact(getMapper().toEntity(contact));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean existsContact(final String contactValue, final ContactmethodType contactMethod) {
-		return contactmethodsService.existsContact(contactValue, contactMethod);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Contactmethod> findContact(final String contactValue, final ContactmethodType contactMethod) {
-		return getMapper().toDomainObjects(contactmethodsService.findContact(contactValue, contactMethod));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Contactmethod> find(final ContactmethodType contactmethod, final String contactvalue) {
-		return getMapper().toDomainObjects(contactmethodsService.find(contactmethod, contactvalue));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Contactmethod> findContactmethod(final ContactmethodType contactmethod, final User user) {
-		final Users users = getMapper().map(user, Users.class);
-		return getMapper().toDomainObjects(contactmethodsService.findContactmethod(contactmethod, users));
 	}
 
 }

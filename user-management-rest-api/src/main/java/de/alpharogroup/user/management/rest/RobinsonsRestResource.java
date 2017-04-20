@@ -34,7 +34,7 @@ public class RobinsonsRestResource
 	extends
 		AbstractRestfulResource<Integer, Robinson, RobinsonService>
 	implements
- RobinsonsResource
+		RobinsonsResource
 {
 
 }

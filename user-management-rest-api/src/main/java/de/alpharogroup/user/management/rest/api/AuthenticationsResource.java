@@ -36,33 +36,39 @@ import de.alpharogroup.auth.Credentials;
 
 
 /**
- * The interface {@link AuthenticationsResource} provides methods for authenticate users of a given application.
+ * The interface {@link AuthenticationsResource} provides methods for authenticate users of a given
+ * application.
  */
 @Path("/auth/")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public interface AuthenticationsResource {
+public interface AuthenticationsResource
+{
 
 	/**
 	 * Authenticate a user with the given {@link Credentials}.
 	 *
-	 * @param credentials the credentials
+	 * @param credentials
+	 *            the credentials
 	 * @return the response
 	 */
 	@POST
 	@Path("/credentials")
-	Response authenticate(Credentials credentials);	
-	
+	Response authenticate(Credentials credentials);
+
 	/**
 	 * Authenticate a user with the given email or username and the given password.
 	 *
-	 * @param username the email or username
-	 * @param password the password
+	 * @param username
+	 *            the email or username
+	 * @param password
+	 *            the password
 	 * @return the {@link Response} object
 	 */
 	@POST
 	@Path("/form")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	Response authenticate(@FormParam("username") String username, @FormParam("password") String password);
+	Response authenticate(@FormParam("username") String username,
+		@FormParam("password") String password);
 }

@@ -31,7 +31,8 @@ import de.alpharogroup.user.entities.Users;
 /**
  * The Interface IUsersModel have Methods for get the Users object.
  */
-public interface IUsersModel extends Serializable {
+public interface IUsersModel extends Serializable
+{
 
 
 	/**

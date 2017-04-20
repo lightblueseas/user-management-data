@@ -30,7 +30,8 @@ import de.alpharogroup.db.dao.jpa.JpaEntityManagerDao;
 import de.alpharogroup.user.management.entities.Recommendations;
 
 @Repository("recommendationsDao")
-public class RecommendationsDao extends JpaEntityManagerDao<Recommendations, Integer>{
+public class RecommendationsDao extends JpaEntityManagerDao<Recommendations, Integer>
+{
 	/**
 	 * The serialVersionUID.
 	 */

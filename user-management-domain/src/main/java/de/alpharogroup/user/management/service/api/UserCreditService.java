@@ -30,6 +30,7 @@ import de.alpharogroup.user.management.domain.UserCredit;
 /**
  * The interface {@link UserCreditService}.
  */
-public interface UserCreditService extends DomainService<Integer, UserCredit> {
+public interface UserCreditService extends DomainService<Integer, UserCredit>
+{
 
 }

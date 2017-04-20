@@ -46,7 +46,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SignUpUserResult implements Serializable {
+public class SignUpUserResult implements Serializable
+{
 
 	/**
 	 * The serialVersionUID.

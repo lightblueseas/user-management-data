@@ -42,7 +42,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RuleViolation extends BaseDomainObject<Integer> {
+public class RuleViolation extends BaseDomainObject<Integer>
+{
 	private static final long serialVersionUID = 1L;
 	private RuleViolationReason reason;
 	private User detector;

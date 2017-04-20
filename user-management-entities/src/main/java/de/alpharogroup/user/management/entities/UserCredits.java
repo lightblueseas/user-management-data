@@ -39,18 +39,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The entity class {@link UserCredits} is keeping the
- * information for the credits from a user. A user can buy credits that is
- * inserted in this table.
+ * The entity class {@link UserCredits} is keeping the information for the credits from a user. A
+ * user can buy credits that is inserted in this table.
  */
 @Entity
 @Table(name = "user_credits")
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserCredits
-extends BaseEntity<Integer>
-implements Cloneable {
+public class UserCredits extends BaseEntity<Integer> implements Cloneable
+{
 	/**
 	 * The serial Version UID.
 	 */
@@ -59,8 +57,7 @@ implements Cloneable {
 	@Column(name = "credits", nullable = true)
 	private Integer credits;
 	/**
-	 * The user attribute that references to the Entity class {@link Users}
-	 * that owns the credits.
+	 * The user attribute that references to the Entity class {@link Users} that owns the credits.
 	 */
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_USER_CREDITS_USER_ID"))

@@ -37,23 +37,26 @@ import de.alpharogroup.user.management.service.api.UserManagementService;
 import lombok.Getter;
 import lombok.Setter;
 
-public class UserAuthenticationFilter extends AuthenticationFilter {
-	
+public class UserAuthenticationFilter extends AuthenticationFilter
+{
+
 	@SuppressWarnings("deprecation")
-	private Map<String, LocalDateTime> validTokens = new MapMaker()
-	.expiration(30, TimeUnit.MINUTES)
-	.makeMap();
+	private Map<String, LocalDateTime> validTokens = new MapMaker().expiration(30, TimeUnit.MINUTES)
+		.makeMap();
 
 	@Autowired
 	@Getter
 	@Setter
 	private UserManagementService userManagementService;
-	
+
 	@Override
-	protected String onValidateToken(String token) throws Exception {
-		if (!validTokens.containsKey(token)) {
-			if (!userManagementService.isValid(token)) {
-				throw new Exception("UnauthorizedException with Token:"+ token); 
+	protected String onValidateToken(String token) throws Exception
+	{
+		if (!validTokens.containsKey(token))
+		{
+			if (!userManagementService.isValid(token))
+			{
+				throw new Exception("UnauthorizedException with Token:" + token);
 			}
 		}
 		validTokens.put(token, LocalDateTime.now());

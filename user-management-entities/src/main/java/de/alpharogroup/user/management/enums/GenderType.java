@@ -30,7 +30,8 @@ import java.util.List;
 /**
  * The enum {@link GenderType} defines the type of the gender.
  */
-public enum GenderType {
+public enum GenderType
+{
 
 	/** The constant for the gender male. */
 	MALE,
@@ -42,15 +43,20 @@ public enum GenderType {
 	UNDEFINED;
 
 	/**
-	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED}.
+	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED} and
+	 * {@link GenderType#INCORPORATION}.
 	 *
-	 * @return the valid gender types
+	 * @return the human gender types
 	 */
-	public static List<GenderType> getValidGenders() {
+	public static List<GenderType> getHumanGenders()
+	{
 		final GenderType[] genderValues = GenderType.values();
 		final List<GenderType> genders = new ArrayList<>();
-		for (int i = 0; i < genderValues.length; i++) {
-			if (!genderValues[i].equals(GenderType.UNDEFINED)) {
+		for (int i = 0; i < genderValues.length; i++)
+		{
+			if (!genderValues[i].equals(GenderType.UNDEFINED)
+				&& !genderValues[i].equals(GenderType.INCORPORATION))
+			{
 				genders.add(genderValues[i]);
 			}
 		}
@@ -58,15 +64,18 @@ public enum GenderType {
 	}
 
 	/**
-	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED} and {@link GenderType#INCORPORATION}.
+	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED}.
 	 *
-	 * @return the human gender types
+	 * @return the valid gender types
 	 */
-	public static List<GenderType> getHumanGenders() {
+	public static List<GenderType> getValidGenders()
+	{
 		final GenderType[] genderValues = GenderType.values();
 		final List<GenderType> genders = new ArrayList<>();
-		for (int i = 0; i < genderValues.length; i++) {
-			if (!genderValues[i].equals(GenderType.UNDEFINED)&& !genderValues[i].equals(GenderType.INCORPORATION)) {
+		for (int i = 0; i < genderValues.length; i++)
+		{
+			if (!genderValues[i].equals(GenderType.UNDEFINED))
+			{
 				genders.add(genderValues[i]);
 			}
 		}

@@ -28,28 +28,26 @@ import de.alpharogroup.address.book.rest.api.AddressesResource;
 import de.alpharogroup.address.book.rest.api.CountriesResource;
 import de.alpharogroup.address.book.rest.api.FederalstatesResource;
 import de.alpharogroup.address.book.rest.api.ZipcodesResource;
-
-import de.alpharogroup.resource.system.rest.api.ResourcesResource;
-
 import de.alpharogroup.cxf.rest.client.AbstractRestClient;
+import de.alpharogroup.resource.system.rest.api.ResourcesResource;
 import de.alpharogroup.user.management.rest.api.AuthenticationsResource;
 import de.alpharogroup.user.management.rest.api.ContactmethodsResource;
-import de.alpharogroup.user.rest.api.PermissionsResource;
 import de.alpharogroup.user.management.rest.api.RecommendationsResource;
-import de.alpharogroup.user.rest.api.RelationPermissionsResource;
-import de.alpharogroup.user.rest.api.ResetPasswordsResource;
 import de.alpharogroup.user.management.rest.api.RobinsonsResource;
-import de.alpharogroup.user.rest.api.RolesResource;
 import de.alpharogroup.user.management.rest.api.RuleViolationsResource;
 import de.alpharogroup.user.management.rest.api.UserCreditsResource;
 import de.alpharogroup.user.management.rest.api.UserDatasResource;
 import de.alpharogroup.user.management.rest.api.UserManagementResource;
 import de.alpharogroup.user.management.rest.api.UsersResource;
+import de.alpharogroup.user.rest.api.PermissionsResource;
+import de.alpharogroup.user.rest.api.RelationPermissionsResource;
+import de.alpharogroup.user.rest.api.ResetPasswordsResource;
+import de.alpharogroup.user.rest.api.RolesResource;
 import lombok.Getter;
 
 /**
- * The class {@link UserManagementSystemRestClient} is a rest client for the
- * dating-system that are persists in the database.
+ * The class {@link UserManagementSystemRestClient} is a rest client for the dating-system that are
+ * persists in the database.
  */
 public class UserManagementSystemRestClient extends AbstractRestClient
 {
@@ -196,9 +194,9 @@ public class UserManagementSystemRestClient extends AbstractRestClient
 		addressesResource = newResource(AddressesResource.class);
 		countriesResource = newResource(CountriesResource.class);
 		federalstatesResource = newResource(FederalstatesResource.class);
-		zipcodesResource =  newResource(ZipcodesResource.class);
+		zipcodesResource = newResource(ZipcodesResource.class);
 
-        	resourcesResource  = newResource(ResourcesResource.class);
+		resourcesResource = newResource(ResourcesResource.class);
 	}
 
 }

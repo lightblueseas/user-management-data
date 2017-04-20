@@ -34,6 +34,7 @@ import de.alpharogroup.user.management.entities.RuleViolations;
  * The class {@link RuleViolationsMapper}.
  */
 @Component
-public class RuleViolationsMapper extends AbstractEntityDOMapper<RuleViolations, RuleViolation> {
+public class RuleViolationsMapper extends AbstractEntityDOMapper<RuleViolations, RuleViolation>
+{
 
 }

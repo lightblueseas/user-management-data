@@ -49,46 +49,27 @@ import de.alpharogroup.user.management.service.api.UserDatasService;
 
 @Transactional
 @Service("userDatasService")
-public class UserDatasBusinessService extends AbstractBusinessService<UserDatas, Integer, UserDatasDao> implements UserDatasService {
+public class UserDatasBusinessService
+	extends
+		AbstractBusinessService<UserDatas, Integer, UserDatasDao>
+	implements
+		UserDatasService
+{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant LOGGER. */
 	private final static Logger LOGGER = Logger.getLogger(UserDatasBusinessService.class.getName());
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Autowired
-	public void setUserDataDao(final UserDatasDao userDataDao) {
-		setDao(userDataDao);
-	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public UserDatas findBy(final Users user) {
-		final String hqlString =
-				  "select ud from UserDatas ud "
-				+ "where ud.owner=:user";
-		final Query query = getQuery(hqlString);
-		query.setParameter("user", user);
-		final List<UserDatas> userDatas = query.getResultList();
-		return ListExtensions.getFirst(userDatas);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public UserDatas findBy(final Integer userid) {
-		final String hqlString =
-				  "select ud from UserDatas ud "
-				+ "where ud.owner.id=:userid";
+	public UserDatas findBy(final Integer userid)
+	{
+		final String hqlString = "select ud from UserDatas ud " + "where ud.owner.id=:userid";
 		final Query query = getQuery(hqlString);
 		query.setParameter("userid", userid);
 		final List<UserDatas> userDatas = query.getResultList();
@@ -100,13 +81,27 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender, final Integer until)
+	public UserDatas findBy(final Users user)
+	{
+		final String hqlString = "select ud from UserDatas ud " + "where ud.owner=:user";
+		final Query query = getQuery(hqlString);
+		query.setParameter("user", user);
+		final List<UserDatas> userDatas = query.getResultList();
+		return ListExtensions.getFirst(userDatas);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender,
+		final Integer until)
 	{
 		final Date now = new Date(System.currentTimeMillis());
 		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
 		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
-		final String hqlString = "select ud from UserDatas ud "
-		+ "where ud.gender=:gender "
+		final String hqlString = "select ud from UserDatas ud " + "where ud.gender=:gender "
 			+ "and ud.dateofbirth >= :start " + "and ud.dateofbirth <= :end";
 		final Query query = getQuery(hqlString);
 		query.setParameter("gender", searchGender);
@@ -121,8 +116,8 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender, final Integer until,
-		final String geohash)
+	public List<UserDatas> findUserDatas(final Integer from, final GenderType searchGender,
+		final Integer until, final String geohash)
 	{
 		final Date now = new Date(System.currentTimeMillis());
 		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
@@ -141,8 +136,7 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 		{
 			final String firstAndSecondRingSubQuery = HqlStringCreator
 				.getGeohashFirstAndSecondRingSubQuery();
-			hqlString.append("and ud.primaryAddress.geohash in "
-				+ firstAndSecondRingSubQuery);
+			hqlString.append("and ud.primaryAddress.geohash in " + firstAndSecondRingSubQuery);
 		}
 
 		final String queryString = hqlString.toString();
@@ -161,6 +155,15 @@ public class UserDatasBusinessService extends AbstractBusinessService<UserDatas,
 		}
 		final List<UserDatas> userDatas = query.getResultList();
 		return userDatas;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Autowired
+	public void setUserDataDao(final UserDatasDao userDataDao)
+	{
+		setDao(userDataDao);
 	}
 
 }

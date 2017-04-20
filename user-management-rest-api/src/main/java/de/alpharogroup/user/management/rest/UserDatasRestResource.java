@@ -34,19 +34,20 @@ import de.alpharogroup.user.management.service.api.UserDataService;
 public class UserDatasRestResource
 	extends
 		AbstractRestfulResource<Integer, UserData, UserDataService>
-	implements UserDatasResource
+	implements
+		UserDatasResource
 {
-
-	@Override
-	public UserData findBy(final User user)
-	{
-		return getDomainService().findBy(user);
-	}
 
 	@Override
 	public UserData findBy(final Integer userid)
 	{
 		return getDomainService().findBy(userid);
+	}
+
+	@Override
+	public UserData findBy(final User user)
+	{
+		return getDomainService().findBy(user);
 	}
 
 }

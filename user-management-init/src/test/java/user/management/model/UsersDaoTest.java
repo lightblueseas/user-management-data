@@ -31,7 +31,8 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import de.alpharogroup.user.repositories.UsersDao;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
-public class UsersDaoTest extends AbstractTestNGSpringContextTests {
+public class UsersDaoTest extends AbstractTestNGSpringContextTests
+{
 	@Autowired
 	private UsersDao usersDao;
 

@@ -45,8 +45,12 @@ import lombok.Setter;
  */
 @Transactional
 @Service("userDataDomainService")
-public class UserDataDomainService extends
-		AbstractDomainService<Integer, UserData, UserDatas, UserDatasDao, UserDatasMapper> implements UserDataService {
+public class UserDataDomainService
+	extends
+		AbstractDomainService<Integer, UserData, UserDatas, UserDatasDao, UserDatasMapper>
+	implements
+		UserDataService
+{
 
 	/** The {@link UserDatasService}. */
 	@Autowired
@@ -54,26 +58,11 @@ public class UserDataDomainService extends
 	@Setter
 	private UserDatasService userDatasService;
 
-	/**
-	 * Sets the specific {@link UserDatasDao}.
-	 *
-	 * @param userDatasDao
-	 *            the new {@link UserDatasDao}.
-	 */
-	@Autowired
-	public void setUserDatasDao(final UserDatasDao userDatasDao) {
-		setDao(userDatasDao);
-	}
-
-	/**
-	 * Sets the specific {@link UserDatasMapper}.
-	 *
-	 * @param mapper
-	 *            the new {@link UserDatasMapper}.
-	 */
-	@Autowired
-	public void setUserDatasMapper(final UserDatasMapper mapper) {
-		setMapper(mapper);
+	@Override
+	public UserData findBy(final Integer userid)
+	{
+		final UserData userData = getMapper().toDomainObject(userDatasService.findBy(userid));
+		return userData;
 	}
 
 	@Override
@@ -84,11 +73,28 @@ public class UserDataDomainService extends
 		return userData;
 	}
 
-	@Override
-	public UserData findBy(final Integer userid)
+	/**
+	 * Sets the specific {@link UserDatasDao}.
+	 *
+	 * @param userDatasDao
+	 *            the new {@link UserDatasDao}.
+	 */
+	@Autowired
+	public void setUserDatasDao(final UserDatasDao userDatasDao)
 	{
-		final UserData userData = getMapper().toDomainObject(userDatasService.findBy(userid));
-		return userData;
+		setDao(userDatasDao);
+	}
+
+	/**
+	 * Sets the specific {@link UserDatasMapper}.
+	 *
+	 * @param mapper
+	 *            the new {@link UserDatasMapper}.
+	 */
+	@Autowired
+	public void setUserDatasMapper(final UserDatasMapper mapper)
+	{
+		setMapper(mapper);
 	}
 
 

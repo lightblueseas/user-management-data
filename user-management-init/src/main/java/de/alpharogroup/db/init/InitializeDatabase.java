@@ -34,7 +34,8 @@ import de.alpharogroup.user.management.db.init.DatabaseInitialization;
 /**
  * The Class {@link InitializeDatabase} initialize the specific database.
  */
-public class InitializeDatabase {
+public class InitializeDatabase
+{
 
 	/**
 	 * The main method to start the initialization process from the specific database.
@@ -49,11 +50,14 @@ public class InitializeDatabase {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public static void main(final String[] args) throws ClassNotFoundException,
-			SQLException, IOException {
+	public static void main(final String[] args)
+		throws ClassNotFoundException, SQLException, IOException
+	{
 		final Properties dbProperties = PropertiesExtensions.loadProperties("jdbc.properties");
-		if(args != null && 0< args.length ) {
-			dbProperties.setProperty(AbstractDatabaseInitialization.JDBC_CREATE_DB_PROCESS_KEY, args[0]);
+		if (args != null && 0 < args.length)
+		{
+			dbProperties.setProperty(AbstractDatabaseInitialization.JDBC_CREATE_DB_PROCESS_KEY,
+				args[0]);
 		}
 		new DatabaseInitialization(dbProperties).initializeDatabase();
 	}

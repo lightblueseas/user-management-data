@@ -34,7 +34,8 @@ import de.alpharogroup.user.service.api.BaseUsersService;
 /**
  * The interface {@link UsersService}.
  */
-public interface UsersService extends BaseUsersService {
+public interface UsersService extends BaseUsersService
+{
 
 	/**
 	 * Find all {@link Addresses} from the given {@link Users}.
@@ -53,15 +54,6 @@ public interface UsersService extends BaseUsersService {
 	 * @return the main {@link Addresses} from the given {@link Users}.
 	 */
 	Addresses findAddressFromUser(final Users user);
-
-	/**
-	 * Find the {@link Users} object with the given email.
-	 *
-	 * @param email
-	 *            the email
-	 * @return the found {@link Users} object
-	 */
-	Users findUserWithEmail(final String email);
 
 	/**
 	 * Find users from the given {@link GenderType} object and the range from till until.
@@ -91,6 +83,15 @@ public interface UsersService extends BaseUsersService {
 	 * @return the found list of {@link Users} objects that matches the criteria.
 	 */
 	List<Users> findUsers(Integer from, GenderType searchGender, Integer until,
-			final String geohash);
+		final String geohash);
+
+	/**
+	 * Find the {@link Users} object with the given email.
+	 *
+	 * @param email
+	 *            the email
+	 * @return the found {@link Users} object
+	 */
+	Users findUserWithEmail(final String email);
 
 }

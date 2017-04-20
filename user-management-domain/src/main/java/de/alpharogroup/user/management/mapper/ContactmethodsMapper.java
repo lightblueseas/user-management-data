@@ -34,5 +34,6 @@ import de.alpharogroup.user.management.entities.Contactmethods;
  * The class {@link ContactmethodsMapper}.
  */
 @Component
-public class ContactmethodsMapper extends AbstractEntityDOMapper<Contactmethods, Contactmethod> {
+public class ContactmethodsMapper extends AbstractEntityDOMapper<Contactmethods, Contactmethod>
+{
 }

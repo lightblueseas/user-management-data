@@ -35,8 +35,8 @@ import javax.ws.rs.core.MediaType;
 import de.alpharogroup.collections.pairs.KeyValuePair;
 import de.alpharogroup.service.rs.RestfulResource;
 import de.alpharogroup.service.rs.Securable;
-import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.domain.User;
+import de.alpharogroup.user.management.domain.Contactmethod;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 
 /**
@@ -59,22 +59,39 @@ public interface ContactmethodsResource extends RestfulResource<Integer, Contact
 	boolean compare(KeyValuePair<Contactmethod, Contactmethod> comparison);
 
 	/**
-	 * Check if a contact exist with given contact value and the given {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
+	 * Check if a contact exist with given contact value and the given {@link ContactmethodType}
+	 * encapsulated as a {@link KeyValuePair}.
 	 *
 	 * @param contactMethod
-	 *            the {@link KeyValuePair} object that encapsulate the contact method and contact value
+	 *            the {@link KeyValuePair} object that encapsulate the contact method and contact
+	 *            value
 	 * @return true, if successful
 	 */
 	@POST
-    @Securable
+	@Securable
 	@Path("/exists/contact")
 	boolean existsContact(KeyValuePair<String, ContactmethodType> contactMethod);
-	
+
 	/**
-	 * Find all the {@link Contactmethod} objects from the given contact value and the given {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
+	 * Find all the {@link Contactmethod} objects from the given contact value and the given
+	 * {@link ContactmethodType}.
+	 *
+	 * @param contactMethod
+	 *            the {@link KeyValuePair} object that encapsulate the contact method and contact
+	 *            value
+	 * @return the list of the found {@link Contactmethod} objects.
+	 */
+	@POST
+	@Path("/find")
+	List<Contactmethod> find(KeyValuePair<String, ContactmethodType> contactMethod);
+
+	/**
+	 * Find all the {@link Contactmethod} objects from the given contact value and the given
+	 * {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
 	 * 
 	 * @param contactMethod
-	 *            the {@link KeyValuePair} object that encapsulate the contact method and contact value
+	 *            the {@link KeyValuePair} object that encapsulate the contact method and contact
+	 *            value
 	 * @return the list of the found {@link Contactmethod} objects.
 	 */
 	@POST
@@ -82,23 +99,15 @@ public interface ContactmethodsResource extends RestfulResource<Integer, Contact
 	List<Contactmethod> findContact(KeyValuePair<String, ContactmethodType> contactMethod);
 
 	/**
-	 * Find all the {@link Contactmethod} objects from the given contact value and the given {@link ContactmethodType}.
+	 * Find all the {@link Contactmethod} objects from the given {@link User} object and the given
+	 * {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
 	 *
-	 * @param contactMethod
-	 *            the {@link KeyValuePair} object that encapsulate the contact method and contact value
-	 * @return the list of the found {@link Contactmethod} objects.
-	 */
-	@POST
-	@Path("/find")
-	List<Contactmethod> find(KeyValuePair<String, ContactmethodType> contactMethod);
-		
-	/**
-	 * Find all the {@link Contactmethod} objects from the given {@link User} object and the given {@link ContactmethodType} encapsulated as a {@link KeyValuePair}.
-	 *
-	 * @param contactMethodsFromUser the contact method
+	 * @param contactMethodsFromUser
+	 *            the contact method
 	 * @return the list of the found {@link Contactmethod} objects.
 	 */
 	@POST
 	@Path("/find/contactmethods/from/user/")
-	List<Contactmethod> findContactmethod(final KeyValuePair<ContactmethodType, User> contactMethodsFromUser);
+	List<Contactmethod> findContactmethod(
+		final KeyValuePair<ContactmethodType, User> contactMethodsFromUser);
 }

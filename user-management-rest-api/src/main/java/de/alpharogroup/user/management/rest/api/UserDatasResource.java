@@ -46,23 +46,25 @@ public interface UserDatasResource extends RestfulResource<Integer, UserData>
 {
 
 	/**
-	 * Find the {@link UserData} object by the given {@link User} object.
-	 *
-	 * @param user the user
-	 * @return the found {@link UserData} object or null if does not exist.
-	 */
-	@POST
-	@Path("/find/by/user")
-	UserData findBy(User user);
-
-
-	/**
 	 * Find the {@link UserData} object by the given {@link Integer} user id.
 	 *
-	 * @param userid the user id
+	 * @param userid
+	 *            the user id
 	 * @return the found {@link UserData} object or null if does not exist.
 	 */
 	@GET
 	@Path("/find/by/{userid}/")
 	UserData findBy(@PathParam("userid") final Integer userid);
+
+
+	/**
+	 * Find the {@link UserData} object by the given {@link User} object.
+	 *
+	 * @param user
+	 *            the user
+	 * @return the found {@link UserData} object or null if does not exist.
+	 */
+	@POST
+	@Path("/find/by/user")
+	UserData findBy(User user);
 }

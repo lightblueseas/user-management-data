@@ -44,8 +44,11 @@ import lombok.Setter;
 @Transactional
 @Service("userCreditDomainService")
 public class UserCreditDomainService
-		extends AbstractDomainService<Integer, UserCredit, UserCredits, UserCreditsDao, UserCreditsMapper>
-		implements UserCreditService {
+	extends
+		AbstractDomainService<Integer, UserCredit, UserCredits, UserCreditsDao, UserCreditsMapper>
+	implements
+		UserCreditService
+{
 
 	/** The {@link UserCreditsService}. */
 	@Autowired
@@ -60,7 +63,8 @@ public class UserCreditDomainService
 	 *            the new {@link UserCreditsDao}.
 	 */
 	@Autowired
-	public void setUserCreditsDao(final UserCreditsDao userCreditsDao) {
+	public void setUserCreditsDao(final UserCreditsDao userCreditsDao)
+	{
 		setDao(userCreditsDao);
 	}
 
@@ -71,8 +75,9 @@ public class UserCreditDomainService
 	 *            the new {@link UserCreditsMapper}.
 	 */
 	@Autowired
-	public void setUserCreditsMapper(UserCreditsMapper mapper) {
+	public void setUserCreditsMapper(UserCreditsMapper mapper)
+	{
 		setMapper(mapper);
 	}
-	
+
 }

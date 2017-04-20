@@ -34,6 +34,7 @@ import de.alpharogroup.user.management.entities.Robinsons;
  * The class {@link RobinsonsMapper}.
  */
 @Component
-public class RobinsonsMapper extends AbstractEntityDOMapper<Robinsons, Robinson> {
+public class RobinsonsMapper extends AbstractEntityDOMapper<Robinsons, Robinson>
+{
 
 }

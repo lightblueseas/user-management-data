@@ -30,7 +30,8 @@ import de.alpharogroup.db.dao.jpa.JpaEntityManagerDao;
 import de.alpharogroup.user.management.entities.Contactmethods;
 
 @Repository("contactmethodsDao")
-public class ContactmethodsDao extends JpaEntityManagerDao<Contactmethods, Integer>{
+public class ContactmethodsDao extends JpaEntityManagerDao<Contactmethods, Integer>
+{
 	/**
 	 * The serialVersionUID.
 	 */

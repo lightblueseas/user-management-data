@@ -35,27 +35,29 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.user.entities.Users;
 
-public class EntityManagerTest {
+public class EntityManagerTest
+{
 
-    private EntityManager em = null;
+	private EntityManager em = null;
 
-    @BeforeClass
-    public void setUpClass() throws Exception {
-        if (em == null) {
-            em = (EntityManager) Persistence.
-                      createEntityManagerFactory("usermanagement").
-                      createEntityManager();
-        }
-    }
+	@BeforeClass
+	public void setUpClass() throws Exception
+	{
+		if (em == null)
+		{
+			em = (EntityManager)Persistence.createEntityManagerFactory("usermanagement")
+				.createEntityManager();
+		}
+	}
 
-    @Test(enabled=false)
-    public void testAllOps(){
-    	em.getTransaction().begin();
-    	final Query query = em.createQuery("select u from Users u where u.id=:userid");
-    	query.setParameter("userid", 4);
-    	@SuppressWarnings("unchecked")
-		final
-		List<Users> users = query.getResultList();
-    	System.out.println(users);
-    }
+	@Test(enabled = false)
+	public void testAllOps()
+	{
+		em.getTransaction().begin();
+		final Query query = em.createQuery("select u from Users u where u.id=:userid");
+		query.setParameter("userid", 4);
+		@SuppressWarnings("unchecked")
+		final List<Users> users = query.getResultList();
+		System.out.println(users);
+	}
 }

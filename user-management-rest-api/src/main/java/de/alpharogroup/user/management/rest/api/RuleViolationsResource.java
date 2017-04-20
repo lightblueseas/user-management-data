@@ -46,25 +46,27 @@ import de.alpharogroup.user.management.domain.model.Infringement;
 @Consumes(MediaType.APPLICATION_JSON)
 public interface RuleViolationsResource extends RestfulResource<Integer, RuleViolation>
 {
-	
+
+	/**
+	 * Find a all {@link RuleViolation} objects from the given {@link Infringement} object.
+	 *
+	 * @param model
+	 *            the {@link Infringement} object with the search criteria.
+	 * @return the found {@link RuleViolation} objects.
+	 */
+	@POST
+	@Path("/find")
+	List<RuleViolation> find(Infringement model);
+
 	/**
 	 * Persist the given domain object {@link InfringementModel}.
 	 *
-	 * @param model the model
+	 * @param model
+	 *            the model
 	 * @return the persisted {@link RuleViolation} object.
 	 */
 	@POST
 	@Path("/new")
 	RuleViolation save(Infringement model);
 
-	/**
-	 * Find a all {@link RuleViolation} objects from the given {@link Infringement} object.
-	 *
-	 * @param model the {@link Infringement} object with the search criteria.
-	 * @return the found {@link RuleViolation} objects.
-	 */
-	@POST
-	@Path("/find")
-	List<RuleViolation> find(Infringement model);
-	
 }

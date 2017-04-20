@@ -48,7 +48,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserModel implements Serializable {
+public class UserModel implements Serializable
+{
 
 	/**
 	 * The serialVersionUID.

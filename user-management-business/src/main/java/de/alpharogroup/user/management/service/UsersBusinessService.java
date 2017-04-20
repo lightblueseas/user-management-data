@@ -42,11 +42,11 @@ import de.alpharogroup.collections.ListExtensions;
 import de.alpharogroup.date.CalculateDateExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 import de.alpharogroup.jgeohash.GeoHashExtensions;
-import de.alpharogroup.user.repositories.UsersDao;
 import de.alpharogroup.user.entities.Roles;
 import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.service.api.UsersService;
+import de.alpharogroup.user.repositories.UsersDao;
 
 @Transactional
 @Service("usersService")
@@ -61,12 +61,6 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Autowired
-	public void setUsersDao(final UsersDao usersDao)
-	{
-		setDao(usersDao);
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -120,6 +114,69 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		return roles;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Users> findUsers(final Integer from, final GenderType searchGender,
+		final Integer until)
+	{
+		final Date now = new Date(System.currentTimeMillis());
+		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
+		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
+		final String hqlString = "select distinct ud.owner from UserDatas ud "
+			+ "where ud.gender=:gender " + "and ud.dateofbirth >= :start "
+			+ "and ud.dateofbirth <= :end";
+		final Query query = getQuery(hqlString);
+		query.setParameter("gender", searchGender);
+		query.setParameter("start", start);
+		query.setParameter("end", end);
+		final List<Users> users = query.getResultList();
+		return users;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Users> findUsers(final Integer from, final GenderType searchGender,
+		final Integer until, final String geohash)
+	{
+		final Date now = new Date(System.currentTimeMillis());
+		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
+		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
+
+		final StringBuilder hqlString = new StringBuilder();
+		hqlString.append("select distinct ud.owner from UserDatas ud ")
+			.append(" where ud.gender=:gender ").append(" and ud.dateofbirth >= :start ")
+			.append(" and ud.dateofbirth <= :end ");
+
+		Map<String, String> adjacentAreas = null;
+		if (geohash != null && !geohash.trim().isEmpty())
+		{
+			adjacentAreas = GeoHashExtensions.getTwentyFiveAreasMap(geohash);
+		}
+		if (adjacentAreas != null)
+		{
+			final String firstAndSecondRingSubQuery = HqlStringCreator
+				.getGeohashFirstAndSecondRingSubQuery();
+			hqlString.append("and ud.primaryAddress.geohash in " + firstAndSecondRingSubQuery);
+		}
+
+		final String queryString = hqlString.toString();
+		LOGGER.info("Query String from method findUsers:" + queryString);
+		final Query query = getQuery(queryString);
+		// Set parameters...
+		query.setParameter("gender", searchGender);
+		query.setParameter("start", start);
+		query.setParameter("end", end);
+		if (adjacentAreas != null)
+		{
+			for (final Entry<String, String> entry : adjacentAreas.entrySet())
+			{
+				query.setParameter(entry.getKey(), entry.getValue() + "%");
+			}
+		}
+		final List<Users> users = query.getResultList();
+		return users;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -150,6 +207,12 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 		return ListExtensions.getFirst(users);
 	}
 
+	@Autowired
+	public void setUsersDao(final UsersDao usersDao)
+	{
+		setDao(usersDao);
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -165,71 +228,6 @@ public class UsersBusinessService extends AbstractBusinessService<Users, Integer
 			}
 		}
 		return false;
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Users> findUsers(final Integer from, final GenderType searchGender, final Integer until)
-	{
-		final Date now = new Date(System.currentTimeMillis());
-		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
-		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
-		final String hqlString = "select distinct ud.owner from UserDatas ud "
-								+ "where ud.gender=:gender "
-								+ "and ud.dateofbirth >= :start " 
-								+ "and ud.dateofbirth <= :end";
-		final Query query = getQuery(hqlString);
-		query.setParameter("gender", searchGender);
-		query.setParameter("start", start);
-		query.setParameter("end", end);
-		final List<Users> users = query.getResultList();
-		return users;
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Users> findUsers(final Integer from, final GenderType searchGender, final Integer until,
-		final String geohash)
-	{
-		final Date now = new Date(System.currentTimeMillis());
-		final Date start = CalculateDateExtensions.substractYearsFromDate(now, until);
-		final Date end = CalculateDateExtensions.substractYearsFromDate(now, from);
-
-		final StringBuilder hqlString = new StringBuilder();
-		hqlString.append("select distinct ud.owner from UserDatas ud ")
-		.append(" where ud.gender=:gender ")
-		.append(" and ud.dateofbirth >= :start ") 
-		.append(" and ud.dateofbirth <= :end ");
-
-		Map<String, String> adjacentAreas = null;
-		if (geohash != null && !geohash.trim().isEmpty())
-		{
-			adjacentAreas = GeoHashExtensions.getTwentyFiveAreasMap(geohash);
-		}
-		if (adjacentAreas != null)
-		{
-			final String firstAndSecondRingSubQuery = HqlStringCreator
-				.getGeohashFirstAndSecondRingSubQuery();
-			hqlString.append("and ud.primaryAddress.geohash in "
-				+ firstAndSecondRingSubQuery);
-		}
-
-		final String queryString = hqlString.toString();
-		LOGGER.info("Query String from method findUsers:" + queryString);
-		final Query query = getQuery(queryString);
-		// Set parameters...
-		query.setParameter("gender", searchGender);
-		query.setParameter("start", start);
-		query.setParameter("end", end);
-		if (adjacentAreas != null)
-		{
-			for (final Entry<String, String> entry : adjacentAreas.entrySet())
-			{
-				query.setParameter(entry.getKey(), entry.getValue() + "%");
-			}
-		}
-		final List<Users> users = query.getResultList();
-		return users;
 	}
 
 }

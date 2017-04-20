@@ -30,14 +30,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.entities.Users;
+import de.alpharogroup.user.management.entities.Contactmethods;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.api.UsersService;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
-public class ContactmethodsBusinessServiceTest {
+public class ContactmethodsBusinessServiceTest
+{
 
 
 	/** The contactmethods business service. */
@@ -45,11 +46,15 @@ public class ContactmethodsBusinessServiceTest {
 	private ContactmethodsService contactmethodsService;
 	@Autowired
 	private UsersService usersService;
-	@Test(enabled=false)
-	public void testFindContactmethod() {
+
+	@Test(enabled = false)
+	public void testFindContactmethod()
+	{
 		final Users michaelProvider = usersService.findUserWithEmail("michael.knight@gmail.com");
-		final List<Contactmethods> cms = contactmethodsService.findContactmethod(ContactmethodType.INTERNET, michaelProvider);
-		for (final Contactmethods contactmethods : cms) {
+		final List<Contactmethods> cms = contactmethodsService
+			.findContactmethod(ContactmethodType.INTERNET, michaelProvider);
+		for (final Contactmethods contactmethods : cms)
+		{
 			System.out.println(contactmethods);
 		}
 	}

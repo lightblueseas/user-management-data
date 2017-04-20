@@ -31,18 +31,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.user.repositories.RolesDao;
 import de.alpharogroup.user.entities.Roles;
+import de.alpharogroup.user.repositories.RolesDao;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
-public class RolesDaoTest extends AbstractTestNGSpringContextTests {
+public class RolesDaoTest extends AbstractTestNGSpringContextTests
+{
 	@Autowired
 	private RolesDao rolesDao;
 
 
-
-	@Test(enabled=false)
-	public void testFindAll() {
+	@Test(enabled = false)
+	public void testFindAll()
+	{
 		final List<Roles> all = rolesDao.findAll();
 		System.out.println(all);
 	}

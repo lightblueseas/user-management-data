@@ -34,6 +34,7 @@ import de.alpharogroup.user.management.entities.UserCredits;
  * The class {@link UserCreditsMapper}.
  */
 @Component
-public class UserCreditsMapper extends AbstractEntityDOMapper<UserCredits, UserCredit> {
+public class UserCreditsMapper extends AbstractEntityDOMapper<UserCredits, UserCredit>
+{
 
 }

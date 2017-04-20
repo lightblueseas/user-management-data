@@ -38,17 +38,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * The entity class {@link Recommendations} is keeping the
- * information for the recommendations that a user recommended another user to an email with an invitation text.
+ * The entity class {@link Recommendations} is keeping the information for the recommendations that
+ * a user recommended another user to an email with an invitation text.
  */
 @Entity
 @Table(name = "recommendations")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Recommendations
-extends BaseEntity<Integer>
-implements Cloneable {
+public class Recommendations extends BaseEntity<Integer> implements Cloneable
+{
 
 	/**
 	 * The serial Version UID
@@ -63,11 +62,11 @@ implements Cloneable {
 	@JoinColumn(name = "recommended_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_RECOMMENDATIONS_RECOMMENDED_ID"))
 	private Users recommended;
 	/** The email where this recommendation is send. */
-	@Column( name="email", length = 1024  )
+	@Column(name = "email", length = 1024)
 	private String email;
 	/** The text from the invitation from the user. This is optional. */
-	@Column( name="invitation_text", length = 1024  )
-    private String invitationText;
+	@Column(name = "invitation_text", length = 1024)
+	private String invitationText;
 	/** The sent flag, if true the recommendation is successfully sent with the message system. */
 	@Column(name = "sent")
 	private Boolean sent;

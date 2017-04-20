@@ -36,12 +36,13 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(callSuper=true)
-@EqualsAndHashCode(callSuper=true)
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserCredit extends BaseDomainObject<Integer> {
+public class UserCredit extends BaseDomainObject<Integer>
+{
 	/**
 	 * The serial Version UID.
 	 */
@@ -49,8 +50,7 @@ public class UserCredit extends BaseDomainObject<Integer> {
 	/** The points that the user have buyed. */
 	private Integer credits;
 	/**
-	 * The user attribute that references to the Entity class {@link User}
-	 * that owns the credits.
+	 * The user attribute that references to the Entity class {@link User} that owns the credits.
 	 */
 	private User user;
 }

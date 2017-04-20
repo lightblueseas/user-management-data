@@ -44,18 +44,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Infringement {
-	
+public class Infringement
+{
+
 	/** The detector. */
 	private User detector;
-	
+
 	/** The violator. */
 	private User violator;
-	
+
 	/** The reason. */
 	private RuleViolationReason reason;
-	
+
 	/** The description. */
 	private String description;
-	
+
 }

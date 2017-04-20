@@ -35,15 +35,17 @@ import de.alpharogroup.user.management.daos.ContactmethodsDao;
 import de.alpharogroup.user.management.entities.Contactmethods;
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
-public class ContactmethodsDaoTest extends AbstractTestNGSpringContextTests {
+public class ContactmethodsDaoTest extends AbstractTestNGSpringContextTests
+{
 
 	@Autowired
 	private ContactmethodsDao contactmethodsDao;
 
 
-	@Test(enabled=false)
-	public void testFindAll() {
-		final List<Contactmethods> all =  contactmethodsDao.findAll();
+	@Test(enabled = false)
+	public void testFindAll()
+	{
+		final List<Contactmethods> all = contactmethodsDao.findAll();
 		System.out.println(all);
 	}
 

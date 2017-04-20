@@ -34,7 +34,8 @@ import de.alpharogroup.auth.models.UsernameSignUpModel;
 import de.alpharogroup.user.management.enums.GenderType;
 import de.alpharogroup.user.management.sign.up.UserModel;
 
-public class UserManagementModelFactory implements Serializable {
+public class UserManagementModelFactory implements Serializable
+{
 	/** The Constant instance. */
 	private static final UserManagementModelFactory instance = new UserManagementModelFactory();
 	/**
@@ -47,24 +48,19 @@ public class UserManagementModelFactory implements Serializable {
 	 * 
 	 * @return single instance of UserManagementModelFactory
 	 */
-	public static UserManagementModelFactory getInstance() {
+	public static UserManagementModelFactory getInstance()
+	{
 		return instance;
-	}	
-	private UserManagementModelFactory() {
 	}
 
-	public UserModel newUserModel(
-			String birthname,
-			Date dateOfBirth,
-			String firstname,
-			GenderType gender,
-			String ipAddress,
-			String lastname,
-			Locale locale,
-			String mobile,
-			String telefon,
-			String fax,
-			Addresses address) {
+	private UserManagementModelFactory()
+	{
+	}
+
+	public UserModel newUserModel(String birthname, Date dateOfBirth, String firstname,
+		GenderType gender, String ipAddress, String lastname, Locale locale, String mobile,
+		String telefon, String fax, Addresses address)
+	{
 		UserModel userModel = new UserModel();
 		userModel.setBirthname(birthname);
 		userModel.setDateofbirth(dateOfBirth);
@@ -79,13 +75,10 @@ public class UserManagementModelFactory implements Serializable {
 		userModel.setAddress(address);
 		return userModel;
 	}
-	
-	public UsernameSignUpModel newUsernameSignupModel(
-			String email, 
-			String pw, 
-			String repeatPw, 
-			Boolean termOfUseAccepted,
-			String username) {
+
+	public UsernameSignUpModel newUsernameSignupModel(String email, String pw, String repeatPw,
+		Boolean termOfUseAccepted, String username)
+	{
 		UsernameSignUpModel model = new BaseUsernameSignUpModel();
 		model.setEmail(email);
 		model.setPassword(pw);

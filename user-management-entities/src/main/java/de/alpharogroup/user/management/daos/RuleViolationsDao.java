@@ -30,7 +30,8 @@ import de.alpharogroup.db.dao.jpa.JpaEntityManagerDao;
 import de.alpharogroup.user.management.entities.RuleViolations;
 
 @Repository("ruleViolationsDao")
-public class RuleViolationsDao extends JpaEntityManagerDao<RuleViolations, Integer> {
+public class RuleViolationsDao extends JpaEntityManagerDao<RuleViolations, Integer>
+{
 	/**
 	 * The serialVersionUID.
 	 */

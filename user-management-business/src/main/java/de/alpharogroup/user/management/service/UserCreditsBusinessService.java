@@ -36,15 +36,21 @@ import de.alpharogroup.user.management.service.api.UserCreditsService;
 
 @Transactional
 @Service("userCreditsService")
-public class UserCreditsBusinessService extends AbstractBusinessService<UserCredits, Integer, UserCreditsDao> implements UserCreditsService {
-	
+public class UserCreditsBusinessService
+	extends
+		AbstractBusinessService<UserCredits, Integer, UserCreditsDao>
+	implements
+		UserCreditsService
+{
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	public void setUserCreditsDao(UserCreditsDao userCreditsDao) {
+	public void setUserCreditsDao(UserCreditsDao userCreditsDao)
+	{
 		setDao(userCreditsDao);
 	}
 

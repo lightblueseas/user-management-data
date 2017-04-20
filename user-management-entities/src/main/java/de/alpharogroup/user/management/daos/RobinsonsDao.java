@@ -30,7 +30,8 @@ import de.alpharogroup.db.dao.jpa.JpaEntityManagerDao;
 import de.alpharogroup.user.management.entities.Robinsons;
 
 @Repository("robinsonsDao")
-public class RobinsonsDao extends JpaEntityManagerDao<Robinsons, Integer>{
+public class RobinsonsDao extends JpaEntityManagerDao<Robinsons, Integer>
+{
 	/**
 	 * The serialVersionUID.
 	 */

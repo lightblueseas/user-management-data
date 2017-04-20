@@ -34,6 +34,7 @@ import de.alpharogroup.user.management.entities.Recommendations;
  * The class {@link RecommendationsMapper}.
  */
 @Component
-public class RecommendationsMapper extends AbstractEntityDOMapper<Recommendations, Recommendation> {
+public class RecommendationsMapper extends AbstractEntityDOMapper<Recommendations, Recommendation>
+{
 
 }

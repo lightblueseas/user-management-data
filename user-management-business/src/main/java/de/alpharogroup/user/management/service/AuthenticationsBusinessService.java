@@ -38,7 +38,8 @@ import lombok.Setter;
  */
 @Transactional
 @Service("authenticationsService")
-public class AuthenticationsBusinessService implements AuthenticationsService {
+public class AuthenticationsBusinessService implements AuthenticationsService
+{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -50,8 +51,9 @@ public class AuthenticationsBusinessService implements AuthenticationsService {
 	private UsersManagementService usersManagementService;
 
 	@Override
-	public String newAuthenticationToken(String username) {		
+	public String newAuthenticationToken(String username)
+	{
 		return usersManagementService.newAuthenticationToken(username);
 	}
-	
+
 }

@@ -36,15 +36,16 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(callSuper=true)
-@EqualsAndHashCode(callSuper=true)
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Robinson extends BaseDomainObject<Integer> {
+public class Robinson extends BaseDomainObject<Integer>
+{
 	private static final long serialVersionUID = 1L;
 	/**
-     * The value associated with the column: robinson
+	 * The value associated with the column: robinson
 	 */
 	private User robinson;
 }

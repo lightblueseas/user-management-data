@@ -23,6 +23,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package user.management.daos;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,14 @@ import de.alpharogroup.user.management.entities.UserCredits;
 
 
 @ContextConfiguration(locations = "classpath:test-applicationContext.xml")
-public class UserCreditsDaoTest extends AbstractTestNGSpringContextTests {
+public class UserCreditsDaoTest extends AbstractTestNGSpringContextTests
+{
 	@Autowired
 	private UserCreditsDao userCreditsDao;
 
-	@Test(enabled=false)
-	public void testFindAll() {
+	@Test(enabled = false)
+	public void testFindAll()
+	{
 		final List<UserCredits> all = userCreditsDao.findAll();
 		System.out.println(all);
 	}

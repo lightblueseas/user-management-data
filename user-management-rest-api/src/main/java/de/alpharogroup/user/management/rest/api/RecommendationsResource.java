@@ -34,8 +34,8 @@ import javax.ws.rs.core.MediaType;
 
 import de.alpharogroup.collections.pairs.Triple;
 import de.alpharogroup.service.rs.RestfulResource;
-import de.alpharogroup.user.management.domain.Recommendation;
 import de.alpharogroup.user.domain.User;
+import de.alpharogroup.user.management.domain.Recommendation;
 
 /**
  * The interface {@link RecommendationsResource} provides methods for resolving recommendation
@@ -50,18 +50,20 @@ public interface RecommendationsResource extends RestfulResource<Integer, Recomm
 	/**
 	 * Find all the {@link Recommendation} objects from the given parameters.
 	 *
-	 * @param recommendation the recommendation
+	 * @param recommendation
+	 *            the recommendation
 	 * 
 	 * @return the list of found {@link Recommendation} objects.
 	 */
 	@POST
 	@Path("/find")
 	List<Recommendation> find(Triple<User, User, String> recommendation);
-		
+
 	/**
 	 * Find the {@link Recommendation} object from the given parameters.
 	 *
-	 * @param recommendation the recommendation
+	 * @param recommendation
+	 *            the recommendation
 	 * @return the found {@link Recommendation} object
 	 */
 	@POST

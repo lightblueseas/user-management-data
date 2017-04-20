@@ -30,6 +30,7 @@ import de.alpharogroup.user.management.entities.Robinsons;
 /**
  * The interface {@link RobinsonsService}.
  */
-public interface RobinsonsService extends BusinessService<Robinsons, Integer>{
+public interface RobinsonsService extends BusinessService<Robinsons, Integer>
+{
 
 }

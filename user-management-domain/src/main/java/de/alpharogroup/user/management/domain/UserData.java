@@ -43,12 +43,13 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(callSuper=true)
-@EqualsAndHashCode(callSuper=true)
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserData extends BaseDomainObject<Integer> {
+public class UserData extends BaseDomainObject<Integer>
+{
 	/**
 	 * The serial Version UID.
 	 */

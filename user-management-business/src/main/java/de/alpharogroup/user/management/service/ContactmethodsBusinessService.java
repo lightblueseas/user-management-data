@@ -33,116 +33,136 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
+import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.daos.ContactmethodsDao;
 import de.alpharogroup.user.management.entities.Contactmethods;
-import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.enums.ContactmethodType;
 import de.alpharogroup.user.management.service.api.ContactmethodsService;
 import de.alpharogroup.user.management.service.util.HqlStringCreator;
 
 @Transactional
 @Service("contactmethodsService")
-public class ContactmethodsBusinessService extends AbstractBusinessService<Contactmethods, Integer, ContactmethodsDao> implements ContactmethodsService {
+public class ContactmethodsBusinessService
+	extends
+		AbstractBusinessService<Contactmethods, Integer, ContactmethodsDao>
+	implements
+		ContactmethodsService
+{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Sets the given specific repository object.
-	 *
-	 * @param repository the repository object to set
-	 */
-	@Autowired
-	public void setContactmethodsDao(ContactmethodsDao repository) {
-		setDao(repository);
-	}	
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean compare(final Contactmethods contact,
-			final Contactmethods compare) {
-		if(contact == null && compare != null) {
+	public boolean compare(final Contactmethods contact, final Contactmethods compare)
+	{
+		if (contact == null && compare != null)
+		{
 			return false;
 		}
-		if(contact == null && compare == null) {
+		if (contact == null && compare == null)
+		{
 			return true;
 		}
-		if(contact != null && compare == null) {
+		if (contact != null && compare == null)
+		{
 			return false;
 		}
-		if(contact.getContactvalue() == null && compare.getContactvalue() != null) {
+		if (contact.getContactvalue() == null && compare.getContactvalue() != null)
+		{
 			return false;
 		}
-		if(contact.getContactvalue() == null && compare.getContactvalue() == null) {
+		if (contact.getContactvalue() == null && compare.getContactvalue() == null)
+		{
 			return true;
 		}
-		if(contact.getContactvalue() != null && compare.getContactvalue() == null) {
+		if (contact.getContactvalue() != null && compare.getContactvalue() == null)
+		{
 			return false;
 		}
 		return contact.getContactmethod().equals(compare.getContactmethod())
-				&& contact.getContactvalue().equals(compare.getContactvalue());
+			&& contact.getContactvalue().equals(compare.getContactvalue());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean existsContact(final Contactmethods contact) {
-		return existsContact(contact.getContactvalue(),
-				contact.getContactmethod());
+	public boolean existsContact(final Contactmethods contact)
+	{
+		return existsContact(contact.getContactvalue(), contact.getContactmethod());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean existsContact(final String contactValue,
-			final ContactmethodType contactMethod) {
-		final List<Contactmethods> contacts = findContact(contactValue,
-				contactMethod);
-		if (null != contacts && !contacts.isEmpty()) {
+	public boolean existsContact(final String contactValue, final ContactmethodType contactMethod)
+	{
+		final List<Contactmethods> contacts = findContact(contactValue, contactMethod);
+		if (null != contacts && !contacts.isEmpty())
+		{
 			return true;
 		}
 		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Contactmethods> find(final ContactmethodType contactmethod,
+		final String contactvalue)
+	{
+		String hqlString = HqlStringCreator.forContactmethods(contactmethod, contactvalue);
+		final Query query = getQuery(hqlString);
+		if (contactmethod != null)
+		{
+			query.setParameter("contactmethod", contactmethod);
+		}
+		if (contactvalue != null)
+		{
+			query.setParameter("contactvalue", contactvalue);
+		}
+		final List<Contactmethods> contactmethods = query.getResultList();
+		return contactmethods;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public List<Contactmethods> findContact(final String contactValue,
-			final ContactmethodType contactMethod) {
+		final ContactmethodType contactMethod)
+	{
 		return find(contactMethod, contactValue);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Contactmethods> find(final ContactmethodType contactmethod, final String contactvalue) {
-		String hqlString = HqlStringCreator.forContactmethods(contactmethod, contactvalue);
+	public List<Contactmethods> findContactmethod(final ContactmethodType contactmethod,
+		final Users user)
+	{
+		final String hqlString = "select distinct cm from UserDatas u inner join u.contactmethods cm "
+			+ "where u.owner=:user " + "and cm.contactmethod.contactmethod=:contactmethod";
 		final Query query = getQuery(hqlString);
-		if(contactmethod != null){
-			query.setParameter("contactmethod", contactmethod);
+		if (user != null)
+		{
+			query.setParameter("user", user);
 		}
-		if(contactvalue != null){
-			query.setParameter("contactvalue", contactvalue);
+		if (contactmethod != null)
+		{
+			query.setParameter("contactmethod", contactmethod);
 		}
 		final List<Contactmethods> contactmethods = query.getResultList();
 		return contactmethods;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Contactmethods> findContactmethod(final ContactmethodType contactmethod, final Users user) {
-		final String hqlString = 
-				  "select distinct cm from UserDatas u inner join u.contactmethods cm "
-				+ "where u.owner=:user "
-				+ "and cm.contactmethod.contactmethod=:contactmethod";
-		final Query query = getQuery(hqlString);
-		if(user != null){
-			query.setParameter("user", user);
-		}
-		if(contactmethod != null){
-			query.setParameter("contactmethod", contactmethod);
-		}
-		final List<Contactmethods> contactmethods = query.getResultList();
-		return contactmethods;		
+
+	/**
+	 * Sets the given specific repository object.
+	 *
+	 * @param repository
+	 *            the repository object to set
+	 */
+	@Autowired
+	public void setContactmethodsDao(ContactmethodsDao repository)
+	{
+		setDao(repository);
 	}
 
 }
