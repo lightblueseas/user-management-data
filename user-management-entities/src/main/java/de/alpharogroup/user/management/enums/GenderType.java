@@ -1,32 +1,62 @@
+/**
+ * The MIT License
+ *
+ * Copyright (C) 2015 Asterios Raptis
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *  *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *  *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package de.alpharogroup.user.management.enums;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Defines the type of the gender.
+ * The enum {@link GenderType} defines the type of the gender.
  */
-public enum GenderType {
+public enum GenderType
+{
 
-	/** The male. */
+	/** The constant for the gender male. */
 	MALE,
-	/** The female. */
+	/** The constant for the gender female. */
 	FEMALE,
-	/** represents a company. */
+	/** The constant for the gender that represents a company. */
 	INCORPORATION,
-	/** The undefined. */
+	/** The constant if the gender is undefined. */
 	UNDEFINED;
 
 	/**
-	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED}.
+	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED} and
+	 * {@link GenderType#INCORPORATION}.
 	 *
-	 * @return the valid gender types
+	 * @return the human gender types
 	 */
-	public static List<GenderType> getValidGenders() {
+	public static List<GenderType> getHumanGenders()
+	{
 		final GenderType[] genderValues = GenderType.values();
-		final List<GenderType> genders = new ArrayList<GenderType>();
-		for (int i = 0; i < genderValues.length; i++) {
-			if (!genderValues[i].equals(GenderType.UNDEFINED)) {
+		final List<GenderType> genders = new ArrayList<>();
+		for (int i = 0; i < genderValues.length; i++)
+		{
+			if (!genderValues[i].equals(GenderType.UNDEFINED)
+				&& !genderValues[i].equals(GenderType.INCORPORATION))
+			{
 				genders.add(genderValues[i]);
 			}
 		}
@@ -34,15 +64,18 @@ public enum GenderType {
 	}
 
 	/**
-	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED} and {@link GenderType#INCORPORATION}.
+	 * Gets the all genders without the gender type {@link GenderType#UNDEFINED}.
 	 *
-	 * @return the human gender types
+	 * @return the valid gender types
 	 */
-	public static List<GenderType> getHumanGenders() {
+	public static List<GenderType> getValidGenders()
+	{
 		final GenderType[] genderValues = GenderType.values();
-		final List<GenderType> genders = new ArrayList<GenderType>();
-		for (int i = 0; i < genderValues.length; i++) {
-			if (!genderValues[i].equals(GenderType.UNDEFINED)&& !genderValues[i].equals(GenderType.INCORPORATION)) {
+		final List<GenderType> genders = new ArrayList<>();
+		for (int i = 0; i < genderValues.length; i++)
+		{
+			if (!genderValues[i].equals(GenderType.UNDEFINED))
+			{
 				genders.add(genderValues[i]);
 			}
 		}

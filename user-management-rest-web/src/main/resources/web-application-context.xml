@@ -23,13 +23,19 @@
 			<ref bean="ruleViolationsResource" />
 			<ref bean="userCreditsResource" />
 			<ref bean="userDatasResource" />
+			<ref bean="userManagementResource" />
 			<ref bean="usersResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
-			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+			<ref bean="authenticationFilter"/>
+			<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+			<bean id="multipartProvider" class="org.apache.cxf.jaxrs.provider.MultipartProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
 
+	<bean id="authenticationFilter" class="de.alpharogroup.user.management.filter.UserAuthenticationFilter">
+		<property name="userManagementService" ref="userManagementDomainService"></property>
+	</bean>
 	<!-- web resources -->
 	<bean id="authenticationsResource" class="de.alpharogroup.user.management.rest.AuthenticationsRestResource">
 		<property name="authenticationService" ref="authenticationDomainService"></property>
@@ -37,23 +43,11 @@
 	<bean id="contactmethodsResource" class="de.alpharogroup.user.management.rest.ContactmethodsRestResource">
 		<property name="domainService" ref="contactmethodDomainService"></property>
 	</bean>
-	<bean id="permissionsResource" class="de.alpharogroup.user.management.rest.PermissionsRestResource">
-		<property name="domainService" ref="permissionDomainService"></property>
-	</bean>
 	<bean id="recommendationsResource" class="de.alpharogroup.user.management.rest.RecommendationsRestResource">
 		<property name="domainService" ref="recommendationDomainService"></property>
 	</bean>
-	<bean id="relationPermissionsResource" class="de.alpharogroup.user.management.rest.RelationPermissionsRestResource">
-		<property name="domainService" ref="relationPermissionDomainService"></property>
-	</bean>
-	<bean id="resetPasswordsResource" class="de.alpharogroup.user.management.rest.ResetPasswordsRestResource">
-		<property name="domainService" ref="resetPasswordDomainService"></property>
-	</bean>
 	<bean id="robinsonsResource" class="de.alpharogroup.user.management.rest.RobinsonsRestResource">
 		<property name="domainService" ref="robinsonDomainService"></property>
-	</bean>
-	<bean id="rolesResource" class="de.alpharogroup.user.management.rest.RolesRestResource">
-		<property name="domainService" ref="roleDomainService"></property>
 	</bean>
 	<bean id="ruleViolationsResource" class="de.alpharogroup.user.management.rest.RuleViolationsRestResource">
 		<property name="domainService" ref="ruleViolationDomainService"></property>
@@ -66,6 +60,21 @@
 	</bean>
 	<bean id="usersResource" class="de.alpharogroup.user.management.rest.UsersRestResource">
 		<property name="domainService" ref="userDomainService"></property>
+	</bean>
+	<bean id="userManagementResource" class="de.alpharogroup.user.management.rest.UserManagementRestResource">
+		<property name="userManagementService" ref="userManagementDomainService"></property>
+	</bean>
+	<bean id="permissionsResource" class="de.alpharogroup.user.rest.PermissionsRestResource">
+		<property name="domainService" ref="permissionDomainService"></property>
+	</bean>
+	<bean id="relationPermissionsResource" class="de.alpharogroup.user.rest.RelationPermissionsRestResource">
+		<property name="domainService" ref="relationPermissionDomainService"></property>
+	</bean>
+	<bean id="resetPasswordsResource" class="de.alpharogroup.user.rest.ResetPasswordsRestResource">
+		<property name="domainService" ref="resetPasswordDomainService"></property>
+	</bean>
+	<bean id="rolesResource" class="de.alpharogroup.user.rest.RolesRestResource">
+		<property name="domainService" ref="roleDomainService"></property>
 	</bean>
 
 </beans>

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>user-management-data</artifactId>
-		<version>3.9.0</version>
+		<version>3.11.0</version>
 	</parent>
 
 	<artifactId>user-management-rest-api</artifactId>
@@ -20,6 +20,11 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>user-management-domain</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>auth-security</artifactId>
 		</dependency>
 
 	</dependencies>
