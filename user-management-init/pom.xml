@@ -91,12 +91,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.jolbox</groupId>
-			<artifactId>bonecp</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 	<profiles>
