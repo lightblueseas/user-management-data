@@ -4,11 +4,17 @@ Parent project that holds module projects for the persistence of user data.
 
 The project holds backend data for user management.
 
+# ERD-Diagramm
+
+The erd-diagramm for this database looks as follows: ![erd-diagramm](https://github.com/lightblueseas/user-management-data/blob/develop/user-init/src/main/resources/erd/erd-diagramm-users.png)
+
+This erd-diagramm was created with the awesome [SQuirreL SQL Client](http://squirrel-sql.sourceforge.net/)
+
 ## License
 
 The source code comes under the liberal MIT License, making user-management-data great for all types of applications with users or accounts.
 
-# Build status and latest maven version
+# Build status
 [![Build Status](https://travis-ci.org/lightblueseas/user-management-data.svg?branch=master)](https://travis-ci.org/lightblueseas/user-management-data)
 
 ## Maven Central
@@ -121,6 +127,9 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 			</dependency>
 			...
 		</dependencies>
+		 
+## Open Issues
+[![Open Issues](https://img.shields.io/github/issues/astrapi69/user-management-data.svg?style=flat)](https://github.com/astrapi69/user-management-data/issues) 
 
 ## Want to Help and improve it? ###
 
