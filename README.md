@@ -33,7 +33,7 @@ You can first define the version properties:
 	<properties>
 			...
 		<!-- user-management-data version -->
-		<user-management-data.version>3.11.0</user-management-data.version>
+		<user-management-data.version>3.12.0</user-management-data.version>
 		<user-management-business.version>${user-management-data.version}</user-management-business.version>
 		<user-management-domain.version>${user-management-data.version}</user-management-domain.version>
 		<user-management-entities.version>${user-management-data.version}</user-management-entities.version>
