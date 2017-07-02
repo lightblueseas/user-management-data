@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="de.alpharogroup.user.entities" v="1.5.4" status="GENERATED" xs="false" id="_14929455118411" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:mapped-superclass xre="false" compositePrimaryKeyClass="BaseEntityPK" access="FIELD" sm="false" abs="true" class="BaseEntity" visibile="true" minimized="false" rootElement="_14929455118411" id="_14929455118806">
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <jpa:id attribute-type="PK" visibile="true" name="id" id="_14929455118817">
+                <jpa:column name="id" nullable="false"/>
+                <jpa:generated-value strategy="AUTO"/>
+                <jpa:sequence-generator name="id"/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:mapped-superclass>
+    <jpa:entity xre="false" compositePrimaryKeyClass="RolesPK" sm="false" abs="false" class="Roles" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_14929455118702">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="description" id="_14929455118733">
+                <jpa:column name="description" length="64"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="rolename" id="_14929455118785">
+                <jpa:column name="rolename" unique="true" length="64"/>
+            </basic>
+            <many-to-many own="true" collection-type="java.util.Set" connected-entity-id="_149294551197530" fetch="EAGER" visibile="true" name="permissions" id="_14929455118744">
+                <join-table name="role_permissions">
+                    <jpa:join-column name="role_id"/>
+                    <jpa:inverse-join-column name="permission_id"/>
+                </join-table>
+            </many-to-many>
+        </jpa:attributes>
+        <jpa:table name="roles"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ZipcodesPK" sm="false" abs="false" class="Zipcodes" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_14929455118978">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="zipcode" id="_149294551189710">
+                <jpa:column nullable="false" length="10"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="city" id="_149294551189711"/>
+            <many-to-one connected-entity-id="_149294551216289" visibile="true" name="country" id="_14929455118979">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="country_id" nullable="true"/>
+            </many-to-one>
+        </jpa:attributes>
+        <jpa:table name="zipcodes"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="UsersPK" sm="false" abs="false" class="Users" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551191512">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="Boolean" visibile="true" name="active" id="_149294551191513">
+                <jpa:column name="active"/>
+            </basic>
+            <basic attribute-type="Boolean" visibile="true" name="locked" id="_149294551191514">
+                <jpa:column name="locked"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="pw" id="_149294551191515">
+                <jpa:column name="pw" length="1024"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="salt" id="_149294551191817">
+                <jpa:column name="salt" length="8"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="username" id="_149294551191818">
+                <jpa:column name="username" unique="true" length="256"/>
+            </basic>
+            <many-to-many own="true" collection-type="java.util.Set" connected-entity-id="_14929455118702" fetch="EAGER" visibile="true" name="roles" id="_149294551191516">
+                <join-table name="user_roles">
+                    <jpa:join-column name="user_id"/>
+                    <jpa:inverse-join-column name="role_id"/>
+                </join-table>
+            </many-to-many>
+        </jpa:attributes>
+        <jpa:table name="users"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="RobinsonsPK" sm="false" abs="false" class="Robinsons" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551193419">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="robinson" id="_149294551193420">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="robinson_user_id" nullable="true"/>
+            </many-to-one>
+        </jpa:attributes>
+        <jpa:table name="robinsons"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="AddressesPK" sm="false" abs="false" class="Addresses" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551195221">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="addressComment" id="_149294551195222">
+                <jpa:column name="address_comment" length="100"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="geohash" id="_149294551195224"/>
+            <basic attribute-type="String" visibile="true" name="latitude" id="_149294551195225"/>
+            <basic attribute-type="String" visibile="true" name="longitude" id="_149294551195326"/>
+            <basic attribute-type="String" visibile="true" name="street" id="_149294551195327"/>
+            <basic attribute-type="String" visibile="true" name="streetnumber" id="_149294551195328"/>
+            <many-to-one connected-entity-id="_149294551201137" visibile="true" name="federalstate" id="_149294551195223">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="federalstate_id" nullable="true"/>
+            </many-to-one>
+            <many-to-one connected-entity-id="_14929455118978" visibile="true" name="zipcode" id="_149294551195329">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="zipcode_id" nullable="true"/>
+            </many-to-one>
+        </jpa:attributes>
+        <jpa:table name="addresses"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="PermissionsPK" sm="false" abs="false" class="Permissions" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551197530">
+        <inf>de.alpharogroup.auth.interfaces.Permission</inf>
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="description" id="_149294551197531">
+                <jpa:column name="description" length="64"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="permissionName" id="_149294551197532">
+                <jpa:column name="permissionName" unique="true" length="64"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="shortcut" id="_149294551197533">
+                <jpa:column name="shortcut" unique="true" length="10"/>
+            </basic>
+        </jpa:attributes>
+        <jpa:table name="permissions"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="UserCreditsPK" sm="false" abs="false" class="UserCredits" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551199134">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="Integer" visibile="true" name="credits" id="_149294551199135">
+                <jpa:column name="credits" nullable="true"/>
+            </basic>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="user" id="_149294551199236">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="user_id" nullable="true"/>
+            </many-to-one>
+        </jpa:attributes>
+        <jpa:table name="user_credits"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="FederalstatesPK" sm="false" abs="false" class="Federalstates" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551201137">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="iso3166A2code" id="_149294551201239">
+                <jpa:column name="iso3166_a2code" length="6"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="name" id="_149294551201240"/>
+            <basic attribute-type="String" visibile="true" name="subdivisionCategory" id="_149294551201241">
+                <jpa:column name="subdivision_category" length="128"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="subdivisionName" id="_149294551201242">
+                <jpa:column name="subdivision_name" length="56"/>
+            </basic>
+            <many-to-one connected-entity-id="_149294551216289" visibile="true" name="country" id="_149294551201138">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="country_id"/>
+            </many-to-one>
+        </jpa:attributes>
+        <jpa:nq name="findFederalstateFromCountryAndName">
+            <jpa:query>select fs from Federalstates fs where fs.country=:country and fs.name=:name</jpa:query>
+        </jpa:nq>
+        <jpa:nnq name="findFederalstatesFromCountry" result-class="de.alpharogroup.address.book.entities.Federalstates">
+            <jpa:query>select * from federalstates fs where fs.country_id=:country</jpa:query>
+        </jpa:nnq>
+        <jpa:table name="federalstates"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="RelationPermissionsPK" sm="false" abs="false" class="RelationPermissions" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551203043">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="subscriber" id="_149294551203044">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="subscriber_id" nullable="true"/>
+            </many-to-one>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="provider" id="_149294551203045">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="provider_id" nullable="true"/>
+            </many-to-one>
+            <many-to-many own="true" collection-type="java.util.Set" connected-entity-id="_149294551197530" fetch="EAGER" visibile="true" name="permissions" id="_149294551203146">
+                <join-table name="user_relation_permissions">
+                    <jpa:join-column name="user_relation_permission_id"/>
+                    <jpa:inverse-join-column name="permission_id"/>
+                </join-table>
+            </many-to-many>
+        </jpa:attributes>
+        <jpa:table name="relation_permissions"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ResourcesPK" sm="false" abs="false" class="Resources" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551205147">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="checksum" id="_149294551205248">
+                <jpa:column name="checksum"/>
+            </basic>
+            <basic attribute-type="byte[]" visibile="true" name="content" id="_149294551205249">
+                <jpa:column name="content" column-definition="BYTEA"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="contentType" id="_149294551205250">
+                <jpa:column name="contentType" length="64"/>
+            </basic>
+            <basic attribute-type="java.util.Date" visibile="true" name="created" id="_149294551205251">
+                <jpa:column name="created"/>
+            </basic>
+            <basic attribute-type="Boolean" visibile="true" name="deletedFlag" id="_149294551205252">
+                <jpa:column name="deleted_flag"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="description" id="_149294551205253">
+                <jpa:column name="description" length="1024"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="filename" id="_149294551205254">
+                <jpa:column name="filename" length="1024"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="filesize" id="_149294551205255">
+                <jpa:column name="filesize" length="64"/>
+            </basic>
+        </jpa:attributes>
+        <jpa:table name="resources"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ContactmethodsPK" sm="false" abs="false" class="Contactmethods" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551207056">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@org.hibernate.annotations.TypeDef(name=&quot;contactmethodConverter&quot;, typeClass=de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters={@org.hibernate.annotations.Parameter(name=&quot;enumClassName&quot;, value=&quot;de.alpharogroup.user.management.enums.ContactmethodType&quot;)})"/>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="de.alpharogroup.user.management.enums.ContactmethodType" visibile="true" name="contactmethod" id="_149294551207057">
+                <an n="@org.hibernate.annotations.Type(type=&quot;contactmethodConverter&quot;)"/>
+                <jpa:column name="contactmethod"/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="contactvalue" id="_149294551207058">
+                <jpa:column name="contactvalue" length="1024"/>
+            </basic>
+        </jpa:attributes>
+        <jpa:table name="contactmethods"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="RuleViolationsPK" sm="false" abs="false" class="RuleViolations" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551208859">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@org.hibernate.annotations.TypeDefs({@org.hibernate.annotations.TypeDef(name=&quot;reasonConverter&quot;, typeClass=de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters={@org.hibernate.annotations.Parameter(name=&quot;enumClassName&quot;, value=&quot;de.alpharogroup.user.management.enums.RuleViolationReason&quot;)})})"/>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="de.alpharogroup.user.management.enums.RuleViolationReason" visibile="true" name="reason" id="_149294551208960">
+                <an n="@org.hibernate.annotations.Type(type=&quot;reasonConverter&quot;)"/>
+                <jpa:column name="reason"/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="description" id="_149294551208963">
+                <jpa:column name="description" length="1000"/>
+            </basic>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="detector" id="_149294551208961">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="detector_user_id" nullable="true"/>
+            </many-to-one>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="violator" id="_149294551208962">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="violator_user_id" nullable="true"/>
+            </many-to-one>
+        </jpa:attributes>
+        <jpa:table name="rule_violations"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="UserDatasPK" sm="false" abs="false" class="UserDatas" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551210764">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@org.hibernate.annotations.TypeDefs({@org.hibernate.annotations.TypeDef(name=&quot;genderConverter&quot;, typeClass=de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters={@org.hibernate.annotations.Parameter(name=&quot;enumClassName&quot;, value=&quot;de.alpharogroup.user.management.enums.GenderType&quot;)})})"/>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="birthname" id="_149294551210967">
+                <jpa:column name="birthname" length="64"/>
+            </basic>
+            <basic attribute-type="java.util.Date" visibile="true" name="dateofbirth" id="_149294551210970"/>
+            <basic attribute-type="String" visibile="true" name="firstname" id="_149294551211071">
+                <jpa:column name="firstname" length="64"/>
+            </basic>
+            <basic attribute-type="de.alpharogroup.user.management.enums.GenderType" visibile="true" name="gender" id="_149294551211072">
+                <an n="@org.hibernate.annotations.Type(type=&quot;genderConverter&quot;)"/>
+                <jpa:column name="gender"/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="ipAddress" id="_149294551211074">
+                <jpa:column name="ip_address" length="16"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="lastname" id="_149294551211075">
+                <jpa:column name="lastname" length="64"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="locale" id="_149294551211076">
+                <jpa:column name="locale" length="12"/>
+            </basic>
+            <many-to-one connected-entity-id="_149294551195221" visibile="true" name="primaryAddress" id="_149294551211077">
+                <an n="@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.ALL})"/>
+                <join-column name="primary_address_id" nullable="true"/>
+            </many-to-one>
+            <one-to-one own="true" connected-entity-id="_149294551191512" fetch="EAGER" visibile="true" name="owner" id="_149294551210765">
+                <join-column name="owner"/>
+            </one-to-one>
+            <many-to-many own="true" collection-type="java.util.Set" connected-entity-id="_149294551195221" fetch="EAGER" visibile="true" name="addresses" id="_149294551210766">
+                <an n="@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.DELETE})"/>
+                <join-table name="user_addresses">
+                    <jpa:join-column name="user_data_id"/>
+                    <jpa:inverse-join-column name="addresses_id"/>
+                </join-table>
+            </many-to-many>
+            <many-to-many own="true" collection-type="java.util.Set" connected-entity-id="_149294551191512" fetch="EAGER" visibile="true" name="blacklistedContacts" id="_149294551210968">
+                <an n="@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.DELETE})"/>
+                <join-table name="blacklisted_contacts">
+                    <jpa:join-column name="user_data_id"/>
+                    <jpa:inverse-join-column name="blacklisted_id"/>
+                </join-table>
+            </many-to-many>
+            <many-to-many own="true" collection-type="java.util.Set" connected-entity-id="_149294551207056" fetch="EAGER" visibile="true" name="contactmethods" id="_149294551210969">
+                <an n="@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.DELETE})"/>
+                <join-table name="user_contactmethods">
+                    <jpa:join-column name="user_data_id"/>
+                    <jpa:inverse-join-column name="contactmethods_id"/>
+                </join-table>
+            </many-to-many>
+            <many-to-many own="true" collection-type="java.util.Set" connected-entity-id="_149294551205147" fetch="EAGER" visibile="true" name="resources" id="_149294551211073">
+                <an n="@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.DELETE})"/>
+                <join-table name="user_resources">
+                    <jpa:join-column name="user_data_id"/>
+                    <jpa:inverse-join-column name="resources_id"/>
+                </join-table>
+            </many-to-many>
+            <many-to-many own="true" collection-type="java.util.Set" connected-entity-id="_149294551191512" fetch="EAGER" visibile="true" name="userContacts" id="_149294551211078">
+                <join-table name="user_contacts">
+                    <jpa:join-column name="user_data_id"/>
+                    <jpa:inverse-join-column name="user_contact_id"/>
+                </join-table>
+            </many-to-many>
+        </jpa:attributes>
+        <jpa:table name="user_data"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="UserTokensPK" sm="false" abs="false" class="UserTokens" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551212979">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.ToString(callSuper=true)"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <annotation n="@lombok.AllArgsConstructor"/>
+        <annotation n="@lombok.Builder"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="username" id="_149294551212980">
+                <jpa:column name="username" unique="true" length="256"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="token" id="_149294551212981">
+                <jpa:column name="token" unique="true" length="128"/>
+            </basic>
+            <basic attribute-type="java.util.Date" visibile="true" name="expiry" id="_149294551212982"/>
+        </jpa:attributes>
+        <jpa:table name="user_tokens"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="RecommendationsPK" sm="false" abs="false" class="Recommendations" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551214383">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="email" id="_149294551214386">
+                <jpa:column name="email" length="1024"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="invitationText" id="_149294551214387">
+                <jpa:column name="invitation_text" length="1024"/>
+            </basic>
+            <basic attribute-type="Boolean" visibile="true" name="sent" id="_149294551214388">
+                <jpa:column name="sent"/>
+            </basic>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="user" id="_149294551214384">
+                <join-column name="user_id" nullable="true"/>
+            </many-to-one>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="recommended" id="_149294551214385">
+                <join-column name="recommended_id" nullable="true"/>
+            </many-to-one>
+        </jpa:attributes>
+        <jpa:table name="recommendations"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="CountriesPK" sm="false" abs="false" class="Countries" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551216289">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@org.hibernate.annotations.Cache(usage=org.hibernate.annotations.CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)"/>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="iso3166A2name" id="_149294551216290">
+                <jpa:column name="iso3166_a2name" length="2"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="iso3166A3name" id="_149294551216291">
+                <jpa:column name="iso3166_a3name" length="3"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="iso3166Number" id="_149294551216292">
+                <jpa:column name="iso3166_number" length="3"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="name" id="_149294551216293"/>
+        </jpa:attributes>
+        <jpa:table name="countries"/>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ResetPasswordsPK" sm="false" abs="false" class="ResetPasswords" superclassId="_14929455118806" visibile="true" minimized="false" rootElement="_14929455118411" id="_149294551217894">
+        <inf>java.lang.Cloneable</inf>
+        <annotation n="@lombok.Getter"/>
+        <annotation n="@lombok.Setter"/>
+        <annotation n="@lombok.NoArgsConstructor"/>
+        <jpa:attributes>
+            <basic attribute-type="java.util.Date" visibile="true" name="expiryDate" id="_149294551217895">
+                <jpa:column name="expiry_date"/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="generatedPassword" id="_149294551217896">
+                <jpa:column name="generated_password" length="1024"/>
+            </basic>
+            <basic attribute-type="java.util.Date" visibile="true" name="starttime" id="_149294551217897">
+                <jpa:column name="starttime"/>
+            </basic>
+            <many-to-one connected-entity-id="_149294551191512" visibile="true" name="user" id="_149294551217898">
+                <cascade>
+                    <jpa:cascade-all/>
+                </cascade>
+                <join-column name="user_id" nullable="true"/>
+            </many-to-one>
+        </jpa:attributes>
+        <jpa:table name="reset_passwords"/>
+    </jpa:entity>
+    <jpa:diagram>
+        <plane elementRef="_14929455118411"/>
+    </jpa:diagram>
+</jpa:entity-mappings>

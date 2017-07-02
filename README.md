@@ -4,11 +4,17 @@ Parent project that holds module projects for the persistence of user data.
 
 The project holds backend data for user management.
 
+# ERD-Diagramm
+
+The erd-diagramm for this database looks as follows: ![erd-diagramm](https://raw.githubusercontent.com/lightblueseas/user-management-data/develop/user-management-init/src/main/resources/erd/erd-diagramm-user-management.png)
+
+This erd-diagramm was created with the awesome [SQuirreL SQL Client](http://squirrel-sql.sourceforge.net/)
+
 ## License
 
 The source code comes under the liberal MIT License, making user-management-data great for all types of applications with users or accounts.
 
-# Build status and latest maven version
+# Build status
 [![Build Status](https://travis-ci.org/lightblueseas/user-management-data.svg?branch=master)](https://travis-ci.org/lightblueseas/user-management-data)
 
 ## Maven Central
@@ -27,7 +33,7 @@ You can first define the version properties:
 	<properties>
 			...
 		<!-- user-management-data version -->
-		<user-management-data.version>3.11.0</user-management-data.version>
+		<user-management-data.version>3.12.0</user-management-data.version>
 		<user-management-business.version>${user-management-data.version}</user-management-business.version>
 		<user-management-domain.version>${user-management-data.version}</user-management-domain.version>
 		<user-management-entities.version>${user-management-data.version}</user-management-entities.version>
@@ -121,6 +127,9 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 			</dependency>
 			...
 		</dependencies>
+		 
+## Open Issues
+[![Open Issues](https://img.shields.io/github/issues/astrapi69/user-management-data.svg?style=flat)](https://github.com/astrapi69/user-management-data/issues) 
 
 ## Want to Help and improve it? ###
 
