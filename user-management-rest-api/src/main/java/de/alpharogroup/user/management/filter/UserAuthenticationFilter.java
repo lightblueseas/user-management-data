@@ -25,6 +25,7 @@
 package de.alpharogroup.user.management.filter;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -39,10 +40,9 @@ import lombok.Setter;
 
 public class UserAuthenticationFilter extends AuthenticationFilter
 {
+	private final static int DEFAULT_MAX_ENTRIES = 1000;
 
-	@SuppressWarnings("deprecation")
-	private Map<String, LocalDateTime> validTokens = new MapMaker().expiration(30, TimeUnit.MINUTES)
-		.makeMap();
+	private final Map<String, LocalDateTime> validTokens = newValidTokenCache();
 
 	@Autowired
 	@Getter
@@ -50,7 +50,7 @@ public class UserAuthenticationFilter extends AuthenticationFilter
 	private UserManagementService userManagementService;
 
 	@Override
-	protected String onValidateToken(String token) throws Exception
+	protected String onValidateToken(final String token) throws Exception
 	{
 		if (!validTokens.containsKey(token))
 		{
@@ -61,6 +61,23 @@ public class UserAuthenticationFilter extends AuthenticationFilter
 		}
 		validTokens.put(token, LocalDateTime.now());
 		return token;
+	}
+
+	protected Map<String, LocalDateTime> newValidTokenCache() {
+
+		// TODO get cache...
+//		new MapMaker()
+//			.expiration(30, TimeUnit.MINUTES).makeMap();
+		final Map<String, LocalDateTime> validTokens = new LinkedHashMap<String, LocalDateTime>(DEFAULT_MAX_ENTRIES + 1, .75F, true) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean removeEldestEntry(final Map.Entry<String, LocalDateTime> eldest) {
+	            return size() > DEFAULT_MAX_ENTRIES;
+	        }
+	    };
+		return validTokens;
 	}
 
 }
