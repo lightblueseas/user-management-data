@@ -38,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import de.alpharogroup.address.book.entities.Addresses;
 import de.alpharogroup.address.book.service.util.HqlStringCreator;
-import de.alpharogroup.collections.ListExtensions;
+import de.alpharogroup.collections.list.ListExtensions;
 import de.alpharogroup.date.CalculateDateExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 import de.alpharogroup.jgeohash.GeoHashExtensions;

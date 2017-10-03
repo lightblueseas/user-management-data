@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Class-Path: user-management-rest-api.jar rest-api-3.30.0.jar domain-ap
- i-3.30.0.jar data-api-3.30.0.jar hibernate-core-4.3.11.Final.jar jbos
+Class-Path: user-management-rest-api.jar rest-api-3.35.1.jar domain-ap
+ i-3.35.1.jar data-api-3.35.1.jar hibernate-core-4.3.11.Final.jar jbos
  s-logging-3.1.3.GA.jar jboss-logging-annotations-1.2.0.Beta1.jar jbos
  s-transaction-api_1.2_spec-1.0.0.Final.jar dom4j-1.6.1.jar xml-apis-1
  .4.01.jar hibernate-commons-annotations-4.0.5.Final.jar hibernate-jpa
@@ -8,43 +8,44 @@ Class-Path: user-management-rest-api.jar rest-api-3.30.0.jar domain-ap
  ex-1.1.0.Final.jar spring-core-4.3.9.RELEASE.jar commons-logging-1.2.
  jar spring-orm-4.3.9.RELEASE.jar spring-beans-4.3.9.RELEASE.jar sprin
  g-jdbc-4.3.9.RELEASE.jar spring-tx-4.3.9.RELEASE.jar jcommons-lang-4.
- 19.0.jar commons-beanutils-1.9.3.jar commons-collections-3.2.2.jar co
- mmons-collections4-4.1.jar commons-io-2.5.jar velocity-1.7.jar common
- s-lang-2.4.jar commons-codec-1.10.jar joda-time-2.9.7.jar silly-colle
- ctions-4.15.0.jar lombok-1.16.16.jar slf4j-log4j12-1.6.4.jar slf4j-ap
- i-1.6.4.jar log4j-1.2.16.jar xml-extensions-4.16.0.jar xercesImpl-2.1
- 1.0.jar xmlbeans-2.6.0.jar stax-api-1.0.1.jar jettison-1.3.8.jar xstr
- eam-1.4.8.jar xmlpull-1.1.3.1.jar xpp3_min-1.1.4c.jar jackson-databin
- d-2.8.9.jar jackson-annotations-2.8.0.jar jackson-core-2.8.9.jar file
- -worker-4.15.0.jar poi-3.15.jar poi-ooxml-3.15.jar poi-ooxml-schemas-
- 3.15.jar curvesapi-1.04.jar zip4j-1.3.2.jar dozer-5.5.1.jar commons-l
- ang3-3.5.jar jcl-over-slf4j-1.7.5.jar javax.ws.rs-api-2.0.1.jar jacks
- on-jaxrs-json-provider-2.8.9.jar jackson-jaxrs-base-2.8.9.jar jackson
- -module-jaxb-annotations-2.8.9.jar jackson-datatype-jaxrs-2.8.9.jar j
- avaee-api-7.0.jar javax.mail-1.5.0.jar activation-1.1.jar user-manage
- ment-domain.jar user-management-business.jar business-api-3.30.0.jar 
- user-management-entities.jar spring-context-4.3.9.RELEASE.jar spring-
- aop-4.3.9.RELEASE.jar spring-expression-4.3.9.RELEASE.jar user-entiti
- es-3.12.0.jar data-usertype-3.30.0.jar postgresql-42.1.1.jar auth-sec
- urity-4.20.0.jar randomizer-4.20.0.jar vintage-time-4.11.0.jar crypt-
- data-4.20.0.jar bcpkix-jdk15on-1.55.jar bcprov-jdk15on-1.55.jar resou
- rcebundle-inspector-2.12.0.jar nv-i18n-1.21.jar test-objects-4.16.0.j
- ar address-book-entities-3.12.0.jar resource-system-entities-3.12.0.j
- ar address-book-business-3.12.0.jar jgeohash-core-2.4.0.jar geoip-api
- -1.2.14.jar org.torpedoquery-2.5.0.jar objenesis-1.3.jar guava-19.0.j
- ar user-business-3.12.0.jar crypt-core-4.20.0.jar bcprov-ext-jdk15on-
- 1.55.jar resource-system-business-3.12.0.jar jsr305-3.0.2.jar user-do
- main-3.12.0.jar address-book-domain-3.12.0.jar resource-system-domain
- -3.12.0.jar user-management-rest-client.jar rest-client-3.30.0.jar cx
- f-rt-rs-client-3.1.12.jar cxf-rt-transports-http-3.1.12.jar cxf-core-
- 3.1.12.jar woodstox-core-asl-4.4.1.jar stax2-api-3.1.4.jar xmlschema-
- core-2.2.2.jar cxf-rt-frontend-jaxrs-3.1.12.jar javax.annotation-api-
- 1.2.jar user-rest-api-3.12.0.jar address-book-rest-api-3.12.0.jar res
- ource-system-rest-api-3.12.0.jar javax.servlet-api-3.1.0.jar email-ta
- ils-4.15.0.jar mail-1.4.5.jar mime-util-2.1.3.jar net-extensions-4.12
- .0.jar spring-web-4.3.9.RELEASE.jar hibernate-entitymanager-4.3.11.Fi
- nal.jar hibernate-ehcache-4.3.11.Final.jar ehcache-core-2.4.3.jar hib
- ernate-validator-5.1.3.Final.jar validation-api-1.1.0.Final.jar class
- mate-1.0.0.jar cglib-2.2.2.jar asm-3.3.1.jar h2-1.4.196.jar jetty-jmx
- -9.4.6.v20170531.jar
+ 22.0.jar commons-beanutils-1.9.3.jar commons-collections-3.2.2.jar co
+ mmons-collections4-4.1.jar commons-io-2.5.jar commons-codec-1.10.jar 
+ commons-lang3-3.6.jar joda-time-2.9.7.jar silly-collections-4.19.0.ja
+ r lombok-1.16.18.jar slf4j-log4j12-1.6.4.jar slf4j-api-1.6.4.jar log4
+ j-1.2.16.jar xml-extensions-4.16.0.jar xercesImpl-2.11.0.jar xmlbeans
+ -2.6.0.jar stax-api-1.0.1.jar jettison-1.3.8.jar xstream-1.4.8.jar xm
+ lpull-1.1.3.1.jar xpp3_min-1.1.4c.jar jackson-databind-2.9.1.jar jack
+ son-annotations-2.9.0.jar jackson-core-2.9.1.jar file-worker-4.16.0.j
+ ar poi-3.15.jar poi-ooxml-3.15.jar poi-ooxml-schemas-3.15.jar curvesa
+ pi-1.04.jar zip4j-1.3.2.jar dozer-5.5.1.jar jcl-over-slf4j-1.7.5.jar 
+ javax.ws.rs-api-2.0.1.jar jackson-jaxrs-json-provider-2.9.1.jar jacks
+ on-jaxrs-base-2.9.1.jar jackson-module-jaxb-annotations-2.9.1.jar jac
+ kson-datatype-jaxrs-2.9.1.jar javaee-api-7.0.jar javax.mail-1.5.0.jar
+  activation-1.1.jar user-management-domain.jar user-management-busine
+ ss.jar business-api-3.35.1.jar user-management-entities.jar spring-co
+ ntext-4.3.9.RELEASE.jar spring-aop-4.3.9.RELEASE.jar spring-expressio
+ n-4.3.9.RELEASE.jar user-entities-3.14.0-SNAPSHOT.jar data-usertype-3
+ .35.1.jar postgresql-42.1.1.jar auth-security-4.22.0.jar randomizer-4
+ .22.0.jar vintage-time-4.11.0.jar crypt-data-4.22.0.jar bcpkix-jdk15o
+ n-1.55.jar bcprov-jdk15on-1.55.jar jsr305-3.0.2.jar resourcebundle-in
+ spector-2.15.1.jar nv-i18n-1.21.jar test-objects-4.16.0.jar address-b
+ ook-entities-3.14.0-SNAPSHOT.jar resource-system-entities-3.15.0-SNAP
+ SHOT.jar address-book-business-3.14.0-SNAPSHOT.jar jgeohash-core-2.4.
+ 0.jar geoip-api-1.2.14.jar org.torpedoquery-2.5.0.jar objenesis-1.3.j
+ ar guava-19.0.jar user-business-3.14.0-SNAPSHOT.jar crypt-core-4.22.0
+ .jar bcprov-ext-jdk15on-1.55.jar resource-system-business-3.15.0-SNAP
+ SHOT.jar user-domain-3.14.0-SNAPSHOT.jar address-book-domain-3.14.0-S
+ NAPSHOT.jar resource-system-domain-3.15.0-SNAPSHOT.jar user-managemen
+ t-rest-client.jar rest-client-3.35.1.jar cxf-rt-rs-client-3.2.0.jar c
+ xf-rt-transports-http-3.2.0.jar cxf-core-3.2.0.jar woodstox-core-5.0.
+ 3.jar stax2-api-3.1.4.jar xmlschema-core-2.2.2.jar cxf-rt-frontend-ja
+ xrs-3.2.0.jar javax.annotation-api-1.3.jar user-rest-api-3.14.0-SNAPS
+ HOT.jar address-book-rest-api-3.14.0-SNAPSHOT.jar resource-system-res
+ t-api-3.15.0-SNAPSHOT.jar javax.servlet-api-3.1.0.jar email-tails-4.1
+ 5.0.jar mail-1.4.5.jar mime-util-2.1.3.jar net-extensions-4.12.0.jar 
+ spring-web-4.3.9.RELEASE.jar hibernate-entitymanager-4.3.11.Final.jar
+  hibernate-ehcache-4.3.11.Final.jar ehcache-core-2.4.3.jar hibernate-
+ validator-5.1.3.Final.jar validation-api-1.1.0.Final.jar classmate-1.
+ 0.0.jar cglib-2.2.2.jar asm-3.3.1.jar h2-1.4.196.jar jetty-jmx-9.4.6.
+ v20170531.jar
 

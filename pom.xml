@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>persistence-api</artifactId>
-		<version>3.33.0</version>
+		<version>3.35.1</version>
 		<relativePath />
 	</parent>
 
 	<artifactId>user-management-data</artifactId>
 	<packaging>pom</packaging>
-	<version>3.12.2</version>
+	<version>3.14.0-SNAPSHOT</version>
 	<inceptionYear>2015</inceptionYear>
 
 	<name>${project.artifactId}</name>
@@ -72,7 +72,7 @@
 
 	<properties>
 		<!-- MYSTIC-CRYPT versions -->
-		<mystic-crypt.version>4.20.0</mystic-crypt.version>
+		<mystic-crypt.version>4.22.0</mystic-crypt.version>
 		<crypt-core.version>${mystic-crypt.version}</crypt-core.version>
 		<auth-security.version>${mystic-crypt.version}</auth-security.version>
 		<!-- NEW EXTENSIONS LIB versions -->
@@ -90,7 +90,7 @@
 		<address-book-domain.version>${address-book-data.version}</address-book-domain.version>
 		<address-book-rest-api.version>${address-book-data.version}</address-book-rest-api.version>
 		<!-- RESOURCE-SYSTEM-DATA versions -->
-		<resource-system-data.version>${project.version}</resource-system-data.version>
+		<resource-system-data.version>3.15.0-SNAPSHOT</resource-system-data.version>
 		<resource-system-entities.version>${resource-system-data.version}</resource-system-entities.version>
 		<resource-system-domain.version>${resource-system-data.version}</resource-system-domain.version>
 		<resource-system-business.version>${resource-system-data.version}</resource-system-business.version>

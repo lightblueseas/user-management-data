@@ -32,7 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import de.alpharogroup.collections.ListExtensions;
+import de.alpharogroup.collections.list.ListExtensions;
 import de.alpharogroup.db.service.jpa.AbstractBusinessService;
 import de.alpharogroup.user.entities.Users;
 import de.alpharogroup.user.management.daos.RecommendationsDao;
@@ -50,14 +50,15 @@ public class RecommendationsBusinessService
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Recommendations> find(Users user, Users recommended, String email)
 	{
-		String hqlString = HqlStringCreator.forRecommendations(user, recommended, email);
+		final String hqlString = HqlStringCreator.forRecommendations(user, recommended, email);
 		final Query query = getQuery(hqlString);
 		if (user != null)
 		{
@@ -75,6 +76,7 @@ public class RecommendationsBusinessService
 		return recommendations;
 	}
 
+	@Override
 	public Recommendations findRecommendations(Users user, Users recommended, String email)
 	{
 		return ListExtensions.getFirst(find(user, recommended, email));

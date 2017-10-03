@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import de.alpharogroup.resourcebundle.properties.PropertiesExtensions;
+import de.alpharogroup.resourcebundle.properties.PropertiesFileExtensions;
 import de.alpharogroup.user.management.db.init.DatabaseInitialization;
 
 /**
@@ -53,7 +53,7 @@ public class InitializeDatabase
 	public static void main(final String[] args)
 		throws ClassNotFoundException, SQLException, IOException
 	{
-		final Properties dbProperties = PropertiesExtensions.loadProperties("jdbc.properties");
+		final Properties dbProperties = PropertiesFileExtensions.loadProperties("jdbc.properties");
 		if (args != null && 0 < args.length)
 		{
 			dbProperties.setProperty(AbstractDatabaseInitialization.JDBC_CREATE_DB_PROCESS_KEY,
