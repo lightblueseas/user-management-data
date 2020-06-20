@@ -50,7 +50,7 @@ import lombok.Setter;
  * Object mapping for hibernate-handled table: rule_violations
  */
 @Entity
-@Table(name = "rule_violations")
+@Table(name = RuleViolations.TABLE_NAME)
 @TypeDefs({
 		@TypeDef(name = "reasonConverter", typeClass = de.alpharogroup.db.postgres.usertype.PGEnumUserType.class, parameters = {
 				@Parameter(name = "enumClassName", value = "de.alpharogroup.user.management.enums.RuleViolationReason") }) })
@@ -60,13 +60,14 @@ import lombok.Setter;
 public class RuleViolations extends BaseEntity<Integer> implements Cloneable
 {
 
-	/**
-	 *
-	 */
+	static final String COLUMN_NAME_REASON = "reason";
+	static final String COLUMN_NAME_DESCRIPTION = "description";
+	/** The serial Version UID. */
 	private static final long serialVersionUID = 1L;
+	static final String TABLE_NAME = "rule_violations";
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "reason")
+	@Column(name = COLUMN_NAME_REASON)
 	@Type(type = "reasonConverter")
 	private RuleViolationReason reason;
 
@@ -76,7 +77,7 @@ public class RuleViolations extends BaseEntity<Integer> implements Cloneable
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "violator_user_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_VIOLATOR_USER_ID"))
 	private Users violator;
-	@Column(name = "description", length = 1000)
+	@Column(name = COLUMN_NAME_DESCRIPTION, length = 1000)
 	private String description;
 
 }
